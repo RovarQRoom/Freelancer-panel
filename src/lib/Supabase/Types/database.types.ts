@@ -3,6 +3,69 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
 	public: {
 		Tables: {
+			Conversation: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					id: number;
+					is_group: boolean | null;
+					name: string | null;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					is_group?: boolean | null;
+					name?: string | null;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					is_group?: boolean | null;
+					name?: string | null;
+				};
+				Relationships: [];
+			};
+			ConversationParticipant: {
+				Row: {
+					conversation: number | null;
+					created_at: string;
+					deleted_at: string | null;
+					id: number;
+					user: number | null;
+				};
+				Insert: {
+					conversation?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					user?: number | null;
+				};
+				Update: {
+					conversation?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					user?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'ConversationParticipant_conversation_fkey';
+						columns: ['conversation'];
+						isOneToOne: false;
+						referencedRelation: 'Conversation';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'ConversationParticipant_user_fkey';
+						columns: ['user'];
+						isOneToOne: false;
+						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			Language: {
 				Row: {
 					ar: string | null;
@@ -29,6 +92,51 @@ export type Database = {
 					id?: number;
 				};
 				Relationships: [];
+			};
+			Message: {
+				Row: {
+					content: string;
+					conversation: number | null;
+					created_at: string;
+					deleted_at: string | null;
+					id: number;
+					is_read: boolean | null;
+					sender: number | null;
+				};
+				Insert: {
+					content: string;
+					conversation?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					is_read?: boolean | null;
+					sender?: number | null;
+				};
+				Update: {
+					content?: string;
+					conversation?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					is_read?: boolean | null;
+					sender?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Message_conversation_fkey';
+						columns: ['conversation'];
+						isOneToOne: false;
+						referencedRelation: 'Conversation';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'Message_sender_fkey';
+						columns: ['sender'];
+						isOneToOne: false;
+						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					}
+				];
 			};
 			Policy: {
 				Row: {
@@ -108,36 +216,42 @@ export type Database = {
 					created_by: number | null;
 					deleted_at: string | null;
 					demo: string | null;
-					description: string | null;
+					description: number | null;
 					id: number;
-					media: string | null;
+					media: number | null;
 					price: number;
 					supervised_by: number | null;
-					title: string;
+					supports: string[] | null;
+					tags: string[] | null;
+					title: number;
 				};
 				Insert: {
 					created_at?: string;
 					created_by?: number | null;
 					deleted_at?: string | null;
 					demo?: string | null;
-					description?: string | null;
+					description?: number | null;
 					id?: number;
-					media?: string | null;
+					media?: number | null;
 					price?: number;
 					supervised_by?: number | null;
-					title: string;
+					supports?: string[] | null;
+					tags?: string[] | null;
+					title: number;
 				};
 				Update: {
 					created_at?: string;
 					created_by?: number | null;
 					deleted_at?: string | null;
 					demo?: string | null;
-					description?: string | null;
+					description?: number | null;
 					id?: number;
-					media?: string | null;
+					media?: number | null;
 					price?: number;
 					supervised_by?: number | null;
-					title?: string;
+					supports?: string[] | null;
+					tags?: string[] | null;
+					title?: number;
 				};
 				Relationships: [
 					{
@@ -148,8 +262,71 @@ export type Database = {
 						referencedColumns: ['id'];
 					},
 					{
+						foreignKeyName: 'Service_description_fkey';
+						columns: ['description'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'Service_media_fkey';
+						columns: ['media'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					},
+					{
 						foreignKeyName: 'Service_supervised_by_fkey';
 						columns: ['supervised_by'];
+						isOneToOne: false;
+						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'Service_title_fkey';
+						columns: ['title'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			TypingStatus: {
+				Row: {
+					conservation: number | null;
+					created_at: string;
+					id: number;
+					is_typing: boolean | null;
+					updated_at: string | null;
+					user: number | null;
+				};
+				Insert: {
+					conservation?: number | null;
+					created_at?: string;
+					id?: number;
+					is_typing?: boolean | null;
+					updated_at?: string | null;
+					user?: number | null;
+				};
+				Update: {
+					conservation?: number | null;
+					created_at?: string;
+					id?: number;
+					is_typing?: boolean | null;
+					updated_at?: string | null;
+					user?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'TypingStatus_conservation_fkey';
+						columns: ['conservation'];
+						isOneToOne: false;
+						referencedRelation: 'Conversation';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'TypingStatus_user_fkey';
+						columns: ['user'];
 						isOneToOne: false;
 						referencedRelation: 'User';
 						referencedColumns: ['id'];
@@ -247,7 +424,7 @@ export type Database = {
 			[_ in never]: never;
 		};
 		Enums: {
-			[_ in never]: never;
+			'Languages ': 'EN' | 'AR' | 'CKB';
 		};
 		CompositeTypes: {
 			[_ in never]: never;
@@ -345,10 +522,32 @@ export type CompositeTypes<
 		: never;
 
 // Schema: public
+// Enums
+export enum Languages {
+	EN = 'EN',
+	AR = 'AR',
+	CKB = 'CKB'
+}
+
 // Tables
+export type Conversation = Database['public']['Tables']['Conversation']['Row'];
+export type InsertConversation = Database['public']['Tables']['Conversation']['Insert'];
+export type UpdateConversation = Database['public']['Tables']['Conversation']['Update'];
+
+export type ConversationParticipant =
+	Database['public']['Tables']['ConversationParticipant']['Row'];
+export type InsertConversationParticipant =
+	Database['public']['Tables']['ConversationParticipant']['Insert'];
+export type UpdateConversationParticipant =
+	Database['public']['Tables']['ConversationParticipant']['Update'];
+
 export type Language = Database['public']['Tables']['Language']['Row'];
 export type InsertLanguage = Database['public']['Tables']['Language']['Insert'];
 export type UpdateLanguage = Database['public']['Tables']['Language']['Update'];
+
+export type Message = Database['public']['Tables']['Message']['Row'];
+export type InsertMessage = Database['public']['Tables']['Message']['Insert'];
+export type UpdateMessage = Database['public']['Tables']['Message']['Update'];
 
 export type Policy = Database['public']['Tables']['Policy']['Row'];
 export type InsertPolicy = Database['public']['Tables']['Policy']['Insert'];
@@ -365,6 +564,10 @@ export type UpdateRolePolicy = Database['public']['Tables']['RolePolicy']['Updat
 export type Service = Database['public']['Tables']['Service']['Row'];
 export type InsertService = Database['public']['Tables']['Service']['Insert'];
 export type UpdateService = Database['public']['Tables']['Service']['Update'];
+
+export type TypingStatus = Database['public']['Tables']['TypingStatus']['Row'];
+export type InsertTypingStatus = Database['public']['Tables']['TypingStatus']['Insert'];
+export type UpdateTypingStatus = Database['public']['Tables']['TypingStatus']['Update'];
 
 export type User = Database['public']['Tables']['User']['Row'];
 export type InsertUser = Database['public']['Tables']['User']['Insert'];
