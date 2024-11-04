@@ -25,6 +25,9 @@
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
+		"flowbite": "^2.5.2",
+		"flowbite-svelte": "^0.47.3",
+		"flowbite-svelte-icons": "^2.0.2",
 		"globals": "^15.0.0",
 		"mdsvex": "^0.11.2",
 		"prettier": "^3.3.2",
@@ -41,6 +44,7 @@
 		"@inlang/paraglide-sveltekit": "^0.11.1",
 		"@supabase/ssr": "^0.5.1",
 		"@supabase/supabase-js": "^2.46.1",
+		"chart.js": "^4.4.6",
 		"supabase": "^1.207.9"
 	}
 }

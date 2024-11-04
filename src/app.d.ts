@@ -6,6 +6,8 @@ declare global {
 		interface Locals {
 			supabase: SupabaseClient;
 			safeGetSession(): Promise<{ session: Session | null; user: User | null }>;
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			session?: any;
 		  }
 		  interface PageData {
 			session: Session | null;
