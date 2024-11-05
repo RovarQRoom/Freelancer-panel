@@ -3,6 +3,41 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
 	public: {
 		Tables: {
+			Category: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					icon: string | null;
+					id: number;
+					image: string;
+					title: number;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					icon?: string | null;
+					id?: number;
+					image: string;
+					title: number;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					icon?: string | null;
+					id?: number;
+					image?: string;
+					title?: number;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Category_title_fkey';
+						columns: ['title'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			Conversation: {
 				Row: {
 					created_at: string;
@@ -156,6 +191,51 @@ export type Database = {
 				};
 				Relationships: [];
 			};
+			Rating: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					id: number;
+					rate: number;
+					review: string | null;
+					service: number;
+					user: number;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					rate?: number;
+					review?: string | null;
+					service: number;
+					user: number;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					rate?: number;
+					review?: string | null;
+					service?: number;
+					user?: number;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Rating_service_fkey';
+						columns: ['service'];
+						isOneToOne: false;
+						referencedRelation: 'Service';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'Rating_user_fkey';
+						columns: ['user'];
+						isOneToOne: false;
+						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			Role: {
 				Row: {
 					created_at: string;
@@ -284,6 +364,55 @@ export type Database = {
 					},
 					{
 						foreignKeyName: 'Service_title_fkey';
+						columns: ['title'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			Subcategory: {
+				Row: {
+					category: number | null;
+					created_at: string;
+					deleted_at: string | null;
+					description: number | null;
+					id: number;
+					title: number;
+				};
+				Insert: {
+					category?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					description?: number | null;
+					id?: number;
+					title: number;
+				};
+				Update: {
+					category?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					description?: number | null;
+					id?: number;
+					title?: number;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Subcategory_category_fkey';
+						columns: ['category'];
+						isOneToOne: false;
+						referencedRelation: 'Category';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'Subcategory_description_fkey';
+						columns: ['description'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'Subcategory_title_fkey';
 						columns: ['title'];
 						isOneToOne: false;
 						referencedRelation: 'Language';
@@ -530,6 +659,10 @@ export enum Languages {
 }
 
 // Tables
+export type Category = Database['public']['Tables']['Category']['Row'];
+export type InsertCategory = Database['public']['Tables']['Category']['Insert'];
+export type UpdateCategory = Database['public']['Tables']['Category']['Update'];
+
 export type Conversation = Database['public']['Tables']['Conversation']['Row'];
 export type InsertConversation = Database['public']['Tables']['Conversation']['Insert'];
 export type UpdateConversation = Database['public']['Tables']['Conversation']['Update'];
@@ -553,6 +686,10 @@ export type Policy = Database['public']['Tables']['Policy']['Row'];
 export type InsertPolicy = Database['public']['Tables']['Policy']['Insert'];
 export type UpdatePolicy = Database['public']['Tables']['Policy']['Update'];
 
+export type Rating = Database['public']['Tables']['Rating']['Row'];
+export type InsertRating = Database['public']['Tables']['Rating']['Insert'];
+export type UpdateRating = Database['public']['Tables']['Rating']['Update'];
+
 export type Role = Database['public']['Tables']['Role']['Row'];
 export type InsertRole = Database['public']['Tables']['Role']['Insert'];
 export type UpdateRole = Database['public']['Tables']['Role']['Update'];
@@ -564,6 +701,10 @@ export type UpdateRolePolicy = Database['public']['Tables']['RolePolicy']['Updat
 export type Service = Database['public']['Tables']['Service']['Row'];
 export type InsertService = Database['public']['Tables']['Service']['Insert'];
 export type UpdateService = Database['public']['Tables']['Service']['Update'];
+
+export type Subcategory = Database['public']['Tables']['Subcategory']['Row'];
+export type InsertSubcategory = Database['public']['Tables']['Subcategory']['Insert'];
+export type UpdateSubcategory = Database['public']['Tables']['Subcategory']['Update'];
 
 export type TypingStatus = Database['public']['Tables']['TypingStatus']['Row'];
 export type InsertTypingStatus = Database['public']['Tables']['TypingStatus']['Insert'];

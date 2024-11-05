@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { setLanguageTag, languageTag, type AvailableLanguageTag, availableLanguageTags } from '$lib/paraglide/runtime';
 	import "../app.css";
 	import { 
 		Navbar, 
@@ -13,25 +14,42 @@
 		FooterCopyright,
 		FooterLinkGroup,
 		FooterLink,
-		Avatar
+		Avatar,
+		Select
 	} from "flowbite-svelte";
+	import { i18n } from '$lib/i18n.js'
 	import { authStore } from '$lib/Store/Auth';
 	import * as m from '$lib/paraglide/messages';
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	// Navigation items
 	const navItems = [
 		{ href: '/dashboard', label: m.dashboard() },
+		{ href: '/categories', label: m.categories() },
 		{ href: '/services', label: m.services() },
 		{ href: '/users', label: m.users() },
 		{ href: '/messages', label: m.messages() },
 		{ href: '/settings', label: m.settings() }
 	];
+	let selectedLanguage = $state(languageTag());
 
-	let userDropdownOpen = false;
+	onMount(() => {
+		authStore.fetch();
+	});
+
+	let userDropdownOpen = $state(false);
 
 	async function handleLogout() {
 		await authStore.logout();
+	}
+
+	function switchToLanguage(newLanguage: AvailableLanguageTag) {
+		const canonicalPath = i18n.route($page.url.pathname);
+		const localisedPath = i18n.resolveRoute(canonicalPath, newLanguage);
+		setLanguageTag(newLanguage);
+		goto(localisedPath);
 	}
 </script>
 
@@ -40,7 +58,7 @@
 		<NavBrand href="/">
 			<img src="/logo.png" class="mr-3 h-8" alt="Logo" />
 			<span class="self-center whitespace-nowrap text-xl font-semibold text-main-light-900 dark:text-main-dark-900">
-				Your App
+				Task Home
 			</span>
 		</NavBrand>
 		
@@ -51,7 +69,11 @@
 				<NavLi 
 					href={item.href} 
 					activeClass="text-blue-700 dark:text-blue-500"
-					class={$page.url.pathname === item.href ? "text-blue-700 dark:text-blue-500" : ""}
+					class={`
+						transition-all duration-200 ease-in-out
+						hover:scale-105 hover:text-blue-600 dark:hover:text-blue-400
+						${$page.url.pathname === item.href ? "text-blue-700 dark:text-blue-500" : ""}
+					`}
 				>
 					{item.label}
 				</NavLi>
@@ -59,7 +81,16 @@
 		</NavUl>
 
 		{#if $authStore}
-			<div class="flex items-center ml-auto">
+			<div class="flex items-center ml-auto gap-4 hello">
+				<Select 
+					class="w-32 transition-all duration-200 ease-in-out "
+					items={availableLanguageTags.map(lang => ({
+						name: lang.toUpperCase(),
+						value: lang
+					}))}
+					bind:value={selectedLanguage}
+					on:change={() => switchToLanguage(selectedLanguage)}
+				/>
 				<button
 					on:click={() => userDropdownOpen = !userDropdownOpen}
 					class="flex items-center space-x-3 p-2 rounded-lg hover:bg-main-light-100 dark:hover:bg-main-dark-100"

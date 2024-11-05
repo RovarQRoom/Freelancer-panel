@@ -41,5 +41,13 @@
   "about": "About",
   "privacy_policy": "Privacy Policy",
   "terms": "Terms & Conditions",
-  "contact": "Contact"
+  "contact": "Contact",
+  "categories": "Categories",
+  "id": "ID",
+  "title": "Title",
+  "image": "Image",
+  "icon": "Icon",
+  "addCategory": "Add Category",
+  "save": "Save",
+  "cancel": "Cancel"
 }

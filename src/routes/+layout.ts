@@ -28,5 +28,14 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 
 	const user = session?.user ?? null;
 
-	return { supabase, session, user };
+	return {
+		supabase,
+		session,
+		user,
+		pageTransition: {
+			duration: 200,
+			easing: 'ease-in-out',
+			css: true
+		}
+	};
 };
