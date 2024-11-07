@@ -13,7 +13,8 @@
 		Tabs,
 		TabItem,
 		Img,
-		Spinner
+		Spinner,
+		Modal
 	} from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import {
@@ -87,6 +88,9 @@
 		file?: File;
 		preview?: string;
 	} = {};
+
+	let showDeleteModal = false;
+	let categoryToDelete: number | null = null;
 
 	onMount(async () => {
 		await categoryStore.fetchAll(filter);
@@ -200,6 +204,23 @@
 			iconFile = {};
 		}
 	}
+
+	async function handleDeleteCategory() {
+		if (!categoryToDelete) return;
+		try {
+			const category = await categoryStore.fetch(categoryToDelete);
+			await categoryStore.remove(categoryToDelete);
+			if (category?.title?.id) {
+				console.log(category.title.id);
+				await languageStore.removeSoft(category.title.id);
+			}
+		} catch (error) {
+			if (error instanceof Error) toastStore.error(error.message);
+		} finally {
+			showDeleteModal = false;
+			categoryToDelete = null;
+		}
+	}
 </script>
 
 <div class="p-4">
@@ -250,6 +271,10 @@
 								size="sm"
 								class="p-2"
 								color="red"
+								on:click={() => {
+									categoryToDelete = category.id;
+									showDeleteModal = true;
+								}}
 							>
 								<TrashBinSolid class="w-4 h-4" />
 							</Button>
@@ -454,3 +479,24 @@
 		</form>
 	</div>
 </Drawer>
+
+<Modal
+	bind:open={showDeleteModal}
+	size="xs"
+	autoclose={false}
+	class="w-full"
+>
+	<div class="text-center">
+		<h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+			{m.deleteConfirmation()}
+		</h3>
+		<div class="flex justify-center gap-4">
+			<Button color="red" on:click={handleDeleteCategory}>
+				{m.yes()}
+			</Button>
+			<Button color="alternative" on:click={() => (showDeleteModal = false)}>
+				{m.no()}
+			</Button>
+		</div>
+	</div>
+</Modal>

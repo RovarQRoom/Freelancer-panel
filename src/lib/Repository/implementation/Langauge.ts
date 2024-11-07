@@ -82,4 +82,14 @@ export class LanguageRepository implements ILanguage {
 			throw new Error(response.error.message);
 		}
 	}
+	async deleteSoftLanguageAsync(id: number): Promise<void> {
+		const response = await supabase
+			.from('Language')
+			.update({ deleted_at: new Date().toISOString() })
+			.eq('id', id);
+		if (response.error) {
+			toastStore.error(response.error.message);
+			throw new Error(response.error.message);
+		}
+	}
 }

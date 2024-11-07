@@ -59,5 +59,8 @@
 	"files_are_required": "الملفات مطلوبة",
 	"create_success": "تم الإنشاء بنجاح",
 	"update_success": "تم التحديث بنجاح",
-	"delete_success": "تم الحذف بنجاح"
+	"delete_success": "تم الحذف بنجاح",
+	"deleteConfirmation": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+	"yes": "نعم",
+	"no": "لا"
 }

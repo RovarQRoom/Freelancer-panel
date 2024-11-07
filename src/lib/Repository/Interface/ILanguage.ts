@@ -11,4 +11,5 @@ export interface ILanguage {
 	readLanguageAsync(id: number): Promise<PostgrestSingleResponse<LanguageEntity>>;
 	updateLanguageAsync(language: UpdateLanguage): Promise<PostgrestSingleResponse<LanguageEntity>>;
 	deleteLanguageAsync(id: number): Promise<void>;
+	deleteSoftLanguageAsync(id: number): Promise<void>;
 }

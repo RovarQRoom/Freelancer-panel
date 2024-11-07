@@ -99,6 +99,22 @@ const createLanguageStore = () => {
 				}
 				throw error;
 			}
+		}, 
+		removeSoft: async (id: number) => {
+			try {
+				await langaugeRepository.deleteLanguageAsync(id);
+				toastStore.success(m['delete_success']());
+				update((store) => {
+					store.data = store.data.filter((item) => item.id !== id);
+					return store;
+				});
+			} catch (error) {
+				if (error instanceof Error) {
+					toastStore.error(error.message);
+					throw new Error(error.message);
+				}
+				throw error;
+			}
 		}
 	};
 };

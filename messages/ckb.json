@@ -59,5 +59,8 @@
   "files_are_required": "فایلەکان پێویستن",
   "create_success": "بە سەرکەوتوویی دروستکرا",
   "update_success": "بە سەرکەوتوویی نوێکرایەوە",
-  "delete_success": "بە سەرکەوتوویی سڕایەوە"
+  "delete_success": "بە سەرکەوتوویی سڕایەوە",
+  "deleteConfirmation": "دڵنیای دەتەوێت ئەم بەشە بسڕیتەوە؟",
+  "yes": "بەڵێ",
+  "no": "نەخێر"
 }
