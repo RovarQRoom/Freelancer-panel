@@ -5,6 +5,7 @@ import { writable } from 'svelte/store';
 import { toastStore } from './Toast';
 import { Store } from '$lib/Model/Extention/Store';
 import type { GenericListOptions } from '$lib/Model/Common/ListOption';
+import * as m from '$lib/paraglide/messages.js';
 
 const categoryRepository = new CategoryRepository();
 
@@ -25,7 +26,7 @@ const createCategoryStore = () => {
                     categories.data.push(response.data);
                     return categories;
                 });
-                toastStore.success('Category created successfully');
+                toastStore.success(m['create_success']('category'));
                 return response.data;
             } catch (error) {
                 if (error instanceof Error) toastStore.error(error.message);
@@ -64,7 +65,7 @@ const createCategoryStore = () => {
             }
         },
 
-        update: async (request: UpdateCategory) => {
+        put: async (request: UpdateCategory) => {
             try {
                 const response = await categoryRepository.updateCategoryAsync(request);
                 if (response.error) {
@@ -84,7 +85,7 @@ const createCategoryStore = () => {
             }
         },
 
-        delete: async (id: number) => {
+        remove: async (id: number) => {
             try {
                 await categoryRepository.deleteCategoryAsync(id);
                 toastStore.success('Category deleted successfully');

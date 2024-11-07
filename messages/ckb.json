@@ -43,11 +43,21 @@
   "terms": "مەرج و ڕێساکان",
   "contact": "پەیوەندی",
   "categories": "بەشەکان",
-  "id": "ناسنامە",
+  "id": "ناسنام",
   "title": "ناونیشان",
   "image": "وێنە",
   "icon": "ئایکۆن",
   "addCategory": "زیادکردنی بەش",
+  "editCategory": "دەستکاری بەش",
   "save": "پاشەکەوت",
-  "cancel": "پاشگەزبوونەوە"
+  "cancel": "پاشگەزبوونەوە",
+  "language_en": "ئینگلیزی",
+  "language_ckb": "کوردی",
+  "language_ar": "عەرەبی",
+  "file_is_required": "فایل پێویستە",
+  "file_upload_failed": "بارکردنی فایل سەرکەوتوو نەبوو",
+  "files_are_required": "فایلەکان پێویستن",
+  "create_success": "بە سەرکەوتوویی دروستکرا",
+  "update_success": "بە سەرکەوتوویی نوێکرایەوە",
+  "delete_success": "بە سەرکەوتوویی سڕایەوە"
 }
