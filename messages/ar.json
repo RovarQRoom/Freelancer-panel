@@ -62,5 +62,7 @@
 	"delete_success": "تم الحذف بنجاح",
 	"deleteConfirmation": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
 	"yes": "نعم",
-	"no": "لا"
+	"no": "لا",
+	"add": "إضافة",
+	"description": "الوصف"
 }

@@ -14,7 +14,7 @@ export class SubcategoryRepository implements ISubcategory {
 		const response = await supabase
 			.from('Subcategory')
 			.insert(request)
-			.select('*')
+			.select('*, title(en, ar, ckb), description(en, ar, ckb)')
 			.returns<SubcategoryEntity>()
 			.single();
 		if (response.error) {
@@ -30,6 +30,9 @@ export class SubcategoryRepository implements ISubcategory {
 		if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
 		if (options?.from) query.gte('created_at', options.from);
 		if (options?.to) query.lte('created_at', options.to);
+		if (options?.equal) query.eq(options.fieldOption ?? 'id', options.equal);
+		if (options?.isEmpty && options?.equal) query.not('category', 'eq', options.equal);
+		if (options?.isEmpty && !options?.equal) query.is('category', null);
 		const response = await query
 			.is('deleted_at', null)
 			.order('id', { ascending: false })
@@ -71,6 +74,19 @@ export class SubcategoryRepository implements ISubcategory {
 			throw new Error(response.error.message);
 		}
 		return response;
+	}
+	async updateSubcategoriesAsync(ids: number[], categoryId: number): Promise<SubcategoryEntity[]> {
+		const response = await supabase
+			.from('Subcategory')
+			.update({ category: categoryId })
+			.in('id', ids)
+			.select('*, title(en, ar, ckb), description(en, ar, ckb)')
+			.returns<SubcategoryEntity[]>();
+		if (response.error) {
+			toastStore.error(response.error.message);
+			throw new Error(response.error.message);
+		}
+		return response.data;
 	}
 	async deleteSubcategoryAsync(id: number): Promise<void> {
 		const response = await supabase

@@ -39,9 +39,12 @@
 	import { toastStore } from '$lib/Store/Toast';
 	import { CategoryEntity } from '$lib/Model/Entity/Category';
 	import { PenSolid, TrashBinSolid } from 'flowbite-svelte-icons';
+	import SubcategoryMultiselect from '$lib/Component/Subcategory.Multiselect.svelte';
+	import { subcategoryStore } from '$lib/Store/Subcategory';
 	let hideSidebar = true;
 	let isLoading = false;
 	let hideEditSidebar = true;
+	let selectedSubcategories: string[] = [];
 	let editCategory: UpdateCategory = {
 		id: 0,
 		title: 0,
@@ -111,6 +114,9 @@
 			}
 			createCategory.title = langaugeResponse.id;
 			categoryResponse = await categoryStore.insert(createCategory);
+			if (selectedSubcategories.length > 0 && categoryResponse?.id) {
+				await subcategoryStore.putAll(selectedSubcategories.map(Number), categoryResponse?.id);
+			}
 		} catch (error) {
 			if (langaugeResponse?.id) {
 				await languageStore.remove(langaugeResponse.id);
@@ -358,6 +364,9 @@
 						/>
 					</div>
 				</div>
+			</div>
+			<div class="space-y-3">
+				<SubcategoryMultiselect categoryId={createCategory.id} />
 			</div>
 
 			<div class="flex gap-3 pt-4">

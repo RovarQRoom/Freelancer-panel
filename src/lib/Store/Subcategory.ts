@@ -61,7 +61,7 @@ const createSubcategoryStore = () => {
 				if (error instanceof Error) toastStore.error(error.message);
 			}
 		},
-		update: async (request: UpdateSubcategory) => {
+		put: async (request: UpdateSubcategory) => {
 			try {
 				const response = await subcategoryRepository.updateSubcategoryAsync(request);
 				if (response.error) {
@@ -76,6 +76,24 @@ const createSubcategoryStore = () => {
 				});
 				toastStore.success('Subcategory updated successfully');
 				return response.data;
+			} catch (error) {
+				if (error instanceof Error) toastStore.error(error.message);
+			}
+		},
+		putAll: async (ids: number[], categoryId: number) => {
+			try {
+				const response = await subcategoryRepository.updateSubcategoriesAsync(ids, categoryId);
+				update((subcategories) => {
+					for (const subcategory of response) {
+						const index = subcategories.data.findIndex(
+							(subcategory) => subcategory.id === subcategory.id
+						);
+						if (index !== -1) subcategories.data[index] = subcategory;
+					}
+					return subcategories;
+				});
+				toastStore.success('Subcategories updated successfully');
+				return response;
 			} catch (error) {
 				if (error instanceof Error) toastStore.error(error.message);
 			}

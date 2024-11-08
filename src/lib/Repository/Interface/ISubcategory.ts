@@ -14,5 +14,6 @@ export interface ISubcategory {
 	updateSubcategoryAsync(
 		request: UpdateSubcategory
 	): Promise<PostgrestSingleResponse<SubcategoryEntity>>;
+	updateSubcategoriesAsync(ids: number[], categoryId: number): Promise<SubcategoryEntity[]>;
 	deleteSubcategoryAsync(id: number): Promise<void>;
 }
