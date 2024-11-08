@@ -66,5 +66,16 @@
 	"add": "إضافة",
 	"description": "الوصف",
 	"subcategories": "الفئات الفرعية",
-	"addSubcategory": "إضافة فئة فرعية"
+	"addSubcategory": "إضافة فئة فرعية",
+	"noMediaSelected": "لم يتم اختيار وسائط",
+	"addImage": "إضافة صورة",
+	"subCategorytitle": "عنوان الفئة الفرعية",
+	"subCategorytitlePlaceholder": "أدخل عنوان الفئة الفرعية",
+	"subCategoryDescription": "وصف الفئة الفرعية",
+	"subCategoryDescriptionPlaceholder": "أدخل وصف الفئة الفرعية",
+	"editSubcategory": "تعديل الفئة الفرعية",
+	"double_click_to_view_subcategories": "انقر نقرًا مزدوجًا لعرض الفئات الفرعية",
+	"not_available": "غير متوفر",
+	"no_media_selected": "لم يتم اختيار وسائط",
+	"add_image": "إضافة صورة"
 }

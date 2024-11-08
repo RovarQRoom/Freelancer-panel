@@ -30,7 +30,6 @@ export class SubcategoryRepository implements ISubcategory {
 		if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
 		if (options?.from) query.gte('created_at', options.from);
 		if (options?.to) query.lte('created_at', options.to);
-		if (options?.equal) query.eq(options.fieldOption ?? 'id', options.equal);
 		if (options?.isEmpty && options?.equal) query.not('category', 'eq', options.equal);
 		if (options?.isEmpty && !options?.equal) query.is('category', null);
 		const response = await query
@@ -50,7 +49,7 @@ export class SubcategoryRepository implements ISubcategory {
 	async readSubcategoryAsync(id: number): Promise<PostgrestSingleResponse<SubcategoryEntity>> {
 		const response = await supabase
 			.from('Subcategory')
-			.select('*')
+			.select('*, title(id, en, ar, ckb), description(id, en, ar, ckb)')
 			.eq('id', id)
 			.returns<SubcategoryEntity>()
 			.single();

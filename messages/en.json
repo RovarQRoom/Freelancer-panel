@@ -66,5 +66,16 @@
 	"add": "Add",
 	"description": "Description",
 	"subcategories": "Subcategories",
-	"addSubcategory": "Add Subcategory"
+	"addSubcategory": "Add Subcategory",
+	"noMediaSelected": "No Media Selected",
+	"addImage": "Add Image",
+	"subCategorytitle": "Subcategory Title",
+	"subCategorytitlePlaceholder": "Enter subcategory title",
+	"subCategoryDescription": "Subcategory Description",
+	"subCategoryDescriptionPlaceholder": "Enter subcategory description",
+	"editSubcategory": "Edit Subcategory",
+	"double_click_to_view_subcategories": "Double click to view subcategories",
+	"not_available": "Not available",
+	"no_media_selected": "No media selected",
+	"add_image": "Add Image"
 }

@@ -98,7 +98,7 @@ const createSubcategoryStore = () => {
 				if (error instanceof Error) toastStore.error(error.message);
 			}
 		},
-		delete: async (id: number) => {
+		remove: async (id: number) => {
 			try {
 				await subcategoryRepository.deleteSubcategoryAsync(id);
 				toastStore.success('Subcategory deleted successfully');

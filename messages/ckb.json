@@ -66,5 +66,16 @@
 	"add": "زیادکردن",
 	"description": "وەسف",
 	"subcategories": "بەشە لاوەکییەکان",
-	"addSubcategory": "زیادکردنی بەشی لاوەکی"
+	"addSubcategory": "زیادکردنی بەشی لاوەکی",
+	"noMediaSelected": "هیچ میدیایەک هەڵنەبژێردراوە",
+	"addImage": "زیادکردنی وێنە",
+	"subCategorytitle": "ناونیشانی بەشی لاوەکی",
+	"subCategorytitlePlaceholder": "ناونیشانی بەشی لاوەکی بنووسە",
+	"subCategoryDescription": "وەسفی بەشی لاوەکی",
+	"subCategoryDescriptionPlaceholder": "وەسفی بەشی لاوەکی بنووسە",
+	"editSubcategory": "دەستکاری بەشی لاوەکی",
+	"double_click_to_view_subcategories": "دووجار کرتە بکە بۆ بینینی بەشە لاوەکییەکان",
+	"not_available": "بەردەست نییە",
+	"no_media_selected": "هیچ میدیایەک هەڵنەبژێردراوە",
+	"add_image": "زیادکردنی وێنە"
 }
