@@ -27,11 +27,11 @@
 	}
 </script>
 
-<div class="bg-main-light-100 dark:bg-main-dark-100 flex min-h-screen items-center justify-center">
+<div class="flex min-h-screen items-center justify-center bg-main-light-100 dark:bg-main-dark-100">
 	<div class="w-full max-w-md p-4">
 		<Card class="shadow-lg">
 			<form class="flex flex-col space-y-6" on:submit|preventDefault={handleLogin}>
-				<h3 class="text-main-light-900 dark:text-main-dark-900 text-center text-2xl font-bold">
+				<h3 class="text-center text-2xl font-bold text-main-light-900 dark:text-main-dark-900">
 					{m.login()}
 				</h3>
 
@@ -49,7 +49,7 @@
 						placeholder="name@company.com"
 						bind:value={email}
 						required
-						class="focus:ring-primary-light-500 focus:border-primary-light-500 dark:focus:ring-primary-dark-500 dark:focus:border-primary-dark-500"
+						class="focus:border-primary-light-500 focus:ring-primary-light-500 dark:focus:border-primary-dark-500 dark:focus:ring-primary-dark-500"
 					/>
 				</div>
 
@@ -61,7 +61,7 @@
 						placeholder="••••••••"
 						bind:value={password}
 						required
-						class="focus:ring-primary-light-500 focus:border-primary-light-500 dark:focus:ring-primary-dark-500 dark:focus:border-primary-dark-500"
+						class="focus:border-primary-light-500 focus:ring-primary-light-500 dark:focus:border-primary-dark-500 dark:focus:ring-primary-dark-500"
 					/>
 				</div>
 

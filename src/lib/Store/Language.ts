@@ -99,7 +99,7 @@ const createLanguageStore = () => {
 				}
 				throw error;
 			}
-		}, 
+		},
 		removeSoft: async (id: number) => {
 			try {
 				await langaugeRepository.deleteLanguageAsync(id);

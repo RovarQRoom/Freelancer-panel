@@ -28,8 +28,7 @@ export class CategoryRepository implements ICategory {
 	): Promise<PostgrestSingleResponse<Array<CategoryEntity>>> {
 		const query = supabase
 			.from('Category')
-			.select(options?.select ?? `*,title(${languageTag()})`, { count: 'exact' })
-			;
+			.select(options?.select ?? `*,title(${languageTag()})`, { count: 'exact' });
 		if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
 		if (options?.from) query.gte('created_at', options.from);
 		if (options?.to) query.lte('created_at', options.to);

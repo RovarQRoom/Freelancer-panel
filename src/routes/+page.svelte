@@ -95,7 +95,7 @@
 	});
 </script>
 
-<div class="bg-main-light-50 dark:bg-main-dark-50 min-h-screen p-4">
+<div class="min-h-screen bg-main-light-50 p-4 dark:bg-main-dark-50">
 	<!-- Stats Cards -->
 	<div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
 		<Card>

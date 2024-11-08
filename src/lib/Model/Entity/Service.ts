@@ -1,5 +1,5 @@
-import { Datetime } from "../Extention/Datetime";
-import { LanguageEntity } from "./Language";
+import { Datetime } from '../Extention/Datetime';
+import { LanguageEntity } from './Language';
 
 export class ServiceEntity extends Datetime {
 	id: number = 0;

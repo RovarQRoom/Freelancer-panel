@@ -21,12 +21,8 @@
 		Languages,
 		type InsertCategory,
 		type InsertLanguage,
-
 		type UpdateCategory,
-
 		type UpdateLanguage
-
-
 	} from '$lib/Supabase/Types/database.types';
 	import { onMount } from 'svelte';
 	import { categoryStore } from '$lib/Store/Category';
@@ -57,15 +53,15 @@
 		ar: null,
 		ckb: null
 	};
-	  // Create the upload configuration at component level
-	  const { startUpload } = createUploadThing("imageUploader", {
-    onClientUploadComplete: () => {
-      console.log("Upload completed");
-    },
-    onUploadError: (error) => {
-      console.error("Upload error:", error);
-    },
-  });
+	// Create the upload configuration at component level
+	const { startUpload } = createUploadThing('imageUploader', {
+		onClientUploadComplete: () => {
+			console.log('Upload completed');
+		},
+		onUploadError: (error) => {
+			console.error('Upload error:', error);
+		}
+	});
 
 	let filter: GenericListOptions = {
 		limit: 10,
@@ -102,9 +98,9 @@
 	async function handleAddCategory() {
 		if (isLoading) return;
 		isLoading = true;
-		let langaugeResponse:LanguageEntity | undefined;
-		let categoryResponse:CategoryEntity | undefined;
-	try {
+		let langaugeResponse: LanguageEntity | undefined;
+		let categoryResponse: CategoryEntity | undefined;
+		try {
 			langaugeResponse = await languageStore.insert(createCategoryLanguage);
 			if (imageFile.file) {
 				createCategory.image = await storageStore.uploadFile(imageFile.file, startUpload);
@@ -169,13 +165,13 @@
 			title: category?.title.id ?? 0,
 			image: category?.image ?? '',
 			icon: category?.icon ?? null
-		}
+		};
 		editCategoryLanguage = {
 			id: category?.title.id ?? 0,
 			en: category?.title.en ?? '',
 			ar: category?.title.ar ?? null,
 			ckb: category?.title.ckb ?? null
-		}
+		};
 		imageFile.preview = category?.image ?? '';
 		iconFile.preview = category?.icon ?? '';
 		hideEditSidebar = false;
@@ -184,8 +180,8 @@
 	async function handleEditCategory() {
 		let backupLanguage = editCategoryLanguage;
 		let backupCategory = editCategory;
-		let categoryResponse:CategoryEntity | undefined;
-		let langaugeResponse:LanguageEntity | undefined;
+		let categoryResponse: CategoryEntity | undefined;
+		let langaugeResponse: LanguageEntity | undefined;
 		try {
 			langaugeResponse = await languageStore.put(editCategoryLanguage);
 			if (imageFile.file) {
@@ -231,16 +227,19 @@
 
 <div class="p-4">
 	<div class="mb-6 flex items-center justify-between">
-		<h1 class="text-2xl font-bold text-main-light-900 dark:text-main-dark-900 transition-colors duration-200">
+		<h1
+			class="text-2xl font-bold text-main-light-900 transition-colors duration-200 dark:text-main-dark-900"
+		>
 			{m.categories()}
 		</h1>
 		<Button
-			class="bg-primary-light-500 text-white hover:bg-primary-light-600 dark:bg-primary-dark-500 
-			dark:hover:bg-primary-dark-600 transition-all duration-200 transform hover:scale-105"
-			on:click={() => (hideSidebar = false)}>{m.addCategory()}</Button>
+			class="transform bg-primary-light-500 text-white transition-all 
+			duration-200 hover:scale-105 hover:bg-primary-light-600 dark:bg-primary-dark-500 dark:hover:bg-primary-dark-600"
+			on:click={() => (hideSidebar = false)}>{m.addCategory()}</Button
+		>
 	</div>
 
-	<Table hoverable={true} class="bg-white dark:bg-gray-800 transition-all duration-200">
+	<Table hoverable={true} class="bg-white transition-all duration-200 dark:bg-gray-800">
 		<TableHead>
 			<TableHeadCell>{m.id()}</TableHeadCell>
 			<TableHeadCell>{m.title()}</TableHeadCell>
@@ -250,7 +249,9 @@
 		</TableHead>
 		<TableBody class="divide-y">
 			{#each $categoryStore.data as category}
-				<TableBodyRow class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+				<TableBodyRow
+					class="transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700"
+				>
 					<TableBodyCell>{category.id}</TableBodyCell>
 					<TableBodyCell>{category.title[languageTag()]}</TableBodyCell>
 					<TableBodyCell>
@@ -258,7 +259,7 @@
 					</TableBodyCell>
 					<TableBodyCell>
 						{#if category.icon}
-						<Img src={category.icon} alt="category" class="h-10 w-10 rounded object-cover" />
+							<Img src={category.icon} alt="category" class="h-10 w-10 rounded object-cover" />
 						{/if}
 					</TableBodyCell>
 					<TableBodyCell>
@@ -267,11 +268,11 @@
 								size="sm"
 								class="p-2"
 								color="light"
-								on:click={() =>{
+								on:click={() => {
 									getCategory(category.id);
 								}}
 							>
-								<PenSolid class="w-4 h-4" />
+								<PenSolid class="h-4 w-4" />
 							</Button>
 							<Button
 								size="sm"
@@ -282,7 +283,7 @@
 									showDeleteModal = true;
 								}}
 							>
-								<TrashBinSolid class="w-4 h-4" />
+								<TrashBinSolid class="h-4 w-4" />
 							</Button>
 						</div>
 					</TableBodyCell>
@@ -293,7 +294,7 @@
 </div>
 
 <Drawer bind:hidden={hideSidebar} width="w-[480px]" class="transition-transform duration-300">
-	<div class="bg-main-light-50 p-6 dark:bg-main-dark-50 h-full overflow-y-auto">
+	<div class="h-full overflow-y-auto bg-main-light-50 p-6 dark:bg-main-dark-50">
 		<h2 class="mb-6 text-2xl font-bold text-main-light-900 dark:text-main-dark-900">
 			{m.addCategory()}
 		</h2>
@@ -306,8 +307,8 @@
 							<Input
 								class="w-full transition-all duration-200 focus:ring-2 focus:ring-primary-light-500"
 								bind:value={createCategoryLanguage[language.toLowerCase() as keyof InsertLanguage]}
-									required={language === Languages.EN}
-								/>
+								required={language === Languages.EN}
+							/>
 						</TabItem>
 					{/each}
 				</Tabs>
@@ -316,17 +317,21 @@
 			<div class="space-y-3">
 				<Label class="text-lg font-medium">{m.image()}</Label>
 				<div class="flex justify-center">
-					<div class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-main-light-100 
-					dark:bg-main-dark-100 transition-all duration-200 hover:shadow-lg">
+					<div
+						class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-main-light-100
+					transition-all duration-200 hover:shadow-lg dark:bg-main-dark-100"
+					>
 						{#if imageFile.preview}
-							<Img 
-								src={imageFile.preview} 
-								alt="Preview" 
+							<Img
+								src={imageFile.preview}
+								alt="Preview"
 								class="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
 							/>
 						{:else}
 							<div class="flex h-full w-full flex-col items-center justify-center">
-								<span class="text-main-light-400 dark:text-main-dark-400 mb-2">No Media Selected</span>
+								<span class="mb-2 text-main-light-400 dark:text-main-dark-400"
+									>No Media Selected</span
+								>
 								<Button class="transform transition-all duration-200 hover:scale-105">
 									<span class="mr-2">+</span>
 									Add Image
@@ -346,11 +351,16 @@
 			<div class="space-y-3">
 				<Label class="text-lg font-medium">{m.icon()}</Label>
 				<div class="flex justify-start">
-					<div class="relative h-20 w-20 overflow-hidden rounded-lg bg-main-light-100 
-					dark:bg-main-dark-100 transition-all duration-200 hover:shadow-lg">
+					<div
+						class="relative h-20 w-20 overflow-hidden rounded-lg bg-main-light-100
+					transition-all duration-200 hover:shadow-lg dark:bg-main-dark-100"
+					>
 						{#if iconFile.preview}
-							<img src={iconFile.preview} alt="Icon Preview" 
-							class="h-full w-full object-cover transition-transform duration-200 hover:scale-105" />
+							<img
+								src={iconFile.preview}
+								alt="Icon Preview"
+								class="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
+							/>
 						{:else}
 							<div class="flex h-full w-full flex-col items-center justify-center">
 								<span class="text-xl text-main-light-400 dark:text-main-dark-400">+</span>
@@ -372,9 +382,9 @@
 			<div class="flex gap-3 pt-4">
 				<Button
 					type="submit"
-					class="flex-1 bg-primary-light-500 text-white hover:bg-primary-light-600 
-					dark:bg-primary-dark-500 dark:hover:bg-primary-dark-600 transition-all duration-200 
-					transform hover:scale-105"
+					class="flex-1 transform bg-primary-light-500 text-white 
+					transition-all duration-200 hover:scale-105 hover:bg-primary-light-600 
+					dark:bg-primary-dark-500 dark:hover:bg-primary-dark-600"
 					disabled={isLoading}
 				>
 					{#if isLoading}
@@ -384,16 +394,17 @@
 				</Button>
 				<Button
 					color="alternative"
-					class="flex-1 bg-main-light-200 hover:bg-main-light-300 dark:bg-main-dark-200 
-					dark:hover:bg-main-dark-300 transition-all duration-200 transform hover:scale-105"
-					on:click={() => (hideSidebar = true)}>{m.cancel()}</Button>
+					class="flex-1 transform bg-main-light-200 transition-all 
+					duration-200 hover:scale-105 hover:bg-main-light-300 dark:bg-main-dark-200 dark:hover:bg-main-dark-300"
+					on:click={() => (hideSidebar = true)}>{m.cancel()}</Button
+				>
 			</div>
 		</form>
 	</div>
 </Drawer>
 
 <Drawer bind:hidden={hideEditSidebar} width="w-[480px]" class="transition-transform duration-300">
-	<div class="bg-main-light-50 p-6 dark:bg-main-dark-50 h-full overflow-y-auto">
+	<div class="h-full overflow-y-auto bg-main-light-50 p-6 dark:bg-main-dark-50">
 		<h2 class="mb-6 text-2xl font-bold text-main-light-900 dark:text-main-dark-900">
 			{m.editCategory()}
 		</h2>
@@ -402,12 +413,15 @@
 				<Label class="text-lg font-medium">{m.title()}</Label>
 				<Tabs style="underline" class="mb-4">
 					{#each Object.keys(Languages) as language}
-						<TabItem open={language === Languages.EN} title={m[`language_${language.toLowerCase() as AvailableLanguageTag}`]()}>
+						<TabItem
+							open={language === Languages.EN}
+							title={m[`language_${language.toLowerCase() as AvailableLanguageTag}`]()}
+						>
 							<Input
 								class="w-full transition-all duration-200 focus:ring-2 focus:ring-primary-light-500"
 								bind:value={editCategoryLanguage[language.toLowerCase() as keyof InsertLanguage]}
-									required={language === Languages.EN}
-								/>
+								required={language === Languages.EN}
+							/>
 						</TabItem>
 					{/each}
 				</Tabs>
@@ -416,17 +430,21 @@
 			<div class="space-y-3">
 				<Label class="text-lg font-medium">{m.image()}</Label>
 				<div class="flex justify-center">
-					<div class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-main-light-100 
-					dark:bg-main-dark-100 transition-all duration-200 hover:shadow-lg">
+					<div
+						class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-main-light-100
+					transition-all duration-200 hover:shadow-lg dark:bg-main-dark-100"
+					>
 						{#if imageFile.preview}
-							<Img 
-								src={imageFile.preview} 
-								alt="Preview" 
+							<Img
+								src={imageFile.preview}
+								alt="Preview"
 								class="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
 							/>
 						{:else}
 							<div class="flex h-full w-full flex-col items-center justify-center">
-								<span class="text-main-light-400 dark:text-main-dark-400 mb-2">No Media Selected</span>
+								<span class="mb-2 text-main-light-400 dark:text-main-dark-400"
+									>No Media Selected</span
+								>
 								<Button class="transform transition-all duration-200 hover:scale-105">
 									<span class="mr-2">+</span>
 									Add Image
@@ -446,11 +464,16 @@
 			<div class="space-y-3">
 				<Label class="text-lg font-medium">{m.icon()}</Label>
 				<div class="flex justify-start">
-					<div class="relative h-20 w-20 overflow-hidden rounded-lg bg-main-light-100 
-					dark:bg-main-dark-100 transition-all duration-200 hover:shadow-lg">
+					<div
+						class="relative h-20 w-20 overflow-hidden rounded-lg bg-main-light-100
+					transition-all duration-200 hover:shadow-lg dark:bg-main-dark-100"
+					>
 						{#if iconFile.preview}
-							<img src={iconFile.preview} alt="Icon Preview" 
-							class="h-full w-full object-cover transition-transform duration-200 hover:scale-105" />
+							<img
+								src={iconFile.preview}
+								alt="Icon Preview"
+								class="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
+							/>
 						{:else}
 							<div class="flex h-full w-full flex-col items-center justify-center">
 								<span class="text-xl text-main-light-400 dark:text-main-dark-400">+</span>
@@ -469,9 +492,9 @@
 			<div class="flex gap-3 pt-4">
 				<Button
 					type="submit"
-					class="flex-1 bg-primary-light-500 text-white hover:bg-primary-light-600 
-					dark:bg-primary-dark-500 dark:hover:bg-primary-dark-600 transition-all duration-200 
-					transform hover:scale-105"
+					class="flex-1 transform bg-primary-light-500 text-white 
+					transition-all duration-200 hover:scale-105 hover:bg-primary-light-600 
+					dark:bg-primary-dark-500 dark:hover:bg-primary-dark-600"
 					disabled={isLoading}
 				>
 					{#if isLoading}
@@ -481,20 +504,16 @@
 				</Button>
 				<Button
 					color="alternative"
-					class="flex-1 bg-main-light-200 hover:bg-main-light-300 dark:bg-main-dark-200 
-					dark:hover:bg-main-dark-300 transition-all duration-200 transform hover:scale-105"
-					on:click={() => (hideEditSidebar = true)}>{m.cancel()}</Button>
+					class="flex-1 transform bg-main-light-200 transition-all 
+					duration-200 hover:scale-105 hover:bg-main-light-300 dark:bg-main-dark-200 dark:hover:bg-main-dark-300"
+					on:click={() => (hideEditSidebar = true)}>{m.cancel()}</Button
+				>
 			</div>
 		</form>
 	</div>
 </Drawer>
 
-<Modal
-	bind:open={showDeleteModal}
-	size="xs"
-	autoclose={false}
-	class="w-full"
->
+<Modal bind:open={showDeleteModal} size="xs" autoclose={false} class="w-full">
 	<div class="text-center">
 		<h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
 			{m.deleteConfirmation()}

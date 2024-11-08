@@ -8,8 +8,8 @@ declare global {
 			safeGetSession(): Promise<{ session: Session | null; user: User | null }>;
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			session?: any;
-		  }
-		  interface PageData {
+		}
+		interface PageData {
 			session: Session | null;
 			user: User | null;
 		}

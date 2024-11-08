@@ -4,16 +4,18 @@
 
 /* Page transition styles */
 .page-transition-enter {
-    opacity: 0;
-    transform: translateY(10px);
+	opacity: 0;
+	transform: translateY(10px);
 }
 
 .page-transition-enter-active,
 .page-transition-leave-active {
-    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+	transition:
+		opacity 200ms ease-in-out,
+		transform 200ms ease-in-out;
 }
 
 .page-transition-leave-to {
-    opacity: 0;
-    transform: translateY(-10px);
+	opacity: 0;
+	transform: translateY(-10px);
 }
