@@ -64,5 +64,7 @@
 	"yes": "نعم",
 	"no": "لا",
 	"add": "إضافة",
-	"description": "الوصف"
+	"description": "الوصف",
+	"subcategories": "الفئات الفرعية",
+	"addSubcategory": "إضافة فئة فرعية"
 }

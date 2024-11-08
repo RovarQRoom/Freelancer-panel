@@ -64,5 +64,7 @@
 	"yes": "Yes",
 	"no": "No",
 	"add": "Add",
-	"description": "Description"
+	"description": "Description",
+	"subcategories": "Subcategories",
+	"addSubcategory": "Add Subcategory"
 }

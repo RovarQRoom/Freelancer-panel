@@ -14,13 +14,16 @@
 		TabItem,
 		Img,
 		Spinner,
-		Modal
+		Modal,
+		Checkbox,
+		Search
 	} from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import {
 		Languages,
 		type InsertCategory,
 		type InsertLanguage,
+		type InsertSubcategory,
 		type UpdateCategory,
 		type UpdateLanguage
 	} from '$lib/Supabase/Types/database.types';
@@ -34,12 +37,12 @@
 	import { storageStore } from '$lib/Store/Storage';
 	import { toastStore } from '$lib/Store/Toast';
 	import { CategoryEntity } from '$lib/Model/Entity/Category';
-	import { PenSolid, TrashBinSolid } from 'flowbite-svelte-icons';
-	import SubcategoryMultiselect from '$lib/Component/Subcategory.Multiselect.svelte';
+	import { PenSolid, TrashBinSolid, CirclePlusSolid } from 'flowbite-svelte-icons';
 	import { subcategoryStore } from '$lib/Store/Subcategory';
 	let hideSidebar = true;
-	let isLoading = false;
 	let hideEditSidebar = true;
+	let showSubcategoryModal = false;
+	let isLoading = false;
 	let selectedSubcategories: string[] = [];
 	let editCategory: UpdateCategory = {
 		id: 0,
@@ -90,6 +93,14 @@
 
 	let showDeleteModal = false;
 	let categoryToDelete: number | null = null;
+
+	let showCreateSubcategoryModal = false;
+	let selectedCategory: number | null = null;
+	let createSubcategory: InsertSubcategory = {
+		title: 0,
+		description: 0,
+		category: 0
+	};
 
 	onMount(async () => {
 		await categoryStore.fetchAll(filter);
@@ -223,6 +234,30 @@
 			categoryToDelete = null;
 		}
 	}
+
+	async function handleGetSubcategories(categoryId:number){
+		try {
+			await subcategoryStore.fetchAll({
+			select: `id, title(id, ${languageTag()}), description(id, ${languageTag()})`,
+			fieldOption: 'category',
+			isEmpty: true,
+			equal: categoryId?.toString()
+		});
+		showSubcategoryModal = true;
+		} catch (error) {
+			if (error instanceof Error) toastStore.error(error.message);
+		} finally {
+			showSubcategoryModal = false;
+		}
+	}
+
+	// Add this function to handle row clicks without conflicting with buttons
+	function handleRowClick(event: MouseEvent, categoryId: number) {
+		const target = event.target as HTMLElement;
+		if (!target.closest('button')) {
+			handleGetSubcategories(categoryId);
+		}
+	}
 </script>
 
 <div class="p-4">
@@ -250,7 +285,8 @@
 		<TableBody class="divide-y">
 			{#each $categoryStore.data as category}
 				<TableBodyRow
-					class="transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700"
+					class="transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
+					on:click={(e) => handleRowClick(e, category.id)}
 				>
 					<TableBodyCell>{category.id}</TableBodyCell>
 					<TableBodyCell>{category.title[languageTag()]}</TableBodyCell>
@@ -374,9 +410,6 @@
 						/>
 					</div>
 				</div>
-			</div>
-			<div class="space-y-3">
-				<SubcategoryMultiselect categoryId={createCategory.id} />
 			</div>
 
 			<div class="flex gap-3 pt-4">
@@ -528,3 +561,98 @@
 		</div>
 	</div>
 </Modal>
+
+<!-- Subcategories List Modal -->
+<Modal bind:open={showSubcategoryModal} size="xl" autoclose={false}>
+	<div class="p-4">
+		<div class="mb-4 flex items-center justify-between">
+			<h3 class="text-xl font-bold">{m.subcategories()}</h3>
+			<Button
+				class="transform bg-primary-light-500 text-white transition-all duration-200"
+				on:click={() => {
+					showCreateSubcategoryModal = true;
+				}}
+			>
+				<CirclePlusSolid class="mr-2 h-4 w-4" />
+				{m.addSubcategory()}
+			</Button>
+		</div>
+
+		<Table hoverable={true}>
+			<TableHead>
+				<TableHeadCell class="!p-4">
+					<Checkbox />
+				</TableHeadCell>
+				<TableHeadCell>{m.title()}</TableHeadCell>
+				<TableHeadCell>{m.description()}</TableHeadCell>
+				<TableHeadCell>{m.action()}</TableHeadCell>
+			</TableHead>
+			<TableBody class="divide-y">
+				{#each $subcategoryStore.data as subcategory}
+					<TableBodyRow>
+						<TableBodyCell class="!p-4">
+							<Checkbox />
+						</TableBodyCell>
+						<TableBodyCell>{subcategory.title[languageTag()]}</TableBodyCell>
+						<TableBodyCell>{subcategory.description?.[languageTag()] ?? ''}</TableBodyCell>
+						<TableBodyCell>
+							<div class="flex gap-2">
+								<Button size="sm" class="p-2" color="light">
+									<PenSolid class="h-4 w-4" />
+								</Button>
+								<Button size="sm" class="p-2" color="red">
+									<TrashBinSolid class="h-4 w-4" />
+								</Button>
+							</div>
+						</TableBodyCell>
+					</TableBodyRow>
+				{/each}
+			</TableBody>
+		</Table>
+	</div>
+</Modal>
+
+<!-- Create Subcategory Modal -->
+<Modal bind:open={showCreateSubcategoryModal} size="lg" autoclose={false}>
+	<div class="p-4">
+		<h3 class="mb-4 text-xl font-bold">{m.addSubcategory()}</h3>
+		<form class="space-y-4">
+			<div class="space-y-2">
+				<Label>{m.title()}</Label>
+				<Tabs style="underline">
+					{#each Object.keys(Languages) as language}
+						<TabItem open={language === Languages.EN} title={language}>
+							<Input
+								class="w-full"
+								required={language === Languages.EN}
+							/>
+						</TabItem>
+					{/each}
+				</Tabs>
+			</div>
+
+			<div class="space-y-2">
+				<Label>{m.description()}</Label>
+				<Tabs style="underline">
+					{#each Object.keys(Languages) as language}
+						<TabItem open={language === Languages.EN} title={language}>
+							<Input
+								class="w-full"
+								required={language === Languages.EN}
+							/>
+						</TabItem>
+					{/each}
+				</Tabs>
+			</div>
+
+			<div class="flex justify-end gap-3">
+				<Button type="submit" color="primary">{m.save()}</Button>
+				<Button color="alternative" on:click={() => (showCreateSubcategoryModal = false)}>
+					{m.cancel()}
+				</Button>
+			</div>
+		</form>
+	</div>
+</Modal>
+
+

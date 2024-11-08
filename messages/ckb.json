@@ -64,5 +64,7 @@
 	"yes": "بەڵێ",
 	"no": "نەخێر",
 	"add": "زیادکردن",
-	"description": "وەسف"
+	"description": "وەسف",
+	"subcategories": "بەشە لاوەکییەکان",
+	"addSubcategory": "زیادکردنی بەشی لاوەکی"
 }
