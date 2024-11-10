@@ -31,7 +31,6 @@
             <TableHeadCell>Description</TableHeadCell>
             <TableHeadCell>Media</TableHeadCell>
             <TableHeadCell>Price</TableHeadCell>
-            <TableHeadCell>Language</TableHeadCell>
             <TableHeadCell>Actions</TableHeadCell>
         </TableHead>
         <TableBody>
@@ -42,7 +41,6 @@
                     <TableBodyCell>{service.description?.[languageTag()] ?? ''}</TableBodyCell>
                     <TableBodyCell>{service.media}</TableBodyCell>
                     <TableBodyCell>{service.price}</TableBodyCell>
-                    <TableBodyCell>{service.language}</TableBodyCell>
                     <TableBodyCell>
                         <div class="flex gap-2">
                             <Button color="blue" size="xs" on:click={() => handleEdit(service)}>
