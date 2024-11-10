@@ -78,5 +78,9 @@
 	"not_available": "Not available",
 	"no_media_selected": "No media selected",
 	"add_image": "Add Image",
-	"update_selected": "Update Selected"
+	"update_selected": "Update Selected",
+	"media": "Media",
+	"price": "Price",
+	"actions": "Actions",
+	"edit": "Edit"
 }

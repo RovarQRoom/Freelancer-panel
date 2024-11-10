@@ -18,7 +18,7 @@
 	"monthly_users": "المستخدمون الشهريون",
 	"active_users": "المستخدمون النشطون",
 	"inactive_users": "المستخدمون غير النشطين",
-	"total_users": "إجمالي المستخدمين",
+	"total_users": "إجمال�� المستخدمين",
 	"total_revenue": "إجمالي الإيرادات",
 	"total_orders": "إجمالي الطلبات",
 	"conversion_rate": "معدل التحويل",
@@ -78,5 +78,9 @@
 	"not_available": "غير متوفر",
 	"no_media_selected": "لم يتم اختيار وسائط",
 	"add_image": "إضافة صورة",
-	"update_selected": "تحديث المحدد"
+	"update_selected": "تحديث المحدد",
+	"media": "الوسائط",
+	"price": "السعر",
+	"actions": "الإجراءات",
+	"edit": "تعديل"
 }

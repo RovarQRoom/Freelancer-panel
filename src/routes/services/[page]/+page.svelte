@@ -2,36 +2,40 @@
     import { ServiceEntity } from '$lib/Model/Entity/Service';
 	import { languageTag } from '$lib/paraglide/runtime';
     import { Button } from 'flowbite-svelte';
+    import * as m from '$lib/paraglide/messages';
+    
     import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
+	import { PenSolid, TrashBinSolid } from 'flowbite-svelte-icons';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { serviceStore } from '$lib/Store/Service';
 
     let services: ServiceEntity[] = [];
 
-    function handleAdd() {
-        // TODO: Implement add service functionality
-    }
+    onMount(async () => {
+        const data = await serviceStore.fetchAll();
+        if (data) services = data;
+    });
 
-    function handleEdit(service: ServiceEntity) {
-        // TODO: Implement edit service functionality
-    }
-
-    function handleDelete(service: ServiceEntity) {
-        // TODO: Implement delete service functionality
+    async function handleDelete(service: ServiceEntity) {
+        await serviceStore.remove(service.id);
+        services = services.filter(s => s.id !== service.id);
     }
 </script>
 
 <div class="p-4">
     <div class="mb-4 flex justify-end">
-        <Button color="blue" on:click={handleAdd}>Add Service</Button>
+        <a href="/services/add" class="btn btn-primary">{m.add()}</a>
     </div>
 
     <Table>
         <TableHead>
-            <TableHeadCell>ID</TableHeadCell>
-            <TableHeadCell>Title</TableHeadCell>
-            <TableHeadCell>Description</TableHeadCell>
-            <TableHeadCell>Media</TableHeadCell>
-            <TableHeadCell>Price</TableHeadCell>
-            <TableHeadCell>Actions</TableHeadCell>
+            <TableHeadCell>{m.id()}</TableHeadCell>
+            <TableHeadCell>{m.title()}</TableHeadCell>
+            <TableHeadCell>{m.description()}</TableHeadCell>
+            <TableHeadCell>{m.media()}</TableHeadCell>
+            <TableHeadCell>{m.price()}</TableHeadCell>
+            <TableHeadCell>{m.actions()}</TableHeadCell>
         </TableHead>
         <TableBody>
             {#each services as service}
@@ -43,12 +47,12 @@
                     <TableBodyCell>{service.price}</TableBodyCell>
                     <TableBodyCell>
                         <div class="flex gap-2">
-                            <Button color="blue" size="xs" on:click={() => handleEdit(service)}>
-                                Edit
-                            </Button>
-                            <Button color="red" size="xs" on:click={() => handleDelete(service)}>
-                                Delete
-                            </Button>
+                            <button color="primary" on:click={() => goto(`/services/edit/${service.id}`)}>
+                                <PenSolid class="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                            </button>
+                            <button color="red" on:click={() => handleDelete(service)}>
+                                <TrashBinSolid class="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                            </button>
                         </div>
                     </TableBodyCell>
                 </TableBodyRow>
