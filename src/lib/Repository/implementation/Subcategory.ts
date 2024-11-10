@@ -30,8 +30,9 @@ export class SubcategoryRepository implements ISubcategory {
 		if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
 		if (options?.from) query.gte('created_at', options.from);
 		if (options?.to) query.lte('created_at', options.to);
-		if (options?.isEmpty && options?.equal) query.not('category', 'eq', options.equal);
-		if (options?.isEmpty && !options?.equal) query.is('category', null);
+		if (options?.isEmpty && options?.equal) {
+			query.or(`category.is.null,category.eq.${options.equal}`);
+		}
 		const response = await query
 			.is('deleted_at', null)
 			.order('id', { ascending: false })
@@ -65,7 +66,8 @@ export class SubcategoryRepository implements ISubcategory {
 		const response = await supabase
 			.from('Subcategory')
 			.update(request)
-			.select('*')
+			.eq('id', request.id!)
+			.select('*, title(id, en, ar, ckb), description(id, en, ar, ckb)')
 			.returns<SubcategoryEntity>()
 			.single();
 		if (response.error) {
