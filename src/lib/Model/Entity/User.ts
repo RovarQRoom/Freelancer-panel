@@ -1,4 +1,8 @@
 import { Datetime } from '../Extention/Datetime';
+import type { ConversationEntity } from './Conversation';
+import type { RatingEntity } from './Rating';
+import { RoleEntity } from './Role';
+import type { ServiceEntity } from './Service';
 
 export class UserEntity extends Datetime {
 	id: number = 0;
@@ -7,5 +11,8 @@ export class UserEntity extends Datetime {
 	phone: string = '';
 	image?: string = '';
 	auth?: string = '';
-	role: number = 0;
+	role?: RoleEntity = new RoleEntity();
+	services?: ServiceEntity[] = [];
+	ratings?: RatingEntity[] = [];
+	conversations?: ConversationEntity[] = [];
 }

@@ -23,10 +23,10 @@
 
     const navItems = [
         { href: '/dashboard', label: m.dashboard() },
-        { href: '/categories', label: m.categories() },
-        { href: '/services', label: m.services() },
-        { href: '/users', label: m.users() },
-        { href: '/messages', label: m.messages() },
+        { href: '/categories/1', label: m.categories() },
+        { href: '/services/1', label: m.services() },
+        { href: '/users/1', label: m.users() },
+        { href: '/messages/1', label: m.messages() },
         { href: '/settings', label: m.settings() }
     ];
 
@@ -98,7 +98,7 @@
                 <DropdownItem href="/profile">
                     {m.profile()}
                 </DropdownItem>
-                <DropdownItem href="/settings">
+                <DropdownItem href="/settings/1">
                     {m.settings()}
                 </DropdownItem>
                 <DropdownDivider />

@@ -275,14 +275,14 @@ export type Database = {
 				};
 				Relationships: [
 					{
-						foreignKeyName: 'RolePolicy_policy_fkey';
+						foreignKeyName: 'rolepolicy_policy_fkey';
 						columns: ['policy'];
 						isOneToOne: false;
 						referencedRelation: 'Policy';
 						referencedColumns: ['id'];
 					},
 					{
-						foreignKeyName: 'RolePolicy_role_fkey';
+						foreignKeyName: 'rolepolicy_role_fkey';
 						columns: ['role'];
 						isOneToOne: false;
 						referencedRelation: 'Role';
@@ -496,15 +496,7 @@ export type Database = {
 					phone?: string;
 					role?: number | null;
 				};
-				Relationships: [
-					{
-						foreignKeyName: 'User_role_fkey';
-						columns: ['role'];
-						isOneToOne: false;
-						referencedRelation: 'Role';
-						referencedColumns: ['id'];
-					}
-				];
+				Relationships: [];
 			};
 			UserService: {
 				Row: {

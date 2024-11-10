@@ -20,10 +20,10 @@
 	import { toastStore } from '$lib/Store/Toast';
 	import { PenSolid, TrashBinSolid, CirclePlusSolid } from 'flowbite-svelte-icons';
 	import { subcategoryStore } from '$lib/Store/Subcategory';
-	import AddCategoryDrawer from './AddCategoryDrawer.svelte';
-	import EditCategoryDrawer from './EditCategoryDrawer.svelte';
-	import AddSubcategoryModal from './AddSubcategoryModal.svelte';
-	import EditSubcategoryModal from './EditSubcategoryModal.svelte';
+	import AddCategoryDrawer from '../AddCategoryDrawer.svelte';
+	import EditCategoryDrawer from '../EditCategoryDrawer.svelte';
+	import AddSubcategoryModal from '../AddSubcategoryModal.svelte';
+	import EditSubcategoryModal from '../EditSubcategoryModal.svelte';
 
 	let hideSidebar = $state(true);
 	let hideEditSidebar = $state(true);
