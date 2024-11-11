@@ -23,7 +23,7 @@ export class ServiceRepository implements IService {
     }
 
     async readServicesAsync(options?: GenericListOptions): Promise<PostgrestSingleResponse<ServiceEntity[]>> {
-        const query = supabase.from('Service').select(options?.select ?? `*, title(${languageTag()}), description(${languageTag()})`, { count: 'exact' });
+        const query = supabase.from('Service').select(options?.select ?? `*, title(${languageTag()}), description(${languageTag()}), media(${languageTag()})`, { count: 'exact' });
         if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
         if (options?.from) query.gte('created_at', options.from);
         if (options?.to) query.lte('created_at', options.to);
@@ -45,7 +45,7 @@ export class ServiceRepository implements IService {
     async readServiceAsync(id: number): Promise<PostgrestSingleResponse<ServiceEntity>> {
         const response = await supabase
             .from('Service')
-            .select(`*, title(id,en,ckb,ar), description(id,en,ckb,ar)`)
+            .select(`*, title(id,en,ckb,ar), description(id,en,ckb,ar), media(id,en,ckb,ar), supervised_by(id,name), created_by(id,name)`)
             .eq('id', id)
             .returns<ServiceEntity>()
             .single();
