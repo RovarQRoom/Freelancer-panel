@@ -17,6 +17,8 @@
     import * as m from '$lib/paraglide/messages';
     import { page } from '$app/stores';
     import { goto } from '$app/navigation';
+    import { DarkMode } from 'flowbite-svelte';
+    import { ThumbsUpSolid, ThumbsDownSolid } from 'flowbite-svelte-icons';
 
     let selectedLanguage = $state(languageTag());
     let userDropdownOpen = $state(false);
@@ -45,15 +47,15 @@
 
 <Navbar class="border-b border-main-light-200 dark:border-main-dark-200">
     <NavBrand href="/">
-        <!-- <img src="/logo.png" class="mr-3 h-8" alt="Logo" /> -->
-        <span class="self-center whitespace-nowrap text-xl font-semibold text-main-light-900 dark:text-main-dark-900">
+        <img src="/images/logo.png" class="mr-3 h-8" alt="Logo" />
+        <!-- <span class="self-center whitespace-nowrap text-xl font-semibold text-main-light-900 dark:text-main-dark-900">
             Task Home
-        </span>
+        </span> -->
     </NavBrand>
     
     <NavHamburger />
     
-    <NavUl>
+    <NavUl ulClass="flex flex-col p-4 mt-4 md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0 md:text-sm md:font-medium">
         {#each navItems as item}
             <NavLi 
                 href={item.href}
@@ -67,6 +69,11 @@
                 {item.label}
             </NavLi>
         {/each}
+
+        <DarkMode class="text-lg">
+            <img src="/images/sun.png" alt="Light Mode" slot="lightIcon" class="w-6 h-6 object-contain" />
+            <img src="/images/moon.png" alt="Dark Mode" slot="darkIcon" class="w-6 h-6 object-contain" />
+        </DarkMode>
     </NavUl>
 
     {#if $authStore}
