@@ -100,5 +100,10 @@
 	"remove": "حذف",
 	"created_by": "أنشئ بواسطة",
 	"no_media": "لا توجد وسائط",
-	"editService": "تعديل الخدمة"
+	"editService": "تعديل الخدمة",
+	"login_successful": "تم تسجيل الدخول بنجاح",
+	"name": "الاسم",
+	"phone": "رقم الهاتف",
+	"role": "الدور",
+	"no_image": "لا توجد صورة"
 }

@@ -1,28 +1,42 @@
 <script lang="ts">
-	import { Button, Card, Label, Input, Alert } from 'flowbite-svelte';
-	import { authStore } from '$lib/Store/Auth';
+	import { Button, Card, Label, Input } from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { toastStore } from '$lib/Store/Toast';
+	import { authStore } from '$lib/Store/Auth';
 	import { goto } from '$app/navigation';
-	import { enhance } from '$app/forms';
+	import { onMount } from 'svelte';
 
-	let email = '';
-	let password = '';
-	let loading = false;
-	let error = '';
+	let loading = $state(false);	
+	let userData = $state<{email: string, password: string}>({email: '', password: ''});
 
-	async function handleLogin() {
+	onMount(async () => {
+		await checkAuth();
+	});
+
+	async function handleSubmit() {
 		loading = true;
-		error = '';
-
 		try {
-			await authStore.login(email, password);
-			goto('/');
-		} catch (err) {
-			if (err instanceof Error) {
-				error = err.message;
+			await authStore.login(userData.email, userData.password);
+			checkAuth();
+		} catch (error) {
+			if (error instanceof Error) {
+				toastStore.error(error.message);
+			} else {
+				toastStore.error(m.failed_to_login());
 			}
+			goto('/login');
 		} finally {
 			loading = false;
+			userData = {email: '', password: ''};
+		}
+	}
+
+	async function checkAuth() {
+		const response = await authStore.fetch();
+		if (response) {
+			goto('/');
+		} else {
+			goto('/login');
 		}
 	}
 </script>
@@ -30,24 +44,22 @@
 <div class="flex min-h-screen items-center justify-center bg-main-light-100 dark:bg-main-dark-100">
 	<div class="w-full max-w-md p-4">
 		<Card class="shadow-lg">
-			<form class="flex flex-col space-y-6" on:submit|preventDefault={handleLogin}>
+			<form 
+				class="flex flex-col space-y-6" 
+				onsubmit={handleSubmit} 
+			>
 				<h3 class="text-center text-2xl font-bold text-main-light-900 dark:text-main-dark-900">
 					{m.login()}
 				</h3>
-
-				{#if error}
-					<Alert color="red" class="mb-4">
-						{error}
-					</Alert>
-				{/if}
 
 				<div>
 					<Label for="email" class="mb-2">{m.email()}</Label>
 					<Input
 						id="email"
+						name="email"
 						type="email"
+						bind:value={userData.email}
 						placeholder="name@company.com"
-						bind:value={email}
 						required
 						class="focus:border-primary-light-500 focus:ring-primary-light-500 dark:focus:border-primary-dark-500 dark:focus:ring-primary-dark-500"
 					/>
@@ -57,15 +69,16 @@
 					<Label for="password" class="mb-2">{m.password()}</Label>
 					<Input
 						id="password"
+						name="password"
 						type="password"
+						bind:value={userData.password}
 						placeholder="••••••••"
-						bind:value={password}
 						required
 						class="focus:border-primary-light-500 focus:ring-primary-light-500 dark:focus:border-primary-dark-500 dark:focus:ring-primary-dark-500"
 					/>
 				</div>
 
-				<Button type="submit" class="w-full" color="blue" disabled={loading}>
+				<Button type="submit" class="w-full" color="blue" disabled={loading} >
 					{#if loading}
 						<svg
 							class="-ml-1 mr-3 h-5 w-5 animate-spin text-white"

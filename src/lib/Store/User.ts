@@ -1,11 +1,12 @@
 import type { UserEntity } from '$lib/Model/Entity/User';
 import { UserRepository } from '$lib/Repository/implementation/User';
-import type { InsertUser, UpdateUser } from '$lib/Supabase/Types/database.types';
+import type { UpdateUser } from '$lib/Supabase/Types/database.types';
 import { writable } from 'svelte/store';
 import { toastStore } from './Toast';
 import { Store } from '$lib/Model/Extention/Store';
 import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 import * as m from '$lib/paraglide/messages.js';
+import type { UserRequest } from '$lib/Model/Request/User';
 
 const userRepository = new UserRepository();
 
@@ -14,7 +15,7 @@ const createUserStore = () => {
     return {
         subscribe,
 
-        insert: async (request: InsertUser) => {
+        insert: async (request: UserRequest) => {
             try {
                 const response = await userRepository.createUserAsync(request);
                 if (response.error) {

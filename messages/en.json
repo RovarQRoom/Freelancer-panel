@@ -100,5 +100,10 @@
 	"remove": "Remove",
 	"created_by": "Created By",
 	"no_media": "No media",
-	"editService": "Edit Service"
+	"editService": "Edit Service",
+	"login_successful": "Login successful",
+	"name": "Name",
+	"phone": "Phone",
+	"role": "Role",
+	"no_image": "No image"
 }

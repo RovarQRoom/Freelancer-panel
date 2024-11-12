@@ -20,13 +20,15 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 						return data.cookies;
 					}
 				}
-			});
+				});
 
 	const {
 		data: { session }
 	} = await supabase.auth.getSession();
 
-	const user = session?.user ?? null;
+	const {
+		data: { user }
+	} = await supabase.auth.getUser();
 
 	return {
 		supabase,

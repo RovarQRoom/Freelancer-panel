@@ -1,24 +1,28 @@
 import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 import type { UserEntity } from '$lib/Model/Entity/User';
-import type { InsertUser, UpdateUser } from '$lib/Supabase/Types/database.types';
+import type { UpdateUser } from '$lib/Supabase/Types/database.types';
 import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 import type { IUsersRepository } from '../Interface/IUser';
 import { supabase } from '$lib/Supabase/supabase';
 import { toastStore } from '$lib/Store/Toast';
+import type { UserRequest } from '$lib/Model/Request/User';
 
 export class UserRepository implements IUsersRepository {
-	async createUserAsync(request: InsertUser): Promise<PostgrestSingleResponse<UserEntity>> {
-		const response = await supabase
-			.from('User')
-			.insert(request)
-			.select('*')
-			.returns<UserEntity>()
-			.single();
-		if (response.error) {
-			toastStore.error(response.error.message);
-			throw new Error(response.error.message);
-		}
-		return response;
+	async createUserAsync(request: UserRequest): Promise<PostgrestSingleResponse<UserEntity>> {
+		const response = await fetch("/api/user/create", {
+			method: "POST",
+			headers: {
+			  "Content-Type": "application/json",
+			},
+			body: JSON.stringify(request),
+		  });
+		  if (!response.ok) {
+			throw new Error("Failed to create user");
+		  }
+		  const user = (await response.json()) as PostgrestSingleResponse<
+			UserEntity
+		  >;
+		return user;
 	}
 	async readUserAsync(id: number): Promise<PostgrestSingleResponse<UserEntity>> {
 		const response = await supabase

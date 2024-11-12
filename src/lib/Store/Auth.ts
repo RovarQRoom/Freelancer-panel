@@ -56,6 +56,8 @@ const createAuthStore = () => {
 		},
 		login: async (email: string, password: string) => {
 			try {
+				console.log(email, password);
+				
 				const response = await authRepository.loginAsync(email, password);
 				if (response.error) {
 					toastStore.error(m.failed_to_login());

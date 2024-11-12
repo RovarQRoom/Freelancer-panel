@@ -496,7 +496,15 @@ export type Database = {
 					phone?: string;
 					role?: number | null;
 				};
-				Relationships: [];
+				Relationships: [
+					{
+						foreignKeyName: 'User_role_fkey';
+						columns: ['role'];
+						isOneToOne: false;
+						referencedRelation: 'Role';
+						referencedColumns: ['id'];
+					}
+				];
 			};
 			UserService: {
 				Row: {

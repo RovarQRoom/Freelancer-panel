@@ -98,7 +98,7 @@
 <div class="min-h-screen bg-main-light-50 p-4 dark:bg-main-dark-50">
 	<!-- Stats Cards -->
 	<div class="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-		<Card>
+		<!-- <Card>
 			<div class="flex flex-col">
 				<span class="text-main-light-500 dark:text-main-dark-500">{m.total_users()}</span>
 				<span class="text-2xl font-bold">{data.stats.users}</span>
@@ -115,13 +115,13 @@
 				<span class="text-main-light-500 dark:text-main-dark-500">{m.total_orders()}</span>
 				<span class="text-2xl font-bold">{data.stats.orders}</span>
 			</div>
-		</Card>
-		<Card>
+		</Card> -->
+		<!-- <Card>
 			<div class="flex flex-col">
 				<span class="text-main-light-500 dark:text-main-dark-500">{m.conversion_rate()}</span>
 				<span class="text-2xl font-bold">{data.stats.conversion}%</span>
 			</div>
-		</Card>
+		</Card> -->
 	</div>
 
 	<!-- Charts -->
