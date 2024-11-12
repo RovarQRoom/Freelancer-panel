@@ -816,3 +816,43 @@ export const no_media = () => `میدیا نییە`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const editService = () => `دەستکاری خزمەتگوزاری`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const login_successful = () => `چوونەژوورەوە سەرکەوتوو بوو`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const name = () => `ناو`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const phone = () => `ژمارەی مۆبایل`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const role = () => `ڕۆڵ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const no_image = () => `وێنە نییە`

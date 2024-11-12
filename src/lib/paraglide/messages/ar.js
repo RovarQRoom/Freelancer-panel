@@ -816,3 +816,43 @@ export const no_media = () => `لا توجد وسائط`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const editService = () => `تعديل الخدمة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const login_successful = () => `تم تسجيل الدخول بنجاح`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const name = () => `الاسم`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const phone = () => `رقم الهاتف`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const role = () => `الدور`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const no_image = () => `لا توجد صورة`
