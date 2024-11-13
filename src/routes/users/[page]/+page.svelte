@@ -11,6 +11,8 @@
     import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import { authStore } from '$lib/Store/Auth';
 
+    //TODO: When the user clicks on the row, this will open a modal to edit users Password if needed
+
     let filter: GenericListOptions = {
         page: 1,
         limit: 10,

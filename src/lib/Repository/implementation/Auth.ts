@@ -4,6 +4,7 @@ import type { PostgrestSingleResponse } from '@supabase/supabase-js';
 import type { IAuthRepository } from '../Interface/IAuth';
 import { supabase } from '$lib/Supabase/supabase';
 import { toastStore } from '$lib/Store/Toast';
+import { Role } from '$lib/Model/Enum/Role';
 
 export class AuthRepository implements IAuthRepository {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -18,8 +19,9 @@ export class AuthRepository implements IAuthRepository {
 		}
 		const user = await supabase
 			.from('User')
-			.select('*')
+			.select('*,role:Role(id,name)')
 			.eq('auth', response.data.user.id)
+			.filter('role.name', 'in', `(${Role.Superadmin},${Role.Admin},${Role.Teacher})`)
 			.returns<UserEntity>()
 			.single();
 		if (user.error) {
@@ -39,8 +41,9 @@ export class AuthRepository implements IAuthRepository {
 		}
 		const user = await supabase
 			.from('User')
-			.select('*')
+			.select('*,role:Role(id,name)')
 			.eq('auth', response.data.user.id)
+			.filter('role.name', 'in', `(${Role.Superadmin},${Role.Admin},${Role.Teacher})`)
 			.returns<UserEntity>()
 			.single();
 		if (user.error) {
