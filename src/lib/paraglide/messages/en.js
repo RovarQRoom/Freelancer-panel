@@ -856,3 +856,11 @@ export const role = () => `Role`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const no_image = () => `No image`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const conversations = () => `Conversations`

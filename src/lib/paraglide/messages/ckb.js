@@ -856,3 +856,11 @@ export const role = () => `ڕۆڵ`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const no_image = () => `وێنە نییە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const conversations = () => `گفتوگۆکان`

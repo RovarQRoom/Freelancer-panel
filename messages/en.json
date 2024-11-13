@@ -105,5 +105,6 @@
 	"name": "Name",
 	"phone": "Phone",
 	"role": "Role",
-	"no_image": "No image"
+	"no_image": "No image",
+	"conversations": "Conversations"
 }
