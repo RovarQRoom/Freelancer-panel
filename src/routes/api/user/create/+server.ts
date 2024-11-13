@@ -19,6 +19,7 @@ const server = createClient<Database>(
 
 export const POST: RequestHandler = async ({ request }) => {
   const userRequest: UserRequest = await request.json();
+  console.log('create',userRequest);
   try {
     const authUser = await server.auth.admin.createUser({
       email: userRequest.email,

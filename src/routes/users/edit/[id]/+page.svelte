@@ -7,9 +7,10 @@
 	import { storageStore } from '$lib/Store/Storage';
 	import { userStore } from '$lib/Store/User';
 	import { createUploadThing } from '$lib/Utils/Uploadthing';
-	import type { UserRequest } from '$lib/Model/Request/User';
+	import type { UpdateUser } from '$lib/Supabase/Types/database.types';
 	import type { RoleEntity } from '$lib/Model/Entity/Role';
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
 	const { startUpload } = createUploadThing('imageUploader', {
 		onClientUploadComplete: () => {
@@ -23,11 +24,11 @@
 	let isLoading = $state(false);
 	let roles = $state<RoleEntity[]>([]);
 
-	let createUser = $state<UserRequest>({
+	let updateUser = $state<UpdateUser>({
+		id: 0,
 		name: '',
 		email: '',
 		phone: '',
-		password: '',
 		role: null,
 		image: null
 	});
@@ -41,23 +42,44 @@
 	});
 
 	onMount(async () => {
+		const userId = Number($page.params.id);
+
+		// Fetch roles for dropdown
 		roles =
 			(await roleStore.fetchForDropdown({
 				select: 'id,name',
 				limit: 100
 			})) ?? [];
+
+		// Fetch current user data
+		const user = await userStore.fetch(userId);
+		if (user) {
+			updateUser = {
+				id: user.id,
+				name: user.name ?? '',
+				email: user.email,
+				phone: user.phone,
+				role: user.role?.id,
+				image: user.image
+			};
+
+			if (user.image) {
+				imageFile.preview = user.image;
+			}
+		}
 	});
 
-	async function handleAddUser() {
+	async function handleUpdateUser() {
 		if (isLoading) return;
 		isLoading = true;
 
 		try {
 			if (imageFile.file) {
-				createUser.image = await storageStore.uploadFile(imageFile.file, startUpload);
+				updateUser.image = await storageStore.uploadFile(imageFile.file, startUpload);
 			}
-			await userStore.insert(createUser);
-			toastStore.success(m.create_success());
+
+			await userStore.put(updateUser);
+			toastStore.success(m.update_success());
 			goto('/users/1');
 		} catch (error) {
 			if (error instanceof Error) {
@@ -78,13 +100,13 @@
 		<h1
 			class="bg-gradient-to-r from-primary-light-500 to-purple-500 bg-clip-text text-3xl font-bold text-transparent"
 		>
-			{m.add()}
+			{m.edit()}
 			{m.user()}
 		</h1>
 	</div>
 
 	<form
-		onsubmit={handleAddUser}
+		on:submit|preventDefault={handleUpdateUser}
 		class="max-w-3xl space-y-6 rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
 	>
 		<!-- Name -->
@@ -94,7 +116,7 @@
 				id="name"
 				type="text"
 				required
-				bind:value={createUser.name}
+				bind:value={updateUser.name}
 				class="w-full transition-all duration-300 hover:border-primary-light-500"
 			/>
 		</div>
@@ -106,7 +128,7 @@
 				id="email"
 				type="email"
 				required
-				bind:value={createUser.email}
+				bind:value={updateUser.email}
 				class="w-full transition-all duration-300 hover:border-primary-light-500"
 			/>
 		</div>
@@ -118,19 +140,7 @@
 				id="phone"
 				type="tel"
 				required
-				bind:value={createUser.phone}
-				class="w-full transition-all duration-300 hover:border-primary-light-500"
-			/>
-		</div>
-
-		<!-- Password -->
-		<div class="space-y-2">
-			<Label for="password" class="text-lg font-medium">{m.password()}</Label>
-			<Input
-				id="password"
-				type="password"
-				required
-				bind:value={createUser.password}
+				bind:value={updateUser.phone}
 				class="w-full transition-all duration-300 hover:border-primary-light-500"
 			/>
 		</div>
@@ -141,7 +151,7 @@
 			<Select
 				id="role"
 				class="transition-all duration-300 hover:border-primary-light-500"
-				bind:value={createUser.role}
+				bind:value={updateUser.role}
 				items={roles.map((role) => ({
 					value: role.id,
 					name: role.name ?? ''
@@ -162,11 +172,12 @@
 						<button
 							type="button"
 							class="absolute bottom-4 right-4 rounded-full bg-red-500 p-2 text-white transition-all duration-300 hover:bg-red-600"
-							onclick={() => {
+							on:click={() => {
 								if (imageFile.preview) {
 									URL.revokeObjectURL(imageFile.preview);
 								}
 								imageFile = { file: undefined, preview: undefined };
+								updateUser.image = null;
 							}}
 						>
 							<i class="fas fa-trash"></i>
@@ -183,7 +194,7 @@
 					<input
 						type="file"
 						accept="image/*"
-						onchange={(e) => {
+						on:change={(e) => {
 							const input = e.target as HTMLInputElement;
 							const file = input.files?.[0];
 							if (file) {

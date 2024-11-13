@@ -15,32 +15,33 @@
 	} from '$lib/paraglide/runtime';
 	import type { LayoutData } from './$types';
 	import { goto, invalidate } from '$app/navigation';
-	let { data, children }: { data: LayoutData, children: Snippet } = $props();
-	const session = $derived(data.session);
-	const supabaseClient = $derived(data.supabase);
+	let { data, children }: { data: LayoutData; children: Snippet } = $props();
+	
+	let { session, supabase } = $derived(data);
 	// List of routes where navbar and footer should be hidden
 	const hideNavbarRoutes = ['/login', '/register', '/forgot-password', '/reset-password'];
-	const showNavbar = $derived(!hideNavbarRoutes.some(route => $page.url.pathname.startsWith(route)));
+	const showNavbar = $derived(
+		!hideNavbarRoutes.some((route) => $page.url.pathname.startsWith(route))
+	);
 	let isLoading = $state(true);
 
-	onMount(() => {		
-		authStore.fetch().then(() => {
-			isLoading = false;
-		});
-		
-		if($authStore?.id) {
-			const {data} = supabaseClient.auth.onAuthStateChange((_, newSession) => {
+	onMount(() => {
+		try {
+			const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
 				checkAuth();
 				if (newSession?.expires_at !== session?.expires_at) {
-				invalidate('supabase:auth');
+					invalidate('supabase:auth');
 				}
 			});
-			return () => data.subscription.unsubscribe();
-		}
 
-		const savedLanguage = localStorage.getItem('selectedLanguage') as AvailableLanguageTag;
-		if (savedLanguage && availableLanguageTags.includes(savedLanguage)) {
-			setLanguageTag(savedLanguage);
+			const savedLanguage = localStorage.getItem('selectedLanguage') as AvailableLanguageTag;
+			if (savedLanguage && availableLanguageTags.includes(savedLanguage)) {
+				setLanguageTag(savedLanguage);
+			}
+			return () => data.subscription.unsubscribe();
+		} catch (error) {
+		} finally {
+			isLoading = false;
 		}
 	});
 
@@ -54,10 +55,12 @@
 
 <ParaglideJS {i18n}>
 	{#if isLoading}
-		<div class="flex min-h-screen items-center justify-center bg-main-light-50 dark:bg-main-dark-50">
+		<div
+			class="flex min-h-screen items-center justify-center bg-main-light-50 dark:bg-main-dark-50"
+		>
 			<Spinner size="12" />
 		</div>
-	{:else if !$authStore?.id && !hideNavbarRoutes.some(route => $page.url.pathname.startsWith(route))}
+	{:else if !$authStore?.id && !hideNavbarRoutes.some( (route) => $page.url.pathname.startsWith(route) )}
 		{@const currentPath = $page.url.pathname}
 		{#if currentPath !== '/login'}
 			{goto('/login')}

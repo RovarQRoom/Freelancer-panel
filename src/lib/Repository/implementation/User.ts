@@ -27,7 +27,7 @@ export class UserRepository implements IUsersRepository {
 	async readUserAsync(id: number): Promise<PostgrestSingleResponse<UserEntity>> {
 		const response = await supabase
 			.from('User')
-			.select('*')
+			.select('*,role:Role(id,name)')
 			.eq('id', id)
 			.returns<UserEntity>()
 			.single();
