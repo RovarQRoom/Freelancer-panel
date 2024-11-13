@@ -19,3 +19,7 @@
 	opacity: 0;
 	transform: translateY(-10px);
 }
+
+.dark:bg-gray-800{
+	background-color: #252525 !important;
+}

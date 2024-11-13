@@ -24,6 +24,7 @@
 	import EditCategoryDrawer from '../EditCategoryDrawer.svelte';
 	import AddSubcategoryModal from '../AddSubcategoryModal.svelte';
 	import EditSubcategoryModal from '../EditSubcategoryModal.svelte';
+	import Pagination from '$lib/Component/Pagination.Component.svelte';
 
 	let hideSidebar = $state(true);
 	let hideEditSidebar = $state(true);
@@ -187,7 +188,11 @@
 					</TableBodyRow>
 				{/each}
 			</TableBody>
+
 		</Table>
+		<div class="w-full h-12 flex justify-center">
+			<Pagination bind:currentPage={filter.page}  />
+		  </div>
 	</div>
 </div>
 
