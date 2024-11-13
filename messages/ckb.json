@@ -106,5 +106,10 @@
 	"phone": "ژمارەی مۆبایل",
 	"role": "ڕۆڵ",
 	"no_image": "وێنە نییە",
-	"conversations": "گفتوگۆکان"
+	"conversations": "گفتوگۆکان",
+	"type": "جۆر",
+	"participants": "بەشداربووان",
+	"group": "گرووپ",
+	"direct": "ڕاستەوخۆ",
+	"no_participants": "هیچ بەشداربوویەک نییە"
 }

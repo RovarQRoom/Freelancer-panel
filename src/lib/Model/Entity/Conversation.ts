@@ -5,5 +5,5 @@ export class ConversationEntity extends Datetime {
 	id: number = 0;
 	name: string = '';
 	is_group?: boolean = false;
-	users?: UserEntity[] = [];
+	users?: { user: UserEntity }[] = [];
 }

@@ -106,5 +106,10 @@
 	"phone": "Phone",
 	"role": "Role",
 	"no_image": "No image",
-	"conversations": "Conversations"
+	"conversations": "Conversations",
+	"type": "Type",
+	"participants": "Participants",
+	"group": "Group",
+	"direct": "Direct",
+	"no_participants": "No participants"
 }

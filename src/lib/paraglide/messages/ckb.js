@@ -864,3 +864,43 @@ export const no_image = () => `وێنە نییە`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const conversations = () => `گفتوگۆکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const type = () => `جۆر`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const participants = () => `بەشداربووان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const group = () => `گرووپ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const direct = () => `ڕاستەوخۆ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const no_participants = () => `هیچ بەشداربوویەک نییە`

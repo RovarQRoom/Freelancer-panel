@@ -106,5 +106,10 @@
 	"phone": "رقم الهاتف",
 	"role": "الدور",
 	"no_image": "لا توجد صورة",
-	"conversations": "المحادثات"
+	"conversations": "المحادثات",
+	"type": "النوع",
+	"participants": "المشاركون",
+	"group": "مجموعة",
+	"direct": "مباشر",
+	"no_participants": "لا يوجد مشاركون"
 }

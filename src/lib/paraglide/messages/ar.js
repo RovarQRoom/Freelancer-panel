@@ -864,3 +864,43 @@ export const no_image = () => `لا توجد صورة`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const conversations = () => `المحادثات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const type = () => `النوع`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const participants = () => `المشاركون`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const group = () => `مجموعة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const direct = () => `مباشر`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const no_participants = () => `لا يوجد مشاركون`
