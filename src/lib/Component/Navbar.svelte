@@ -104,12 +104,9 @@
 				href={item.href}
 				activeClass="text-blue-700 dark:text-blue-500"
 				class={` transition-all duration-200 ease-in-out hover:scale-105 hover:text-blue-600 dark:hover:text-blue-400 ${$page.url.pathname === item.href ? "text-blue-700 dark:text-blue-500" : ""} `}
-            >
-                {item.label}
-            </NavLi>
-        {/}
 			>
-				{vbar>}
-			</NavLi>{/each}
+				{item.label}
+			</NavLi>
+		{/each}
 	</NavUl>
 </Navbar>
