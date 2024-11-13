@@ -3,7 +3,7 @@
 	import { languageTag } from '$lib/paraglide/runtime';
     import { Button, Img } from 'flowbite-svelte';
     import * as m from '$lib/paraglide/messages';
-    
+    import Pagination from '$lib/Component/Pagination.Component.svelte';
     import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
 	import { PenSolid, TrashBinSolid } from 'flowbite-svelte-icons';
 	import { goto } from '$app/navigation';
@@ -84,7 +84,10 @@
                         </TableBodyCell>
                     </TableBodyRow>
                 {/each}
-            </TableBody>
+            </TableBody>    
         </Table>
+        <div class="w-full h-12 flex justify-center">
+            <Pagination bind:currentPage={filter.page}  />
+          </div>
     </div>
 </div>

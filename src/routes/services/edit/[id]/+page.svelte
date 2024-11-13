@@ -232,7 +232,7 @@
 {:else}
 <form 
     onsubmit={handleEditService} 
-    class="space-y-6 max-w-3xl bg-white rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl"
+    class="space-y-6 max-w-3xl rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl"
 >
     <Tabs style="underline" class="mb-4">
         {#each Object.keys(Languages) as language}

@@ -9,7 +9,10 @@
         DropdownItem,
         DropdownDivider,
         Avatar,
-        Select
+        Select,
+
+		Button
+
     } from "flowbite-svelte";
     import { setLanguageTag, languageTag, type AvailableLanguageTag, availableLanguageTags } from '$lib/paraglide/runtime';
     import { i18n } from '$lib/i18n.js'
@@ -21,10 +24,9 @@
     import { ThumbsUpSolid, ThumbsDownSolid } from 'flowbite-svelte-icons';
 
     let selectedLanguage = $state(languageTag());
-    let userDropdownOpen = $state(false);
 
     const navItems = [
-        { href: '/dashboard', label: m.dashboard() },
+        { href: '/', label: m.dashboard() },
         { href: '/categories/1', label: m.categories() },
         { href: '/services/1', label: m.services() },
         { href: '/users/1', label: m.users() },
@@ -55,7 +57,54 @@
     
     <NavHamburger />
     
-    <NavUl ulClass="flex flex-col p-4 mt-4 md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0 md:text-sm md:font-medium">
+    {#if $authStore}
+    <div class="flex items-center ml-auto gap-4 hello">
+        <Select 
+        class="w-auto transition-all duration-200 ease-in-out"
+        items={availableLanguageTags.map(lang => ({
+            name: m[`language_${lang}`](),
+            value: lang
+        }))}
+                bind:value={selectedLanguage}
+                on:change={() => switchToLanguage(selectedLanguage)}
+                />
+
+             
+
+
+
+
+
+            <Button pill color="light" id="avatar_with_name" class="!p-1">
+                <Avatar src={$authStore.image || "https://flowbite.com/docs/images/people/profile-picture-5.jpg"} />
+                {$authStore.name || $authStore.email}
+              </Button>
+              <Dropdown triggeredBy="#avatar_with_name">
+                <div slot="header" class="px-4 py-2">
+                  <span class="block truncate text-sm font-medium">{$authStore.name || $authStore.email}</span>
+                </div>
+                <DropdownItem href="/profile">{m.profile()}</DropdownItem>
+                <DropdownItem href="/settings/1">{m.settings()}</DropdownItem>
+                <DropdownItem slot="footer" on:click={handleLogout}>{m.logout()}</DropdownItem>
+              </Dropdown>
+            
+
+            
+            
+        </div>
+        {/if}
+        <DarkMode class="text-lg">
+            <img src="/images/sun.png" alt="Light Mode" slot="lightIcon" class="w-6 h-6 object-contain" />
+            <img src="/images/moon.png" alt="Dark Mode" slot="darkIcon" class="w-6 h-6 object-contain" />
+        </DarkMode>
+        
+
+    <NavUl
+    divClass="w-full md:flex justify-center md:w-full"
+    ulClass="flex flex-col p-4 mt-4 md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0 md:text-sm md:font-medium"
+    activeClass="text-blue-700 dark:text-blue-500"
+    nonActiveClass="text-main-light-900 dark:text-main-dark-900"
+    >
         {#each navItems as item}
             <NavLi 
                 href={item.href}
@@ -70,49 +119,8 @@
             </NavLi>
         {/each}
 
-        <DarkMode class="text-lg">
-            <img src="/images/sun.png" alt="Light Mode" slot="lightIcon" class="w-6 h-6 object-contain" />
-            <img src="/images/moon.png" alt="Dark Mode" slot="darkIcon" class="w-6 h-6 object-contain" />
-        </DarkMode>
+       
     </NavUl>
 
-    {#if $authStore}
-        <div class="flex items-center ml-auto gap-4 hello">
-            <Select 
-                class="w-32 transition-all duration-200 ease-in-out"
-                items={availableLanguageTags.map(lang => ({
-                    name: m[`language_${lang}`](),
-                    value: lang
-                }))}
-                bind:value={selectedLanguage}
-                on:change={() => switchToLanguage(selectedLanguage)}
-            />
-            <button
-                onclick={() => userDropdownOpen = !userDropdownOpen}
-                class="flex items-center space-x-3 p-2 rounded-lg hover:bg-main-light-100 dark:hover:bg-main-dark-100"
-            >
-                <Avatar 
-                    src={$authStore.image || "https://flowbite.com/docs/images/people/profile-picture-5.jpg"} 
-                    class="cursor-pointer"
-                    size="sm"
-                />
-                <span class="text-main-light-900 dark:text-main-dark-900">
-                    {$authStore.name || $authStore.email}
-                </span>
-            </button>
-
-            <Dropdown placement="bottom" bind:open={userDropdownOpen}>
-                <DropdownItem href="/profile">
-                    {m.profile()}
-                </DropdownItem>
-                <DropdownItem href="/settings/1">
-                    {m.settings()}
-                </DropdownItem>
-                <DropdownDivider />
-                <DropdownItem on:click={handleLogout}>
-                    {m.logout()}
-                </DropdownItem>
-            </Dropdown>
-        </div>
-    {/if}
 </Navbar> 
+
