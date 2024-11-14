@@ -32,7 +32,7 @@
 		{ href: '/services/1', label: m.services() },
 		{ href: '/users/1', label: m.users() },
 		{ href: '/conversations/1', label: m.conversations() },
-		{ href: '/settings', label: m.settings() }
+		{ href: '/setting', label: m.settings() }
 	];
 
 	async function handleLogout() {

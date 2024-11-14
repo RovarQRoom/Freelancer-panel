@@ -7,6 +7,7 @@
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import { i18n } from '$lib/i18n.js';
 	import NavbarComponent from '$lib/Component/Navbar.svelte';
+	import FooterComponent from '$lib/Component/Footer.Component.svelte';
 	import { page } from '$app/stores';
 	import {
 		setLanguageTag,
@@ -76,24 +77,7 @@
 			</main>
 
 			{#if showNavbar}
-				<Footer class="border-t border-main-light-200 dark:border-main-dark-200">
-					<div class="mx-auto w-full max-w-7xl p-4 md:py-8">
-						<div class="sm:flex sm:items-center sm:justify-between">
-							<FooterLinkGroup class="flex-wrap justify-center">
-								<FooterLink href="/about">{m.about()}</FooterLink>
-								<FooterLink href="/privacy">{m.privacy_policy()}</FooterLink>
-								<FooterLink href="/terms">{m.terms()}</FooterLink>
-								<FooterLink href="/contact">{m.contact()}</FooterLink>
-							</FooterLinkGroup>
-						</div>
-						<hr class="my-6 border-main-light-200 sm:mx-auto lg:my-8 dark:border-main-dark-200" />
-						<FooterCopyright
-							href="/"
-							by="Your Company™"
-							class="text-center text-main-light-500 dark:text-main-dark-500"
-						/>
-					</div>
-				</Footer>
+				<FooterComponent />
 			{/if}
 		</div>
 	{/if}
