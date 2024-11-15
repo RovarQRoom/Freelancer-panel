@@ -855,6 +855,14 @@ export const role = () => `ڕۆڵ`
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
+export const roles = () => `ڕۆڵەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
 export const no_image = () => `وێنە نییە`
 
 
@@ -904,3 +912,179 @@ export const direct = () => `ڕاستەوخۆ`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const no_participants = () => `هیچ بەشداربوویەک نییە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_settings = () => `ڕێکخستنەکانی پڕۆفایل`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const change_photo = () => `گۆڕینی وێنە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const first_name = () => `ناوی یەکەم`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const last_name = () => `ناوی دووەم`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const bio = () => `بایۆ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const notification_preferences = () => `ڕێکخستنەکانی ئاگادارکردنەوە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const email_notifications = () => `ئاگادارکردنەوەکانی ئیمەیڵ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const email_notifications_desc = () => `وەرگرتنی ئیمەیڵ دەربارەی چالاکی هەژمارەکەت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const push_notifications = () => `ئاگادارکردنەوە ڕاستەوخۆکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const push_notifications_desc = () => `وەرگرتنی ئاگادارکردنەوە لەسەر ئامێرەکانت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const security_settings = () => `ڕێکخستنەکانی ئاسایش`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const change_password = () => `گۆڕینی وشەی نهێنی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const current_password = () => `وشەی نهێنی ئێستا`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const new_password = () => `وشەی نهێنی نوێ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const confirm_password = () => `دڵنیاکردنەوەی وشەی نهێنی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const update_password = () => `نوێکردنەوەی وشەی نهێنی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const two_factor_auth = () => `دڵنیاکردنەوەی دوو-قۆناغی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const two_factor_auth_desc = () => `زیادکردنی توێژێکی زیاتری پاراستن بۆ هەژمارەکەت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const enable = () => `چالاککردن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const manage_account = () => `بەڕێوەبردنی ڕێکخستن و تایبەتمەندییەکانی هەژمارەکەت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const phone_already_exists = () => `ژمارەی مۆبایل پێشتر بەکارهێنراوە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const saving = () => `پاشەکەوت دەکرێت...`

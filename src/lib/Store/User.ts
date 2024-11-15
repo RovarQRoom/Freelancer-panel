@@ -94,6 +94,18 @@ const createUserStore = () => {
 
         put: async (request: UpdateUser) => {
             try {
+                if (request.email) {
+                    const checkEmail = await userRepository.checkEmailAsync(request.id!,request.email);
+                    if (checkEmail && checkEmail?.data) {
+                        throw new Error(m.email_already_exists());
+                    }
+                }
+                if (request.phone) {
+                    const checkPhone = await userRepository.checkPhoneAsync(request.id!,request.phone);
+                    if (checkPhone && checkPhone?.data) {
+                        throw new Error(m.phone_already_exists());
+                    }
+                }
                 const response = await userRepository.updateUserAsync(request);
                 if (response.error) {
                     throw new Error(response.error.message);
@@ -103,7 +115,7 @@ const createUserStore = () => {
                     if (index !== -1) users.data[index] = response.data;
                     return users;
                 });
-                toastStore.success(m['update_success']('user'));
+                toastStore.success(m['update_success']());
                 return response.data;
             } catch (error) {
                 if (error instanceof Error) toastStore.error(error.message);

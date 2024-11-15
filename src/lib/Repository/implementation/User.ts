@@ -79,6 +79,34 @@ export class UserRepository implements IUsersRepository {
 		}
 		return response;
 	}
+	async checkEmailAsync(id: number, email: string): Promise<PostgrestSingleResponse<UserEntity> | null> {
+		const response = await supabase
+			.from('User')
+			.select('id,email')
+			.eq('email', email)
+			.neq('id', id)
+			.returns<UserEntity>()
+			.single();
+		if (response.error) {
+			toastStore.error(response.error.message);
+			return null
+		}
+		return response;
+	}
+	async checkPhoneAsync(id: number, phone: string): Promise<PostgrestSingleResponse<UserEntity> | null> {
+		const response = await supabase
+			.from('User')
+			.select('id,phone')
+			.eq('phone', phone)
+			.neq('id', id)
+			.returns<UserEntity>()
+			.single();
+		if (response.error) {
+			toastStore.error(response.error.message);
+			return null
+		}
+		return response;
+	}
 	async updateUserAsync(request: UpdateUser): Promise<PostgrestSingleResponse<UserEntity>> {
 		const response = await supabase
 			.from('User')

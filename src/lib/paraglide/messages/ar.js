@@ -855,6 +855,14 @@ export const role = () => `الدور`
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
+export const roles = () => `الأدوار`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
 export const no_image = () => `لا توجد صورة`
 
 
@@ -904,3 +912,179 @@ export const direct = () => `مباشر`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const no_participants = () => `لا يوجد مشاركون`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const profile_settings = () => `إعدادات الملف الشخصي`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const change_photo = () => `تغيير الصورة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const first_name = () => `الاسم الأول`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const last_name = () => `الاسم الأخير`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const bio = () => `نبذة شخصية`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const notification_preferences = () => `تفضيلات الإشعارات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const email_notifications = () => `إشعارات البريد الإلكتروني`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const email_notifications_desc = () => `استلام إشعارات عبر البريد الإلكتروني حول نشاط حسابك`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const push_notifications = () => `الإشعارات المباشرة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const push_notifications_desc = () => `استلام إشعارات مباشرة على أجهزتك`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const security_settings = () => `إعدادات الأمان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const change_password = () => `تغيير كلمة المرور`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const current_password = () => `كلمة المرور الحالية`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const new_password = () => `كلمة المرور الجديدة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const confirm_password = () => `تأكيد كلمة المرور الجديدة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const update_password = () => `تحديث كلمة المرور`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const two_factor_auth = () => `المصادقة الثنائية`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const two_factor_auth_desc = () => `إضافة طبقة حماية إضافية لحسابك`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const enable = () => `تفعيل`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const manage_account = () => `إدارة تفضيلات وإعدادات حسابك`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const phone_already_exists = () => `رقم الهاتف موجود مسبقاً`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const saving = () => `جاري الحفظ...`
