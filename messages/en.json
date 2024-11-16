@@ -134,5 +134,15 @@
 	"enable": "Enable",
 	"manage_account": "Manage your account preferences and settings",
 	"phone_already_exists": "Phone number already exists",
-	"saving": "Saving..."
+	"saving": "Saving...",
+	"incorrect_current_password": "Incorrect current password",
+	"password_not_match": "Passwords do not match",
+	"password_updated_successfully": "Password updated successfully",
+	"failed_to_update_password": "Failed to update password",
+	"addRole": "Add Role",
+	"editRole": "Edit Role",
+	"enterName": "Enter name",
+	"selectPolicies": "Select policies",
+	"policies": "Policies",
+	"policyCount": "Policy Count"
 }

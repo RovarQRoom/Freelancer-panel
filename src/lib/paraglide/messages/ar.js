@@ -1088,3 +1088,83 @@ export const phone_already_exists = () => `رقم الهاتف موجود مسب
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const saving = () => `جاري الحفظ...`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const incorrect_current_password = () => `كلمة المرور الحالية غير صحيحة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const password_not_match = () => `كلمات المرور غير متطابقة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const password_updated_successfully = () => `تم تحديث كلمة المرور بنجاح`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const failed_to_update_password = () => `فشل تحديث كلمة المرور`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const addRole = () => `إضافة دور`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const editRole = () => `تعديل الدور`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const enterName = () => `أدخل الاسم`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const selectPolicies = () => `اختر الصلاحيات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const policies = () => `الصلاحيات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const policyCount = () => `عدد الصلاحيات`

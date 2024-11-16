@@ -5,6 +5,7 @@
     import NotificationsTab from './NotificationsTab.svelte';
     import SecurityTab from './SecurityTab.svelte';
     import * as m from '$lib/paraglide/messages';
+	import RolesTab from './RolesTab.svelte';
 
     let activeTab = $state('profile');
     
@@ -52,6 +53,8 @@
                     <NotificationsTab />
                 {:else if activeTab === 'security'}
                     <SecurityTab />
+                {:else if activeTab === 'roles'}
+                    <RolesTab />
                 {/if}
             </Card>
         </div>

@@ -134,5 +134,15 @@
 	"enable": "تفعيل",
 	"manage_account": "إدارة تفضيلات وإعدادات حسابك",
 	"phone_already_exists": "رقم الهاتف موجود مسبقاً",
-	"saving": "جاري الحفظ..."
+	"saving": "جاري الحفظ...",
+	"incorrect_current_password": "كلمة المرور الحالية غير صحيحة",
+	"password_not_match": "كلمات المرور غير متطابقة",
+	"password_updated_successfully": "تم تحديث كلمة المرور بنجاح",
+	"failed_to_update_password": "فشل تحديث كلمة المرور",
+	"addRole": "إضافة دور",
+	"editRole": "تعديل الدور",
+	"enterName": "أدخل الاسم",
+	"selectPolicies": "اختر الصلاحيات",
+	"policies": "الصلاحيات",
+	"policyCount": "عدد الصلاحيات"
 }

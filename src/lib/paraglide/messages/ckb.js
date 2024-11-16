@@ -135,7 +135,7 @@ export const monthly_revenue = () => `داهاتی مانگانە`
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const monthly_users = () => `بەکارهێنەرانی مانگانە`
+export const monthly_users = () => `بەکارهێنەران�� مانگانە`
 
 
 /**
@@ -1088,3 +1088,83 @@ export const phone_already_exists = () => `ژمارەی مۆبایل پێشتر 
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const saving = () => `پاشەکەوت دەکرێت...`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const incorrect_current_password = () => `وشەی نهێنی ئێستا هەڵەیە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const password_not_match = () => `وشە نهێنییەکان یەک ناگرنەوە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const password_updated_successfully = () => `وشەی نهێنی بە سەرکەوتوویی نوێکرایەوە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const failed_to_update_password = () => `نوێکردنەوەی وشەی نهێنی سەرکەوتوو نەبوو`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const addRole = () => `زیادکردنی ڕۆڵ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const editRole = () => `دەستکاری ڕۆڵ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const enterName = () => `ناو بنووسە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const selectPolicies = () => `دەسەڵاتەکان هەڵبژێرە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const policies = () => `دەسەڵاتەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const policyCount = () => `ژمارەی دەسەڵاتەکان`

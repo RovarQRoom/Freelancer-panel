@@ -12,3 +12,10 @@ export class UserRequest implements InsertUser {
     email: string = '';
     password: string = '';
 }
+
+export class UpdateUserPassword {
+    id:string = '';
+    currentPassword: string = '';
+    confirmPassword: string = '';
+    newPassword: string = '';
+}

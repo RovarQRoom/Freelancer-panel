@@ -25,7 +25,7 @@ const createConversationStore = () => {
                     conversations.data.push(response.data);
                     return conversations;
                 });
-                toastStore.success(m['create_success']('conversation'));
+                toastStore.success(m['create_success']());
                 return response.data;
             } catch (error) {
                 if (error instanceof Error) toastStore.error(error.message);

@@ -12,7 +12,7 @@ export class UserEntity extends Datetime {
 	image?: string = '';
 	auth?: string = '';
 	role?: RoleEntity = new RoleEntity();
-	services?: ServiceEntity[] = [];
-	ratings?: RatingEntity[] = [];
-	conversations?: ConversationEntity[] = [];
+	services?: { service: ServiceEntity }[] = [];
+	ratings?: { rating: RatingEntity }[] = [];
+	conversations?: { conversation: ConversationEntity }[] = [];
 }

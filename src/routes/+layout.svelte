@@ -16,6 +16,7 @@
 	} from '$lib/paraglide/runtime';
 	import type { LayoutData } from './$types';
 	import { goto, invalidate } from '$app/navigation';
+	import Toast from '$lib/Component/Toast.svelte';
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 	
 	let { session, supabase } = $derived(data);
@@ -55,6 +56,7 @@
 </script>
 
 <ParaglideJS {i18n}>
+	<Toast />
 	{#if isLoading}
 		<div
 			class="flex min-h-screen items-center justify-center bg-main-light-50 dark:bg-main-dark-50"

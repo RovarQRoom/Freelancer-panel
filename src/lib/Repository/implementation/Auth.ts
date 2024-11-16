@@ -30,6 +30,25 @@ export class AuthRepository implements IAuthRepository {
 		}
 		return user;
 	}
+	async checkPasswordAsync(id: string, password: string): Promise<PostgrestSingleResponse<boolean>> {
+		const response = await supabase.rpc("verify_user_password", {
+			password: password
+		});
+		if (response.error) {
+			toastStore.error(response.error.message);
+			throw new Error(response.error.message);
+		}
+		return response;
+	}
+	async updatePasswordAsync(password: string): Promise<void> {
+		const response = await supabase.auth.updateUser({
+			password: password
+		});
+		if (response.error) {
+			toastStore.error(response.error.message);
+			throw new Error(response.error.message);
+		}
+	}
 	async loginAsync(email: string, password: string): Promise<PostgrestSingleResponse<UserEntity>> {
 		const response = await supabase.auth.signInWithPassword({
 			email: email,

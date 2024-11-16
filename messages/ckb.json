@@ -15,7 +15,7 @@
 	"dont_have_account": "هەژمارت نییە؟",
 	"register_here": "لێرە تۆمار بکە",
 	"monthly_revenue": "داهاتی مانگانە",
-	"monthly_users": "بەکارهێنەرانی مانگانە",
+	"monthly_users": "بەکارهێنەران�� مانگانە",
 	"active_users": "بەکارهێنەرانی چالاک",
 	"inactive_users": "بەکارهێنەرانی ناچالاک",
 	"total_users": "کۆی بەکارهێنەران",
@@ -134,5 +134,15 @@
 	"enable": "چالاککردن",
 	"manage_account": "بەڕێوەبردنی ڕێکخستن و تایبەتمەندییەکانی هەژمارەکەت",
 	"phone_already_exists": "ژمارەی مۆبایل پێشتر بەکارهێنراوە",
-	"saving": "پاشەکەوت دەکرێت..."
+	"saving": "پاشەکەوت دەکرێت...",
+	"incorrect_current_password": "وشەی نهێنی ئێستا هەڵەیە",
+	"password_not_match": "وشە نهێنییەکان یەک ناگرنەوە",
+	"password_updated_successfully": "وشەی نهێنی بە سەرکەوتوویی نوێکرایەوە",
+	"failed_to_update_password": "نوێکردنەوەی وشەی نهێنی سەرکەوتوو نەبوو",
+	"addRole": "زیادکردنی ڕۆڵ",
+	"editRole": "دەستکاری ڕۆڵ",
+	"enterName": "ناو بنووسە",
+	"selectPolicies": "دەسەڵاتەکان هەڵبژێرە",
+	"policies": "دەسەڵاتەکان",
+	"policyCount": "ژمارەی دەسەڵاتەکان"
 }

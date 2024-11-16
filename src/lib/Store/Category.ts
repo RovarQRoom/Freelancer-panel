@@ -24,7 +24,7 @@ const createCategoryStore = () => {
 					categories.data.push(response.data);
 					return categories;
 				});
-				toastStore.success(m['create_success']('category'));
+				toastStore.success(m['create_success']());
 				return response.data;
 			} catch (error) {
 				if (error instanceof Error) toastStore.error(error.message);
@@ -74,7 +74,7 @@ const createCategoryStore = () => {
 					if (index !== -1) categories.data[index] = response.data;
 					return categories;
 				});
-				toastStore.success('Category updated successfully');
+				toastStore.success(m['update_success']());
 				return response.data;
 			} catch (error) {
 				if (error instanceof Error) toastStore.error(error.message);
@@ -84,7 +84,7 @@ const createCategoryStore = () => {
 		remove: async (id: number) => {
 			try {
 				await categoryRepository.deleteCategoryAsync(id);
-				toastStore.success('Category deleted successfully');
+				toastStore.success(m['delete_success']());
 			} catch (error) {
 				if (error instanceof Error) toastStore.error(error.message);
 			}
