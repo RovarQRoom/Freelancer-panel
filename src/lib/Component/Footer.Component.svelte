@@ -27,36 +27,11 @@
     <!-- Admin Toolbar -->
     <div class="border-b border-gray-200 bg-gray-50 px-4 py-2 dark:border-gray-700 dark:bg-gray-800/50">
         <div class="mx-auto flex max-w-7xl items-center justify-between">
-            <!-- Left - Quick Actions -->
-            <div class="flex items-center space-x-4">
-                <button 
-                    class="rounded-lg p-1.5 text-gray-500 transition-colors hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700"
-                    title="Settings"
-                >
-                    <Settings size={18} />
-                </button>
-                <div class="relative">
-                    <button 
-                        class="rounded-lg p-1.5 text-gray-500 transition-colors hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700"
-                        title="Notifications"
-                    >
-                        <Bell size={18} />
-                        {#if notifications.length > 0}
-                            <span class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                                {notifications.length}
-                            </span>
-                        {/if}
-                    </button>
-                </div>
-            </div>
+           
 
             <!-- Center - System Status -->
             <div class="hidden items-center space-x-4 sm:flex">
-                <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
-                    <Clock size={16} />
-                    <span>Last deployed: {lastDeployment}</span>
-                </div>
-                <div class="h-4 w-px bg-gray-300 dark:bg-gray-600"></div>
+                
                 <div class="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
                     <span class="relative flex h-2 w-2">
                         <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
@@ -90,23 +65,7 @@
                     {version}
                 </span>
             </div>
-
-            <!-- Right - Quick Links -->
-            <div class="flex space-x-4">
-                {#each [
-                    { icon: Book, label: 'Docs', href: '/docs' },
-                    { icon: MessageCircle, label: 'Support', href: '/support' },
-                    { icon: Github, label: 'Updates', href: '/updates' }
-                ] as { icon: Icon, label, href }}
-                    <a
-                        {href}
-                        class="group flex items-center space-x-1 text-sm text-gray-500 transition-colors hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400"
-                    >
-                        <Icon size={16} class="transition-transform group-hover:scale-110" />
-                        <span class="hidden sm:inline">{label}</span>
-                    </a>
-                {/each}
-            </div>
+           
         </div>
     </div>
 </footer>

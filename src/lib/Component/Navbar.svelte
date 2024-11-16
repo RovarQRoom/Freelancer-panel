@@ -82,7 +82,7 @@
 						>{$authStore.name || $authStore.email}</span
 					>
 				</div>
-				<DropdownItem href="/profile">{m.profile()}</DropdownItem>
+				<!-- <DropdownItem href="/profile">{m.profile()}</DropdownItem> -->
 				<DropdownItem href="/setting">{m.settings()}</DropdownItem>
 				<DropdownItem slot="footer" on:click={handleLogout}>{m.logout()}</DropdownItem>
 			</Dropdown>
