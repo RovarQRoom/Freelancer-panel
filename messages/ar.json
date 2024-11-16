@@ -145,5 +145,6 @@
 	"selectPolicies": "اختر الصلاحيات",
 	"policies": "الصلاحيات",
 	"policyCount": "عدد الصلاحيات",
-	"error": "حدث خطأ"
+	"error": "حدث خطأ",
+	"notifications": "الإشعارات"
 }

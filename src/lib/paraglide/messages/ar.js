@@ -1176,3 +1176,11 @@ export const policyCount = () => `عدد الصلاحيات`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const error = () => `حدث خطأ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const notifications = () => `الإشعارات`

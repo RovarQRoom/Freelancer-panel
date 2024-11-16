@@ -1176,3 +1176,11 @@ export const policyCount = () => `ژمارەی دەسەڵاتەکان`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const error = () => `هەڵەیەک ڕوویدا`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const notifications = () => `ئاگادارکردنەوەکان`

@@ -145,5 +145,6 @@
 	"selectPolicies": "Select policies",
 	"policies": "Policies",
 	"policyCount": "Policy Count",
-	"error": "An error occurred"
+	"error": "An error occurred",
+	"notifications": "Notifications"
 }

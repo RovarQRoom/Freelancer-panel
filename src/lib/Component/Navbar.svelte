@@ -70,7 +70,7 @@
 				on:change={() => switchToLanguage(selectedLanguage)}
 			/>
 
-			<Button pill color="light" id="avatar_with_name" class="!p-1">
+			<Button pill color="light" id="avatar_with_name" class="px-2 py-1 gap-2">
 				<Avatar
 					src={$authStore.image || 'https://flowbite.com/docs/images/people/profile-picture-5.jpg'}
 				/>

@@ -17,7 +17,7 @@
     ];
 </script>
 
-<div class="min-h-screen bg-gray-50 p-4 dark:bg-gray-900 sm:p-6 lg:p-8">
+<div class="min-h-screen sm:p-6 lg:p-8">
     <div class="mx-auto max-w-6xl">
         <!-- Header -->
         <div class="mb-8">
@@ -28,7 +28,7 @@
         <!-- Settings Container -->
         <div class="grid gap-6 lg:grid-cols-[280px,1fr]">
             <!-- Tabs Navigation -->
-            <div class="overflow-x-auto lg:overflow-visible">
+            <div class="overflow-x-auto lg:overflow-visible ">
                 <div class="flex gap-2 lg:flex-col lg:gap-1">
                     {#each tabs as tab}
                         <button
@@ -46,7 +46,7 @@
             </div>
 
             <!-- Content Area -->
-            <Card class="h-fit">
+            <Card class="h-fit max-w-full">
                 {#if activeTab === 'profile'}
                     <ProfileTab />
                 {:else if activeTab === 'notifications'}
