@@ -8,5 +8,6 @@ export interface IRole {
     readRolesAsync(options?: GenericListOptions): Promise<PostgrestSingleResponse<RoleEntity[]>>;
     readRoleAsync(id: number): Promise<PostgrestSingleResponse<RoleEntity>>;
     updateRoleAsync(request: UpdateRole): Promise<PostgrestSingleResponse<RoleEntity>>;
+    updateRolePoliciesAsync(roleId: number, policies: number[]): Promise<PostgrestSingleResponse<{ id: number }[]>>;
     deleteRoleAsync(id: number): Promise<void>;
 }

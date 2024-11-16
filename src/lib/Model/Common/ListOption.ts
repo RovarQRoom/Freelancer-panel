@@ -6,6 +6,8 @@ export interface GenericListOptions extends FilteringOptions {
 	fieldOptionSearch?: string;
 	sortType?: string;
 	select?: string;
+	orderBy?: string;
+	order?: boolean;
 }
 
 interface FilteringOptions {

@@ -135,7 +135,7 @@ export const monthly_revenue = () => `داهاتی مانگانە`
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const monthly_users = () => `بەکارهێنەران�� مانگانە`
+export const monthly_users = () => `بەکارهێنەران مانگانە`
 
 
 /**
@@ -1168,3 +1168,11 @@ export const policies = () => `دەسەڵاتەکان`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const policyCount = () => `ژمارەی دەسەڵاتەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const error = () => `هەڵەیەک ڕوویدا`

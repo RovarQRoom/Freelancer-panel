@@ -17,7 +17,7 @@
 	import { toastStore } from '$lib/Store/Toast';
 	import type { RoleEntity } from '$lib/Model/Entity/Role';
 	import { Action } from '$lib/Model/Action/Action';
-	import type { UpdateRole } from '$lib/Supabase/Types/database.types';
+	import type { InsertRole, UpdateRole } from '$lib/Supabase/Types/database.types';
 	import { roleStore } from '$lib/Store/Role';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 
@@ -26,13 +26,15 @@
 	let showEditModal = $state(false);
 	let showDeleteModal = $state(false);
     let selectedPolicies = $state<number[]>([]);
-	let selectedRole = $state<RoleEntity | null>(null);
+	let selectedRole = $state<RoleEntity | undefined>(undefined);
+	let createRole = $state<InsertRole>({name: ''});
     let updateRole = $state<UpdateRole>({id: 0, name: ''});
-	let newRoleName = $state('');
     let filter = $state<GenericListOptions>({
         page: 1,
         limit: 10,
-        select:"id,name,policies:RolePolicy(policy:Policy(id,name))"
+        select:"id,name,policies:RolePolicy(count)",
+		orderBy: 'id',
+		order: true
     });
 
     onMount(async () => {
@@ -45,41 +47,81 @@
 	}
 
 	function canDeleteRole(roleId: number): boolean {
-		return roleId >= 5;
+		return roleId >= 6;
+	}
+
+	async function getRolePolicies(roleId: number): Promise<void> {
+		const role = await roleStore.fetch(roleId);
+		selectedPolicies = role?.policies?.map(p => p.policy.id) ?? [];
+		selectedRole = role;
+		showEditModal = true;
+		updateRole = {id: roleId, name: role?.name ?? ''};
 	}
 
 	async function handleAddRole() {
+		let roleResponse: RoleEntity | undefined;
+		let policyResponse: { id: number }[] | undefined;
 		try {
-			// Implement role creation logic here
-			showAddModal = false;
-			newRoleName = '';
-			selectedPolicies = [];
+			roleResponse = await roleStore.insert(createRole);
+			if (!roleResponse){
+				throw new Error(m.error());
+			}
+			policyResponse = await roleStore.upsertPolicies(roleResponse.id,selectedPolicies);
 			toastStore.success(m.success());
 		} catch (error) {
+			if(roleResponse){
+				roleStore.remove(roleResponse.id);
+			}
 			if (error instanceof Error) toastStore.error(error.message);
+		} finally {
+			showAddModal = false;
+			selectedPolicies = [];
+			createRole = {name: ''};
 		}
 	}
 
 	async function handleEditRole() {
+		let backupRole = selectedRole;
+		let backupPolicies = selectedRole?.policies?.map(p => p.policy.id) ?? [];
+		let roleResponse: RoleEntity | undefined;
+		let policyResponse: { id: number }[] | undefined;
 		try {
+			roleResponse = await roleStore.put(updateRole);
+			if (!roleResponse){
+				throw new Error(m.error());
+			}
+
+			policyResponse = await roleStore.upsertPolicies(roleResponse.id,selectedPolicies);
+			if (!policyResponse || policyResponse.length === 0){
+				throw new Error(m.error());
+			}
 			// Implement role update logic here
-			showEditModal = false;
-			selectedRole = null;
-			selectedPolicies = [];
 			toastStore.success(m.success());
 		} catch (error) {
+			if(roleResponse){
+				roleStore.put(backupRole!);
+			}
+			if(policyResponse){
+				roleStore.upsertPolicies(backupRole!.id,backupPolicies);
+			}
 			if (error instanceof Error) toastStore.error(error.message);
+		} finally {
+			showEditModal = false;
+			selectedRole = undefined;
+			selectedPolicies = [];
 		}
 	}
 
 	async function handleDeleteRole() {
 		try {
 			// Implement role deletion logic here
-			showDeleteModal = false;
-			selectedRole = null;
-			toastStore.success(m.success());
+			await roleStore.remove(selectedRole!.id);
+			await roleStore.upsertPolicies(selectedRole!.id,[]);
 		} catch (error) {
 			if (error instanceof Error) toastStore.error(error.message);
+		} finally {
+			showDeleteModal = false;
+			selectedRole = undefined;
 		}
 	}
 </script>
@@ -112,17 +154,13 @@
 					<TableBodyRow class="text-center">
 						<TableBodyCell>{role.id}</TableBodyCell>
 						<TableBodyCell>{role.name}</TableBodyCell>
-						<TableBodyCell>{role.policies?.length ?? 0}</TableBodyCell>
+						<TableBodyCell>{role.policies?.reduce((acc, curr) => acc + (curr.count ?? 0), 0) ?? 0}</TableBodyCell>
 						<TableBodyCell>
 							<div class="flex justify-center gap-2">
 								{#if canEditRole(role.id)}
 									<button
 										class="p-2 hover:scale-110 transition-transform duration-200"
-										onclick={() => {
-											selectedRole = role;
-											selectedPolicies = role.policies?.map(p => p.policy.id) ?? [];
-											showEditModal = true;
-										}}
+										onclick={() => getRolePolicies(role.id)}
 									>
 										<PenSolid class="h-4 w-4 text-gray-600 dark:text-gray-300" />
 									</button>
@@ -169,7 +207,7 @@
 					class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 
 					focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 
 					dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-					bind:value={newRoleName}
+					bind:value={createRole.name}
 					placeholder={m.enterName()}
 				/>
 			</div>
@@ -178,9 +216,9 @@
 					{m.policies()}
 				</Label>
 				<MultiSelect
-					items={Object.values(Action).map(action => ({
-						value: action,
-						name: action
+					items={Object.entries(Action).filter(([key]) => isNaN(Number(key))).map(([key, value]) => ({
+						value: value,
+						name: key
 					}))}
 					bind:value={selectedPolicies}
 					placeholder={m.selectPolicies()}
@@ -229,9 +267,9 @@
 					{m.policies()}
 				</Label>
 				<MultiSelect
-					items={Object.values(Action).map(action => ({
-						value: action,
-						name: action
+					items={Object.entries(Action).filter(([key]) => isNaN(Number(key))).map(([key, value]) => ({
+						value: value,
+						name: key
 					}))}
 					bind:value={selectedPolicies}
 					placeholder={m.selectPolicies()}

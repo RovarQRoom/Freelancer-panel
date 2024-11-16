@@ -144,5 +144,6 @@
 	"enterName": "Enter name",
 	"selectPolicies": "Select policies",
 	"policies": "Policies",
-	"policyCount": "Policy Count"
+	"policyCount": "Policy Count",
+	"error": "An error occurred"
 }

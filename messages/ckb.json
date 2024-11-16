@@ -15,7 +15,7 @@
 	"dont_have_account": "هەژمارت نییە؟",
 	"register_here": "لێرە تۆمار بکە",
 	"monthly_revenue": "داهاتی مانگانە",
-	"monthly_users": "بەکارهێنەران�� مانگانە",
+	"monthly_users": "بەکارهێنەران مانگانە",
 	"active_users": "بەکارهێنەرانی چالاک",
 	"inactive_users": "بەکارهێنەرانی ناچالاک",
 	"total_users": "کۆی بەکارهێنەران",
@@ -144,5 +144,6 @@
 	"enterName": "ناو بنووسە",
 	"selectPolicies": "دەسەڵاتەکان هەڵبژێرە",
 	"policies": "دەسەڵاتەکان",
-	"policyCount": "ژمارەی دەسەڵاتەکان"
+	"policyCount": "ژمارەی دەسەڵاتەکان",
+	"error": "هەڵەیەک ڕوویدا"
 }

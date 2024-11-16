@@ -1168,3 +1168,11 @@ export const policies = () => `الصلاحيات`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const policyCount = () => `عدد الصلاحيات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const error = () => `حدث خطأ`

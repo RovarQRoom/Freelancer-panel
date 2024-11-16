@@ -144,5 +144,6 @@
 	"enterName": "أدخل الاسم",
 	"selectPolicies": "اختر الصلاحيات",
 	"policies": "الصلاحيات",
-	"policyCount": "عدد الصلاحيات"
+	"policyCount": "عدد الصلاحيات",
+	"error": "حدث خطأ"
 }

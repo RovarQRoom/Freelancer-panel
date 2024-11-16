@@ -1168,3 +1168,11 @@ export const policies = () => `Policies`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const policyCount = () => `Policy Count`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const error = () => `An error occurred`

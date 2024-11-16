@@ -87,6 +87,18 @@ const createRoleStore = () => {
             }
         },
 
+        upsertPolicies: async (roleId: number, policies: number[]) => {
+           try {
+             const response = await roleRepository.updateRolePoliciesAsync(roleId,policies);
+             if (response.error) {
+                 throw new Error(response.error.message);
+             }
+             return response.data;
+           } catch (error) {
+            if (error instanceof Error) toastStore.error(error.message);
+           }
+        },
+
         remove: async (id: number) => {
             try {
                 await roleRepository.deleteRoleAsync(id);
