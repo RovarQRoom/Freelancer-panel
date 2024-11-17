@@ -35,7 +35,7 @@ export class RatingRepository implements IRating {
             .order('id', { ascending: false })
             .range(
                 ((options?.page ?? 1) - 1) * (options?.limit ?? 10),
-                (options?.page ?? 1) * (options?.limit ?? 10)
+                ((options?.page ?? 1) * (options?.limit ?? 10)) - 1
             )
             .returns<RatingEntity[]>();
         if (response.error) {

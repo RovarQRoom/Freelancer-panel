@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import * as m from '$lib/paraglide/messages.js';
 import { toastStore } from './Toast';
+import { compressImage } from '$lib/Utils/ImageCompression';
 
 const createStorageStore = () => {
 	const { subscribe, set } = writable<{
@@ -23,7 +24,8 @@ const createStorageStore = () => {
 					throw new Error(m['file_is_required']());
 				}
 
-				const response = await startUpload([file]);
+				const compressedFile = await compressImage(file);
+				const response = await startUpload([compressedFile]);
 				if (!response || !response[0]) {
 					throw new Error(m['file_upload_failed']());
 				}
@@ -48,7 +50,8 @@ const createStorageStore = () => {
 					throw new Error(m['files_are_required']());
 				}
 
-				const response = await startUpload(files);
+				const compressedFiles = await Promise.all(files.map(file => compressImage(file)));
+				const response = await startUpload(compressedFiles);
 				if (!response || !response.length) {
 					throw new Error(m['file_upload_failed']());
 				}

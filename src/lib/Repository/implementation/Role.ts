@@ -33,7 +33,7 @@ export class RoleRepository implements IRole {
             .order(options?.orderBy ?? 'id', { ascending: options?.order ?? false })
             .range(
                 ((options?.page ?? 1) - 1) * (options?.limit ?? 10),
-                (options?.page ?? 1) * (options?.limit ?? 10)
+                ((options?.page ?? 1) * (options?.limit ?? 10)) - 1
             )
             .returns<RoleEntity[]>();
 

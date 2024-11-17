@@ -35,7 +35,7 @@ export class ConversationRepository implements IConversation {
             .order('id', { ascending: false })
             .range(
                 ((options?.page ?? 1) - 1) * (options?.limit ?? 10),
-                (options?.page ?? 1) * (options?.limit ?? 10)
+                ((options?.page ?? 1) * (options?.limit ?? 10)) - 1
             )
             .returns<ConversationEntity[]>();
         if (response.error) {

@@ -87,7 +87,7 @@
             </TableBody>    
         </Table>
         <div class="w-full h-12 flex justify-center">
-            <Pagination bind:currentPage={filter.page}  />
-          </div>
+			<Pagination store={serviceStore} bind:filter={filter} name="services" />
+		  </div>
     </div>
 </div>

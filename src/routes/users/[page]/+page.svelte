@@ -10,6 +10,7 @@
     import { userStore } from '$lib/Store/User';
     import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import { authStore } from '$lib/Store/Auth';
+	import Pagination from '$lib/Component/Pagination.Component.svelte';
 
     //TODO: When the user clicks on the row, this will open a modal to edit users Password if needed
 
@@ -86,5 +87,8 @@
                 {/each}
             </TableBody>
         </Table>
+        <div class="w-full h-12 flex justify-center">
+			<Pagination store={userStore} bind:filter={filter} name="users" />
+		  </div>
     </div>
 </div>

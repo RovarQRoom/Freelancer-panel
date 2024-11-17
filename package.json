@@ -45,6 +45,7 @@
 		"@supabase/ssr": "^0.5.1",
 		"@supabase/supabase-js": "^2.46.1",
 		"@uploadthing/svelte": "^7.1.1",
+		"browser-image-compression": "^2.0.2",
 		"chart.js": "^4.4.6",
 		"lucide-svelte": "^0.456.0",
 		"moment": "^2.30.1",

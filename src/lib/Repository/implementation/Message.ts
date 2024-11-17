@@ -35,7 +35,7 @@ export class MessageRepository implements IMessage {
             .order('id', { ascending: false })
             .range(
                 ((options?.page ?? 1) - 1) * (options?.limit ?? 10),
-                (options?.page ?? 1) * (options?.limit ?? 10)
+                ((options?.page ?? 1) * (options?.limit ?? 10)) - 1
             )
             .returns<MessageEntity[]>();
         if (response.error) {

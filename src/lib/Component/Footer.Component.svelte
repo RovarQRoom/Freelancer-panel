@@ -1,18 +1,12 @@
 <script>
+	import { authStore } from '$lib/Store/Auth';
     import { 
-        Github, 
-        MessageCircle,
-        HelpCircle,
-        Book,
-        Bell,
-        Settings,
         User,
-        Clock
     } from 'lucide-svelte';
 
     const currentYear = new Date().getFullYear();
-    const version = "v0.0.1";
-    const lastDeployment = "2024-03-20 15:30 UTC";
+    const version = "v0.5.1";
+    const lastDeployment = "2024-11-17 15:30 UTC";
     
     let showAdminMenu = false;
 
@@ -48,7 +42,7 @@
                     on:click={() => showAdminMenu = !showAdminMenu}
                 >
                     <User size={16} />
-                    <span class="hidden sm:inline">Admin</span>
+                    <span class="hidden sm:inline">{$authStore?.role ? $authStore.role.name : 'Guest'}</span>
                 </button>
             </div>
         </div>

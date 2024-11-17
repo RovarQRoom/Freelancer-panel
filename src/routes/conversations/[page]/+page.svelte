@@ -87,7 +87,7 @@
 			</TableBody>
 		</Table>
 		<div class="w-full h-12 flex justify-center">
-			<!-- <Pagination bind:currentPage={filter.page} pages={$conversationStore.pages} /> -->
-		</div>
+			<Pagination store={conversationStore} bind:filter={filter} name="conversations" />
+		  </div>
 	</div>
 </div>

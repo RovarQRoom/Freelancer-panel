@@ -37,10 +37,10 @@
 	let showCreateSubcategoryModal = $state(false);
 	let showEditSubcategoryModal = $state(false);
 
-	let filter: GenericListOptions = {
+	let filter: GenericListOptions = $state({
 		limit: 10,
 		page: 1
-	};
+	});
 
 	onMount(async () => {
 		await categoryStore.fetchAll(filter);
@@ -191,7 +191,7 @@
 
 		</Table>
 		<div class="w-full h-12 flex justify-center">
-			<Pagination bind:currentPage={filter.page}  />
+			<Pagination store={categoryStore} bind:filter={filter} name="categories" />
 		  </div>
 	</div>
 </div>
