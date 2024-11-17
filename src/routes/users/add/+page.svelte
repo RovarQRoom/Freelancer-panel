@@ -85,7 +85,7 @@
 
 	<form
 		onsubmit={handleAddUser}
-		class="max-w-3xl space-y-6 rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+		class="max-w-3xl space-y-6 rounded-xl bg-white dark:bg-grey-secondary p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
 	>
 		<!-- Name -->
 		<div class="space-y-2">
@@ -95,7 +95,7 @@
 				type="text"
 				required
 				bind:value={createUser.name}
-				class="w-full transition-all duration-300 hover:border-primary-light-500"
+				class="w-full transition-all  dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
 			/>
 		</div>
 
@@ -107,7 +107,7 @@
 				type="email"
 				required
 				bind:value={createUser.email}
-				class="w-full transition-all duration-300 hover:border-primary-light-500"
+				class="w-full transition-all dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
 			/>
 		</div>
 
@@ -119,7 +119,7 @@
 				type="tel"
 				required
 				bind:value={createUser.phone}
-				class="w-full transition-all duration-300 hover:border-primary-light-500"
+				class="w-full transition-all dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
 			/>
 		</div>
 
@@ -131,7 +131,7 @@
 				type="password"
 				required
 				bind:value={createUser.password}
-				class="w-full transition-all duration-300 hover:border-primary-light-500"
+				class="w-full transition-all dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
 			/>
 		</div>
 
@@ -140,7 +140,7 @@
 			<Label for="role" class="text-lg font-medium">{m.role()}</Label>
 			<Select
 				id="role"
-				class="transition-all duration-300 hover:border-primary-light-500"
+				class="transition-all dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
 				bind:value={createUser.role}
 				items={roles.map((role) => ({
 					value: role.id,
@@ -154,7 +154,7 @@
 			<Label class="text-lg font-medium">{m.image()}</Label>
 			<div class="flex justify-center">
 				<div
-					class="relative h-64 w-64 overflow-hidden rounded-full bg-gray-100 transition-all duration-300 hover:shadow-lg"
+					class="relative h-64 w-64 overflow-hidden rounded-full bg-gray-100 dark:bg-grey-dark transition-all duration-300 hover:shadow-lg"
 				>
 					{#if imageFile.preview}
 						<Img src={imageFile.preview} alt="Preview" class="h-full w-full object-cover" />

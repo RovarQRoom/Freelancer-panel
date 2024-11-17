@@ -267,7 +267,7 @@
   <div class="mt-8 bg-grey-light dark:bg-grey-secondary rounded-xl p-6">
     <div class="flex justify-between items-center mb-6">
       <h3 class="text-xl font-bold">Recent Activity</h3>
-      <select class=" px-3 py-1 rounded-lg text-sm">
+      <select class=" px-3 py-1 rounded-lg text-sm dark:bg-grey-dark border-0">
         <option>Last 24h</option>
       </select>
     </div>

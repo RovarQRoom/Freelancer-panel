@@ -107,7 +107,7 @@
 
 	<form
 		on:submit|preventDefault={handleUpdateUser}
-		class="max-w-3xl space-y-6 rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+		class="max-w-3xl space-y-6 rounded-xl bg-white dark:bg-grey-secondary p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
 	>
 		<!-- Name -->
 		<div class="space-y-2">
@@ -117,7 +117,7 @@
 				type="text"
 				required
 				bind:value={updateUser.name}
-				class="w-full transition-all duration-300 hover:border-primary-light-500"
+				class="w-full transition-all duration-300 dark:bg-grey-dark border-0"
 			/>
 		</div>
 
@@ -129,7 +129,7 @@
 				type="email"
 				required
 				bind:value={updateUser.email}
-				class="w-full transition-all duration-300 hover:border-primary-light-500"
+				class="w-full transition-all duration-300 dark:bg-grey-dark border-0"
 			/>
 		</div>
 
@@ -141,7 +141,7 @@
 				type="tel"
 				required
 				bind:value={updateUser.phone}
-				class="w-full transition-all duration-300 hover:border-primary-light-500"
+				class="w-full transition-all duration-300 dark:bg-grey-dark border-0"
 			/>
 		</div>
 
@@ -150,7 +150,7 @@
 			<Label for="role" class="text-lg font-medium">{m.role()}</Label>
 			<Select
 				id="role"
-				class="transition-all duration-300 hover:border-primary-light-500"
+				class="transition-all duration-300 dark:bg-grey-dark border-0"
 				bind:value={updateUser.role}
 				items={roles.map((role) => ({
 					value: role.id,

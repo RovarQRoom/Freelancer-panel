@@ -234,14 +234,14 @@
     onsubmit={handleEditService} 
     class="space-y-6 max-w-3xl rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl"
 >
-    <Tabs style="underline" class="mb-4">
+    <Tabs style="underline" class="mb-4 dark:text-white">
         {#each Object.keys(Languages) as language}
             <TabItem open={language === Languages.EN} title={language}>
                 <!-- Title -->
                 <div class="space-y-2 mb-6">
                     <Label class="text-lg font-medium">{m.title()}</Label>
                     <Input
-                        class="w-full transition-all duration-300 hover:border-primary-light-500"
+                        class="w-full transition-all duration-300 border-0"
                         bind:value={titleLanguage[language.toLowerCase() as keyof UpdateLanguage]}
                         required={language === Languages.EN}
                     />
@@ -252,7 +252,7 @@
                     <Label class="text-lg font-medium">{m.description()}</Label>
                     <!-- svelte-ignore element_invalid_self_closing_tag -->
                     <textarea
-                        class="w-full rounded-lg border p-2.5 transition-all duration-300 hover:border-primary-light-500"
+                        class="w-full rounded-lg border p-2.5 transition-all duration-300 dark:bg-grey-secondary border-0 dark:text-white"
                         rows="4"
                         bind:value={descriptionLanguage[language.toLowerCase() as keyof UpdateLanguage]}
                         required={language === Languages.EN}
@@ -346,14 +346,14 @@
         <div class="space-y-3">
             <Label class="text-lg font-medium">{m.demo()}</Label>
             <div class="flex justify-center">
-                <div class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg">
+                <div class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 dark:bg-grey-secondary transition-all duration-300 hover:shadow-lg">
                     {#if demoFile.preview}
                         <div class="relative h-full">
                             <video 
                                 src={demoFile.preview} 
                                 controls
                                 controlsList="nodownload"
-                                class="h-full w-full object-contain"
+                                class="h-full w-full object-contain "
                             >
                                 <track kind="captions">
                             </video>
