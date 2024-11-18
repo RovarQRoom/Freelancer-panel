@@ -19,7 +19,7 @@ export class AuthRepository implements IAuthRepository {
 		}
 		const user = await supabase
 			.from('User')
-			.select('*,role:Role(id,name)')
+			.select('*,role:Role(id,name,policies:RolePolicy(policy:Policy(id,name)))')
 			.eq('auth', response.data.user.id)
 			.filter('role.name', 'in', `(${Role.Superadmin},${Role.Admin},${Role.Teacher})`)
 			.returns<UserEntity>()
@@ -30,8 +30,11 @@ export class AuthRepository implements IAuthRepository {
 		}
 		return user;
 	}
-	async checkPasswordAsync(id: string, password: string): Promise<PostgrestSingleResponse<boolean>> {
-		const response = await supabase.rpc("verify_user_password", {
+	async checkPasswordAsync(
+		id: string,
+		password: string
+	): Promise<PostgrestSingleResponse<boolean>> {
+		const response = await supabase.rpc('verify_user_password', {
 			password: password
 		});
 		if (response.error) {
@@ -60,7 +63,7 @@ export class AuthRepository implements IAuthRepository {
 		}
 		const user = await supabase
 			.from('User')
-			.select('*,role:Role(id,name)')
+			.select('*,role:Role(id,name,policies:RolePolicy(policy:Policy(id,name)))')
 			.eq('auth', response.data.user.id)
 			.filter('role.name', 'in', `(${Role.Superadmin},${Role.Admin},${Role.Teacher})`)
 			.returns<UserEntity>()
