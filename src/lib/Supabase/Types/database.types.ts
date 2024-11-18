@@ -173,6 +173,78 @@ export type Database = {
 					}
 				];
 			};
+			Notification: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					icon: string | null;
+					id: number;
+					image: string | null;
+					message: string | null;
+					title: string;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					icon?: string | null;
+					id?: number;
+					image?: string | null;
+					message?: string | null;
+					title: string;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					icon?: string | null;
+					id?: number;
+					image?: string | null;
+					message?: string | null;
+					title?: string;
+				};
+				Relationships: [];
+			};
+			NotificationUser: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					id: number;
+					notification: number | null;
+					seen: boolean | null;
+					user: number | null;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					notification?: number | null;
+					seen?: boolean | null;
+					user?: number | null;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					notification?: number | null;
+					seen?: boolean | null;
+					user?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'UserNotification_notification_fkey';
+						columns: ['notification'];
+						isOneToOne: false;
+						referencedRelation: 'Notification';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'UserNotification_user_fkey';
+						columns: ['user'];
+						isOneToOne: false;
+						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			Policy: {
 				Row: {
 					created_at: string;
@@ -939,6 +1011,14 @@ export type UpdateLanguage = Database['public']['Tables']['Language']['Update'];
 export type Message = Database['public']['Tables']['Message']['Row'];
 export type InsertMessage = Database['public']['Tables']['Message']['Insert'];
 export type UpdateMessage = Database['public']['Tables']['Message']['Update'];
+
+export type Notification = Database['public']['Tables']['Notification']['Row'];
+export type InsertNotification = Database['public']['Tables']['Notification']['Insert'];
+export type UpdateNotification = Database['public']['Tables']['Notification']['Update'];
+
+export type NotificationUser = Database['public']['Tables']['NotificationUser']['Row'];
+export type InsertNotificationUser = Database['public']['Tables']['NotificationUser']['Insert'];
+export type UpdateNotificationUser = Database['public']['Tables']['NotificationUser']['Update'];
 
 export type Policy = Database['public']['Tables']['Policy']['Row'];
 export type InsertPolicy = Database['public']['Tables']['Policy']['Insert'];
