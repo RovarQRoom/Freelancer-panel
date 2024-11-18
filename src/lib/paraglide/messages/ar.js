@@ -1184,3 +1184,83 @@ export const error = () => `حدث خطأ`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const notifications = () => `الإشعارات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const message = () => `الرسالة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const no_users = () => `لا يوجد مستخدمين`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const addNotification = () => `إضافة إشعار`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const enterTitle = () => `أدخل العنوان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const enterMessage = () => `أدخل الرسالة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const allSelected = () => `تم اختيار جميع المستخدمين`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const selectUsers = () => `اختر المستخدمين`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const uploadImage = () => `رفع صورة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const uploadIcon = () => `رفع أيقونة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const all_users = () => `جميع المستخدمين`

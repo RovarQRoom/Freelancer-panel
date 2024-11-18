@@ -146,5 +146,15 @@
 	"policies": "الصلاحيات",
 	"policyCount": "عدد الصلاحيات",
 	"error": "حدث خطأ",
-	"notifications": "الإشعارات"
+	"notifications": "الإشعارات",
+	"message": "الرسالة",
+	"no_users": "لا يوجد مستخدمين",
+	"addNotification": "إضافة إشعار",
+	"enterTitle": "أدخل العنوان",
+	"enterMessage": "أدخل الرسالة",
+	"allSelected": "تم اختيار جميع المستخدمين",
+	"selectUsers": "اختر المستخدمين",
+	"uploadImage": "رفع صورة",
+	"uploadIcon": "رفع أيقونة",
+	"all_users": "جميع المستخدمين"
 }

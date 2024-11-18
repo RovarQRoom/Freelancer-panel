@@ -146,5 +146,15 @@
 	"policies": "Policies",
 	"policyCount": "Policy Count",
 	"error": "An error occurred",
-	"notifications": "Notifications"
+	"notifications": "Notifications",
+	"message": "Message",
+	"no_users": "No users",
+	"addNotification": "Add Notification",
+	"enterTitle": "Enter title",
+	"enterMessage": "Enter message",
+	"allSelected": "All Users Selected",
+	"selectUsers": "Select users",
+	"uploadImage": "Upload Image",
+	"uploadIcon": "Upload Icon",
+	"all_users": "All Users"
 }

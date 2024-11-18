@@ -11,7 +11,7 @@ export class NotificationRepository implements INotification {
         const response = await supabase
             .from('Notification')
             .insert(request)
-            .select('*')
+            .select('*,users:NotificationUser(user:User(id,name))')
             .returns<NotificationEntity>()
             .single();
         if (response.error) {
@@ -25,7 +25,7 @@ export class NotificationRepository implements INotification {
         const response = await supabase
             .from('NotificationUser')
             .insert(request)
-            .select('*,user:User(id,name)');
+            .select('*,user:User(id,name),notification:Notification(id)');
         if (response.error) {
             toastStore.error(response.error.message);
             throw new Error(response.error.message);
@@ -34,7 +34,7 @@ export class NotificationRepository implements INotification {
     }
 
     async readNotificationsAsync(options?: GenericListOptions): Promise<PostgrestSingleResponse<NotificationEntity[]>> {
-        const query = supabase.from('Notification').select(options?.select ?? '*, user:user_id(id,name)', { count: 'exact' });
+        const query = supabase.from('Notification').select(options?.select ?? '*, users:NotificationUser(user:User(id,name))', { count: 'exact' });
         if (options?.search) query.textSearch(options.fieldOption ?? 'title', options.search);
         if (options?.from) query.gte('created_at', options.from);
         if (options?.to) query.lte('created_at', options.to);

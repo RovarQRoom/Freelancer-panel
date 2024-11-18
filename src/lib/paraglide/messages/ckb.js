@@ -1184,3 +1184,83 @@ export const error = () => `هەڵەیەک ڕوویدا`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const notifications = () => `ئاگادارکردنەوەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const message = () => `پەیام`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const no_users = () => `هیچ بەکارهێنەرێک نییە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const addNotification = () => `زیادکردنی ئاگادارکردنەوە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const enterTitle = () => `ناونیشان بنووسە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const enterMessage = () => `پەیام بنووسە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const allSelected = () => `هەموو بەکارهێنەران دیاریکراون`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const selectUsers = () => `بەکارهێنەران هەڵبژێرە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const uploadImage = () => `بارکردنی وێنە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const uploadIcon = () => `بارکردنی ئایکۆن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const all_users = () => `هەموو بەکارهێنەرەکان`
