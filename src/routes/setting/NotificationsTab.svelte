@@ -6,9 +6,7 @@
         TableBodyRow,
         TableHead,
         TableHeadCell,
-        Button
     } from 'flowbite-svelte';
-    import { PenSolid, TrashBinSolid, CirclePlusSolid } from 'flowbite-svelte-icons';
     import * as m from '$lib/paraglide/messages';
 
     // Sample data structure

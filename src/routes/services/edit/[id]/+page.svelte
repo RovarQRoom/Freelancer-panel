@@ -12,7 +12,11 @@
 	} from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';
-	import { Languages, type UpdateService, type UpdateLanguage } from '$lib/Supabase/Types/database.types';
+	import {
+		Languages,
+		type UpdateService,
+		type UpdateLanguage
+	} from '$lib/Supabase/Types/database.types';
 	import { languageStore } from '$lib/Store/Language';
 	import { storageStore } from '$lib/Store/Storage';
 	import { toastStore } from '$lib/Store/Toast';
@@ -25,6 +29,8 @@
 	import type { UserEntity } from '$lib/Model/Entity/User';
 	import type { ServiceEntity } from '$lib/Model/Entity/Service';
 	import type { LanguageEntity } from '$lib/Model/Entity/Language';
+	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
+	import { Action } from '$lib/Model/Action/Action';
 
 	const { startUpload } = createUploadThing('imageUploader');
 
@@ -75,8 +81,8 @@
 		ckb: { file: undefined, preview: undefined }
 	});
 
-	let demoFile = $state<{ 
-		file?: File; 
+	let demoFile = $state<{
+		file?: File;
 		preview?: string;
 	}>({
 		file: undefined,
@@ -114,16 +120,16 @@
 
 			descriptionLanguage = {
 				id: service.description?.id ?? 0,
-				en: service.description?.en ?? "",
-				ar: service.description?.ar ?? "",
-				ckb: service.description?.ckb ?? ""
+				en: service.description?.en ?? '',
+				ar: service.description?.ar ?? '',
+				ckb: service.description?.ckb ?? ''
 			};
 
 			mediaLanguage = {
 				id: service.media?.id ?? 0,
-				en: service.media?.en ?? "",
-				ar: service.media?.ar ?? "",
-				ckb: service.media?.ckb ?? ""
+				en: service.media?.en ?? '',
+				ar: service.media?.ar ?? '',
+				ckb: service.media?.ckb ?? ''
 			};
 
 			// Set previews
@@ -131,7 +137,6 @@
 			if (service.media?.ar) mediaFiles.ar.preview = service.media.ar;
 			if (service.media?.ckb) mediaFiles.ckb.preview = service.media.ckb;
 			if (service.demo) demoFile.preview = service.demo;
-
 		} catch (error) {
 			if (error instanceof Error) toastStore.error(error.message);
 		} finally {
@@ -178,7 +183,6 @@
 			await serviceStore.put(editService);
 			toastStore.success(m.success());
 			goto('/services/1');
-
 		} catch (error) {
 			// Rollback changes if error occurs
 			if (titleLanguage.id) await languageStore.put(backupTitle);
@@ -198,10 +202,11 @@
 			await getService(id);
 		}
 
-		users = (await userStore.fetchForDropdown({
-			limit: 100,
-			select: 'id,name'
-		})) ?? [];
+		users =
+			(await userStore.fetchForDropdown({
+				limit: 100,
+				select: 'id,name'
+			})) ?? [];
 	});
 </script>
 
@@ -210,16 +215,14 @@
 
 <div class="container mx-auto p-8">
 	<div class="mb-6 flex items-center">
-		<Button
-			color="alternative"
-			class="mr-4"
-			on:click={() => goto('/services/1')}
-		>
+		<Button color="alternative" class="mr-4" on:click={() => goto('/services/1')}>
 			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<i class="fas fa-arrow-left mr-2" />
 			{m.back()}
 		</Button>
-		<h1 class="text-3xl font-bold bg-gradient-to-r from-primary-light-500 to-purple-500 bg-clip-text text-transparent">
+		<h1
+			class="bg-gradient-to-r from-primary-light-500 to-purple-500 bg-clip-text text-3xl font-bold text-transparent"
+		>
 			{m.editService()}
 		</h1>
 	</div>
@@ -228,231 +231,233 @@
 		<div class="flex justify-center p-12">
 			<Spinner size="12" class="text-primary-light-500" />
 		</div>
-	<!-- After the loading check, add this form section -->
-{:else}
-<form 
-    onsubmit={handleEditService} 
-    class="space-y-6 max-w-3xl rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl"
->
-    <Tabs style="underline" class="mb-4 dark:text-white">
-        {#each Object.keys(Languages) as language}
-            <TabItem open={language === Languages.EN} title={language}>
-                <!-- Title -->
-                <div class="space-y-2 mb-6">
-                    <Label class="text-lg font-medium">{m.title()}</Label>
-                    <Input
-                        class="w-full transition-all duration-300 border-0"
-                        bind:value={titleLanguage[language.toLowerCase() as keyof UpdateLanguage]}
-                        required={language === Languages.EN}
-                    />
-                </div>
+		<!-- After the loading check, add this form section -->
+	{:else}
+		<form
+			onsubmit={handleEditService}
+			class="max-w-3xl space-y-6 rounded-xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+		>
+			<Tabs style="underline" class="mb-4 dark:text-white">
+				{#each Object.keys(Languages) as language}
+					<TabItem open={language === Languages.EN} title={language}>
+						<!-- Title -->
+						<div class="mb-6 space-y-2">
+							<Label class="text-lg font-medium">{m.title()}</Label>
+							<Input
+								class="w-full border-0 transition-all duration-300"
+								bind:value={titleLanguage[language.toLowerCase() as keyof UpdateLanguage]}
+								required={language === Languages.EN}
+							/>
+						</div>
 
-                <!-- Description -->
-                <div class="space-y-2 mb-6">
-                    <Label class="text-lg font-medium">{m.description()}</Label>
-                    <!-- svelte-ignore element_invalid_self_closing_tag -->
-                    <textarea
-                        class="w-full rounded-lg border p-2.5 transition-all duration-300 dark:bg-grey-secondary border-0 dark:text-white"
-                        rows="4"
-                        bind:value={descriptionLanguage[language.toLowerCase() as keyof UpdateLanguage]}
-                        required={language === Languages.EN}
-                    />
-                </div>
+						<!-- Description -->
+						<div class="mb-6 space-y-2">
+							<Label class="text-lg font-medium">{m.description()}</Label>
+							<!-- svelte-ignore element_invalid_self_closing_tag -->
+							<textarea
+								class="w-full rounded-lg border border-0 p-2.5 transition-all duration-300 dark:bg-grey-secondary dark:text-white"
+								rows="4"
+								bind:value={descriptionLanguage[language.toLowerCase() as keyof UpdateLanguage]}
+								required={language === Languages.EN}
+							/>
+						</div>
 
-                <!-- Media Upload -->
-                <div class="space-y-2 mb-6">
-                    <Label class="text-lg font-medium">{m.media()}</Label>
-                    <div class="flex justify-center">
-                        <div class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg">
-                            {#if mediaFiles[language.toLowerCase() as keyof typeof mediaFiles].preview}
-                                <Img
-                                    src={mediaFiles[language.toLowerCase() as keyof typeof mediaFiles].preview}
-                                    alt="Preview"
-                                    class="h-full w-full object-cover"
-                                />
-                            {:else}
-                                <div class="flex h-full w-full flex-col items-center justify-center">
-                                    <span class="mb-2 text-gray-500">{m.no_media_selected()}</span>
-                                    <Button>
-                                        <span class="mr-2">+</span>
-                                        {m.add_image()}
-                                    </Button>
-                                </div>
-                            {/if}
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onchange={(e) => {
-                                    const input = e.target as HTMLInputElement;
-                                    const file = input.files?.[0];
-                                    if (file) {
-                                        const url = URL.createObjectURL(file);
-                                        const lang = language.toLowerCase();
-                                        mediaFiles[lang as keyof typeof mediaFiles].file = file;
-                                        mediaFiles[lang as keyof typeof mediaFiles].preview = url;
-                                    }
-                                }}
-                                class="absolute inset-0 cursor-pointer opacity-0"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </TabItem>
-        {/each}
-    </Tabs>
+						<!-- Media Upload -->
+						<div class="mb-6 space-y-2">
+							<Label class="text-lg font-medium">{m.media()}</Label>
+							<div class="flex justify-center">
+								<div
+									class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg"
+								>
+									{#if mediaFiles[language.toLowerCase() as keyof typeof mediaFiles].preview}
+										<Img
+											src={mediaFiles[language.toLowerCase() as keyof typeof mediaFiles].preview}
+											alt="Preview"
+											class="h-full w-full object-cover"
+										/>
+									{:else}
+										<div class="flex h-full w-full flex-col items-center justify-center">
+											<span class="mb-2 text-gray-500">{m.no_media_selected()}</span>
+											<Button>
+												<span class="mr-2">+</span>
+												{m.add_image()}
+											</Button>
+										</div>
+									{/if}
+									<input
+										type="file"
+										accept="image/*"
+										onchange={(e) => {
+											const input = e.target as HTMLInputElement;
+											const file = input.files?.[0];
+											if (file) {
+												const url = URL.createObjectURL(file);
+												const lang = language.toLowerCase();
+												mediaFiles[lang as keyof typeof mediaFiles].file = file;
+												mediaFiles[lang as keyof typeof mediaFiles].preview = url;
+											}
+										}}
+										class="absolute inset-0 cursor-pointer opacity-0"
+									/>
+								</div>
+							</div>
+						</div>
+					</TabItem>
+				{/each}
+			</Tabs>
 
-    <!-- Non-language specific fields -->
-    <div class="space-y-6">
-        <!-- Price -->
-        <div class="space-y-2">
-            <Label class="text-lg font-medium">{m.price()}</Label>
-            <Input
-                type="number"
-                bind:value={editService.price}
-                required
-                min="0"
-                step="0.01"
-            />
-        </div>
+			<!-- Non-language specific fields -->
+			<div class="space-y-6">
+				<!-- Price -->
+				<div class="space-y-2">
+					<Label class="text-lg font-medium">{m.price()}</Label>
+					<Input type="number" bind:value={editService.price} required min="0" step="0.01" />
+				</div>
 
-        <!-- Supports -->
-        <div class="space-y-2">
-            <Label class="text-lg font-medium">{m.supports()}</Label>
-            <MultiSelect
-                class="transition-all duration-300 hover:border-primary-light-500"
-                items={supportLanguages.map(language => ({
-                    value: language,
-                    name: language
-                }))}
-                bind:value={editService.supports as (string | number)[]}
-                placeholder={m.select_supported_languages()}
-            />
-        </div>
+				<!-- Supports -->
+				<div class="space-y-2">
+					<Label class="text-lg font-medium">{m.supports()}</Label>
+					<MultiSelect
+						class="transition-all duration-300 hover:border-primary-light-500"
+						items={supportLanguages.map((language) => ({
+							value: language,
+							name: language
+						}))}
+						bind:value={editService.supports as (string | number)[]}
+						placeholder={m.select_supported_languages()}
+					/>
+				</div>
 
-        <!-- Tags -->
-        <div class="space-y-2">
-            <Label class="text-lg font-medium">{m.tags()}</Label>
-            <MultiSelect
-                items={availableTags.map(tag => ({
-                    value: tag,
-                    name: tag
-                }))}
-                bind:value={editService.tags as (string | number)[]}
-                placeholder={m.select_tags()}
-            />
-        </div>
+				<!-- Tags -->
+				<div class="space-y-2">
+					<Label class="text-lg font-medium">{m.tags()}</Label>
+					<MultiSelect
+						items={availableTags.map((tag) => ({
+							value: tag,
+							name: tag
+						}))}
+						bind:value={editService.tags as (string | number)[]}
+						placeholder={m.select_tags()}
+					/>
+				</div>
 
-        <!-- Demo Upload -->
-        <div class="space-y-3">
-            <Label class="text-lg font-medium">{m.demo()}</Label>
-            <div class="flex justify-center">
-                <div class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 dark:bg-grey-secondary transition-all duration-300 hover:shadow-lg">
-                    {#if demoFile.preview}
-                        <div class="relative h-full">
-                            <video 
-                                src={demoFile.preview} 
-                                controls
-                                controlsList="nodownload"
-                                class="h-full w-full object-contain "
-                            >
-                                <track kind="captions">
-                            </video>
-                            <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
-                                <Button
-                                    size="sm"
-                                    color="blue"
-                                    on:click={() => {
-                                        document.getElementById('demo-upload')?.click();
-                                    }}
-                                >
-                                    <i class="fas fa-video mr-2"></i>
-                                    {m.add_demo()}
-                                </Button>
-                                <Button
-                                    size="sm"
-                                    color="red"
-                                    on:click={() => {
-                                        if (demoFile.preview) {
-                                            URL.revokeObjectURL(demoFile.preview);
-                                        }
-                                        demoFile = { file: undefined, preview: undefined };
-                                        editService.demo = '';
-                                    }}
-                                >
-                                    {m.remove()}
-                                </Button>
-                            </div>
-                        </div>
-                    {:else}
-                        <div class="flex h-full w-full flex-col items-center justify-center transition-transform duration-300 hover:scale-105">
-                            <span class="mb-2 text-gray-500">{m.no_demo_selected()}</span>
-                            <Button 
-                                on:click={() => {
-                                    document.getElementById('demo-upload')?.click();
-                                }}
-                                class="transition-all duration-300 hover:scale-105"
-                            >
-                                <i class="fas fa-video mr-2"></i>
-                                {m.add_demo()}
-                            </Button>
-                        </div>
-                    {/if}
-                    <input
-                        id="demo-upload"
-                        type="file"
-                        accept="video/*"
-                        onchange={(e) => {
-                            const input = e.target as HTMLInputElement;
-                            const file = input.files?.[0];
-                            if (file) {
-                                if (demoFile.preview) {
-                                    URL.revokeObjectURL(demoFile.preview);
-                                }
-                                demoFile.preview = URL.createObjectURL(file);
-                                demoFile.file = file;
-                            }
-                        }}
-                        class="hidden"
-                    />
-                </div>
-            </div>
-        </div>
+				<!-- Demo Upload -->
+				<div class="space-y-3">
+					<Label class="text-lg font-medium">{m.demo()}</Label>
+					<div class="flex justify-center">
+						<div
+							class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg dark:bg-grey-secondary"
+						>
+							{#if demoFile.preview}
+								<div class="relative h-full">
+									<video
+										src={demoFile.preview}
+										controls
+										controlsList="nodownload"
+										class="h-full w-full object-contain"
+									>
+										<track kind="captions" />
+									</video>
+									<div class="absolute bottom-4 left-0 right-0 z-10 flex justify-center gap-2">
+										<Button
+											size="sm"
+											color="blue"
+											on:click={() => {
+												document.getElementById('demo-upload')?.click();
+											}}
+										>
+											<i class="fas fa-video mr-2"></i>
+											{m.add_demo()}
+										</Button>
+										<Button
+											size="sm"
+											color="red"
+											on:click={() => {
+												if (demoFile.preview) {
+													URL.revokeObjectURL(demoFile.preview);
+												}
+												demoFile = { file: undefined, preview: undefined };
+												editService.demo = '';
+											}}
+										>
+											{m.remove()}
+										</Button>
+									</div>
+								</div>
+							{:else}
+								<div
+									class="flex h-full w-full flex-col items-center justify-center transition-transform duration-300 hover:scale-105"
+								>
+									<span class="mb-2 text-gray-500">{m.no_demo_selected()}</span>
+									<Button
+										on:click={() => {
+											document.getElementById('demo-upload')?.click();
+										}}
+										class="transition-all duration-300 hover:scale-105"
+									>
+										<i class="fas fa-video mr-2"></i>
+										{m.add_demo()}
+									</Button>
+								</div>
+							{/if}
+							<input
+								id="demo-upload"
+								type="file"
+								accept="video/*"
+								onchange={(e) => {
+									const input = e.target as HTMLInputElement;
+									const file = input.files?.[0];
+									if (file) {
+										if (demoFile.preview) {
+											URL.revokeObjectURL(demoFile.preview);
+										}
+										demoFile.preview = URL.createObjectURL(file);
+										demoFile.file = file;
+									}
+								}}
+								class="hidden"
+							/>
+						</div>
+					</div>
+				</div>
 
-        <!-- Supervisor Selection -->
-        <div class="space-y-2">
-            <Label class="text-lg font-medium">{m.supervisor()}</Label>
-            <Select
-                class="transition-all duration-300 hover:border-primary-light-500"
-                bind:value={editService.supervised_by}
-                items={users.map(user => ({
-                    value: user.id,
-                    name: user.name ?? ''
-                }))}
-                placeholder={m.select_supervisor()}
-            />
-        </div>
+				<!-- Supervisor Selection -->
+				<div class="space-y-2">
+					<Label class="text-lg font-medium">{m.supervisor()}</Label>
+					<Select
+						class="transition-all duration-300 hover:border-primary-light-500"
+						bind:value={editService.supervised_by}
+						items={users.map((user) => ({
+							value: user.id,
+							name: user.name ?? ''
+						}))}
+						placeholder={m.select_supervisor()}
+					/>
+				</div>
 
-        <!-- Submit Buttons -->
-        <div class="flex gap-3 pt-4">
-            <Button
-                type="submit"
-                class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:bg-primary-light-600 hover:scale-105"
-                disabled={isLoading}
-            >
-                {#if isLoading}
-                    <Spinner class="mr-3" size="4" color="white" />
-                {/if}
-                {m.save()}
-            </Button>
-            <Button
-                color="alternative"
-                class="flex-1 transition-all duration-300 hover:bg-gray-200 hover:scale-105"
-                on:click={() => goto('/services/1')}
-            >
-                {m.cancel()}
-            </Button>
-        </div>
-    </div>
-</form>
-{/if}
+				<!-- Submit Buttons -->
+				<div class="flex gap-3 pt-4">
+					{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_SERVICE], $authStore?.role?.name)}
+						<Button
+							type="submit"
+							class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:scale-105 hover:bg-primary-light-600"
+							disabled={isLoading}
+						>
+							{#if isLoading}
+								<Spinner class="mr-3" size="4" color="white" />
+							{/if}
+							{m.save()}
+						</Button>
+					{/if}
+					<Button
+						color="alternative"
+						class="flex-1 transition-all duration-300 hover:scale-105 hover:bg-gray-200"
+						on:click={() => goto('/services/1')}
+					>
+						{m.cancel()}
+					</Button>
+				</div>
+			</div>
+		</form>
+	{/if}
 </div>

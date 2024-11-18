@@ -25,7 +25,6 @@
 
 	onMount(async () => {
 		await conversationStore.fetchAll(filter);
-		console.log($conversationStore.data);
 	});
 </script>
 

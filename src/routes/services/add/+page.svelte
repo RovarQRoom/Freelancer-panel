@@ -12,7 +12,11 @@
 	} from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { goto } from '$app/navigation';
-	import { Languages, type InsertService, type InsertLanguage } from '$lib/Supabase/Types/database.types';
+	import {
+		Languages,
+		type InsertService,
+		type InsertLanguage
+	} from '$lib/Supabase/Types/database.types';
 	import { languageStore } from '$lib/Store/Language';
 	import { storageStore } from '$lib/Store/Storage';
 	import { toastStore } from '$lib/Store/Toast';
@@ -24,6 +28,8 @@
 	import type { UserEntity } from '$lib/Model/Entity/User';
 	import type { LanguageEntity } from '$lib/Model/Entity/Language';
 	import type { ServiceEntity } from '$lib/Model/Entity/Service';
+	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
+	import { Action } from '$lib/Model/Action/Action';
 
 	const { startUpload } = createUploadThing('imageUploader', {
 		onClientUploadComplete: () => {
@@ -33,13 +39,14 @@
 			console.error('Upload error:', error);
 		}
 	});
-    let users = $state<UserEntity[]>([]);
-    onMount(async () => {
-        users = (await userStore.fetchForDropdown({
-            limit: 100,
-            select: 'id,name'
-        })) ?? [];
-    });
+	let users = $state<UserEntity[]>([]);
+	onMount(async () => {
+		users =
+			(await userStore.fetchForDropdown({
+				limit: 100,
+				select: 'id,name'
+			})) ?? [];
+	});
 
 	let isLoading = $state(false);
 	let createService = $state<InsertService>({
@@ -61,8 +68,8 @@
 		en: ''
 	});
 
-	let demoFile = $state<{ 
-		file?: File; 
+	let demoFile = $state<{
+		file?: File;
 		preview?: string;
 		isUploading?: boolean;
 	}>({
@@ -73,45 +80,45 @@
 
 	let mediaLanguage = $state<{
 		en: {
-            file?: File;
-            preview?: string;
-        };
+			file?: File;
+			preview?: string;
+		};
 		ar: {
-            file?: File;
-            preview?: string;
-        };
+			file?: File;
+			preview?: string;
+		};
 		ckb: {
-            file?: File;
-            preview?: string;
-        };
+			file?: File;
+			preview?: string;
+		};
 	}>({
 		en: {
-            file: undefined,
+			file: undefined,
 			preview: undefined
 		},
 		ar: {
-            file: undefined,
+			file: undefined,
 			preview: undefined
 		},
 		ckb: {
-            file: undefined,
+			file: undefined,
 			preview: undefined
 		}
 	});
 
 	// Available languages for support
 	const supportLanguages = Object.values(Languages);
-	
+
 	// Sample tags - you should replace this with your actual tags from the backend
 	const availableTags = ['Web Development', 'Mobile Development', 'Design', 'Marketing', 'SEO'];
 
 	async function handleAddService() {
 		if (isLoading) return;
 		isLoading = true;
-        let titleResponse: LanguageEntity | null = null;
-        let descriptionResponse: LanguageEntity | null = null;
-        let mediaResponse: LanguageEntity | null = null;
-        let serviceResponse: ServiceEntity | undefined = undefined;
+		let titleResponse: LanguageEntity | null = null;
+		let descriptionResponse: LanguageEntity | null = null;
+		let mediaResponse: LanguageEntity | null = null;
+		let serviceResponse: ServiceEntity | undefined = undefined;
 		try {
 			// Create language entries for title and description
 			titleResponse = await languageStore.insert(titleLanguage);
@@ -147,20 +154,21 @@
 			createService.title = titleResponse?.id ?? null;
 			createService.description = descriptionResponse?.id ?? null;
 			createService.media = mediaResponse?.id ?? null;
-            createService.created_by = $authStore?.id ?? null;
+			createService.created_by = $authStore?.id ?? null;
 
 			// Create service
 			serviceResponse = await serviceStore.insert(createService);
 			toastStore.success(m.success());
 			goto('/services/1');
 		} catch (error) {
-            if(titleResponse && titleResponse.id) languageStore.remove(titleResponse.id);
-            if(descriptionResponse && descriptionResponse.id) languageStore.remove(descriptionResponse.id);
-            if(mediaResponse && mediaResponse.id) languageStore.remove(mediaResponse.id);
-            if(serviceResponse && serviceResponse.id) serviceStore.remove(serviceResponse.id);
-            if (error instanceof Error) toastStore.error(error.message);
+			if (titleResponse && titleResponse.id) languageStore.remove(titleResponse.id);
+			if (descriptionResponse && descriptionResponse.id)
+				languageStore.remove(descriptionResponse.id);
+			if (mediaResponse && mediaResponse.id) languageStore.remove(mediaResponse.id);
+			if (serviceResponse && serviceResponse.id) serviceStore.remove(serviceResponse.id);
+			if (error instanceof Error) toastStore.error(error.message);
 		} finally {
-            isLoading = false;
+			isLoading = false;
 		}
 	}
 
@@ -181,43 +189,41 @@
 
 <div class="container mx-auto p-8">
 	<div class="mb-6 flex items-center">
-		<Button
-			color="alternative"
-			class="mr-4"
-			on:click={() => goto('/services/1')}
-		>
+		<Button color="alternative" class="mr-4" on:click={() => goto('/services/1')}>
 			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<i class="fas fa-arrow-left mr-2" />
 			{m.back()}
 		</Button>
-		<h1 class="text-3xl font-bold bg-gradient-to-r from-primary-light-500 to-purple-500 bg-clip-text text-transparent">
+		<h1
+			class="bg-gradient-to-r from-primary-light-500 to-purple-500 bg-clip-text text-3xl font-bold text-transparent"
+		>
 			{m.addService()}
 		</h1>
 	</div>
 
-	<form 
-		onsubmit={handleAddService} 
-		class="space-y-6 max-w-3xl bg-white dark:bg-grey-secondary rounded-xl shadow-lg p-8 transition-all duration-300 hover:shadow-xl"
+	<form
+		onsubmit={handleAddService}
+		class="max-w-3xl space-y-6 rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-grey-secondary"
 	>
 		<Tabs style="underline" class="mb-4 dark:text-white">
 			{#each Object.keys(Languages) as language}
 				<TabItem open={language === Languages.EN} title={language}>
 					<!-- Title -->
-					<div class="space-y-2 mb-6">
+					<div class="mb-6 space-y-2">
 						<Label class="text-lg font-medium">{m.title()}</Label>
 						<Input
-							class="w-full transition-all duration-300 border-0"
+							class="w-full border-0 transition-all duration-300"
 							bind:value={titleLanguage[language.toLowerCase() as keyof InsertLanguage]}
 							required={language === Languages.EN}
 						/>
 					</div>
 
 					<!-- Description -->
-					<div class="space-y-2 mb-6">
+					<div class="mb-6 space-y-2">
 						<Label class="text-lg font-medium">{m.description()}</Label>
 						<!-- svelte-ignore element_invalid_self_closing_tag -->
 						<textarea
-							class="w-full rounded-lg dark:bg-grey-secondary border-0 p-2.5 transition-all duration-300 hover:border-primary-light-500"
+							class="w-full rounded-lg border-0 p-2.5 transition-all duration-300 hover:border-primary-light-500 dark:bg-grey-secondary"
 							rows="4"
 							bind:value={descriptionLanguage[language.toLowerCase() as keyof InsertLanguage]}
 							required={language === Languages.EN}
@@ -225,13 +231,16 @@
 					</div>
 
 					<!-- Media Upload -->
-					<div class="space-y-2 mb-6">
+					<div class="mb-6 space-y-2">
 						<Label class="text-lg font-medium">{m.media()}</Label>
 						<div class="flex justify-center">
-							<div class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 dark:bg-grey-secondary transition-all duration-300 hover:shadow-lg">
+							<div
+								class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg dark:bg-grey-secondary"
+							>
 								{#if mediaLanguage[language.toLowerCase() as keyof typeof mediaLanguage].preview}
 									<Img
-										src={mediaLanguage[language.toLowerCase() as keyof typeof mediaLanguage].preview}
+										src={mediaLanguage[language.toLowerCase() as keyof typeof mediaLanguage]
+											.preview}
 										alt="Preview"
 										class="h-full w-full object-cover"
 									/>
@@ -271,13 +280,7 @@
 			<!-- Price -->
 			<div class="space-y-2">
 				<Label class="text-lg font-medium">{m.price()}</Label>
-				<Input
-					type="number"
-					bind:value={createService.price}
-					required
-					min="0"
-					step="0.01"
-				/>
+				<Input type="number" bind:value={createService.price} required min="0" step="0.01" />
 			</div>
 
 			<!-- Supports -->
@@ -285,7 +288,7 @@
 				<Label class="text-lg font-medium">{m.supports()}</Label>
 				<MultiSelect
 					class="transition-all duration-300 hover:border-primary-light-500"
-					items={supportLanguages.map(language => ({
+					items={supportLanguages.map((language) => ({
 						value: language,
 						name: language
 					}))}
@@ -298,7 +301,7 @@
 			<div class="space-y-2">
 				<Label class="text-lg font-medium">{m.tags()}</Label>
 				<MultiSelect
-					items={availableTags.map(tag => ({
+					items={availableTags.map((tag) => ({
 						value: tag,
 						name: tag
 					}))}
@@ -311,18 +314,20 @@
 			<div class="space-y-3">
 				<Label class="text-lg font-medium">{m.demo()}</Label>
 				<div class="flex justify-center">
-					<div class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 dark:bg-grey-dark transition-all duration-300 hover:shadow-lg">
+					<div
+						class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg dark:bg-grey-dark"
+					>
 						{#if demoFile.preview}
 							<div class="relative h-full">
-								<video 
-									src={demoFile.preview} 
+								<video
+									src={demoFile.preview}
 									controls
 									controlsList="nodownload"
 									class="h-full w-full object-contain"
 								>
-									<track kind="captions">
+									<track kind="captions" />
 								</video>
-								<div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+								<div class="absolute bottom-4 left-0 right-0 z-10 flex justify-center gap-2">
 									<Button
 										size="sm"
 										color="blue"
@@ -348,9 +353,11 @@
 								</div>
 							</div>
 						{:else}
-							<div class="flex h-full w-full flex-col items-center justify-center transition-transform duration-300 hover:scale-105">
+							<div
+								class="flex h-full w-full flex-col items-center justify-center transition-transform duration-300 hover:scale-105"
+							>
 								<span class="mb-2 text-gray-500">{m.no_demo_selected()}</span>
-								<Button 
+								<Button
 									on:click={() => {
 										document.getElementById('demo-upload')?.click();
 									}}
@@ -378,7 +385,7 @@
 				<Select
 					class="transition-all duration-300 hover:border-primary-light-500"
 					bind:value={createService.supervised_by}
-					items={users.map(user => ({
+					items={users.map((user) => ({
 						value: user.id,
 						name: user.name ?? ''
 					}))}
@@ -388,19 +395,21 @@
 
 			<!-- Submit Buttons -->
 			<div class="flex gap-3 pt-4">
-				<Button
-					type="submit"
-					class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:bg-primary-light-600 hover:scale-105"
-					disabled={isLoading}
-				>
-					{#if isLoading}
-						<Spinner class="mr-3" size="4" color="white" />
-					{/if}
-					{m.save()}
-				</Button>
+				{#if checkPremissionOnRoute($authStore!, [Action.CREATE_SERVICE], $authStore?.role?.name)}
+					<Button
+						type="submit"
+						class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:scale-105 hover:bg-primary-light-600"
+						disabled={isLoading}
+					>
+						{#if isLoading}
+							<Spinner class="mr-3" size="4" color="white" />
+						{/if}
+						{m.save()}
+					</Button>
+				{/if}
 				<Button
 					color="alternative"
-					class="flex-1 transition-all duration-300 hover:bg-gray-200 hover:scale-105"
+					class="flex-1 transition-all duration-300 hover:scale-105 hover:bg-gray-200"
 					on:click={() => goto('/services/1')}
 				>
 					{m.cancel()}

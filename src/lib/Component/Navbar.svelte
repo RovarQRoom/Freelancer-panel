@@ -23,15 +23,17 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { DarkMode } from 'flowbite-svelte';
+	import { Action } from '$lib/Model/Action/Action';
+	import { filterNavItemsByPermission } from '$lib/Utils/CheckPremission';
 
 	let selectedLanguage = $state(languageTag());
 
 	const navItems = [
-		{ href: '/', label: m.dashboard() },
-		{ href: '/categories/1', label: m.categories() },
-		{ href: '/services/1', label: m.services() },
-		{ href: '/users/1', label: m.users() },
-		{ href: '/conversations/1', label: m.conversations() },
+		{ href: '/', label: m.dashboard(), policies: [Action.READ_CATEGORY] },
+		{ href: '/categories/1', label: m.categories(), policies: [Action.READ_CATEGORY] },
+		{ href: '/services/1', label: m.services(), policies: [Action.READ_SERVICE] },
+		{ href: '/users/1', label: m.users(), policies: [Action.READ_USER] },
+		{ href: '/conversations/1', label: m.conversations(), policies: [Action.READ_CONVERSATION] },
 		{ href: '/setting', label: m.settings() }
 	];
 
@@ -99,11 +101,11 @@
 		activeClass="text-blue-700 dark:text-blue-500"
 		nonActiveClass="text-main-light-900 dark:text-main-dark-900"
 	>
-		{#each navItems as item}
+		{#each filterNavItemsByPermission($authStore!, navItems) as item}
 			<NavLi
 				href={item.href}
 				activeClass="text-blue-700 dark:text-blue-500"
-				class={` transition-all duration-200 ease-in-out hover:scale-105 hover:text-blue-600 dark:hover:text-blue-400 ${$page.url.pathname === item.href ? "text-blue-700 dark:text-blue-500" : ""} `}
+				class={`transition-all duration-200 ease-in-out hover:scale-105 hover:text-blue-600 dark:hover:text-blue-400 ${$page.url.pathname === item.href ? "text-blue-700 dark:text-blue-500" : ""} `}
 			>
 				{item.label}
 			</NavLi>
