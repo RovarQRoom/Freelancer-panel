@@ -173,7 +173,8 @@
 										<button
 											class="flex items-center justify-center p-2 transition-transform duration-200 hover:scale-110"
 											color="light"
-											on:click|stopPropagation={() => {
+											onclick={(event) => {
+												event.stopPropagation();
 												selectedCategory = category.id;
 												hideEditSidebar = false;
 											}}
@@ -186,7 +187,8 @@
 										<button
 											class="flex items-center justify-center p-2 transition-transform duration-200 hover:scale-110"
 											color="red"
-											on:click|stopPropagation={() => {
+											onclick={(event) => {
+												event.stopPropagation();
 												categoryToDelete = category.id;
 												showDeleteModal = true;
 											}}
@@ -271,7 +273,8 @@
 					<button
 						class="flex transform items-center gap-2 bg-gradient-to-r
 					from-primary-light-500 to-purple-500 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
-						on:click|stopPropagation={() => {
+						onclick={(event) => {
+							event.stopPropagation();
 							showCreateSubcategoryModal = true;
 						}}
 					>
@@ -329,7 +332,7 @@
 										size="sm"
 										class="p-2"
 										color="light"
-										on:click={() => {
+										onclick={() => {
 											selectedSubcategoryId = subcategory.id;
 											showEditSubcategoryModal = true;
 										}}
@@ -342,7 +345,9 @@
 										size="sm"
 										class="p-2"
 										color="red"
-										on:click={() => handleRemoveSubcategory(subcategory.id)}
+										onclick={() => {
+											handleRemoveSubcategory(subcategory.id);
+										}}
 									>
 										<TrashBinSolid class="h-4 w-4" />
 									</Button>

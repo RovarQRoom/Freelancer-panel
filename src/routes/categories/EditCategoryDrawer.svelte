@@ -18,6 +18,9 @@
 	import { CategoryEntity } from '$lib/Model/Entity/Category';
 	import { LanguageEntity } from '$lib/Model/Entity/Language';
 	import { createUploadThing } from '$lib/Utils/Uploadthing';
+	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
+	import { authStore } from '$lib/Store/Auth';
+	import { Action } from '$lib/Model/Action/Action';
 
 	let { hidden = $bindable(true), categoryId = $bindable<number | null>(null) } = $props<{ hidden: boolean; categoryId: number | null }>();
 
@@ -210,7 +213,7 @@
 						transition-all duration-200 hover:shadow-lg dark:bg-main-dark-100"
 						>
 							{#if iconFile.preview}
-								<img
+								<Img
 									src={iconFile.preview}
 									alt="Icon Preview"
 									class="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
@@ -231,6 +234,7 @@
 				</div>
 
 				<div class="flex gap-3 pt-4">
+					{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_CATEGORY], $authStore?.role?.name)}
 					<Button
 						type="submit"
 						class="flex-1 transform bg-primary-light-500 text-white 
@@ -238,7 +242,8 @@
 						dark:bg-primary-dark-500 dark:hover:bg-primary-dark-600"
 					>
 						{m.save()}
-					</Button>
+						</Button>
+					{/if}
 					<Button
 						color="alternative"
 						class="flex-1 transform bg-main-light-200 transition-all 

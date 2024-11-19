@@ -14,17 +14,13 @@ export function checkPremission(
 	);
 }
 
-export function checkPremissionOnRoute(
-	auth: UserEntity,
-	policies?: number[],
-	role?: string
-) {
+export function checkPremissionOnRoute(auth: UserEntity, policies?: number[], role?: string) {
 	if (role === Role.Superadmin || role === Role.Admin) return true;
 	if (!policies) return true;
 	if (!auth.role?.policies) return false;
-	
-	return policies.some(policy => 
-		auth.role!.policies!.some(userPolicy => userPolicy.policy.id === policy)
+
+	return policies.some((policy) =>
+		auth.role!.policies!.some((userPolicy) => userPolicy.policy.id === policy)
 	);
 }
 
@@ -33,8 +29,8 @@ export function filterNavItemsByPermission(
 	navItems: Array<{ href: string; label: string; policies?: number[] }>
 ): Array<{ href: string; label: string; policies?: number[] }> {
 	if (!auth) return [];
-	
-	return navItems.filter(item => {
+
+	return navItems.filter((item) => {
 		if (!item.policies) return true;
 		return checkPremissionOnRoute(auth, item.policies, auth.role?.name);
 	});

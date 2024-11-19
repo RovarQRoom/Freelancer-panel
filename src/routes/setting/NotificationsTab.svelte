@@ -147,7 +147,7 @@
 		<Button
 			class="flex transform items-center gap-2 bg-gradient-to-r from-primary-light-500 to-purple-500 text-white 
 			transition-all duration-300 hover:scale-105 hover:shadow-lg"
-			on:click={openAddModal}
+			onclick={openAddModal}
 		>
 			<CirclePlusSolid class="h-5 w-5" />
 			{m.addNotification()}

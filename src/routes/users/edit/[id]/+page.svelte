@@ -11,6 +11,9 @@
 	import type { RoleEntity } from '$lib/Model/Entity/Role';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { authStore } from '$lib/Store/Auth';
+	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
+	import { Action } from '$lib/Model/Action/Action';
 
 	const { startUpload } = createUploadThing('imageUploader', {
 		onClientUploadComplete: () => {
@@ -106,8 +109,12 @@
 	</div>
 
 	<form
-		on:submit|preventDefault={handleUpdateUser}
-		class="max-w-3xl space-y-6 rounded-xl bg-white dark:bg-grey-secondary p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+		onsubmit={(event) => {
+			event.preventDefault();
+			event.stopPropagation();
+			handleUpdateUser();
+		}}
+		class="max-w-3xl space-y-6 rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-grey-secondary"
 	>
 		<!-- Name -->
 		<div class="space-y-2">
@@ -117,7 +124,7 @@
 				type="text"
 				required
 				bind:value={updateUser.name}
-				class="w-full transition-all duration-300 dark:bg-grey-dark border-0"
+				class="w-full border-0 transition-all duration-300 dark:bg-grey-dark"
 			/>
 		</div>
 
@@ -129,7 +136,7 @@
 				type="email"
 				required
 				bind:value={updateUser.email}
-				class="w-full transition-all duration-300 dark:bg-grey-dark border-0"
+				class="w-full border-0 transition-all duration-300 dark:bg-grey-dark"
 			/>
 		</div>
 
@@ -141,7 +148,7 @@
 				type="tel"
 				required
 				bind:value={updateUser.phone}
-				class="w-full transition-all duration-300 dark:bg-grey-dark border-0"
+				class="w-full border-0 transition-all duration-300 dark:bg-grey-dark"
 			/>
 		</div>
 
@@ -150,7 +157,7 @@
 			<Label for="role" class="text-lg font-medium">{m.role()}</Label>
 			<Select
 				id="role"
-				class="transition-all duration-300 dark:bg-grey-dark border-0"
+				class="border-0 transition-all duration-300 dark:bg-grey-dark"
 				bind:value={updateUser.role}
 				items={roles.map((role) => ({
 					value: role.id,
@@ -172,7 +179,7 @@
 						<button
 							type="button"
 							class="absolute bottom-4 right-4 rounded-full bg-red-500 p-2 text-white transition-all duration-300 hover:bg-red-600"
-							on:click={() => {
+							onclick={() => {
 								if (imageFile.preview) {
 									URL.revokeObjectURL(imageFile.preview);
 								}
@@ -194,7 +201,7 @@
 					<input
 						type="file"
 						accept="image/*"
-						on:change={(e) => {
+						onchange={(e) => {
 							const input = e.target as HTMLInputElement;
 							const file = input.files?.[0];
 							if (file) {
@@ -213,16 +220,18 @@
 
 		<!-- Submit Buttons -->
 		<div class="flex gap-3 pt-4">
-			<Button
-				type="submit"
-				class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:scale-105 hover:bg-primary-light-600"
-				disabled={isLoading}
-			>
-				{#if isLoading}
-					<Spinner class="mr-3" size="4" color="white" />
-				{/if}
-				{m.save()}
-			</Button>
+			{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_USER], $authStore?.role?.name)}
+				<Button
+					type="submit"
+					class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:scale-105 hover:bg-primary-light-600"
+					disabled={isLoading}
+				>
+					{#if isLoading}
+						<Spinner class="mr-3" size="4" color="white" />
+					{/if}
+					{m.save()}
+				</Button>
+			{/if}
 			<Button
 				color="alternative"
 				class="flex-1 transition-all duration-300 hover:scale-105 hover:bg-gray-200"

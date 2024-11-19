@@ -1,16 +1,11 @@
 <script lang="ts">
-	import {
-		Button,
-		Input,
-		Label,
-		Tabs,
-		TabItem,
-		Img,
-		Spinner,
-		Drawer
-	} from 'flowbite-svelte';
+	import { Button, Input, Label, Tabs, TabItem, Img, Spinner, Drawer } from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
-	import { Languages, type InsertCategory, type InsertLanguage } from '$lib/Supabase/Types/database.types';
+	import {
+		Languages,
+		type InsertCategory,
+		type InsertLanguage
+	} from '$lib/Supabase/Types/database.types';
 	import { categoryStore } from '$lib/Store/Category';
 	import { languageStore } from '$lib/Store/Language';
 	import { storageStore } from '$lib/Store/Storage';
@@ -19,8 +14,14 @@
 	import { LanguageEntity } from '$lib/Model/Entity/Language';
 	import { createUploadThing } from '$lib/Utils/Uploadthing';
 	import { subcategoryStore } from '$lib/Store/Subcategory';
+	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
+	import { Action } from '$lib/Model/Action/Action';
+	import { authStore } from '$lib/Store/Auth';
 
-	let { hidden = $bindable(true), selectedSubcategories = $bindable<number[]>([]) } = $props<{ hidden: boolean; selectedSubcategories: number[] }>();
+	let { hidden = $bindable(true), selectedSubcategories = $bindable<number[]>([]) } = $props<{
+		hidden: boolean;
+		selectedSubcategories: number[];
+	}>();
 
 	const { startUpload } = createUploadThing('imageUploader', {
 		onClientUploadComplete: () => {
@@ -109,14 +110,18 @@
 	}
 </script>
 
-<Drawer 
-	bind:hidden 
-	width="w-[520px]" 
+<Drawer
+	bind:hidden
+	width="w-[520px]"
 	class="transition-transform duration-300"
 	on:close={resetForm}
 >
-	<div class="h-full overflow-y-auto bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 p-8">
-		<h2 class="text-2xl font-bold mb-8 bg-gradient-to-r from-primary-light-500 to-purple-500 bg-clip-text text-transparent">
+	<div
+		class="h-full overflow-y-auto bg-gradient-to-b from-white to-gray-50 p-8 dark:from-gray-800 dark:to-gray-900"
+	>
+		<h2
+			class="mb-8 bg-gradient-to-r from-primary-light-500 to-purple-500 bg-clip-text text-2xl font-bold text-transparent"
+		>
 			{m.addCategory()}
 		</h2>
 		<form onsubmit={handleAddCategory} class="space-y-6">
@@ -177,7 +182,7 @@
 					transition-all duration-200 hover:shadow-lg dark:bg-main-dark-100"
 					>
 						{#if iconFile.preview}
-							<img
+							<Img
 								src={iconFile.preview}
 								alt="Icon Preview"
 								class="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
@@ -198,23 +203,25 @@
 			</div>
 
 			<div class="flex gap-3 pt-4">
-				<Button
-					type="submit"
-					class="flex-1 transform bg-primary-light-500 text-white 
+				{#if checkPremissionOnRoute($authStore!, [Action.CREATE_CATEGORY], $authStore?.role?.name)}
+					<Button
+						type="submit"
+						class="flex-1 transform bg-primary-light-500 text-white 
 					transition-all duration-200 hover:scale-105 hover:bg-primary-light-600 
 					dark:bg-primary-dark-500 dark:hover:bg-primary-dark-600"
-					disabled={isLoading}
-				>
-					{#if isLoading}
-						<Spinner class="mr-3" size="4" color="white" />
-					{/if}
-					{m.save()}
-				</Button>
+						disabled={isLoading}
+					>
+						{#if isLoading}
+							<Spinner class="mr-3" size="4" color="white" />
+						{/if}
+						{m.save()}
+					</Button>
+				{/if}	
 				<Button
 					color="alternative"
 					class="flex-1 transform bg-main-light-200 transition-all 
 					duration-200 hover:scale-105 hover:bg-main-light-300 dark:bg-main-dark-200 dark:hover:bg-main-dark-300"
-					on:click={() => {
+					onclick={() => {
 						hidden = true;
 						resetForm();
 					}}>{m.cancel()}</Button
@@ -222,4 +229,4 @@
 			</div>
 		</form>
 	</div>
-</Drawer> 
+</Drawer>

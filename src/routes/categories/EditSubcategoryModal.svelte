@@ -1,20 +1,19 @@
 <script lang="ts">
-	import {
-		Button,
-		Input,
-		Label,
-		Tabs,
-		TabItem,
-		Spinner,
-		Modal
-	} from 'flowbite-svelte';
+	import { Button, Input, Label, Tabs, TabItem, Spinner, Modal } from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
-	import { Languages, type UpdateLanguage, type UpdateSubcategory } from '$lib/Supabase/Types/database.types';
+	import {
+		Languages,
+		type UpdateLanguage,
+		type UpdateSubcategory
+	} from '$lib/Supabase/Types/database.types';
 	import { languageStore } from '$lib/Store/Language';
 	import { toastStore } from '$lib/Store/Toast';
 	import { LanguageEntity } from '$lib/Model/Entity/Language';
 	import { subcategoryStore } from '$lib/Store/Subcategory';
 	import type { SubcategoryEntity } from '$lib/Model/Entity/Subcategory';
+	import { authStore } from '$lib/Store/Auth';
+	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
+	import { Action } from '$lib/Model/Action/Action';
 
 	let { open = $bindable(false), subcategoryId = $bindable<number | null>(null) } = $props<{
 		open: boolean;
@@ -108,7 +107,9 @@
 					{#each Object.keys(Languages) as language}
 						<TabItem open={language === Languages.EN} title={language}>
 							<Input
-								bind:value={updateSubcategoryTitleLanguage[language.toLowerCase() as keyof UpdateLanguage]}
+								bind:value={updateSubcategoryTitleLanguage[
+									language.toLowerCase() as keyof UpdateLanguage
+								]}
 								class="w-full"
 								placeholder={m.subCategorytitlePlaceholder()}
 								required={language === Languages.EN}
@@ -137,18 +138,20 @@
 			</div>
 
 			<div class="flex justify-end gap-3">
-				<Button
-					type="submit"
-					class="bg-primary-light-500 text-white"
-					on:click={() => handleEditSubcategory()}
-					disabled={loadingUpdateSubcategory}
-				>
-					{#if loadingUpdateSubcategory}
-						<Spinner class="mr-3" size="4" color="white" />
-					{/if}
-					{m.save()}
-				</Button>
-				<Button color="alternative" on:click={() => (open = false)}>
+				{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_SUBCATEGORY], $authStore?.role?.name)}
+					<Button
+						type="submit"
+						class="bg-primary-light-500 text-white"
+						onclick={() => handleEditSubcategory()}
+						disabled={loadingUpdateSubcategory}
+					>
+						{#if loadingUpdateSubcategory}
+							<Spinner class="mr-3" size="4" color="white" />
+						{/if}
+						{m.save()}
+					</Button>
+				{/if}
+				<Button color="alternative" onclick={() => (open = false)}>
 					{m.cancel()}
 				</Button>
 			</div>

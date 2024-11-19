@@ -10,6 +10,9 @@
 	import type { UserRequest } from '$lib/Model/Request/User';
 	import type { RoleEntity } from '$lib/Model/Entity/Role';
 	import { onMount } from 'svelte';
+	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
+	import { authStore } from '$lib/Store/Auth';
+	import { Action } from '$lib/Model/Action/Action';
 
 	const { startUpload } = createUploadThing('imageUploader', {
 		onClientUploadComplete: () => {
@@ -202,6 +205,7 @@
 
 		<!-- Submit Buttons -->
 		<div class="flex gap-3 pt-4">
+			{#if checkPremissionOnRoute($authStore!, [Action.CREATE_USER], $authStore?.role?.name)}
 			<Button
 				type="submit"
 				class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:scale-105 hover:bg-primary-light-600"
@@ -211,7 +215,8 @@
 					<Spinner class="mr-3" size="4" color="white" />
 				{/if}
 				{m.save()}
-			</Button>
+				</Button>
+			{/if}
 			<Button
 				color="alternative"
 				class="flex-1 transition-all duration-300 hover:scale-105 hover:bg-gray-200"

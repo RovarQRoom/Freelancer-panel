@@ -1,20 +1,19 @@
 <script lang="ts">
-	import {
-		Button,
-		Input,
-		Label,
-		Tabs,
-		TabItem,
-		Spinner,
-		Modal
-	} from 'flowbite-svelte';
+	import { Button, Input, Label, Tabs, TabItem, Spinner, Modal } from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
-	import { Languages, type InsertLanguage, type InsertSubcategory } from '$lib/Supabase/Types/database.types';
+	import {
+		Languages,
+		type InsertLanguage,
+		type InsertSubcategory
+	} from '$lib/Supabase/Types/database.types';
 	import { languageStore } from '$lib/Store/Language';
 	import { toastStore } from '$lib/Store/Toast';
 	import { LanguageEntity } from '$lib/Model/Entity/Language';
 	import { subcategoryStore } from '$lib/Store/Subcategory';
 	import type { SubcategoryEntity } from '$lib/Model/Entity/Subcategory';
+	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
+	import { authStore } from '$lib/Store/Auth';
+	import { Action } from '$lib/Model/Action/Action';
 
 	let { open = $bindable(false) } = $props<{ open: boolean }>();
 
@@ -78,7 +77,9 @@
 						<TabItem open={language === Languages.EN} title={language}>
 							<Input
 								class="w-full"
-								bind:value={createSubcategoryTitleLanguage[language.toLowerCase() as keyof InsertLanguage]}
+								bind:value={createSubcategoryTitleLanguage[
+									language.toLowerCase() as keyof InsertLanguage
+								]}
 								required={language === Languages.EN}
 							/>
 						</TabItem>
@@ -104,17 +105,19 @@
 			</div>
 
 			<div class="flex justify-end gap-3">
-				<Button
-					type="submit"
-					class="bg-primary-light-500 text-white"
-					on:click={() => handleAddSubcategory()}
-					disabled={loadingAddSubcategory}
-				>
-					{#if loadingAddSubcategory}
-						<Spinner class="mr-3" size="4" color="white" />
-					{/if}
-					{m.save()}
-				</Button>
+				{#if checkPremissionOnRoute($authStore!, [Action.CREATE_SUBCATEGORY], $authStore?.role?.name)}
+					<Button
+						type="submit"
+						class="bg-primary-light-500 text-white"
+						onclick={() => handleAddSubcategory()}
+						disabled={loadingAddSubcategory}
+					>
+						{#if loadingAddSubcategory}
+							<Spinner class="mr-3" size="4" color="white" />
+						{/if}
+						{m.save()}
+					</Button>
+				{/if}
 				<Button color="alternative" on:click={() => (open = false)}>
 					{m.cancel()}
 				</Button>
