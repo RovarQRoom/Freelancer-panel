@@ -13,12 +13,13 @@
 		Label,
 		Img
 	} from 'flowbite-svelte';
+	import MultiSelectUser from '$lib/Component/MultiSelect.Component.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { onMount } from 'svelte';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import { notificationStore } from '$lib/Store/Notification';
 	import { toastStore } from '$lib/Store/Toast';
-	import type { InsertNotification, NotificationUser } from '$lib/Supabase/Types/database.types';
+	import type { InsertNotification } from '$lib/Supabase/Types/database.types';
 	import { createUploadThing } from '$lib/Utils/Uploadthing';
 	import { CirclePlusSolid } from 'flowbite-svelte-icons';
 	import { userStore } from '$lib/Store/User';
@@ -75,12 +76,14 @@
 
 	async function openAddModal() {
 		try {
-			await userStore.fetchAll({
-				limit: 100, // Adjust as needed
+			const response = await userStore.fetchForDropdown({
+				limit: 1000, // Adjust as needed
 				page: 1,
-				select: 'id,name'
+				select: 'id,name,image'
 			});
-			users = $userStore.data;
+			if (response) {
+				users = response;
+			}
 			showAddModal = true;
 		} catch (error) {
 			if (error instanceof Error) {
@@ -108,6 +111,13 @@
 					selectedUsers.map((userId) => ({
 						notification: notificationResponse?.id,
 						user: userId
+					}))
+				);
+			} else {
+				await notificationStore.insertNotificationUser(
+					users.map((user) => ({
+						notification: notificationResponse?.id,
+						user: user.id
 					}))
 				);
 			}
@@ -247,13 +257,18 @@
 					<Label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
 						{m.users()}
 					</Label>
-					<MultiSelect
-						items={users.map((user) => ({
-							value: user.id ?? 0,
-							name: user.name ?? ''
+					<MultiSelectUser
+						options={users.map((user) => ({
+							id: user.id ?? 0,
+							label: user.name ?? '',
+							image: user.image ?? ''
 						}))}
-						bind:value={selectedUsers}
+						bind:values={selectedUsers}
 						placeholder={selectedUsers.length === 0 ? m.allSelected() : m.selectUsers()}
+						disabled={false}
+						loading={false}
+						maxSelect={null}
+						required={false}
 					/>
 				</div>
 				<!-- Image upload field -->
@@ -332,10 +347,10 @@
 				</div>
 			</div>
 			<div class="mt-6 flex justify-end gap-4">
-				<Button color="alternative" on:click={() => (showAddModal = false)}>
+				<Button color="red" onclick={() => (showAddModal = false)}>
 					{m.cancel()}
 				</Button>
-				<Button on:click={handleAddNotification}>
+				<Button color="blue" onclick={handleAddNotification}>
 					{m.save()}
 				</Button>
 			</div>
