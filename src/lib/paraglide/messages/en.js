@@ -1264,3 +1264,11 @@ export const uploadIcon = () => `Upload Icon`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const all_users = () => `All Users`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const file_uploaded = () => `File uploaded successfully`

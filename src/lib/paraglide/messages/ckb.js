@@ -1264,3 +1264,11 @@ export const uploadIcon = () => `بارکردنی ئایکۆن`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const all_users = () => `هەموو بەکارهێنەرەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const file_uploaded = () => `فایل بە سەرکەوتوویی بارکرا`

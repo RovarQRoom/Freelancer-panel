@@ -156,5 +156,6 @@
 	"selectUsers": "Select users",
 	"uploadImage": "Upload Image",
 	"uploadIcon": "Upload Icon",
-	"all_users": "All Users"
+	"all_users": "All Users",
+	"file_uploaded": "File uploaded successfully"
 }

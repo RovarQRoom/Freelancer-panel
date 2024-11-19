@@ -1264,3 +1264,11 @@ export const uploadIcon = () => `رفع أيقونة`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const all_users = () => `جميع المستخدمين`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const file_uploaded = () => `تم رفع الملف بنجاح`

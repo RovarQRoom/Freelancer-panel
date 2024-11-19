@@ -156,5 +156,6 @@
 	"selectUsers": "اختر المستخدمين",
 	"uploadImage": "رفع صورة",
 	"uploadIcon": "رفع أيقونة",
-	"all_users": "جميع المستخدمين"
+	"all_users": "جميع المستخدمين",
+	"file_uploaded": "تم رفع الملف بنجاح"
 }
