@@ -18,7 +18,7 @@
 	import { goto, invalidate } from '$app/navigation';
 	import Toast from '$lib/Component/Toast.svelte';
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
-	
+
 	let { session, supabase } = $derived(data);
 	// List of routes where navbar and footer should be hidden
 	const hideNavbarRoutes = ['/login', '/register', '/forgot-password', '/reset-password'];
@@ -29,8 +29,8 @@
 
 	onMount(() => {
 		try {
+			checkAuth();
 			const { data } = supabase.auth.onAuthStateChange((_, newSession) => {
-				checkAuth();
 				if (newSession?.expires_at !== session?.expires_at) {
 					invalidate('supabase:auth');
 				}
