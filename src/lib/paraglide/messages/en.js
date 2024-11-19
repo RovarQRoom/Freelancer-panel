@@ -1272,3 +1272,43 @@ export const all_users = () => `All Users`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const file_uploaded = () => `File uploaded successfully`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const conversation = () => `Conversation`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const type_message = () => `Type a message`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const send = () => `Send`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const invalid_iraqi_phone_number = () => `Please enter a valid Iraqi phone number`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const phone_format_hint = () => `Enter an Iraqi phone number (e.g., +9647XXXXXXXX)`

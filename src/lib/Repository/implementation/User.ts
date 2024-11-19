@@ -9,19 +9,17 @@ import type { UserRequest } from '$lib/Model/Request/User';
 
 export class UserRepository implements IUsersRepository {
 	async createUserAsync(request: UserRequest): Promise<PostgrestSingleResponse<UserEntity>> {
-		const response = await fetch("/api/user/create", {
-			method: "POST",
+		const response = await fetch('/api/user/create', {
+			method: 'POST',
 			headers: {
-			  "Content-Type": "application/json",
+				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(request),
-		  });
-		  if (!response.ok) {
-			throw new Error("Failed to create user");
-		  }
-		  const user = (await response.json()) as PostgrestSingleResponse<
-			UserEntity
-		  >;
+			body: JSON.stringify(request)
+		});
+		if (!response.ok) {
+			throw new Error('Failed to create user');
+		}
+		const user = (await response.json()) as PostgrestSingleResponse<UserEntity>;
 		return user;
 	}
 	async readUserAsync(id: number): Promise<PostgrestSingleResponse<UserEntity>> {
@@ -49,7 +47,7 @@ export class UserRepository implements IUsersRepository {
 			.order('id', { ascending: false })
 			.range(
 				((options?.page ?? 1) - 1) * (options?.limit ?? 10),
-				((options?.page ?? 1) * (options?.limit ?? 10)) - 1
+				(options?.page ?? 1) * (options?.limit ?? 10) - 1
 			)
 			.returns<UserEntity[]>();
 	}
@@ -79,31 +77,39 @@ export class UserRepository implements IUsersRepository {
 		}
 		return response;
 	}
-	async checkEmailAsync(id: number, email: string): Promise<PostgrestSingleResponse<UserEntity> | null> {
-		const response = await supabase
-			.from('User')
-			.select('id,email')
-			.eq('email', email)
-			.neq('id', id)
-			.returns<UserEntity>()
-			.single();
+	async checkEmailAsync(
+		email: string,
+		id?: number
+	): Promise<PostgrestSingleResponse<UserEntity> | null> {
+		const query = supabase.from('User').select('id,email').eq('email', email);
+
+		if (id) {
+			query.neq('id', id);
+		}
+
+		const response = await query.returns<UserEntity>().single();
+
 		if (response.error) {
 			toastStore.error(response.error.message);
-			return null
+			return null;
 		}
 		return response;
 	}
-	async checkPhoneAsync(id: number, phone: string): Promise<PostgrestSingleResponse<UserEntity> | null> {
-		const response = await supabase
-			.from('User')
-			.select('id,phone')
-			.eq('phone', phone)
-			.neq('id', id)
-			.returns<UserEntity>()
-			.single();
+	async checkPhoneAsync(
+		phone: string,
+		id?: number
+	): Promise<PostgrestSingleResponse<UserEntity> | null> {
+		const query = supabase.from('User').select('id,phone').eq('phone', phone);
+
+		if (id) {
+			query.neq('id', id);
+		}
+
+		const response = await query.returns<UserEntity>().single();
+
 		if (response.error) {
 			toastStore.error(response.error.message);
-			return null
+			return null;
 		}
 		return response;
 	}

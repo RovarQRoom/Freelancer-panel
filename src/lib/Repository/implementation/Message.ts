@@ -32,7 +32,7 @@ export class MessageRepository implements IMessage {
         if (options?.to) query.lte('created_at', options.to);
         const response = await query
             .is('deleted_at', null)
-            .order('id', { ascending: false })
+            .order('id', { ascending: options?.order ?? false })
             .range(
                 ((options?.page ?? 1) - 1) * (options?.limit ?? 10),
                 ((options?.page ?? 1) * (options?.limit ?? 10)) - 1

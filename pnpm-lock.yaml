@@ -32,6 +32,9 @@ importers:
       moment:
         specifier: ^2.30.1
         version: 2.30.1
+      phone:
+        specifier: ^3.1.53
+        version: 3.1.53
       supabase:
         specifier: ^1.219.2
         version: 1.219.2
@@ -1748,6 +1751,10 @@ packages:
 
   periscopic@3.1.0:
     resolution: {integrity: sha512-vKiQ8RRtkl9P+r/+oefh25C3fhybptkHKCZSPlcXiJux2tJF55GnEj3BVn4A5gKfq9NWWXXrxkHBwVPUfH0opw==}
+
+  phone@3.1.53:
+    resolution: {integrity: sha512-+0sMjlxjcm1rjUDRLzXW06vRg/SePwa+MubuSt9WhHoUziGrGHjuC/tfFYfh2oXKU/dcckwCyMUMDAOaVArb6w==}
+    engines: {node: '>=12'}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -4034,6 +4041,8 @@ snapshots:
       '@types/estree': 1.0.6
       estree-walker: 3.0.3
       is-reference: 3.0.3
+
+  phone@3.1.53: {}
 
   picocolors@1.1.1: {}
 

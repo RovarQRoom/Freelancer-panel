@@ -14,6 +14,7 @@
 	import { authStore } from '$lib/Store/Auth';
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
+	import { validateIraqiPhone } from '$lib/Utils/CheckPhone';
 
 	const { startUpload } = createUploadThing('imageUploader', {
 		onClientUploadComplete: () => {
@@ -77,6 +78,13 @@
 		isLoading = true;
 
 		try {
+			const phoneValidation = validateIraqiPhone(updateUser.phone ?? '');
+			if (!phoneValidation.isValid) {
+				throw new Error(m.invalid_iraqi_phone_number());
+			}
+
+			updateUser.phone = phoneValidation.formattedNumber;
+
 			if (imageFile.file) {
 				updateUser.image = await storageStore.uploadFile(imageFile.file, startUpload);
 			}

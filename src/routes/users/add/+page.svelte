@@ -13,6 +13,7 @@
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { authStore } from '$lib/Store/Auth';
 	import { Action } from '$lib/Model/Action/Action';
+	import { validateIraqiPhone } from '$lib/Utils/CheckPhone';
 
 	const { startUpload } = createUploadThing('imageUploader', {
 		onClientUploadComplete: () => {
@@ -56,6 +57,13 @@
 		isLoading = true;
 
 		try {
+			const phoneValidation = validateIraqiPhone(createUser.phone);
+			if (!phoneValidation.isValid) {
+				throw new Error(m.invalid_iraqi_phone_number());
+			}
+
+			createUser.phone = phoneValidation.formattedNumber!;
+
 			if (imageFile.file) {
 				createUser.image = await storageStore.uploadFile(imageFile.file, startUpload);
 			}
@@ -88,7 +96,7 @@
 
 	<form
 		onsubmit={handleAddUser}
-		class="max-w-3xl space-y-6 rounded-xl bg-white dark:bg-grey-secondary p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+		class="max-w-3xl space-y-6 rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-grey-secondary"
 	>
 		<!-- Name -->
 		<div class="space-y-2">
@@ -98,7 +106,7 @@
 				type="text"
 				required
 				bind:value={createUser.name}
-				class="w-full transition-all  dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
+				class="w-full border-0  transition-all duration-300 hover:border-primary-light-500 dark:bg-grey-dark"
 			/>
 		</div>
 
@@ -110,7 +118,7 @@
 				type="email"
 				required
 				bind:value={createUser.email}
-				class="w-full transition-all dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
+				class="w-full border-0 transition-all duration-300 hover:border-primary-light-500 dark:bg-grey-dark"
 			/>
 		</div>
 
@@ -122,8 +130,12 @@
 				type="tel"
 				required
 				bind:value={createUser.phone}
-				class="w-full transition-all dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
+				class="w-full border-0 transition-all duration-300 hover:border-primary-light-500 dark:bg-grey-dark"
+				placeholder="+964xxxxxxxxxx"
 			/>
+			<p class="text-sm text-gray-500 dark:text-gray-400">
+				{m.phone_format_hint()}
+			</p>
 		</div>
 
 		<!-- Password -->
@@ -134,7 +146,7 @@
 				type="password"
 				required
 				bind:value={createUser.password}
-				class="w-full transition-all dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
+				class="w-full border-0 transition-all duration-300 hover:border-primary-light-500 dark:bg-grey-dark"
 			/>
 		</div>
 
@@ -143,7 +155,7 @@
 			<Label for="role" class="text-lg font-medium">{m.role()}</Label>
 			<Select
 				id="role"
-				class="transition-all dark:bg-grey-dark border-0 duration-300 hover:border-primary-light-500"
+				class="border-0 transition-all duration-300 hover:border-primary-light-500 dark:bg-grey-dark"
 				bind:value={createUser.role}
 				items={roles.map((role) => ({
 					value: role.id,
@@ -157,7 +169,7 @@
 			<Label class="text-lg font-medium">{m.image()}</Label>
 			<div class="flex justify-center">
 				<div
-					class="relative h-64 w-64 overflow-hidden rounded-full bg-gray-100 dark:bg-grey-dark transition-all duration-300 hover:shadow-lg"
+					class="relative h-64 w-64 overflow-hidden rounded-full bg-gray-100 transition-all duration-300 hover:shadow-lg dark:bg-grey-dark"
 				>
 					{#if imageFile.preview}
 						<Img src={imageFile.preview} alt="Preview" class="h-full w-full object-cover" />
@@ -206,15 +218,15 @@
 		<!-- Submit Buttons -->
 		<div class="flex gap-3 pt-4">
 			{#if checkPremissionOnRoute($authStore!, [Action.CREATE_USER], $authStore?.role?.name)}
-			<Button
-				type="submit"
-				class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:scale-105 hover:bg-primary-light-600"
-				disabled={isLoading}
-			>
-				{#if isLoading}
-					<Spinner class="mr-3" size="4" color="white" />
-				{/if}
-				{m.save()}
+				<Button
+					type="submit"
+					class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:scale-105 hover:bg-primary-light-600"
+					disabled={isLoading}
+				>
+					{#if isLoading}
+						<Spinner class="mr-3" size="4" color="white" />
+					{/if}
+					{m.save()}
 				</Button>
 			{/if}
 			<Button

@@ -9,8 +9,8 @@ export interface IUsersRepository {
 	readUsersAsync(options?: GenericListOptions): Promise<PostgrestSingleResponse<Array<UserEntity>>>;
 	readUserByEmailAsync(email: string): Promise<PostgrestSingleResponse<UserEntity>>;
 	readUserByPhoneAsync(phone: string): Promise<PostgrestSingleResponse<UserEntity>>;
-	checkEmailAsync(id: number, email: string): Promise<PostgrestSingleResponse<UserEntity> | null>;
-	checkPhoneAsync(id: number, phone: string): Promise<PostgrestSingleResponse<UserEntity> | null>;
+	checkEmailAsync(email: string, id?: number): Promise<PostgrestSingleResponse<UserEntity> | null>;
+	checkPhoneAsync(phone: string, id?: number): Promise<PostgrestSingleResponse<UserEntity> | null>;
 	updateUserAsync(request: UpdateUser): Promise<PostgrestSingleResponse<UserEntity>>;
 	deleteUserAsync(id: number): Promise<PostgrestSingleResponse<UserEntity>>;
 }

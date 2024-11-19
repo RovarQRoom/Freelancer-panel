@@ -1272,3 +1272,43 @@ export const all_users = () => `جميع المستخدمين`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const file_uploaded = () => `تم رفع الملف بنجاح`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const conversation = () => `المحادثة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const type_message = () => `اكتب رسالة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const send = () => `إرسال`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const invalid_iraqi_phone_number = () => `الرجاء إدخال رقم هاتف عراقي صحيح`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const phone_format_hint = () => `أدخل رقم هاتف عراقي (مثال: +9647XXXXXXXX)`

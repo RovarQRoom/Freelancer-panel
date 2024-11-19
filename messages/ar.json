@@ -157,5 +157,10 @@
 	"uploadImage": "رفع صورة",
 	"uploadIcon": "رفع أيقونة",
 	"all_users": "جميع المستخدمين",
-	"file_uploaded": "تم رفع الملف بنجاح"
+	"file_uploaded": "تم رفع الملف بنجاح",
+	"conversation": "المحادثة",
+	"type_message": "اكتب رسالة",
+	"send": "إرسال",
+	"invalid_iraqi_phone_number": "الرجاء إدخال رقم هاتف عراقي صحيح",
+	"phone_format_hint": "أدخل رقم هاتف عراقي (مثال: +9647XXXXXXXX)"
 }

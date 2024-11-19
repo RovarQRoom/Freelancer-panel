@@ -1247,7 +1247,7 @@ export const selectUsers = () => `بەکارهێنەران هەڵبژێرە`
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const uploadImage = () => `بارکردنی وێنە`
+export const uploadImage = () => `بارکرد��ی وێنە`
 
 
 /**
@@ -1272,3 +1272,43 @@ export const all_users = () => `هەموو بەکارهێنەرەکان`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const file_uploaded = () => `فایل بە سەرکەوتوویی بارکرا`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const conversation = () => `گفتوگۆ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const type_message = () => `پەیامێک بنووسە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const send = () => `ناردن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const invalid_iraqi_phone_number = () => `تکایە ژمارەی مۆبایلی عێراقی دروست بنووسە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const phone_format_hint = () => `ژمارەی مۆبایلی عێراقی بنووسە (نموونە: +9647XXXXXXXX)`

@@ -157,5 +157,10 @@
 	"uploadImage": "Upload Image",
 	"uploadIcon": "Upload Icon",
 	"all_users": "All Users",
-	"file_uploaded": "File uploaded successfully"
+	"file_uploaded": "File uploaded successfully",
+	"conversation": "Conversation",
+	"type_message": "Type a message",
+	"send": "Send",
+	"invalid_iraqi_phone_number": "Please enter a valid Iraqi phone number",
+	"phone_format_hint": "Enter an Iraqi phone number (e.g., +9647XXXXXXXX)"
 }
