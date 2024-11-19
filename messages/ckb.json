@@ -154,7 +154,7 @@
 	"enterMessage": "پەیام بنووسە",
 	"allSelected": "هەموو بەکارهێنەران دیاریکراون",
 	"selectUsers": "بەکارهێنەران هەڵبژێرە",
-	"uploadImage": "بارکرد��ی وێنە",
+	"uploadImage": "بارکردنی وێنە",
 	"uploadIcon": "بارکردنی ئایکۆن",
 	"all_users": "هەموو بەکارهێنەرەکان",
 	"file_uploaded": "فایل بە سەرکەوتوویی بارکرا",
@@ -162,5 +162,7 @@
 	"type_message": "پەیامێک بنووسە",
 	"send": "ناردن",
 	"invalid_iraqi_phone_number": "تکایە ژمارەی مۆبایلی عێراقی دروست بنووسە",
-	"phone_format_hint": "ژمارەی مۆبایلی عێراقی بنووسە (نموونە: +9647XXXXXXXX)"
+	"phone_format_hint": "ژمارەی مۆبایلی عێراقی بنووسە (نموونە: +9647XXXXXXXX)",
+	"extra_services": "خزمەتگوزارییە زیادەکان",
+	"addExtraService": "زیادکردنی خزمەتگوزاری زیادە"
 }

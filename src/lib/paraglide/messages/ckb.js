@@ -1247,7 +1247,7 @@ export const selectUsers = () => `بەکارهێنەران هەڵبژێرە`
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const uploadImage = () => `بارکرد��ی وێنە`
+export const uploadImage = () => `بارکردنی وێنە`
 
 
 /**
@@ -1312,3 +1312,19 @@ export const invalid_iraqi_phone_number = () => `تکایە ژمارەی مۆب�
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const phone_format_hint = () => `ژمارەی مۆبایلی عێراقی بنووسە (نموونە: +9647XXXXXXXX)`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const extra_services = () => `خزمەتگوزارییە زیادەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const addExtraService = () => `زیادکردنی خزمەتگوزاری زیادە`

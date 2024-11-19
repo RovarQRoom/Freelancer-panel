@@ -3,6 +3,129 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
 	public: {
 		Tables: {
+			Cart: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					fee: number | null;
+					id: number;
+					order: number | null;
+					overhaul_price: number | null;
+					user: number | null;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					fee?: number | null;
+					id?: number;
+					order?: number | null;
+					overhaul_price?: number | null;
+					user?: number | null;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					fee?: number | null;
+					id?: number;
+					order?: number | null;
+					overhaul_price?: number | null;
+					user?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Cart_order_fkey';
+						columns: ['order'];
+						isOneToOne: false;
+						referencedRelation: 'Order';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'Cart_user_fkey';
+						columns: ['user'];
+						isOneToOne: false;
+						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			CartExtraService: {
+				Row: {
+					cart: number | null;
+					created_at: string;
+					deleted_at: string | null;
+					extraService: number | null;
+					id: number;
+				};
+				Insert: {
+					cart?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					extraService?: number | null;
+					id?: number;
+				};
+				Update: {
+					cart?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					extraService?: number | null;
+					id?: number;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'CartExtraService_cart_fkey';
+						columns: ['cart'];
+						isOneToOne: false;
+						referencedRelation: 'Cart';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'CartExtraService_extraService_fkey';
+						columns: ['extraService'];
+						isOneToOne: false;
+						referencedRelation: 'ExtraService';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			CartService: {
+				Row: {
+					cart: number | null;
+					created_at: string;
+					deleted_at: string | null;
+					id: string;
+					service: number | null;
+				};
+				Insert: {
+					cart?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: string;
+					service?: number | null;
+				};
+				Update: {
+					cart?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: string;
+					service?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'CartService_cart_fkey';
+						columns: ['cart'];
+						isOneToOne: false;
+						referencedRelation: 'Cart';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'CartService_service_fkey';
+						columns: ['service'];
+						isOneToOne: false;
+						referencedRelation: 'Service';
+						referencedColumns: ['id'];
+					}
+				];
+			};
 			Category: {
 				Row: {
 					created_at: string;
@@ -97,6 +220,61 @@ export type Database = {
 						columns: ['user'];
 						isOneToOne: false;
 						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			ExtraService: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					description: number | null;
+					icon: string | null;
+					id: number;
+					price: number;
+					service: number;
+					title: number;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					description?: number | null;
+					icon?: string | null;
+					id?: number;
+					price?: number;
+					service: number;
+					title: number;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					description?: number | null;
+					icon?: string | null;
+					id?: number;
+					price?: number;
+					service?: number;
+					title?: number;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'ExtraService_description_fkey';
+						columns: ['description'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'ExtraService_service_fkey';
+						columns: ['service'];
+						isOneToOne: false;
+						referencedRelation: 'Service';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'ExtraService_title_fkey';
+						columns: ['title'];
+						isOneToOne: false;
+						referencedRelation: 'Language';
 						referencedColumns: ['id'];
 					}
 				];
@@ -207,7 +385,7 @@ export type Database = {
 				Row: {
 					created_at: string;
 					deleted_at: string | null;
-					id: number;
+					id: string;
 					notification: number | null;
 					seen: boolean | null;
 					user: number | null;
@@ -215,7 +393,7 @@ export type Database = {
 				Insert: {
 					created_at?: string;
 					deleted_at?: string | null;
-					id?: number;
+					id?: string;
 					notification?: number | null;
 					seen?: boolean | null;
 					user?: number | null;
@@ -223,24 +401,140 @@ export type Database = {
 				Update: {
 					created_at?: string;
 					deleted_at?: string | null;
-					id?: number;
+					id?: string;
 					notification?: number | null;
 					seen?: boolean | null;
 					user?: number | null;
 				};
 				Relationships: [
 					{
-						foreignKeyName: 'UserNotification_notification_fkey';
+						foreignKeyName: 'NotificationUser_notification_fkey';
 						columns: ['notification'];
 						isOneToOne: false;
 						referencedRelation: 'Notification';
 						referencedColumns: ['id'];
 					},
 					{
-						foreignKeyName: 'UserNotification_user_fkey';
+						foreignKeyName: 'NotificationUser_user_fkey';
 						columns: ['user'];
 						isOneToOne: false;
 						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			Order: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					fee: number | null;
+					id: number;
+					overhaul_price: number;
+					status: Database['public']['Enums']['Status'] | null;
+					user: number;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					fee?: number | null;
+					id?: number;
+					overhaul_price: number;
+					status?: Database['public']['Enums']['Status'] | null;
+					user: number;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					fee?: number | null;
+					id?: number;
+					overhaul_price?: number;
+					status?: Database['public']['Enums']['Status'] | null;
+					user?: number;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'Order_user_fkey';
+						columns: ['user'];
+						isOneToOne: false;
+						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			OrderService: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					id: number;
+					order: number | null;
+					service: number | null;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					order?: number | null;
+					service?: number | null;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					order?: number | null;
+					service?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'OrderService_order_fkey';
+						columns: ['order'];
+						isOneToOne: false;
+						referencedRelation: 'Order';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'OrderService_service_fkey';
+						columns: ['service'];
+						isOneToOne: false;
+						referencedRelation: 'Service';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			OrderServiceExtra: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					extraService: number | null;
+					id: string;
+					order: number | null;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					extraService?: number | null;
+					id?: string;
+					order?: number | null;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					extraService?: number | null;
+					id?: string;
+					order?: number | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'OrderExtra_extraService_fkey';
+						columns: ['extraService'];
+						isOneToOne: false;
+						referencedRelation: 'ExtraService';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'OrderExtra_order_fkey';
+						columns: ['order'];
+						isOneToOne: false;
+						referencedRelation: 'Order';
 						referencedColumns: ['id'];
 					}
 				];
@@ -638,6 +932,7 @@ export type Database = {
 		};
 		Enums: {
 			'Languages ': 'EN' | 'AR' | 'CKB';
+			Status: 'FAILED' | 'PENDING' | 'COMPLETE';
 			Tags:
 				| 'WEB_DEVELOPMENT'
 				| 'GRAPHIC_DESIGN'
@@ -864,6 +1159,12 @@ export enum Languages {
 	CKB = 'CKB'
 }
 
+export enum Status {
+	FAILED = 'FAILED',
+	PENDING = 'PENDING',
+	COMPLETE = 'COMPLETE'
+}
+
 export enum Tags {
 	WEB_DEVELOPMENT = 'WEB_DEVELOPMENT',
 	GRAPHIC_DESIGN = 'GRAPHIC_DESIGN',
@@ -989,6 +1290,18 @@ export enum Tags {
 }
 
 // Tables
+export type Cart = Database['public']['Tables']['Cart']['Row'];
+export type InsertCart = Database['public']['Tables']['Cart']['Insert'];
+export type UpdateCart = Database['public']['Tables']['Cart']['Update'];
+
+export type CartExtraService = Database['public']['Tables']['CartExtraService']['Row'];
+export type InsertCartExtraService = Database['public']['Tables']['CartExtraService']['Insert'];
+export type UpdateCartExtraService = Database['public']['Tables']['CartExtraService']['Update'];
+
+export type CartService = Database['public']['Tables']['CartService']['Row'];
+export type InsertCartService = Database['public']['Tables']['CartService']['Insert'];
+export type UpdateCartService = Database['public']['Tables']['CartService']['Update'];
+
 export type Category = Database['public']['Tables']['Category']['Row'];
 export type InsertCategory = Database['public']['Tables']['Category']['Insert'];
 export type UpdateCategory = Database['public']['Tables']['Category']['Update'];
@@ -1003,6 +1316,10 @@ export type InsertConversationParticipant =
 	Database['public']['Tables']['ConversationParticipant']['Insert'];
 export type UpdateConversationParticipant =
 	Database['public']['Tables']['ConversationParticipant']['Update'];
+
+export type ExtraService = Database['public']['Tables']['ExtraService']['Row'];
+export type InsertExtraService = Database['public']['Tables']['ExtraService']['Insert'];
+export type UpdateExtraService = Database['public']['Tables']['ExtraService']['Update'];
 
 export type Language = Database['public']['Tables']['Language']['Row'];
 export type InsertLanguage = Database['public']['Tables']['Language']['Insert'];
@@ -1019,6 +1336,18 @@ export type UpdateNotification = Database['public']['Tables']['Notification']['U
 export type NotificationUser = Database['public']['Tables']['NotificationUser']['Row'];
 export type InsertNotificationUser = Database['public']['Tables']['NotificationUser']['Insert'];
 export type UpdateNotificationUser = Database['public']['Tables']['NotificationUser']['Update'];
+
+export type Order = Database['public']['Tables']['Order']['Row'];
+export type InsertOrder = Database['public']['Tables']['Order']['Insert'];
+export type UpdateOrder = Database['public']['Tables']['Order']['Update'];
+
+export type OrderService = Database['public']['Tables']['OrderService']['Row'];
+export type InsertOrderService = Database['public']['Tables']['OrderService']['Insert'];
+export type UpdateOrderService = Database['public']['Tables']['OrderService']['Update'];
+
+export type OrderServiceExtra = Database['public']['Tables']['OrderServiceExtra']['Row'];
+export type InsertOrderServiceExtra = Database['public']['Tables']['OrderServiceExtra']['Insert'];
+export type UpdateOrderServiceExtra = Database['public']['Tables']['OrderServiceExtra']['Update'];
 
 export type Policy = Database['public']['Tables']['Policy']['Row'];
 export type InsertPolicy = Database['public']['Tables']['Policy']['Insert'];

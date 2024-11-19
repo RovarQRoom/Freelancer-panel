@@ -90,7 +90,6 @@ export class UserRepository implements IUsersRepository {
 		const response = await query.returns<UserEntity>().single();
 
 		if (response.error) {
-			toastStore.error(response.error.message);
 			return null;
 		}
 		return response;
@@ -108,7 +107,6 @@ export class UserRepository implements IUsersRepository {
 		const response = await query.returns<UserEntity>().single();
 
 		if (response.error) {
-			toastStore.error(response.error.message);
 			return null;
 		}
 		return response;

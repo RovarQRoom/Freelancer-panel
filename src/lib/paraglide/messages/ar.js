@@ -1312,3 +1312,19 @@ export const invalid_iraqi_phone_number = () => `الرجاء إدخال رقم 
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const phone_format_hint = () => `أدخل رقم هاتف عراقي (مثال: +9647XXXXXXXX)`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const extra_services = () => `الخدمات الإضافية`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const addExtraService = () => `إضافة خدمة إضافية`

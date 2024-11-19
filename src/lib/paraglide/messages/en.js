@@ -1312,3 +1312,19 @@ export const invalid_iraqi_phone_number = () => `Please enter a valid Iraqi phon
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const phone_format_hint = () => `Enter an Iraqi phone number (e.g., +9647XXXXXXXX)`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const extra_services = () => `Extra Services`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const addExtraService = () => `Add Extra Service`

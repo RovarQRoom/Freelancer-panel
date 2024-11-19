@@ -162,5 +162,7 @@
 	"type_message": "Type a message",
 	"send": "Send",
 	"invalid_iraqi_phone_number": "Please enter a valid Iraqi phone number",
-	"phone_format_hint": "Enter an Iraqi phone number (e.g., +9647XXXXXXXX)"
+	"phone_format_hint": "Enter an Iraqi phone number (e.g., +9647XXXXXXXX)",
+	"extra_services": "Extra Services",
+	"addExtraService": "Add Extra Service"
 }

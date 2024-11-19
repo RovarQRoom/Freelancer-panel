@@ -58,7 +58,9 @@
 				<TableHeadCell>{m.email()}</TableHeadCell>
 				<TableHeadCell>{m.phone()}</TableHeadCell>
 				<TableHeadCell>{m.image()}</TableHeadCell>
-				<TableHeadCell>{m.role()}</TableHeadCell>
+				{#if checkPremissionOnRoute($authStore!, [Action.READ_ROLE], $authStore?.role?.name)}
+					<TableHeadCell>{m.role()}</TableHeadCell>
+				{/if}
 				<TableHeadCell>{m.actions()}</TableHeadCell>
 			</TableHead>
 			<TableBody>
@@ -74,7 +76,7 @@
 						<TableBodyCell>{user.email ?? '-'}</TableBodyCell>
 						<TableBodyCell>{user.phone ?? '-'}</TableBodyCell>
 						<TableBodyCell>
-							<div class="flex items-center justify-center gap-2">
+							<div class="flex items-center justify-start gap-2">
 								{#if user.image}
 									<Img
 										src={user.image}
@@ -86,7 +88,9 @@
 								{/if}
 							</div>
 						</TableBodyCell>
-						<TableBodyCell>{user.role?.name ?? '-'}</TableBodyCell>
+						{#if checkPremissionOnRoute($authStore!, [Action.READ_ROLE], $authStore?.role?.name)}
+							<TableBodyCell>{user.role?.name ?? '-'}</TableBodyCell>
+						{/if}
 						<TableBodyCell>
 							<div class="flex gap-3">
 								{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_USER], $authStore?.role?.name)}

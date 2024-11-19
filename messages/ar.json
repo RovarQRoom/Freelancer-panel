@@ -162,5 +162,7 @@
 	"type_message": "اكتب رسالة",
 	"send": "إرسال",
 	"invalid_iraqi_phone_number": "الرجاء إدخال رقم هاتف عراقي صحيح",
-	"phone_format_hint": "أدخل رقم هاتف عراقي (مثال: +9647XXXXXXXX)"
+	"phone_format_hint": "أدخل رقم هاتف عراقي (مثال: +9647XXXXXXXX)",
+	"extra_services": "الخدمات الإضافية",
+	"addExtraService": "إضافة خدمة إضافية"
 }

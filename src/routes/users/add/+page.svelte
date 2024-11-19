@@ -150,19 +150,21 @@
 			/>
 		</div>
 
-		<!-- Role Selection -->
-		<div class="space-y-2">
-			<Label for="role" class="text-lg font-medium">{m.role()}</Label>
-			<Select
-				id="role"
-				class="border-0 transition-all duration-300 hover:border-primary-light-500 dark:bg-grey-dark"
-				bind:value={createUser.role}
-				items={roles.map((role) => ({
-					value: role.id,
-					name: role.name ?? ''
-				}))}
-			/>
-		</div>
+		{#if checkPremissionOnRoute($authStore!, [Action.READ_ROLE], $authStore?.role?.name)}
+			<!-- Role Selection -->
+			<div class="space-y-2">
+				<Label for="role" class="text-lg font-medium">{m.role()}</Label>
+				<Select
+					id="role"
+					class="border-0 transition-all duration-300 hover:border-primary-light-500 dark:bg-grey-dark"
+					bind:value={createUser.role}
+					items={roles.map((role) => ({
+						value: role.id,
+						name: role.name ?? ''
+					}))}
+				/>
+			</div>
+		{/if}
 
 		<!-- Image Upload -->
 		<div class="space-y-2">
