@@ -1328,3 +1328,995 @@ export const extra_services = () => `خزمەتگوزارییە زیادەکان
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const addExtraService = () => `زیادکردنی خزمەتگوزاری زیادە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EN = () => `ئینگلیزی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CKB = () => `کوردی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const AR = () => `عەرەبی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEB_DEVELOPMENT = () => `پەرەپێدانی وێب`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const GRAPHIC_DESIGN = () => `دیزاینی گرافیک`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DIGITAL_MARKETING = () => `بازاڕگەری دیجیتاڵ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONTENT_WRITING = () => `نووسینی ناوەڕۆک`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DATA_ENTRY = () => `داخڵکردنی داتا`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MOBILE_APP_DEVELOPMENT = () => `پەرەپێدانی ئەپی مۆبایل`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SEO = () => `باشترکردنی گەڕان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VIDEO_EDITING = () => `مۆنتاژی ڤیدیۆ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TRANSLATION = () => `وەرگێڕان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONSULTING = () => `ڕاوێژکاری`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SOCIAL_MEDIA_MANAGEMENT = () => `بەڕێوەبردنی سۆشیال میدیا`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const UI_UX_DESIGN = () => `دیزاینی UI/UX`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const E_COMMERCE_DEVELOPMENT = () => `پەرەپێدانی بازرگانی ئەلیکترۆنی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SOFTWARE_DEVELOPMENT = () => `پەرەپێدانی سۆفتوێر`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VIRTUAL_ASSISTANT = () => `یارمەتیدەری مەجازی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PHOTOGRAPHY = () => `وێنەگرتن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const COPYWRITING = () => `نووسینی کۆپی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BRANDING = () => `براندینگ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EMAIL_MARKETING = () => `بازاڕگەری ئیمەیڵ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MARKET_RESEARCH = () => `توێژینەوەی بازاڕ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PROJECT_MANAGEMENT = () => `بەڕێوەبردنی پڕۆژە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VOICE_OVER = () => `دەنگدانان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ANIMATION = () => `ئەنیمەیشن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ILLUSTRATION = () => `وێنەکێشان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEB_HOSTING = () => `هۆستینگی وێب`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CYBERSECURITY = () => `ئاسایشی سایبەر`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BLOCKCHAIN_DEVELOPMENT = () => `پەرەپێدانی بلۆکچەین`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const GAME_DEVELOPMENT = () => `پەرەپێدانی یاری`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const APP_TESTING = () => `تاقیکردنەوەی ئەپ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TECHNICAL_SUPPORT = () => `پشتگیری تەکنیکی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONTENT_STRATEGY = () => `ستراتیژی ناوەڕۆک`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PUBLIC_RELATIONS = () => `پەیوەندییە گشتییەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PODCAST_EDITING = () => `مۆنتاژی پۆدکاست`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const AFFILIATE_MARKETING = () => `بازاڕگەری هاوبەش`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const LEAD_GENERATION = () => `دروستکردنی لید`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DATA_ANALYSIS = () => `شیکردنەوەی داتا`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BUSINESS_CONSULTING = () => `ڕاوێژکاری بازرگانی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const FINANCIAL_CONSULTING = () => `ڕاوێژکاری دارایی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const LEGAL_CONSULTING = () => `ڕاوێژکاری یاسایی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const HR_CONSULTING = () => `ڕاوێژکاری سەرچاوە مرۆییەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PRODUCT_DESIGN = () => `دیزاینی بەرهەم`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MODELING_3D = () => `مۆدێلینگی سێ ڕەهەندی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const INTERIOR_DESIGN = () => `دیزاینی ناوخۆیی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const FASHION_DESIGN = () => `دیزاینی مۆدە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EVENT_PLANNING = () => `پلاندانانی ڕووداو`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const RESUME_WRITING = () => `نووسینی CV`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TRANSCRIPTION = () => `نووسینەوەی دەنگ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ONLINE_TUTORING = () => `وانەوتنەوەی ئۆنلاین`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VOICE_ACTING = () => `دەنگ پێدان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SCRIPT_WRITING = () => `نووسینی سیناریۆ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BLOG_MANAGEMENT = () => `بەڕێوەبردنی بلۆگ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EMAIL_NEWSLETTER_DESIGN = () => `دیزاینی نیوزلەتەری ئیمەیڵ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MARKET_ANALYSIS = () => `شیکردنەوەی بازاڕ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const USER_TESTING = () => `تاقیکردنەوەی بەکارهێنەر`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const QUALITY_ASSURANCE = () => `دڵنیایی جۆری`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CHATBOT_DEVELOPMENT = () => `پەرەپێدانی چاتبۆت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const API_DEVELOPMENT = () => `پەرەپێدانی API`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CLOUD_COMPUTING = () => `ژمێریاری هەور`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DEVOPS = () => `دێڤۆپس`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const IT_SUPPORT = () => `پشتگیری IT`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const NETWORK_ADMINISTRATION = () => `بەڕێوەبردنی تۆڕ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DATABASE_MANAGEMENT = () => `بەڕێوەبردنی داتابەیس`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONTENT_MANAGEMENT = () => `بەڕێوەبردنی ناوەڕۆک`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEB_ANALYTICS = () => `شیکردنەوەی وێب`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MOBILE_GAME_DEVELOPMENT = () => `پەرەپێدانی یاری مۆبایل`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const AUGMENTED_REALITY_DEVELOPMENT = () => `پەرەپێدانی واقیعی زیادکراو`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VIRTUAL_REALITY_DEVELOPMENT = () => `پەرەپێدانی واقیعی خەیاڵی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DIGITAL_ILLUSTRATION = () => `وێنەکێشانی دیجیتاڵ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CHARACTER_DESIGN = () => `دیزاینی کارەکتەر`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SOCIAL_MEDIA_ADVERTISING = () => `ڕیکلامی سۆشیال میدیا`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const INFLUENCER_MARKETING = () => `بازاڕگەری کاریگەر`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SEARCH_ENGINE_MARKETING = () => `بازاڕگەری گەڕان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PAY_PER_CLICK_ADVERTISING = () => `ڕیکلامی پارە بۆ کرتە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const GRAPHIC_ANIMATION = () => `ئەنیمەیشنی گرافیکی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CORPORATE_IDENTITY = () => `ناسنامەی کۆمپانیا`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PACKAGING_DESIGN = () => `دیزاینی پاکەت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PRINT_DESIGN = () => `دیزاینی چاپ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const T_SHIRT_DESIGN = () => `دیزاینی تیشێرت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MERCHANDISE_DESIGN = () => `دیزاینی کەلوپەل`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EMAIL_CAMPAIGN_MANAGEMENT = () => `بەڕێوەبردنی هەڵمەتی ئیمەیڵ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ONLINE_COMMUNITY_MANAGEMENT = () => `بەڕێوەبردنی کۆمەڵگای ئۆنلاین`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MEMBERSHIP_SITE_DEVELOPMENT = () => `پەرەپێدانی سایتی ئەندامێتی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ONLINE_COURSE_CREATION = () => `دروستکردنی کۆرسی ئۆنلاین`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const E_LEARNING_DEVELOPMENT = () => `پەرەپێدانی فێربوونی ئەلیکترۆنی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TECHNICAL_WRITING = () => `نووسینی تەکنیکی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const GRANT_WRITING = () => `نووسینی گرانت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BUSINESS_PLAN_WRITING = () => `نووسینی پلانی بازرگانی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PRODUCT_PHOTOGRAPHY = () => `وێنەگرتنی بەرهەم`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const REAL_ESTATE_PHOTOGRAPHY = () => `وێنەگرتنی خانووبەرە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const FOOD_PHOTOGRAPHY = () => `وێنەگرتنی خواردن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DRONE_PHOTOGRAPHY = () => `وێنەگرتن بە درۆن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VIDEO_PRODUCTION = () => `بەرهەمهێنانی ڤیدیۆ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const LIVE_STREAMING = () => `پەخشی ڕاستەوخۆ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEBINAR_HOSTING = () => `بەڕێوەبردنی وێبینار`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ONLINE_REPUTATION_MANAGEMENT = () => `بەڕێوەبردنی ناوبانگی ئۆنلاین`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CRISIS_MANAGEMENT = () => `بەڕێوەبردنی قەیران`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CULTURAL_CONSULTING = () => `ڕاوێژکاری کەلتووری`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DIVERSITY_CONSULTING = () => `ڕاوێژکاری فرەچەشنی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SUSTAINABILITY_CONSULTING = () => `ڕاوێژکاری بەردەوامی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const HEALTH_AND_WELLNESS_COACHING = () => `ڕاهێنانی تەندروستی و چاکسازی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const FITNESS_TRAINING = () => `ڕاهێنانی وەرزشی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const NUTRITION_CONSULTING = () => `ڕاوێژکاری خۆراک`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const LIFE_COACHING = () => `ڕاهێنانی ژیان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CAREER_COACHING = () => `ڕاهێنانی پیشەیی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PERSONAL_BRANDING = () => `براندینگی کەسی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SALES_FUNNEL_DEVELOPMENT = () => `پەرەپێدانی فەنەڵی فرۆشتن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CUSTOMER_SERVICE = () => `خزمەتگوزاری کڕیار`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CHAT_SUPPORT = () => `پشتگیری چات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TECHNICAL_SUPPORT_DOCUMENTATION = () => `بەڵگەنامەکردنی پشتگیری تەکنیکی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const USER_EXPERIENCE_RESEARCH = () => `توێژینەوەی ئەزموونی بەکارهێنەر`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MARKET_POSITIONING = () => `شوێنگرتن لە بازاڕ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BRAND_STRATEGY = () => `ستراتیژی براند`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CRISIS_COMMUNICATION = () => `پەیوەندی قەیران`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EVENT_PROMOTION = () => `پرۆمۆشنی ڕووداو`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CROWDFUNDING_CAMPAIGN_MANAGEMENT = () => `بەڕێوەبردنی هەڵمەتی کڕاودفەندینگ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PRODUCT_LAUNCH_STRATEGY = () => `ستراتیژی دەستپێکردنی بەرهەم`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const INFLUENCER_OUTREACH = () => `پەیوەندی لەگەڵ کاریگەران`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SOCIAL_MEDIA_CONTENT_CREATION = () => `دروستکردنی ناوەڕۆکی سۆشیال میدیا`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEBSITE_MAINTENANCE = () => `چاکسازی ماڵپەڕ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PERFORMANCE_MARKETING = () => `بازاڕگەری کارایی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONVERSION_RATE_OPTIMIZATION = () => `باشترکردنی ڕێژەی گۆڕین`

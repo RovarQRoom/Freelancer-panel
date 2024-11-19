@@ -15,7 +15,8 @@
 	import {
 		Languages,
 		type InsertService,
-		type InsertLanguage
+		type InsertLanguage,
+		Tags
 	} from '$lib/Supabase/Types/database.types';
 	import { languageStore } from '$lib/Store/Language';
 	import { storageStore } from '$lib/Store/Storage';
@@ -109,8 +110,7 @@
 	// Available languages for support
 	const supportLanguages = Object.values(Languages);
 
-	// Sample tags - you should replace this with your actual tags from the backend
-	const availableTags = ['Web Development', 'Mobile Development', 'Design', 'Marketing', 'SEO'];
+	const availableTags = Object.values(Tags);
 
 	async function handleAddService() {
 		if (isLoading) return;
@@ -290,7 +290,7 @@
 					class="transition-all duration-300 hover:border-primary-light-500"
 					items={supportLanguages.map((language) => ({
 						value: language,
-						name: language
+						name: m[language]()
 					}))}
 					bind:value={createService.supports as (string | number)[]}
 					placeholder={m.select_supported_languages()}
@@ -303,7 +303,7 @@
 				<MultiSelect
 					items={availableTags.map((tag) => ({
 						value: tag,
-						name: tag
+						name: m[tag]()
 					}))}
 					bind:value={createService.tags as (string | number)[]}
 					placeholder={m.select_tags()}

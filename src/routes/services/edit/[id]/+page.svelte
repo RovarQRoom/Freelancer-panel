@@ -15,7 +15,8 @@
 	import {
 		Languages,
 		type UpdateService,
-		type UpdateLanguage
+		type UpdateLanguage,
+		Tags
 	} from '$lib/Supabase/Types/database.types';
 	import { languageStore } from '$lib/Store/Language';
 	import { storageStore } from '$lib/Store/Storage';
@@ -90,7 +91,7 @@
 	});
 
 	const supportLanguages = Object.values(Languages);
-	const availableTags = ['Web Development', 'Mobile Development', 'Design', 'Marketing', 'SEO'];
+	const availableTags = Object.values(Tags);
 
 	async function getService(id: number) {
 		isLoading = true;
@@ -255,7 +256,7 @@
 							<Label class="text-lg font-medium">{m.description()}</Label>
 							<!-- svelte-ignore element_invalid_self_closing_tag -->
 							<textarea
-								class="w-full rounded-lg border border-0 p-2.5 transition-all duration-300 dark:bg-grey-secondary dark:text-white"
+								class="w-full rounded-lg border p-2.5 transition-all duration-300 dark:bg-grey-secondary dark:text-white"
 								rows="4"
 								bind:value={descriptionLanguage[language.toLowerCase() as keyof UpdateLanguage]}
 								required={language === Languages.EN}
@@ -321,7 +322,7 @@
 						class="transition-all duration-300 hover:border-primary-light-500"
 						items={supportLanguages.map((language) => ({
 							value: language,
-							name: language
+							name: m[language]()
 						}))}
 						bind:value={editService.supports as (string | number)[]}
 						placeholder={m.select_supported_languages()}
@@ -334,7 +335,7 @@
 					<MultiSelect
 						items={availableTags.map((tag) => ({
 							value: tag,
-							name: tag
+							name: m[tag]()
 						}))}
 						bind:value={editService.tags as (string | number)[]}
 						placeholder={m.select_tags()}

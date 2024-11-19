@@ -1328,3 +1328,995 @@ export const extra_services = () => `Extra Services`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const addExtraService = () => `Add Extra Service`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EN = () => `English`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CKB = () => `Kurdish`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const AR = () => `Arabic`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEB_DEVELOPMENT = () => `Web Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const GRAPHIC_DESIGN = () => `Graphic Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DIGITAL_MARKETING = () => `Digital Marketing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONTENT_WRITING = () => `Content Writing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DATA_ENTRY = () => `Data Entry`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MOBILE_APP_DEVELOPMENT = () => `Mobile App Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SEO = () => `SEO`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VIDEO_EDITING = () => `Video Editing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TRANSLATION = () => `Translation`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONSULTING = () => `Consulting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SOCIAL_MEDIA_MANAGEMENT = () => `Social Media Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const UI_UX_DESIGN = () => `UI/UX Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const E_COMMERCE_DEVELOPMENT = () => `E-commerce Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SOFTWARE_DEVELOPMENT = () => `Software Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VIRTUAL_ASSISTANT = () => `Virtual Assistant`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PHOTOGRAPHY = () => `Photography`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const COPYWRITING = () => `Copywriting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BRANDING = () => `Branding`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EMAIL_MARKETING = () => `Email Marketing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MARKET_RESEARCH = () => `Market Research`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PROJECT_MANAGEMENT = () => `Project Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VOICE_OVER = () => `Voice Over`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ANIMATION = () => `Animation`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ILLUSTRATION = () => `Illustration`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEB_HOSTING = () => `Web Hosting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CYBERSECURITY = () => `Cybersecurity`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BLOCKCHAIN_DEVELOPMENT = () => `Blockchain Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const GAME_DEVELOPMENT = () => `Game Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const APP_TESTING = () => `App Testing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TECHNICAL_SUPPORT = () => `Technical Support`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONTENT_STRATEGY = () => `Content Strategy`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PUBLIC_RELATIONS = () => `Public Relations`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PODCAST_EDITING = () => `Podcast Editing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const AFFILIATE_MARKETING = () => `Affiliate Marketing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const LEAD_GENERATION = () => `Lead Generation`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DATA_ANALYSIS = () => `Data Analysis`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BUSINESS_CONSULTING = () => `Business Consulting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const FINANCIAL_CONSULTING = () => `Financial Consulting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const LEGAL_CONSULTING = () => `Legal Consulting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const HR_CONSULTING = () => `HR Consulting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PRODUCT_DESIGN = () => `Product Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MODELING_3D = () => `3D Modeling`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const INTERIOR_DESIGN = () => `Interior Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const FASHION_DESIGN = () => `Fashion Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EVENT_PLANNING = () => `Event Planning`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const RESUME_WRITING = () => `Resume Writing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TRANSCRIPTION = () => `Transcription`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ONLINE_TUTORING = () => `Online Tutoring`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VOICE_ACTING = () => `Voice Acting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SCRIPT_WRITING = () => `Script Writing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BLOG_MANAGEMENT = () => `Blog Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EMAIL_NEWSLETTER_DESIGN = () => `Email Newsletter Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MARKET_ANALYSIS = () => `Market Analysis`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const USER_TESTING = () => `User Testing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const QUALITY_ASSURANCE = () => `Quality Assurance`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CHATBOT_DEVELOPMENT = () => `Chatbot Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const API_DEVELOPMENT = () => `API Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CLOUD_COMPUTING = () => `Cloud Computing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DEVOPS = () => `DevOps`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const IT_SUPPORT = () => `IT Support`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const NETWORK_ADMINISTRATION = () => `Network Administration`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DATABASE_MANAGEMENT = () => `Database Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONTENT_MANAGEMENT = () => `Content Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEB_ANALYTICS = () => `Web Analytics`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MOBILE_GAME_DEVELOPMENT = () => `Mobile Game Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const AUGMENTED_REALITY_DEVELOPMENT = () => `Augmented Reality Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VIRTUAL_REALITY_DEVELOPMENT = () => `Virtual Reality Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DIGITAL_ILLUSTRATION = () => `Digital Illustration`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CHARACTER_DESIGN = () => `Character Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SOCIAL_MEDIA_ADVERTISING = () => `Social Media Advertising`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const INFLUENCER_MARKETING = () => `Influencer Marketing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SEARCH_ENGINE_MARKETING = () => `Search Engine Marketing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PAY_PER_CLICK_ADVERTISING = () => `Pay Per Click Advertising`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const GRAPHIC_ANIMATION = () => `Graphic Animation`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CORPORATE_IDENTITY = () => `Corporate Identity`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PACKAGING_DESIGN = () => `Packaging Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PRINT_DESIGN = () => `Print Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const T_SHIRT_DESIGN = () => `T-Shirt Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MERCHANDISE_DESIGN = () => `Merchandise Design`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EMAIL_CAMPAIGN_MANAGEMENT = () => `Email Campaign Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ONLINE_COMMUNITY_MANAGEMENT = () => `Online Community Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MEMBERSHIP_SITE_DEVELOPMENT = () => `Membership Site Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ONLINE_COURSE_CREATION = () => `Online Course Creation`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const E_LEARNING_DEVELOPMENT = () => `E-Learning Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TECHNICAL_WRITING = () => `Technical Writing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const GRANT_WRITING = () => `Grant Writing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BUSINESS_PLAN_WRITING = () => `Business Plan Writing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PRODUCT_PHOTOGRAPHY = () => `Product Photography`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const REAL_ESTATE_PHOTOGRAPHY = () => `Real Estate Photography`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const FOOD_PHOTOGRAPHY = () => `Food Photography`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DRONE_PHOTOGRAPHY = () => `Drone Photography`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const VIDEO_PRODUCTION = () => `Video Production`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const LIVE_STREAMING = () => `Live Streaming`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEBINAR_HOSTING = () => `Webinar Hosting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const ONLINE_REPUTATION_MANAGEMENT = () => `Online Reputation Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CRISIS_MANAGEMENT = () => `Crisis Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CULTURAL_CONSULTING = () => `Cultural Consulting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const DIVERSITY_CONSULTING = () => `Diversity Consulting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SUSTAINABILITY_CONSULTING = () => `Sustainability Consulting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const HEALTH_AND_WELLNESS_COACHING = () => `Health and Wellness Coaching`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const FITNESS_TRAINING = () => `Fitness Training`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const NUTRITION_CONSULTING = () => `Nutrition Consulting`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const LIFE_COACHING = () => `Life Coaching`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CAREER_COACHING = () => `Career Coaching`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PERSONAL_BRANDING = () => `Personal Branding`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SALES_FUNNEL_DEVELOPMENT = () => `Sales Funnel Development`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CUSTOMER_SERVICE = () => `Customer Service`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CHAT_SUPPORT = () => `Chat Support`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const TECHNICAL_SUPPORT_DOCUMENTATION = () => `Technical Support Documentation`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const USER_EXPERIENCE_RESEARCH = () => `User Experience Research`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const MARKET_POSITIONING = () => `Market Positioning`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const BRAND_STRATEGY = () => `Brand Strategy`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CRISIS_COMMUNICATION = () => `Crisis Communication`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const EVENT_PROMOTION = () => `Event Promotion`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CROWDFUNDING_CAMPAIGN_MANAGEMENT = () => `Crowdfunding Campaign Management`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PRODUCT_LAUNCH_STRATEGY = () => `Product Launch Strategy`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const INFLUENCER_OUTREACH = () => `Influencer Outreach`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const SOCIAL_MEDIA_CONTENT_CREATION = () => `Social Media Content Creation`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const WEBSITE_MAINTENANCE = () => `Website Maintenance`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const PERFORMANCE_MARKETING = () => `Performance Marketing`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const CONVERSION_RATE_OPTIMIZATION = () => `Conversion Rate Optimization`
