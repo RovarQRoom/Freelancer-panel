@@ -233,7 +233,7 @@
 	"CONTENT_MANAGEMENT": "بەڕێوەبردنی ناوەڕۆک",
 	"WEB_ANALYTICS": "شیکردنەوەی وێب",
 	"MOBILE_GAME_DEVELOPMENT": "پەرەپێدانی یاری مۆبایل",
-	"AUGMENTED_REALITY_DEVELOPMENT": "پەرەپێدانی واقیعی زیادکراو",
+	"AUGMENTED_REALITY_DEVELOPMENT": "پەرەپێدانی واقیعی ز��ادکراو",
 	"VIRTUAL_REALITY_DEVELOPMENT": "پەرەپێدانی واقیعی خەیاڵی",
 	"DIGITAL_ILLUSTRATION": "وێنەکێشانی دیجیتاڵ",
 	"CHARACTER_DESIGN": "دیزاینی کارەکتەر",
@@ -288,5 +288,18 @@
 	"SOCIAL_MEDIA_CONTENT_CREATION": "دروستکردنی ناوەڕۆکی سۆشیال میدیا",
 	"WEBSITE_MAINTENANCE": "چاکسازی ماڵپەڕ",
 	"PERFORMANCE_MARKETING": "بازاڕگەری کارایی",
-	"CONVERSION_RATE_OPTIMIZATION": "باشترکردنی ڕێژەی گۆڕین"
+	"CONVERSION_RATE_OPTIMIZATION": "باشترکردنی ڕێژەی گۆڕین",
+	"orders": "داواکارییەکان",
+	"customer": "کڕیار",
+	"status": "دۆخ",
+	"total_price": "کۆی نرخ",
+	"created_at": "دروستکراوە لە",
+	"editExtraService": "دەستکاری خزمەتگوزاری زیادە",
+	"no_icon": "هیچ ئایکۆنێک نییە",
+	"title": "ناونیشان",
+	"description": "وەسف",
+	"price": "نرخ",
+	"icon": "ئایکۆن",
+	"save": "پاشەکەوت",
+	"cancel": "پاشگەزبوونەوە"
 }

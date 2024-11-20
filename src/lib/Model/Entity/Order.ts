@@ -12,6 +12,6 @@ export class OrderEntity extends Datetime {
 	fee: number = 0;
 	user: UserEntity = new UserEntity();
 	cart?: CartEntity;
-	services?: { service: ServiceEntity }[];
-	extraServices?: { extraService: ExtraServiceEntity }[];
+	services?: { service: ServiceEntity, count?: number }[];
+	extraServices?: { extraService: ExtraServiceEntity, count?: number }[];
 }

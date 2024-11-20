@@ -1887,7 +1887,7 @@ export const AUGMENTED_REALITY_DEVELOPMENT = () => `تطوير الواقع ال
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const VIRTUAL_REALITY_DEVELOPMENT = () => `تطوير الواقع الافتراضي`
+export const VIRTUAL_REALITY_DEVELOPMENT = () => `تطو��ر الواقع الافتراضي`
 
 
 /**
@@ -2247,7 +2247,7 @@ export const MARKET_POSITIONING = () => `تموضع السوق`
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const BRAND_STRATEGY = () => `استراتيجية العلامة التجارية`
+export const BRAND_STRATEGY = () => `است��اتيجية العلامة التجارية`
 
 
 /**
@@ -2320,3 +2320,59 @@ export const PERFORMANCE_MARKETING = () => `تسويق الأداء`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const CONVERSION_RATE_OPTIMIZATION = () => `تحسين معدل التحويل`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const orders = () => `الطلبات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const customer = () => `العميل`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const status = () => `الحالة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const total_price = () => `السعر الإجمالي`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const created_at = () => `تاريخ الإنشاء`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const editExtraService = () => `تعديل الخدمة الإضافية`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const no_icon = () => `لا يوجد أيقونة`

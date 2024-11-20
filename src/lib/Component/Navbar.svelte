@@ -33,6 +33,7 @@
 		{ href: '/categories/1', label: m.categories(), policies: [Action.READ_CATEGORY] },
 		{ href: '/services/1', label: m.services(), policies: [Action.READ_SERVICE] },
 		{ href: '/users/1', label: m.users(), policies: [Action.READ_USER] },
+		{ href: '/orders/1', label: m.orders(), policies: [Action.READ_ORDER] },
 		{ href: '/conversations/1', label: m.conversations(), policies: [Action.READ_CONVERSATION] },
 		{ href: '/setting', label: m.settings() }
 	];
@@ -69,7 +70,7 @@
 					value: lang
 				}))}
 				bind:value={selectedLanguage}
-				on:change={() => switchToLanguage(selectedLanguage)}
+				onchange={() => switchToLanguage(selectedLanguage)}
 			/>
 
 			<Button pill color="light" id="avatar_with_name" class="px-2 py-1 gap-2">
@@ -105,7 +106,7 @@
 			<NavLi
 				href={item.href}
 				activeClass="text-blue-700 dark:text-blue-500"
-				class={`transition-all duration-200 ease-in-out hover:scale-105 hover:text-blue-600 dark:hover:text-blue-400 ${$page.url.pathname === item.href ? "text-blue-700 dark:text-blue-500" : ""} `}
+				class={`transition-all duration-200 ease-in-out hover:scale-105 hover:text-blue-600 dark:hover:text-blue-400 ${$page.url.pathname.startsWith(item.href) ? "text-blue-700 dark:text-blue-500" : ""} `}
 			>
 				{item.label}
 			</NavLi>

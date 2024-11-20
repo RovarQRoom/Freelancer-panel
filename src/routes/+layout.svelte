@@ -1,8 +1,7 @@
 <script lang="ts">
 	import '../app.css';
-	import { Footer, FooterCopyright, FooterLinkGroup, FooterLink, Spinner } from 'flowbite-svelte';
+	import { Spinner } from 'flowbite-svelte';
 	import { authStore } from '$lib/Store/Auth';
-	import * as m from '$lib/paraglide/messages';
 	import { onMount, type Snippet } from 'svelte';
 	import { ParaglideJS } from '@inlang/paraglide-sveltekit';
 	import { i18n } from '$lib/i18n.js';
@@ -54,6 +53,7 @@
 		}
 	}
 </script>
+
 
 <ParaglideJS {i18n}>
 	<Toast />

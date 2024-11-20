@@ -1879,7 +1879,7 @@ export const MOBILE_GAME_DEVELOPMENT = () => `پەرەپێدانی یاری مۆ
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const AUGMENTED_REALITY_DEVELOPMENT = () => `پەرەپێدانی واقیعی زیادکراو`
+export const AUGMENTED_REALITY_DEVELOPMENT = () => `پەرەپێدانی واقیعی ز��ادکراو`
 
 
 /**
@@ -2320,3 +2320,59 @@ export const PERFORMANCE_MARKETING = () => `بازاڕگەری کارایی`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const CONVERSION_RATE_OPTIMIZATION = () => `باشترکردنی ڕێژەی گۆڕین`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const orders = () => `داواکارییەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const customer = () => `کڕیار`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const status = () => `دۆخ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const total_price = () => `کۆی نرخ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const created_at = () => `دروستکراوە لە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const editExtraService = () => `دەستکاری خزمەتگوزاری زیادە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const no_icon = () => `هیچ ئایکۆنێک نییە`

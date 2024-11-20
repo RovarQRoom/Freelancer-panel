@@ -288,5 +288,18 @@
 	"SOCIAL_MEDIA_CONTENT_CREATION": "Social Media Content Creation",
 	"WEBSITE_MAINTENANCE": "Website Maintenance",
 	"PERFORMANCE_MARKETING": "Performance Marketing",
-	"CONVERSION_RATE_OPTIMIZATION": "Conversion Rate Optimization"
+	"CONVERSION_RATE_OPTIMIZATION": "Conversion Rate Optimization",
+	"orders": "Orders",
+	"customer": "Customer",
+	"status": "Status",
+	"total_price": "Total Price",
+	"created_at": "Created At",
+	"editExtraService": "Edit Extra Service",
+	"no_icon": "No Icon",
+	"title": "Title",
+	"description": "Description",
+	"price": "Price",
+	"icon": "Icon",
+	"save": "Save",
+	"cancel": "Cancel"
 }

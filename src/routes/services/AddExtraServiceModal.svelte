@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Input, Label, Tabs, TabItem, Spinner, Modal } from 'flowbite-svelte';
+	import { Button, Input, Label, Tabs, TabItem, Spinner, Modal, Img } from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import {
 		Languages,
@@ -14,6 +14,8 @@
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { authStore } from '$lib/Store/Auth';
 	import { Action } from '$lib/Model/Action/Action';
+	import { storageStore } from '$lib/Store/Storage';
+	import { createUploadThing } from '$lib/Utils/Uploadthing';
 
 	let { open = $bindable(false), serviceId = $bindable<number | null>(null) } = $props<{
 		open: boolean;
@@ -35,6 +37,20 @@
 		en: ''
 	});
 
+	const { startUpload } = createUploadThing('imageUploader', {
+		onClientUploadComplete: () => {
+			console.log('Upload completed');
+		},
+		onUploadError: (error) => {
+			console.error('Upload error:', error);
+		}
+	});
+
+	let iconFile = $state<{ file?: File; preview?: string }>({
+		file: undefined,
+		preview: undefined
+	});
+
 	async function handleAdd() {
 		if (loadingAdd || !serviceId) return;
 		loadingAdd = true;
@@ -44,6 +60,9 @@
 		try {
 			titleResponse = await languageStore.insert(createTitleLanguage);
 			descriptionResponse = await languageStore.insert(createDescriptionLanguage);
+			if (iconFile.file) {
+				createExtraService.icon = await storageStore.uploadFile(iconFile.file, startUpload);
+			}
 			createExtraService.title = titleResponse?.id ?? 0;
 			createExtraService.description = descriptionResponse?.id ?? 0;
 			createExtraService.service = serviceId;
@@ -67,10 +86,21 @@
 		}
 	}
 
+	function handleIconUpload(event: Event) {
+		const input = event.target as HTMLInputElement;
+		const file = input.files?.[0];
+
+		if (file) {
+			iconFile.preview = URL.createObjectURL(file);
+			iconFile.file = file;
+		}
+	}
+
 	function resetForm() {
 		createTitleLanguage = { en: '' };
 		createDescriptionLanguage = { en: '' };
 		createExtraService = { title: 0, description: 0, price: 0, icon: '', service: serviceId ?? 0 };
+		iconFile = { file: undefined, preview: undefined };
 	}
 </script>
 
@@ -78,44 +108,62 @@
 	<div class="p-4">
 		<h3 class="mb-4 text-xl font-bold">{m.addExtraService()}</h3>
 		<form class="space-y-4">
-			<div class="space-y-2">
-				<Label>{m.title()}</Label>
-				<Tabs style="underline">
-					{#each Object.keys(Languages) as language}
-						<TabItem open={language === Languages.EN} title={language}>
-							<Input
-								class="w-full"
-								bind:value={createTitleLanguage[language.toLowerCase() as keyof InsertLanguage]}
-								required={language === Languages.EN}
-							/>
-						</TabItem>
-					{/each}
-				</Tabs>
-			</div>
-
-			<div class="space-y-2">
-				<Label>{m.description()}</Label>
-				<Tabs style="underline">
-					{#each Object.keys(Languages) as language}
-						<TabItem open={language === Languages.EN} title={language}>
-							<Input
-								class="w-full"
-								bind:value={createDescriptionLanguage[language.toLowerCase() as keyof InsertLanguage]}
-								required={language === Languages.EN}
-							/>
-						</TabItem>
-					{/each}
-				</Tabs>
-			</div>
+			<Tabs style="underline">
+				{#each Object.keys(Languages) as language}
+					<TabItem open={language === Languages.EN} title={language}>
+						<div class="space-y-4">
+							<div class="space-y-2">
+								<Label>{m.title()}</Label>
+								<Input
+									class="w-full"
+									bind:value={createTitleLanguage[language.toLowerCase() as keyof InsertLanguage]}
+									required={language === Languages.EN}
+								/>
+							</div>
+							<div class="space-y-2">
+								<Label>{m.description()}</Label>
+								<Input
+									class="w-full"
+									bind:value={createDescriptionLanguage[language.toLowerCase() as keyof InsertLanguage]}
+									required={language === Languages.EN}
+								/>
+							</div>
+						</div>
+					</TabItem>
+				{/each}
+			</Tabs>
 
 			<div class="space-y-2">
 				<Label>{m.price()}</Label>
 				<Input type="number" bind:value={createExtraService.price} required min="0" step="0.01" />
 			</div>
 
-			<div class="space-y-2">
+			<div class="space-y-3">
 				<Label>{m.icon()}</Label>
-				<Input type="text" bind:value={createExtraService.icon} />
+				<div class="flex justify-start">
+					<div
+						class="relative h-20 w-20 overflow-hidden rounded-lg bg-main-light-100
+						transition-all duration-200 hover:shadow-lg dark:bg-main-dark-100"
+					>
+						{#if iconFile.preview}
+							<Img
+								src={iconFile.preview}
+								alt="Icon Preview"
+								class="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
+							/>
+						{:else}
+							<div class="flex h-full w-full flex-col items-center justify-center">
+								<span class="text-xl text-main-light-400 dark:text-main-dark-400">+</span>
+							</div>
+						{/if}
+						<input
+							type="file"
+							accept="image/*"
+							on:change={handleIconUpload}
+							class="absolute inset-0 cursor-pointer opacity-0"
+						/>
+					</div>
+				</div>
 			</div>
 
 			<div class="flex justify-end gap-3">

@@ -25,6 +25,7 @@
 	import { Modal } from 'flowbite-svelte';
 	import { CirclePlusSolid } from 'flowbite-svelte-icons';
 	import { toastStore } from '$lib/Store/Toast';
+	import EditExtraServiceModal from '../EditExtraServiceModal.svelte';
 
 	let filter: GenericListOptions = $state({
 		page: 1,
@@ -35,6 +36,8 @@
 	let showExtraServicesModal = $state(false);
 	let showCreateExtraServiceModal = $state(false);
 	let selectedServiceId = $state<number | null>(null);
+	let showEditExtraServiceModal = $state(false);
+	let selectedExtraServiceId = $state<number | null>(null);
 
 	onMount(async () => {
 		await serviceStore.fetchAll(filter);
@@ -191,8 +194,21 @@
 					<TableBodyRow>
 						<TableBodyCell>{extraService.title[languageTag()]}</TableBodyCell>
 						<TableBodyCell>{extraService.description?.[languageTag()] ?? ''}</TableBodyCell>
-						<TableBodyCell>{extraService.price}</TableBodyCell>
-						<TableBodyCell>{extraService.icon ?? ''}</TableBodyCell>
+						<TableBodyCell>
+							{extraService.price
+								? Intl.NumberFormat(languageTag(), {
+										style: 'currency',
+										currency: 'IQD'
+								  }).format(extraService.price)
+								: '-'}
+						</TableBodyCell>
+						<TableBodyCell>
+							{#if extraService.icon}
+								<Img src={extraService.icon} alt="Extra Service Icon" class="h-10 w-10 rounded-md object-cover shadow-sm" />
+							{:else}
+								<span class="text-gray-500">{m.no_icon()}</span>
+							{/if}
+						</TableBodyCell>
 						<TableBodyCell>
 							<div class="flex gap-2">
 								{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_EXTRA_SERVICE], $authStore?.role?.name)}
@@ -200,8 +216,9 @@
 										size="sm"
 										class="p-2"
 										color="light"
-										on:click={() => {
-											// Handle edit - You'll need to create an EditExtraServiceModal component
+										onclick={() => {
+											selectedExtraServiceId = extraService.id;
+											showEditExtraServiceModal = true;
 										}}
 									>
 										<PenSolid class="h-4 w-4" />
@@ -229,3 +246,8 @@
 </Modal>
 
 <AddExtraServiceModal bind:open={showCreateExtraServiceModal} bind:serviceId={selectedServiceId} />
+
+<EditExtraServiceModal 
+	bind:open={showEditExtraServiceModal} 
+	bind:extraServiceId={selectedExtraServiceId} 
+/>
