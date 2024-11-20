@@ -234,7 +234,7 @@
 	"WEB_ANALYTICS": "تحليلات الويب",
 	"MOBILE_GAME_DEVELOPMENT": "تطوير ألعاب الموبايل",
 	"AUGMENTED_REALITY_DEVELOPMENT": "تطوير الواقع المعزز",
-	"VIRTUAL_REALITY_DEVELOPMENT": "تطو��ر الواقع الافتراضي",
+	"VIRTUAL_REALITY_DEVELOPMENT": "تطوير الواقع الافتراضي",
 	"DIGITAL_ILLUSTRATION": "الرسم الرقمي",
 	"CHARACTER_DESIGN": "تصميم الشخصيات",
 	"SOCIAL_MEDIA_ADVERTISING": "الإعلان على وسائل التواصل الاجتماعي",
@@ -279,7 +279,7 @@
 	"TECHNICAL_SUPPORT_DOCUMENTATION": "توثيق الدعم الفني",
 	"USER_EXPERIENCE_RESEARCH": "أبحاث تجربة المستخدم",
 	"MARKET_POSITIONING": "تموضع السوق",
-	"BRAND_STRATEGY": "است��اتيجية العلامة التجارية",
+	"BRAND_STRATEGY": "استراتيجية العلامة التجارية",
 	"CRISIS_COMMUNICATION": "التواصل في الأزمات",
 	"EVENT_PROMOTION": "الترويج للفعاليات",
 	"CROWDFUNDING_CAMPAIGN_MANAGEMENT": "إدارة حملات التمويل الجماعي",
@@ -293,13 +293,5 @@
 	"customer": "العميل",
 	"status": "الحالة",
 	"total_price": "السعر الإجمالي",
-	"created_at": "تاريخ الإنشاء",
-	"editExtraService": "تعديل الخدمة الإضافية",
-	"no_icon": "لا يوجد أيقونة",
-	"title": "العنوان",
-	"description": "الوصف",
-	"price": "السعر",
-	"icon": "الأيقونة",
-	"save": "حفظ",
-	"cancel": "إلغاء"
+	"created_at": "تاريخ الإنشاء"
 }

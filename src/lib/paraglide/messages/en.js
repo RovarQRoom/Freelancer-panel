@@ -2360,19 +2360,3 @@ export const total_price = () => `Total Price`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const created_at = () => `Created At`
-
-
-/**
- * 
- * @returns {string}
- */
-/* @__NO_SIDE_EFFECTS__ */
-export const editExtraService = () => `Edit Extra Service`
-
-
-/**
- * 
- * @returns {string}
- */
-/* @__NO_SIDE_EFFECTS__ */
-export const no_icon = () => `No Icon`

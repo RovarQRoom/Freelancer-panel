@@ -233,7 +233,7 @@
 	"CONTENT_MANAGEMENT": "بەڕێوەبردنی ناوەڕۆک",
 	"WEB_ANALYTICS": "شیکردنەوەی وێب",
 	"MOBILE_GAME_DEVELOPMENT": "پەرەپێدانی یاری مۆبایل",
-	"AUGMENTED_REALITY_DEVELOPMENT": "پەرەپێدانی واقیعی ز��ادکراو",
+	"AUGMENTED_REALITY_DEVELOPMENT": "پەرەپێدانی واقیعی زیادکراو",
 	"VIRTUAL_REALITY_DEVELOPMENT": "پەرەپێدانی واقیعی خەیاڵی",
 	"DIGITAL_ILLUSTRATION": "وێنەکێشانی دیجیتاڵ",
 	"CHARACTER_DESIGN": "دیزاینی کارەکتەر",
@@ -279,7 +279,7 @@
 	"TECHNICAL_SUPPORT_DOCUMENTATION": "بەڵگەنامەکردنی پشتگیری تەکنیکی",
 	"USER_EXPERIENCE_RESEARCH": "توێژینەوەی ئەزموونی بەکارهێنەر",
 	"MARKET_POSITIONING": "شوێنگرتن لە بازاڕ",
-	"BRAND_STRATEGY": "ستراتیژی براند",
+	"BRAND_STRATEGY": "سترا��یژی براند",
 	"CRISIS_COMMUNICATION": "پەیوەندی قەیران",
 	"EVENT_PROMOTION": "پرۆمۆشنی ڕووداو",
 	"CROWDFUNDING_CAMPAIGN_MANAGEMENT": "بەڕێوەبردنی هەڵمەتی کڕاودفەندینگ",
@@ -293,13 +293,5 @@
 	"customer": "کڕیار",
 	"status": "دۆخ",
 	"total_price": "کۆی نرخ",
-	"created_at": "دروستکراوە لە",
-	"editExtraService": "دەستکاری خزمەتگوزاری زیادە",
-	"no_icon": "هیچ ئایکۆنێک نییە",
-	"title": "ناونیشان",
-	"description": "وەسف",
-	"price": "نرخ",
-	"icon": "ئایکۆن",
-	"save": "پاشەکەوت",
-	"cancel": "پاشگەزبوونەوە"
+	"created_at": "دروستکراوە لە"
 }

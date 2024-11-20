@@ -293,13 +293,5 @@
 	"customer": "Customer",
 	"status": "Status",
 	"total_price": "Total Price",
-	"created_at": "Created At",
-	"editExtraService": "Edit Extra Service",
-	"no_icon": "No Icon",
-	"title": "Title",
-	"description": "Description",
-	"price": "Price",
-	"icon": "Icon",
-	"save": "Save",
-	"cancel": "Cancel"
+	"created_at": "Created At"
 }
