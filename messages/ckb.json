@@ -279,7 +279,7 @@
 	"TECHNICAL_SUPPORT_DOCUMENTATION": "بەڵگەنامەکردنی پشتگیری تەکنیکی",
 	"USER_EXPERIENCE_RESEARCH": "توێژینەوەی ئەزموونی بەکارهێنەر",
 	"MARKET_POSITIONING": "شوێنگرتن لە بازاڕ",
-	"BRAND_STRATEGY": "سترا��یژی براند",
+	"BRAND_STRATEGY": "ستراتیژی براند",
 	"CRISIS_COMMUNICATION": "پەیوەندی قەیران",
 	"EVENT_PROMOTION": "پرۆمۆشنی ڕووداو",
 	"CROWDFUNDING_CAMPAIGN_MANAGEMENT": "بەڕێوەبردنی هەڵمەتی کڕاودفەندینگ",
@@ -293,5 +293,6 @@
 	"customer": "کڕیار",
 	"status": "دۆخ",
 	"total_price": "کۆی نرخ",
-	"created_at": "دروستکراوە لە"
+	"created_at": "دروستکراوە لە",
+	"editExtraService": "دەستکاری خزمەتگوزاری زیادە"
 }

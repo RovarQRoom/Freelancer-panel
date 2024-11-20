@@ -222,7 +222,7 @@
 							<input
 								type="file"
 								accept="image/*"
-								on:change={handleIconUpload}
+								onchange={handleIconUpload}
 								class="absolute inset-0 cursor-pointer opacity-0"
 							/>
 						</div>
@@ -234,7 +234,7 @@
 						<Button
 							type="submit"
 							class="bg-primary-light-500 text-white"
-							on:click={handleEdit}
+							onclick={handleEdit}
 							disabled={loadingEdit}
 						>
 							{#if loadingEdit}

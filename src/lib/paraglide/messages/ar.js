@@ -1407,7 +1407,7 @@ export const MOBILE_APP_DEVELOPMENT = () => `تطوير تطبيقات المو�
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const SEO = () => `تحسين محركات البحث`
+export const SEO = () => `تحسين محرك��ت البحث`
 
 
 /**
@@ -1887,7 +1887,7 @@ export const AUGMENTED_REALITY_DEVELOPMENT = () => `تطوير الواقع ال
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const VIRTUAL_REALITY_DEVELOPMENT = () => `تطوير الواقع الافتراضي`
+export const VIRTUAL_REALITY_DEVELOPMENT = () => `تط��ير الواقع الافتراضي`
 
 
 /**
@@ -2360,3 +2360,11 @@ export const total_price = () => `السعر الإجمالي`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const created_at = () => `تاريخ الإنشاء`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const editExtraService = () => `تعديل الخدمة الإضافية`

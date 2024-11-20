@@ -2247,7 +2247,7 @@ export const MARKET_POSITIONING = () => `شوێنگرتن لە بازاڕ`
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const BRAND_STRATEGY = () => `سترا��یژی براند`
+export const BRAND_STRATEGY = () => `ستراتیژی براند`
 
 
 /**
@@ -2360,3 +2360,11 @@ export const total_price = () => `کۆی نرخ`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const created_at = () => `دروستکراوە لە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const editExtraService = () => `دەستکاری خزمەتگوزاری زیادە`
