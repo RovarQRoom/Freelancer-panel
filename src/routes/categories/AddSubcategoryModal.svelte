@@ -68,7 +68,7 @@
 
 <Modal bind:open size="lg" autoclose={false} on:close={resetForm}>
 	<div class="p-4">
-		<h3 class="mb-4 text-xl font-bold">{m.addSubcategory()}</h3>
+		<h3 class="mb-4 text-xl font-bold ">{m.addSubcategory()}</h3>
 		<form class="space-y-4">
 			<div class="space-y-2">
 				<Label>{m.title()}</Label>
@@ -108,7 +108,7 @@
 				{#if checkPremissionOnRoute($authStore!, [Action.CREATE_SUBCATEGORY], $authStore?.role?.name)}
 					<Button
 						type="submit"
-						class="bg-primary-light-500 text-white"
+						class="w-full h-12 bg-primary-light-500 text-white p-2"
 						onclick={() => handleAddSubcategory()}
 						disabled={loadingAddSubcategory}
 					>

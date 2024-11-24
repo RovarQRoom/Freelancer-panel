@@ -106,7 +106,13 @@
 			<NavLi
 				href={item.href}
 				activeClass="text-blue-700 dark:text-blue-500"
-				class={`transition-all duration-200 ease-in-out hover:scale-105 hover:text-blue-600 dark:hover:text-blue-400 ${$page.url.pathname.startsWith(item.href) ? "text-blue-700 dark:text-blue-500" : ""} `}
+				nonActiveClass="text-main-light-900 dark:text-main-dark-900"
+				class={`transition-all duration-200 ease-in-out hover:scale-105 hover:text-blue-600 dark:hover:text-blue-400 ${
+					(item.href === '/' && $page.url.pathname === '/') || 
+					(item.href !== '/' && $page.url.pathname.startsWith(item.href))
+						? "text-blue-700 dark:text-blue-500" 
+						: ""
+				}`}
 			>
 				{item.label}
 			</NavLi>

@@ -127,9 +127,10 @@
 		<form onsubmit={handleAddCategory} class="space-y-6">
 			<div class="space-y-2">
 				<Label class="text-lg font-medium">{m.title()}</Label>
-				<Tabs style="underline" class="mb-4">
+				<Tabs style="underline" class="mb-4 grid grid-cols-3 justify-center items-center w-full">
 					{#each Object.keys(Languages) as language}
-						<TabItem open={language === Languages.EN} title={language}>
+						<TabItem open={language === Languages.EN} title={language} activeClasses="w-full p-4 text-blue-light bg-blue-light/20 rounded-t-lg "
+						inactiveClasses="w-full p-4 text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-white">
 							<Input
 								class="w-full transition-all duration-200 focus:ring-2 focus:ring-primary-light-500"
 								bind:value={createCategoryLanguage[language.toLowerCase() as keyof InsertLanguage]}
@@ -206,9 +207,9 @@
 				{#if checkPremissionOnRoute($authStore!, [Action.CREATE_CATEGORY], $authStore?.role?.name)}
 					<Button
 						type="submit"
-						class="flex-1 transform bg-primary-light-500 text-white 
+						class="flex-1 transform bg-blue-light text-white
 					transition-all duration-200 hover:scale-105 hover:bg-primary-light-600 
-					dark:bg-primary-dark-500 dark:hover:bg-primary-dark-600"
+					 dark:hover:bg-primary-dark-600 "
 						disabled={isLoading}
 					>
 						{#if isLoading}
