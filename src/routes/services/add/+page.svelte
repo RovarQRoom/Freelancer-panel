@@ -187,8 +187,8 @@
 	}
 </script>
 
-<div class="container mx-auto p-8">
-	<div class="mb-6 flex items-center">
+<div class="container mx-auto p-8 flex flex-col w-full justify-center items-center">
+	<div class="w-full mb-6 flex flex-col items-start justify-center gap-12">
 		<Button color="alternative" class="mr-4" on:click={() => goto('/services/1')}>
 			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<i class="fas fa-arrow-left mr-2" />
@@ -203,7 +203,7 @@
 
 	<form
 		onsubmit={handleAddService}
-		class="max-w-3xl space-y-6 rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-grey-secondary"
+		class="w-full space-y-6 rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-grey-secondary"
 	>
 		<Tabs style="underline" class="mb-4 dark:text-white">
 			{#each Object.keys(Languages) as language}
@@ -235,7 +235,7 @@
 						<Label class="text-lg font-medium">{m.media()}</Label>
 						<div class="flex justify-center">
 							<div
-								class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg dark:bg-grey-secondary"
+								class="relative h-64 w-full overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg dark:bg-grey-secondary"
 							>
 								{#if mediaLanguage[language.toLowerCase() as keyof typeof mediaLanguage].preview}
 									<Img
@@ -398,7 +398,7 @@
 				{#if checkPremissionOnRoute($authStore!, [Action.CREATE_SERVICE], $authStore?.role?.name)}
 					<Button
 						type="submit"
-						class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:scale-105 hover:bg-primary-light-600"
+						class="flex-1 bg-blue-light text-white transition-all duration-300 hover:scale-105 hover:bg-blue-light/90"
 						disabled={isLoading}
 					>
 						{#if isLoading}

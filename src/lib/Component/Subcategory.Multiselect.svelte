@@ -96,7 +96,7 @@
 		}))}
 		bind:value={selected}
 	/>
-	<Button class="p-2" color="primary" on:click={() => (showModal = true)}>
+	<Button class="p-2 " color="primary" on:click={() => (showModal = true)}>
 		<CirclePlusSolid class="h-4 w-4" />
 	</Button>
 </div>

@@ -215,7 +215,7 @@
 <!-- I'll show the key differences in the template -->
 
 <div class="container mx-auto p-8">
-	<div class="mb-6 flex items-center">
+	<div class="mb-6 flex flex-col items-start justify-center gap-12">
 		<Button color="alternative" class="mr-4" on:click={() => goto('/services/1')}>
 			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<i class="fas fa-arrow-left mr-2" />
@@ -236,7 +236,7 @@
 	{:else}
 		<form
 			onsubmit={handleEditService}
-			class="max-w-3xl space-y-6 rounded-xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+			class="w-full space-y-6 rounded-xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
 		>
 			<Tabs style="underline" class="mb-4 dark:text-white">
 				{#each Object.keys(Languages) as language}
@@ -441,7 +441,7 @@
 					{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_SERVICE], $authStore?.role?.name)}
 						<Button
 							type="submit"
-							class="flex-1 bg-primary-light-500 text-white transition-all duration-300 hover:scale-105 hover:bg-primary-light-600"
+							class="flex-1 bg-blue-light text-white transition-all duration-300 hover:scale-105 hover:bg-blue-light/90"
 							disabled={isLoading}
 						>
 							{#if isLoading}
