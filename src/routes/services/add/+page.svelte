@@ -203,7 +203,7 @@
 
 	<form
 		onsubmit={handleAddService}
-		class="w-full space-y-6 rounded-xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-xl dark:bg-grey-secondary"
+		class="w-full space-y-6 rounded-xl  p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
 	>
 		<Tabs style="underline" class="mb-4 dark:text-white">
 			{#each Object.keys(Languages) as language}
@@ -212,7 +212,7 @@
 					<div class="mb-6 space-y-2">
 						<Label class="text-lg font-medium">{m.title()}</Label>
 						<Input
-							class="w-full border-0 transition-all duration-300"
+							class="w-full bg-grey-light dark:bg-grey-secondary border-0 transition-all duration-300"
 							bind:value={titleLanguage[language.toLowerCase() as keyof InsertLanguage]}
 							required={language === Languages.EN}
 						/>
@@ -223,7 +223,7 @@
 						<Label class="text-lg font-medium">{m.description()}</Label>
 						<!-- svelte-ignore element_invalid_self_closing_tag -->
 						<textarea
-							class="w-full rounded-lg border-0 p-2.5 transition-all duration-300 hover:border-primary-light-500 dark:bg-grey-secondary"
+							class="w-full rounded-lg border-0 p-2.5 transition-all duration-300 hover:border-primary-light-500 bg-grey-light dark:bg-grey-secondary"
 							rows="4"
 							bind:value={descriptionLanguage[language.toLowerCase() as keyof InsertLanguage]}
 							required={language === Languages.EN}
@@ -235,7 +235,7 @@
 						<Label class="text-lg font-medium">{m.media()}</Label>
 						<div class="flex justify-center">
 							<div
-								class="relative h-64 w-full overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg dark:bg-grey-secondary"
+								class="relative h-64 w-full overflow-hidden rounded-lg bg-grey-light transition-all duration-300 hover:shadow-lg dark:bg-grey-secondary"
 							>
 								{#if mediaLanguage[language.toLowerCase() as keyof typeof mediaLanguage].preview}
 									<Img
@@ -280,14 +280,16 @@
 			<!-- Price -->
 			<div class="space-y-2">
 				<Label class="text-lg font-medium">{m.price()}</Label>
-				<Input type="number" bind:value={createService.price} required min="0" step="0.01" />
+				<Input type="number" bind:value={createService.price} required min="0" step="0.01"
+				class="border-0 w-full h-12 bg-grey-light dark:bg-grey-secondary"
+				/>
 			</div>
 
 			<!-- Supports -->
 			<div class="space-y-2">
 				<Label class="text-lg font-medium">{m.supports()}</Label>
 				<MultiSelect
-					class="transition-all duration-300 hover:border-primary-light-500"
+					class="transition-all duration-300 hover:border-primary-light-500 bg-grey-light dark:bg-grey-secondary border-0"
 					items={supportLanguages.map((language) => ({
 						value: language,
 						name: m[language]()
@@ -307,6 +309,7 @@
 					}))}
 					bind:value={createService.tags as (string | number)[]}
 					placeholder={m.select_tags()}
+					class="transition-all duration-300 hover:border-primary-light-500 bg-grey-light dark:bg-grey-secondary border-0"
 				/>
 			</div>
 
@@ -315,7 +318,7 @@
 				<Label class="text-lg font-medium">{m.demo()}</Label>
 				<div class="flex justify-center">
 					<div
-						class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-gray-100 transition-all duration-300 hover:shadow-lg dark:bg-grey-dark"
+						class="relative h-64 w-full max-w-md overflow-hidden rounded-lg bg-grey-light transition-all duration-300 hover:shadow-lg dark:bg-grey-secondary"
 					>
 						{#if demoFile.preview}
 							<div class="relative h-full">
@@ -383,7 +386,7 @@
 			<div class="space-y-2">
 				<Label class="text-lg font-medium">{m.supervisor()}</Label>
 				<Select
-					class="transition-all duration-300 hover:border-primary-light-500"
+					class="transition-all duration-300 hover:border-primary-light-500 bg-grey-light dark:bg-grey-secondary border-0"
 					bind:value={createService.supervised_by}
 					items={users.map((user) => ({
 						value: user.id,
