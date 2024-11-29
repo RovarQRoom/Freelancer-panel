@@ -53,7 +53,7 @@
 			</div>
 		</div>
 
-		<div class="flex items-center justify-between rounded-lg border p-4 dark:border-gray-700">
+		<!-- <div class="flex items-center justify-between rounded-lg border p-4 dark:border-gray-700">
 			<div>
 				<h3 class="font-medium text-gray-800 dark:text-white">{m.two_factor_auth()}</h3>
 				<p class="text-sm text-gray-500">{m.two_factor_auth_desc()}</p>
@@ -63,6 +63,6 @@
 			>
 				{m.enable()}
 			</button>
-		</div>
+		</div> -->
 	</div>
 </div>

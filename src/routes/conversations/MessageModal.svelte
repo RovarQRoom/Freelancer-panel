@@ -40,8 +40,8 @@
 								? 'ml-auto bg-blue-500 text-white'
 								: 'bg-gray-100 dark:bg-gray-700'} shadow"
 						>
-							<p class="whitespace-pre-wrap break-words text-sm">{message.content}</p>
-							<p class="mt-1 text-xs {isCurrentUser ? 'text-blue-100' : 'text-gray-500'}">
+							<p class="whitespace-pre-wrap break-words text-sm {isCurrentUser ? 'text-white' : 'text-black dark:text-white'}">{message.content}</p>
+							<p class="mt-1 text-[10px] {isCurrentUser ? 'text-blue-100' : 'text-gray-500'}">
 								{new Date(message.created_at).toLocaleString()}
 							</p>
 						</div>

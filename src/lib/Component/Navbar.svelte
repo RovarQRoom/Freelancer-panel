@@ -98,21 +98,20 @@
 
 	<NavUl
 		divClass="w-full md:flex justify-center md:w-full"
-		ulClass="flex flex-col p-4 mt-4 md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0 md:text-sm md:font-medium"
-		activeClass="text-blue-700 dark:text-blue-500"
-		nonActiveClass="text-main-light-900 dark:text-main-dark-900"
+		ulClass="flex flex-col p-4 mt-4 md:flex-row md:items-center md:space-x-8 rtl:space-x-reverse md:mt-0 md:text-sm md:font-medium
+		"
+		
 	>
 		{#each filterNavItemsByPermission($authStore!, navItems) as item}
 			<NavLi
 				href={item.href}
-				activeClass="text-blue-700 dark:text-blue-500"
-				nonActiveClass="text-main-light-900 dark:text-main-dark-900"
-				class={`transition-all duration-200 ease-in-out hover:scale-105 hover:text-blue-600 dark:hover:text-blue-400 ${
-					(item.href === '/' && $page.url.pathname === '/') || 
-					(item.href !== '/' && $page.url.pathname.startsWith(item.href))
-						? "text-blue-700 dark:text-blue-500" 
-						: ""
-				}`}
+				class="transition-all duration-200 ease-in-out hover:scale-105
+				{item.href === '/' 
+					? ($page.url.pathname === '/' || $page.url.pathname === '/ckb' || $page.url.pathname === '/ar' ? '!text-blue-600 dark:!text-blue-400' : '!text-gray-600 dark:!text-gray-400')
+					: ($page.url.pathname.includes(item.href.split('/')[1]) 
+						? '!text-blue-600 dark:!text-blue-400' 
+						: '!text-gray-600 dark:!text-gray-400')
+				}"
 			>
 				{item.label}
 			</NavLi>

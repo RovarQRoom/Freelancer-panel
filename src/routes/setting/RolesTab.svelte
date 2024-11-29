@@ -188,15 +188,16 @@
 <!-- Add Role Modal -->
 <Modal
 	bind:open={showAddModal}
-	size="md"
+	size="lg"
 	autoclose={false}
-	class="rounded-xl overflow-hidden shadow-xl"
+	class="rounded-xl overflow-hidden shadow-xl min-h-[500px]"
 >
-	<div class="p-6">
+	<div class="p-6 w-full flex flex-col justify-between items-center">
 		<h3 class="mb-5 text-xl font-semibold text-gray-800 dark:text-gray-200">
 			{m.addRole()}
 		</h3>
-		<div class="space-y-4">
+
+		<div class="space-y-4 w-full h-[400px]">
 			<div>
 				<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="name">
 					{m.name()}
@@ -225,6 +226,7 @@
 				/>
 			</div>
 		</div>
+
 		<div class="flex justify-end gap-4 mt-6">
 			<Button color="alternative" on:click={() => (showAddModal = false)}>
 				{m.cancel()}
@@ -239,15 +241,15 @@
 <!-- Edit Role Modal -->
 <Modal
 	bind:open={showEditModal}
-	size="md"
+	size="lg"
 	autoclose={false}
-	class="rounded-xl overflow-hidden shadow-xl"
+	class="rounded-xl overflow-hidden shadow-xl min-h-[500px]"
 >
-	<div class="p-6">
+	<div class="p-6 w-full flex flex-col justify-between items-center">
 		<h3 class="mb-5 text-xl font-semibold text-gray-800 dark:text-gray-200">
 			{m.editRole()}
 		</h3>
-		<div class="space-y-4">
+		<div class="space-y-4 w-full h-[400px]">
 			<div>
 				<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="edit-name">
 					{m.name()}
