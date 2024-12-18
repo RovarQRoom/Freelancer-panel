@@ -99,7 +99,15 @@
 					>
 						<TableBodyCell class="!p-4">{service.id}</TableBodyCell>
 						<TableBodyCell>{service.title[languageTag()] ?? '-'}</TableBodyCell>
-						<TableBodyCell>{service.description?.[languageTag()] ?? '-'}</TableBodyCell>
+						<TableBodyCell>
+							{#if service.description?.[languageTag()]}
+								{(service.description?.[languageTag()] ?? '').length > 100 
+									? (service.description?.[languageTag()] ?? '').slice(0, 100) + '...' 
+									: service.description?.[languageTag()] ?? '-'}
+							{:else}
+								-
+							{/if}
+						</TableBodyCell>
 						<TableBodyCell>
 							<div class="flex items-center justify-center gap-2">
 								{#if service.media && service.media?.[languageTag()]}
@@ -206,7 +214,7 @@
 							{#if extraService.icon}
 								<Img src={extraService.icon} alt="Extra Service Icon" class="h-10 w-10 rounded-md object-cover shadow-sm" />
 							{:else}
-								<span class="text-gray-500">{m.no_icon()}</span>
+								<span class="text-gray-500">{m.no_media()}</span>
 							{/if}
 						</TableBodyCell>
 						<TableBodyCell>
