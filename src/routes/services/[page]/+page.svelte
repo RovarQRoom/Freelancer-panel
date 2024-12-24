@@ -26,6 +26,7 @@
 	import { CirclePlusSolid } from 'flowbite-svelte-icons';
 	import { toastStore } from '$lib/Store/Toast';
 	import EditExtraServiceModal from '../EditExtraServiceModal.svelte';
+	import { Tabs, TabItem } from 'flowbite-svelte';
 
 	let filter: GenericListOptions = $state({
 		page: 1,
@@ -38,6 +39,7 @@
 	let selectedServiceId = $state<number | null>(null);
 	let showEditExtraServiceModal = $state(false);
 	let selectedExtraServiceId = $state<number | null>(null);
+	let activeTab = $state(0);
 
 	onMount(async () => {
 		await serviceStore.fetchAll(filter);
@@ -68,97 +70,148 @@
 </script>
 
 <div class="p-4">
-	<div class="mb-4 flex justify-end">
-		{#if checkPremissionOnRoute($authStore!, [Action.CREATE_SERVICE], $authStore?.role?.name)}
-			<a
-					href="/services/add"
-					class="transform rounded-md bg-blue-500 px-4 py-2 text-white shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:bg-blue-600"
-			>
-					{m.add()}
-			</a>
-		{/if}
-	</div>
+	<div class="mb-6 rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800">
+		<Tabs style="pills" class="!border-b-0">
+			<TabItem open activeClasses="bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md transform scale-105 transition-all duration-300" 
+					inactiveClasses="text-gray-500 hover:text-gray-700  dark:hover:text-white dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300"
+					on:click={() => activeTab = 0}>
+				<div slot="title" class="flex items-center gap-2 px-5 py-2.5">
+					<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+						<path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/>
+					</svg>
+					<span class="font-medium">{m.services()}</span>
+				</div>
+				
+				<!-- Services Tab Content -->
+				<div class="mt-4">
+					<div class="mb-4 flex justify-end">
+						{#if checkPremissionOnRoute($authStore!, [Action.CREATE_SERVICE], $authStore?.role?.name)}
+							<a href="/services/add"
+								class="transform rounded-md bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 text-white shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+								{m.add()}
+							</a>
+						{/if}
+					</div>
 
-	<div class="overflow-x-auto rounded-lg shadow-lg">
-		<Table hoverable={true} class="rounded-lg">
-			<TableHead class="bg-gray-50 dark:bg-gray-700">
-				<TableHeadCell class="!p-4">{m.id()}</TableHeadCell>
-				<TableHeadCell>{m.title()}</TableHeadCell>
-				<TableHeadCell>{m.description()}</TableHeadCell>
-				<TableHeadCell>{m.media()}</TableHeadCell>
-				<TableHeadCell>{m.price()}</TableHeadCell>
-				<TableHeadCell>{m.supervisor()}</TableHeadCell>
-				<TableHeadCell>{m.created_by()}</TableHeadCell>
-				<TableHeadCell>{m.actions()}</TableHeadCell>
-			</TableHead>
-			<TableBody>
-				{#each $serviceStore.data as service}
-					<TableBodyRow
-						class="transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-600"
-						on:click={() => handleGetExtraServices(service.id)}
-					>
-						<TableBodyCell class="!p-4">{service.id}</TableBodyCell>
-						<TableBodyCell>{service.title[languageTag()] ?? '-'}</TableBodyCell>
-						<TableBodyCell>
-							{#if service.description?.[languageTag()]}
-								{(service.description?.[languageTag()] ?? '').length > 100 
-									? (service.description?.[languageTag()] ?? '').slice(0, 100) + '...' 
-									: service.description?.[languageTag()] ?? '-'}
-							{:else}
-								-
-							{/if}
-						</TableBodyCell>
-						<TableBodyCell>
-							<div class="flex items-center justify-center gap-2">
-								{#if service.media && service.media?.[languageTag()]}
-									<Img
-										src={service.media?.[languageTag()]}
-										alt="Service Media"
-										class="h-10 w-10 rounded-md object-cover shadow-sm"
-									/>
-								{:else}
-									<span class="text-gray-500">{m.no_media()}</span>
-								{/if}
-							</div>
-						</TableBodyCell>
-						<TableBodyCell>
-							{service.price
-								? Intl.NumberFormat(languageTag(), {
-										style: 'currency',
-										currency: 'IQD'
-								  }).format(service.price)
-								: '-'}
-						</TableBodyCell>
-						<TableBodyCell>{service.supervised_by ? service.supervised_by.name : '-'}</TableBodyCell
-						>
-						<TableBodyCell>{service.created_by ? service.created_by.name : '-'}</TableBodyCell>
-						<TableBodyCell>
-							<div class="flex gap-3">
-								{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_SERVICE], $authStore?.role?.name)}
-									<button
-										class="rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
-										onclick={() => goto(`/services/edit/${service.id}`)}
+					<div class="overflow-x-auto rounded-lg border border-gray-100 shadow-md dark:border-gray-700">
+						<Table hoverable={true} class="rounded-lg">
+							<TableHead class="bg-gray-50 dark:bg-gray-700">
+								<TableHeadCell class="!p-4">{m.id()}</TableHeadCell>
+								<TableHeadCell>{m.title()}</TableHeadCell>
+								<TableHeadCell>{m.description()}</TableHeadCell>
+								<TableHeadCell>{m.media()}</TableHeadCell>
+								<TableHeadCell>{m.price()}</TableHeadCell>
+								<TableHeadCell>{m.supervisor()}</TableHeadCell>
+								<TableHeadCell>{m.created_by()}</TableHeadCell>
+								<TableHeadCell>{m.actions()}</TableHeadCell>
+							</TableHead>
+							<TableBody>
+								{#each $serviceStore.data as service}
+									<TableBodyRow
+										class="transition-colors duration-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+										on:click={() => handleGetExtraServices(service.id)}
 									>
-										<PenSolid class="h-4 w-4 text-blue-600 dark:text-blue-400" />
-									</button>
-								{/if}
-								{#if checkPremissionOnRoute($authStore!, [Action.DELETE_SERVICE], $authStore?.role?.name)}
-									<button
-										class="rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
-										onclick={() => handleDelete(service)}
-									>
-										<TrashBinSolid class="h-4 w-4 text-red-600 dark:text-red-400" />
-									</button>
-								{/if}
-							</div>
-						</TableBodyCell>
-					</TableBodyRow>
-				{/each}
-			</TableBody>
-		</Table>
-		<div class="flex h-12 w-full justify-center">
-			<Pagination store={serviceStore} bind:filter name="services" />
-		</div>
+										<TableBodyCell class="!p-4">{service.id}</TableBodyCell>
+										<TableBodyCell>{service.title[languageTag()] ?? '-'}</TableBodyCell>
+										<TableBodyCell>
+											{#if service.description?.[languageTag()]}
+												{(service.description?.[languageTag()] ?? '').length > 100 
+													? (service.description?.[languageTag()] ?? '').slice(0, 100) + '...' 
+													: service.description?.[languageTag()] ?? '-'}
+											{:else}
+												-
+											{/if}
+										</TableBodyCell>
+										<TableBodyCell>
+											<div class="flex items-center justify-center gap-2">
+												{#if service.media && service.media?.[languageTag()]}
+													<Img
+														src={service.media?.[languageTag()]}
+														alt="Service Media"
+														class="h-10 w-10 rounded-md object-cover shadow-sm"
+													/>
+												{:else}
+													<span class="text-gray-500">{m.no_media()}</span>
+												{/if}
+											</div>
+										</TableBodyCell>
+										<TableBodyCell>
+											{service.price
+												? Intl.NumberFormat(languageTag(), {
+														style: 'currency',
+														currency: 'IQD'
+												  }).format(service.price)
+												: '-'}
+										</TableBodyCell>
+										<TableBodyCell>{service.supervised_by ? service.supervised_by.name : '-'}</TableBodyCell>
+										<TableBodyCell>{service.created_by ? service.created_by.name : '-'}</TableBodyCell>
+										<TableBodyCell>
+											<div class="flex gap-3">
+												{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_SERVICE], $authStore?.role?.name)}
+													<button
+														class="rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
+														onclick={() => goto(`/services/edit/${service.id}`)}
+													>
+														<PenSolid class="h-4 w-4 text-blue-600 dark:text-blue-400" />
+													</button>
+												{/if}
+												{#if checkPremissionOnRoute($authStore!, [Action.DELETE_SERVICE], $authStore?.role?.name)}
+													<button
+														class="rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
+														onclick={() => handleDelete(service)}
+													>
+														<TrashBinSolid class="h-4 w-4 text-red-600 dark:text-red-400" />
+													</button>
+												{/if}
+											</div>
+										</TableBodyCell>
+									</TableBodyRow>
+								{/each}
+							</TableBody>
+						</Table>
+						<div class="flex h-12 w-full justify-center bg-white dark:bg-gray-800">
+							<Pagination store={serviceStore} bind:filter name="services" />
+						</div>
+					</div>
+				</div>
+			</TabItem>
+
+			<TabItem activeClasses="bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md transform scale-105 transition-all duration-300"
+					 inactiveClasses="text-gray-500 hover:text-gray-700  dark:hover:text-white dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300"
+					 on:click={() => activeTab = 1}>
+				<div slot="title" class="flex items-center gap-2 px-5 py-2.5">
+					<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
+						<path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
+					</svg>
+					<span class="font-medium">{m.service_jobs()}</span>
+				</div>
+
+				<!-- Service Jobs Tab Content -->
+				<div class="mt-4">
+					<div class="mb-4 flex justify-end">
+						<!-- Add button for service jobs if needed -->
+					</div>
+
+					<div class="overflow-x-auto rounded-lg border border-gray-100 shadow-md dark:border-gray-700">
+						<Table hoverable={true} class="rounded-lg">
+							<TableHead class="bg-gray-50 dark:bg-gray-700">
+								<TableHeadCell class="!p-4">{m.id()}</TableHeadCell>
+								<TableHeadCell>{m.title()}</TableHeadCell>
+								<TableHeadCell>{m.description()}</TableHeadCell>
+								<TableHeadCell>{m.status()}</TableHeadCell>
+								<TableHeadCell>{m.created_at()}</TableHeadCell>
+								<TableHeadCell>{m.actions()}</TableHeadCell>
+							</TableHead>
+							<TableBody>
+								<!-- Add your service jobs data here -->
+							</TableBody>
+						</Table>
+						<!-- Add pagination for service jobs if needed -->
+					</div>
+				</div>
+			</TabItem>
+		</Tabs>
 	</div>
 </div>
 
@@ -259,3 +312,26 @@
 	bind:open={showEditExtraServiceModal} 
 	bind:extraServiceId={selectedExtraServiceId} 
 />
+
+<style>
+	/* Custom styles for modern UI */
+	:global(.tab-active) {
+		@apply bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md;
+	}
+	
+	:global(.tab-item) {
+		@apply rounded-lg transition-all duration-300 ease-in-out;
+	}
+	
+	:global(.tab-item:hover) {
+		@apply transform scale-105;
+	}
+	
+	:global(.tabs-group) {
+		@apply p-1 bg-gray-50 dark:bg-gray-800 rounded-xl;
+	}
+	
+	:global(.table-container) {
+		@apply bg-white dark:bg-gray-800;
+	}
+</style>

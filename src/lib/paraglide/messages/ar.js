@@ -2368,3 +2368,11 @@ export const created_at = () => `تاريخ الإنشاء`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const editExtraService = () => `تعديل الخدمة الإضافية`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const service_jobs = () => `وظائف الخدمات`

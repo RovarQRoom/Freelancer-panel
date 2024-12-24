@@ -2368,3 +2368,11 @@ export const created_at = () => `Created At`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const editExtraService = () => `Edit Extra Service`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const service_jobs = () => `Service Jobs`

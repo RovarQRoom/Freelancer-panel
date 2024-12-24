@@ -294,5 +294,6 @@
 	"status": "دۆخ",
 	"total_price": "کۆی نرخ",
 	"created_at": "دروستکراوە لە",
-	"editExtraService": "دەستکاری خزمەتگوزاری زیادە"
+	"editExtraService": "دەستکاری خزمەتگوزاری زیادە",
+	"service_jobs": "وێبیناری خزمەتگوزاری"
 }

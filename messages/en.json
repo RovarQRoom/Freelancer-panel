@@ -294,5 +294,6 @@
 	"status": "Status",
 	"total_price": "Total Price",
 	"created_at": "Created At",
-	"editExtraService": "Edit Extra Service"
+	"editExtraService": "Edit Extra Service",
+	"service_jobs": "Service Jobs"
 }

@@ -2368,3 +2368,11 @@ export const created_at = () => `دروستکراوە لە`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const editExtraService = () => `دەستکاری خزمەتگوزاری زیادە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const service_jobs = () => `وێبیناری خزمەتگوزاری`

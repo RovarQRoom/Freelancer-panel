@@ -294,5 +294,6 @@
 	"status": "الحالة",
 	"total_price": "السعر الإجمالي",
 	"created_at": "تاريخ الإنشاء",
-	"editExtraService": "تعديل الخدمة الإضافية"
+	"editExtraService": "تعديل الخدمة الإضافية",
+	"service_jobs": "وظائف الخدمات"
 }
