@@ -13,6 +13,7 @@
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import Pagination from '$lib/Component/Pagination.Component.svelte';
 	import { languageTag } from '$lib/paraglide/runtime';
+	import TableFilter from '$lib/Component/TableFilter.svelte';
 
 	let filter: GenericListOptions = {
 		limit: 10,
@@ -21,14 +22,38 @@
         status,
         overhaul_price,
         fee,
-		user:User!inner(name,email),
-		services:OrderService!inner(
-			service:Service!inner(title(${languageTag()}),price)
-		),
-		extraServices:OrderExtraService!inner(
-			extraService:ExtraService(count)
-		)`
+			user:User!inner(name,email),
+			services:OrderService!inner(
+				service:Service!inner(title(${languageTag()}),price)
+			),
+			extraServices:OrderExtraService!inner(
+				extraService:ExtraService(count)
+			)`
 	};
+
+	const filterFields = [
+		{ name: 'id', type: 'number' },
+		{ 
+			name: 'status', 
+			type: 'select',
+			options: [
+				{ value: 'PENDING', label: 'Pending' },
+				{ value: 'COMPLETE', label: 'Complete' },
+				{ value: 'FAILED', label: 'Failed' },
+				{ value: 'PROCESSING', label: 'Processing' }
+			]
+		},
+		{ name: 'created_at', type: 'date' }
+	];
+
+	function handleFilter(filters: any) {
+		filter = {
+			...filter,
+			...filters,
+			page: 1
+		};
+		orderStore.fetchAll(filter);
+	}
 
 	onMount(async () => {
 		await orderStore.fetchAll(filter);
@@ -45,6 +70,10 @@
 	</div>
 
 	<div class="overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800">
+		<div class="p-4">
+			<TableFilter fields={filterFields} onFilter={handleFilter} />
+		</div>
+
 		<Table hoverable={true} class="w-full">
 			<TableHead class="bg-gray-50 dark:bg-gray-700">
 				<TableHeadCell class="font-semibold">{m.id()}</TableHeadCell>

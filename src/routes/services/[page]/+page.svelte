@@ -27,6 +27,7 @@
 	import { toastStore } from '$lib/Store/Toast';
 	import EditExtraServiceModal from '../EditExtraServiceModal.svelte';
 	import { Tabs, TabItem } from 'flowbite-svelte';
+	import TableFilter from '$lib/Component/TableFilter.svelte';
 
 	let filter: GenericListOptions = $state({
 		page: 1,
@@ -41,12 +42,35 @@
 	let selectedExtraServiceId = $state<number | null>(null);
 	let activeTab = $state(0);
 
+	const filterFields = [
+		{ name: 'title', type: 'text' },
+		{ name: 'price', type: 'number' },
+		{ 
+			name: 'status', 
+			type: 'select',
+			options: [
+				{ value: 'active', label: m.active() },
+				{ value: 'inactive', label: m.inactive() }
+			]
+		},
+		{ name: 'created_at', type: 'date' }
+	];
+
+	function handleFilter(filters: any) {
+		filter = {
+			...filter,
+			...filters,
+			page: 1
+		};
+		serviceStore.fetchAll(filter);
+	}
+
 	onMount(async () => {
 		await serviceStore.fetchAll(filter);
 	});
 
 	async function handleDelete(service: ServiceEntity) {
-		await serviceStore.remove(service.id);
+			await serviceStore.remove(service.id);
 	}
 
 	async function handleGetExtraServices(serviceId: number) {
@@ -94,6 +118,7 @@
 					</div>
 
 					<div class="overflow-x-auto rounded-lg border border-gray-100 shadow-md dark:border-gray-700">
+						<TableFilter {filterFields} onFilter={handleFilter} />
 						<Table hoverable={true} class="rounded-lg">
 							<TableHead class="bg-gray-50 dark:bg-gray-700">
 								<TableHeadCell class="!p-4">{m.id()}</TableHeadCell>

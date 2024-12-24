@@ -28,6 +28,7 @@
 	import { authStore } from '$lib/Store/Auth';
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
+	import TableFilter from '$lib/Component/TableFilter.svelte';
 
 	let hideSidebar = $state(true);
 	let hideEditSidebar = $state(true);
@@ -44,6 +45,29 @@
 		limit: 10,
 		page: 1
 	});
+
+	const filterFields = [
+		{ name: 'id', type: 'number' },
+		{ name: 'title', type: 'text' },
+		{ 
+			name: 'status', 
+			type: 'select',
+			options: [
+				{ value: 'active', label: m.active() },
+				{ value: 'inactive', label: m.inactive() }
+			]
+		},
+		{ name: 'created_at', type: 'date' }
+	];
+
+	function handleFilter(filters: any) {
+		filter = {
+			...filter,
+			...filters,
+			page: 1
+		};
+		categoryStore.fetchAll(filter);
+	}
 
 	onMount(async () => {
 		await categoryStore.fetchAll(filter);
@@ -117,6 +141,10 @@
 	</div>
 
 	<div class="overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800">
+		<div class="p-4">
+			<TableFilter fields={filterFields} onFilter={handleFilter} />
+		</div>
+
 		<Table hoverable={true} class="w-full">
 			<TableHead class="bg-gray-50 text-center dark:bg-gray-700">
 				<TableHeadCell class="font-semibold">{m.id()}</TableHeadCell>

@@ -20,6 +20,7 @@
 	import Pagination from '$lib/Component/Pagination.Component.svelte';
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
+	import TableFilter from '$lib/Component/TableFilter.svelte';
 
 	//TODO: When the user clicks on the row, this will open a modal to edit users Password if needed
 
@@ -28,6 +29,29 @@
 		limit: 10,
 		select: '*,role:Role(name)'
 	};
+
+	const filterFields = [
+		{ name: m.name(), type: 'text' },
+		{ name: m.email(), type: 'text' },
+		{ name: m.phone(), type: 'text' },
+		{ 
+			name: m.role(),
+			type: 'select',
+			options: [
+				{ value: 'admin', label: 'Admin' },
+				{ value: 'user', label: 'User' }
+			]
+		}
+	];
+
+	function handleFilter(filters: any) {
+		filter = {
+			...filter,
+			...filters,
+			page: 1
+		};
+		userStore.fetchAll(filter);
+	}
 
 	onMount(async () => {
 		await userStore.fetchAll(filter);
@@ -39,6 +63,10 @@
 </script>
 
 <div class="p-4">
+	<div class="mb-4">
+		<TableFilter fields={filterFields} onFilter={handleFilter} />
+	</div>
+
 	<div class="mb-4 flex justify-end">
 		{#if checkPremissionOnRoute($authStore!, [Action.CREATE_USER], $authStore?.role?.name)}
 			<a

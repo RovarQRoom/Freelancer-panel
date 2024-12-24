@@ -295,5 +295,12 @@
 	"total_price": "Total Price",
 	"created_at": "Created At",
 	"editExtraService": "Edit Extra Service",
-	"service_jobs": "Service Jobs"
+	"service_jobs": "Service Jobs",
+	"search": "Search...",
+	"filters": "Filters",
+	"all": "All",
+	"reset": "Reset",
+	"apply": "Apply",
+	"active": "Active",
+	"inactive": "Inactive"
 }
