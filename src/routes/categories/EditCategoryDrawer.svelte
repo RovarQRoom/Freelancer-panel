@@ -142,11 +142,11 @@
 
 <Drawer 
 	bind:hidden 
-	width="w-[480px]" 
+	width="w-[520px]"
 	class="transition-transform duration-300"
 	on:close={resetForm}
 >
-	<div class="h-full overflow-y-auto bg-main-light-50 p-6 dark:bg-main-dark-50">
+	<div class="h-full overflow-y-auto bg-gradient-to-b from-white to-gray-50 p-8 dark:from-gray-800 dark:to-gray-900">
 		<h2 class="mb-6 text-2xl font-bold text-main-light-900 dark:text-main-dark-900">
 			{m.editCategory()}
 		</h2>
@@ -158,9 +158,10 @@
 			<form onsubmit={handleEditCategory} class="space-y-6">
 				<div class="space-y-2">
 					<Label class="text-lg font-medium">{m.title()}</Label>
-					<Tabs style="underline" class="mb-4">
+					<Tabs style="underline" class="mb-4 grid grid-cols-3 justify-center items-center w-full">
 						{#each Object.keys(Languages) as language}
-							<TabItem open={language === Languages.EN} title={language}>
+							<TabItem open={language === Languages.EN} title={language} activeClasses="w-full p-4 text-blue-light bg-blue-light/20 rounded-t-lg "
+							inactiveClasses="w-full p-4 text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-white">
 								<Input
 									class="w-full transition-all duration-200 focus:ring-2 focus:ring-primary-light-500"
 									bind:value={editCategoryLanguage[language.toLowerCase() as keyof UpdateLanguage]}
@@ -237,9 +238,9 @@
 					{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_CATEGORY], $authStore?.role?.name)}
 					<Button
 						type="submit"
-						class="flex-1 transform bg-primary-light-500 text-white 
-						transition-all duration-200 hover:scale-105 hover:bg-primary-light-600 
-						dark:bg-primary-dark-500 dark:hover:bg-primary-dark-600"
+						class="flex-1 transform bg-blue-light text-white
+					transition-all duration-200 hover:scale-105 hover:bg-primary-light-600 
+					 dark:hover:bg-primary-dark-600 "
 					>
 						{m.save()}
 						</Button>

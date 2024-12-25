@@ -231,7 +231,9 @@
 			<Button color="alternative" on:click={() => (showAddModal = false)}>
 				{m.cancel()}
 			</Button>
-			<Button onclick={handleAddRole}>
+			<Button class="w-24 flex-1 transform bg-blue-light text-white
+			transition-all duration-200 hover:scale-105 hover:bg-primary-light-600 
+			 dark:hover:bg-primary-dark-600 " onclick={handleAddRole}>
 				{m.save()}
 			</Button>
 		</div>
@@ -282,7 +284,9 @@
 			<Button color="alternative" on:click={() => (showEditModal = false)}>
 				{m.cancel()}
 			</Button>
-			<Button on:click={handleEditRole}>
+			<Button class="w-24 flex-1 transform bg-blue-light text-white
+			transition-all duration-200 hover:scale-105 hover:bg-primary-light-600 
+			 dark:hover:bg-primary-dark-600 " on:click={handleEditRole}>
 				{m.save()}
 			</Button>
 		</div>

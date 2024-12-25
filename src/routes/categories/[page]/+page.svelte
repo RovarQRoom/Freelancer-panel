@@ -299,7 +299,7 @@
 				{#if checkPremissionOnRoute($authStore!, [Action.CREATE_SUBCATEGORY], $authStore?.role?.name)}
 					<!-- svelte-ignore event_directive_deprecated -->
 					<button
-						class="flex transform items-center gap-2 bg-gradient-to-r
+						class="flex transform items-center gap-2 bg-gradient-to-r rounded-lg p-2
 					from-primary-light-500 to-purple-500 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
 						onclick={(event) => {
 							event.stopPropagation();

@@ -118,7 +118,7 @@
 					</div>
 
 					<div class="overflow-x-auto rounded-lg border border-gray-100 shadow-md dark:border-gray-700">
-						<TableFilter {filterFields} onFilter={handleFilter} />
+						<TableFilter fields={filterFields} onFilter={handleFilter} />
 						<Table hoverable={true} class="rounded-lg">
 							<TableHead class="bg-gray-50 dark:bg-gray-700">
 								<TableHeadCell class="!p-4">{m.id()}</TableHeadCell>

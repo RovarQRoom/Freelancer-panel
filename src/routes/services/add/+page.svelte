@@ -205,9 +205,10 @@
 		onsubmit={handleAddService}
 		class="w-full space-y-6 rounded-xl  p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
 	>
-		<Tabs style="underline" class="mb-4 dark:text-white">
+		<Tabs style="underline" class="mb-4 grid grid-cols-3 justify-center items-center w-full">
 			{#each Object.keys(Languages) as language}
-				<TabItem open={language === Languages.EN} title={language}>
+				<TabItem open={language === Languages.EN} title={language} activeClasses="w-full p-4 text-blue-light bg-blue-light/20 rounded-t-lg "
+				inactiveClasses="w-full p-4 text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-white">
 					<!-- Title -->
 					<div class="mb-6 space-y-2">
 						<Label class="text-lg font-medium">{m.title()}</Label>
