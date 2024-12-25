@@ -7,7 +7,12 @@ export class NotificationEntity extends Datetime {
     message?:string;
     image?:string;
     icon?:string;
-    users?: {
-        user:UserEntity
-    }[] = [];
+    users?: NotificationUserEntity[] = [];
+}
+
+export class NotificationUserEntity extends Datetime {
+    id:number = 0;
+    user?:UserEntity;
+    notification?:NotificationEntity;
+    seen:boolean = false;
 }

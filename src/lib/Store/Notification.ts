@@ -10,6 +10,7 @@ import { toastStore } from './Toast';
 import { Store } from '$lib/Model/Extention/Store';
 import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 import * as m from '$lib/paraglide/messages';
+import { supabase } from '$lib/Supabase/supabase';
 
 const notificationRepository = new NotificationRepository();
 
@@ -20,7 +21,8 @@ const createNotificationStore = () => {
 
 	return {
 		subscribe,
-
+		set,
+		update,
 		insert: async (request: InsertNotification) => {
 			try {
 				const response = await notificationRepository.createNotificationAsync(request);
@@ -37,11 +39,27 @@ const createNotificationStore = () => {
 				if (error instanceof Error) toastStore.error(error.message);
 			}
 		},
-		insertNotificationUser: async (request: InsertNotificationUser[]) => {
+		insertNotificationUser: async (
+			request: InsertNotificationUser[],
+			notification?: NotificationEntity
+		) => {
 			try {
 				const response = await notificationRepository.createNotificationUserAsync(request);
 				if (response.error) {
 					throw new Error(response.error.message);
+				}
+				for (const notificationUser of response.data) {
+					const channel = supabase.channel(`notification:${notificationUser.user?.id}`);
+					if (notification) {
+						notification.users = [notificationUser];
+					}
+
+					console.log(notification);
+					channel.send({
+						type: 'broadcast',
+						event: 'notification',
+						payload: notification
+					});
 				}
 				return response.data;
 			} catch (error) {

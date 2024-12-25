@@ -166,22 +166,28 @@ export type Database = {
 					created_at: string;
 					deleted_at: string | null;
 					id: number;
+					is_done: boolean | null;
 					is_group: boolean | null;
 					name: string | null;
+					participants: number[] | null;
 				};
 				Insert: {
 					created_at?: string;
 					deleted_at?: string | null;
 					id?: number;
+					is_done?: boolean | null;
 					is_group?: boolean | null;
 					name?: string | null;
+					participants?: number[] | null;
 				};
 				Update: {
 					created_at?: string;
 					deleted_at?: string | null;
 					id?: number;
+					is_done?: boolean | null;
 					is_group?: boolean | null;
 					name?: string | null;
+					participants?: number[] | null;
 				};
 				Relationships: [];
 			};
@@ -226,6 +232,7 @@ export type Database = {
 			};
 			ExtraService: {
 				Row: {
+					active: boolean | null;
 					created_at: string;
 					deleted_at: string | null;
 					description: number | null;
@@ -236,6 +243,7 @@ export type Database = {
 					title: number;
 				};
 				Insert: {
+					active?: boolean | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					description?: number | null;
@@ -246,6 +254,7 @@ export type Database = {
 					title: number;
 				};
 				Update: {
+					active?: boolean | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					description?: number | null;
@@ -312,6 +321,7 @@ export type Database = {
 					conversation: number | null;
 					created_at: string;
 					deleted_at: string | null;
+					file: string | null;
 					id: number;
 					is_read: boolean | null;
 					sender: number | null;
@@ -321,6 +331,7 @@ export type Database = {
 					conversation?: number | null;
 					created_at?: string;
 					deleted_at?: string | null;
+					file?: string | null;
 					id?: number;
 					is_read?: boolean | null;
 					sender?: number | null;
@@ -330,6 +341,7 @@ export type Database = {
 					conversation?: number | null;
 					created_at?: string;
 					deleted_at?: string | null;
+					file?: string | null;
 					id?: number;
 					is_read?: boolean | null;
 					sender?: number | null;
@@ -461,66 +473,27 @@ export type Database = {
 					}
 				];
 			};
-			OrderService: {
-				Row: {
-					created_at: string;
-					deleted_at: string | null;
-					id: number;
-					order: number | null;
-					service: number | null;
-				};
-				Insert: {
-					created_at?: string;
-					deleted_at?: string | null;
-					id?: number;
-					order?: number | null;
-					service?: number | null;
-				};
-				Update: {
-					created_at?: string;
-					deleted_at?: string | null;
-					id?: number;
-					order?: number | null;
-					service?: number | null;
-				};
-				Relationships: [
-					{
-						foreignKeyName: 'OrderService_order_fkey';
-						columns: ['order'];
-						isOneToOne: false;
-						referencedRelation: 'Order';
-						referencedColumns: ['id'];
-					},
-					{
-						foreignKeyName: 'OrderService_service_fkey';
-						columns: ['service'];
-						isOneToOne: false;
-						referencedRelation: 'Service';
-						referencedColumns: ['id'];
-					}
-				];
-			};
-			OrderServiceExtra: {
+			OrderExtraService: {
 				Row: {
 					created_at: string;
 					deleted_at: string | null;
 					extraService: number | null;
 					id: string;
-					order: number | null;
+					order: number;
 				};
 				Insert: {
 					created_at?: string;
 					deleted_at?: string | null;
 					extraService?: number | null;
 					id?: string;
-					order?: number | null;
+					order: number;
 				};
 				Update: {
 					created_at?: string;
 					deleted_at?: string | null;
 					extraService?: number | null;
 					id?: string;
-					order?: number | null;
+					order?: number;
 				};
 				Relationships: [
 					{
@@ -535,6 +508,45 @@ export type Database = {
 						columns: ['order'];
 						isOneToOne: false;
 						referencedRelation: 'Order';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			OrderService: {
+				Row: {
+					created_at: string;
+					deleted_at: string | null;
+					id: number;
+					order: number;
+					service: number;
+				};
+				Insert: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					order: number;
+					service: number;
+				};
+				Update: {
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					order?: number;
+					service?: number;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'OrderService_order_fkey';
+						columns: ['order'];
+						isOneToOne: false;
+						referencedRelation: 'Order';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'OrderService_service_fkey';
+						columns: ['service'];
+						isOneToOne: false;
+						referencedRelation: 'Service';
 						referencedColumns: ['id'];
 					}
 				];
@@ -658,6 +670,7 @@ export type Database = {
 			};
 			Service: {
 				Row: {
+					average_rating: number | null;
 					created_at: string;
 					created_by: number | null;
 					deleted_at: string | null;
@@ -666,12 +679,14 @@ export type Database = {
 					id: number;
 					media: number | null;
 					price: number;
+					subcategory: number | null;
 					supervised_by: number | null;
 					supports: string[] | null;
 					tags: string[] | null;
 					title: number;
 				};
 				Insert: {
+					average_rating?: number | null;
 					created_at?: string;
 					created_by?: number | null;
 					deleted_at?: string | null;
@@ -680,12 +695,14 @@ export type Database = {
 					id?: number;
 					media?: number | null;
 					price?: number;
+					subcategory?: number | null;
 					supervised_by?: number | null;
 					supports?: string[] | null;
 					tags?: string[] | null;
 					title: number;
 				};
 				Update: {
+					average_rating?: number | null;
 					created_at?: string;
 					created_by?: number | null;
 					deleted_at?: string | null;
@@ -694,6 +711,7 @@ export type Database = {
 					id?: number;
 					media?: number | null;
 					price?: number;
+					subcategory?: number | null;
 					supervised_by?: number | null;
 					supports?: string[] | null;
 					tags?: string[] | null;
@@ -722,6 +740,13 @@ export type Database = {
 						referencedColumns: ['id'];
 					},
 					{
+						foreignKeyName: 'Service_subcategory_fkey';
+						columns: ['subcategory'];
+						isOneToOne: false;
+						referencedRelation: 'Subcategory';
+						referencedColumns: ['id'];
+					},
+					{
 						foreignKeyName: 'Service_supervised_by_fkey';
 						columns: ['supervised_by'];
 						isOneToOne: false;
@@ -733,6 +758,68 @@ export type Database = {
 						columns: ['title'];
 						isOneToOne: false;
 						referencedRelation: 'Language';
+						referencedColumns: ['id'];
+					}
+				];
+			};
+			ServiceJob: {
+				Row: {
+					client: number | null;
+					created_at: string;
+					deleted_at: string | null;
+					id: number;
+					order: number | null;
+					service: number | null;
+					serviceProvider: number | null;
+					status: Database['public']['Enums']['JobStatus'] | null;
+				};
+				Insert: {
+					client?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					order?: number | null;
+					service?: number | null;
+					serviceProvider?: number | null;
+					status?: Database['public']['Enums']['JobStatus'] | null;
+				};
+				Update: {
+					client?: number | null;
+					created_at?: string;
+					deleted_at?: string | null;
+					id?: number;
+					order?: number | null;
+					service?: number | null;
+					serviceProvider?: number | null;
+					status?: Database['public']['Enums']['JobStatus'] | null;
+				};
+				Relationships: [
+					{
+						foreignKeyName: 'ServiceJob_client_fkey';
+						columns: ['client'];
+						isOneToOne: false;
+						referencedRelation: 'User';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'ServiceJob_order_fkey';
+						columns: ['order'];
+						isOneToOne: false;
+						referencedRelation: 'Order';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'ServiceJob_service_fkey';
+						columns: ['service'];
+						isOneToOne: false;
+						referencedRelation: 'Service';
+						referencedColumns: ['id'];
+					},
+					{
+						foreignKeyName: 'ServiceJob_serviceProvider_fkey';
+						columns: ['serviceProvider'];
+						isOneToOne: false;
+						referencedRelation: 'User';
 						referencedColumns: ['id'];
 					}
 				];
@@ -788,7 +875,7 @@ export type Database = {
 			};
 			TypingStatus: {
 				Row: {
-					conservation: number | null;
+					conversation: number | null;
 					created_at: string;
 					id: number;
 					is_typing: boolean | null;
@@ -796,7 +883,7 @@ export type Database = {
 					user: number | null;
 				};
 				Insert: {
-					conservation?: number | null;
+					conversation?: number | null;
 					created_at?: string;
 					id?: number;
 					is_typing?: boolean | null;
@@ -804,7 +891,7 @@ export type Database = {
 					user?: number | null;
 				};
 				Update: {
-					conservation?: number | null;
+					conversation?: number | null;
 					created_at?: string;
 					id?: number;
 					is_typing?: boolean | null;
@@ -813,8 +900,8 @@ export type Database = {
 				};
 				Relationships: [
 					{
-						foreignKeyName: 'TypingStatus_conservation_fkey';
-						columns: ['conservation'];
+						foreignKeyName: 'TypingStatus_conversation_fkey';
+						columns: ['conversation'];
 						isOneToOne: false;
 						referencedRelation: 'Conversation';
 						referencedColumns: ['id'];
@@ -831,35 +918,44 @@ export type Database = {
 			User: {
 				Row: {
 					auth: string | null;
+					bio: string | null;
 					created_at: string;
+					date_of_birth: string | null;
 					deleted_at: string | null;
 					email: string;
+					gender: Database['public']['Enums']['Genders'] | null;
 					id: number;
 					image: string | null;
 					name: string | null;
-					phone: string;
+					phone: string | null;
 					role: number | null;
 				};
 				Insert: {
 					auth?: string | null;
+					bio?: string | null;
 					created_at?: string;
+					date_of_birth?: string | null;
 					deleted_at?: string | null;
 					email: string;
+					gender?: Database['public']['Enums']['Genders'] | null;
 					id?: number;
 					image?: string | null;
 					name?: string | null;
-					phone: string;
+					phone?: string | null;
 					role?: number | null;
 				};
 				Update: {
 					auth?: string | null;
+					bio?: string | null;
 					created_at?: string;
+					date_of_birth?: string | null;
 					deleted_at?: string | null;
 					email?: string;
+					gender?: Database['public']['Enums']['Genders'] | null;
 					id?: number;
 					image?: string | null;
 					name?: string | null;
-					phone?: string;
+					phone?: string | null;
 					role?: number | null;
 				};
 				Relationships: [
@@ -931,8 +1027,10 @@ export type Database = {
 			};
 		};
 		Enums: {
+			Genders: 'MALE' | 'FEMALE';
+			JobStatus: 'PENDING' | 'INTASK' | 'COMPLETE' | 'FAILED' | 'CANCELED';
 			'Languages ': 'EN' | 'AR' | 'CKB';
-			Status: 'FAILED' | 'PENDING' | 'COMPLETE';
+			Status: 'CANCELLED' | 'FAILED' | 'PENDING' | 'COMPLETE';
 			Tags:
 				| 'WEB_DEVELOPMENT'
 				| 'GRAPHIC_DESIGN'
@@ -1153,6 +1251,19 @@ export type CompositeTypes<
 
 // Schema: public
 // Enums
+export enum Genders {
+	MALE = 'MALE',
+	FEMALE = 'FEMALE'
+}
+
+export enum JobStatus {
+	PENDING = 'PENDING',
+	INTASK = 'INTASK',
+	COMPLETE = 'COMPLETE',
+	FAILED = 'FAILED',
+	CANCELED = 'CANCELED'
+}
+
 export enum Languages {
 	EN = 'EN',
 	AR = 'AR',
@@ -1160,6 +1271,7 @@ export enum Languages {
 }
 
 export enum Status {
+	CANCELLED = 'CANCELLED',
 	FAILED = 'FAILED',
 	PENDING = 'PENDING',
 	COMPLETE = 'COMPLETE'
@@ -1341,13 +1453,13 @@ export type Order = Database['public']['Tables']['Order']['Row'];
 export type InsertOrder = Database['public']['Tables']['Order']['Insert'];
 export type UpdateOrder = Database['public']['Tables']['Order']['Update'];
 
+export type OrderExtraService = Database['public']['Tables']['OrderExtraService']['Row'];
+export type InsertOrderExtraService = Database['public']['Tables']['OrderExtraService']['Insert'];
+export type UpdateOrderExtraService = Database['public']['Tables']['OrderExtraService']['Update'];
+
 export type OrderService = Database['public']['Tables']['OrderService']['Row'];
 export type InsertOrderService = Database['public']['Tables']['OrderService']['Insert'];
 export type UpdateOrderService = Database['public']['Tables']['OrderService']['Update'];
-
-export type OrderServiceExtra = Database['public']['Tables']['OrderServiceExtra']['Row'];
-export type InsertOrderServiceExtra = Database['public']['Tables']['OrderServiceExtra']['Insert'];
-export type UpdateOrderServiceExtra = Database['public']['Tables']['OrderServiceExtra']['Update'];
 
 export type Policy = Database['public']['Tables']['Policy']['Row'];
 export type InsertPolicy = Database['public']['Tables']['Policy']['Insert'];
@@ -1368,6 +1480,10 @@ export type UpdateRolePolicy = Database['public']['Tables']['RolePolicy']['Updat
 export type Service = Database['public']['Tables']['Service']['Row'];
 export type InsertService = Database['public']['Tables']['Service']['Insert'];
 export type UpdateService = Database['public']['Tables']['Service']['Update'];
+
+export type ServiceJob = Database['public']['Tables']['ServiceJob']['Row'];
+export type InsertServiceJob = Database['public']['Tables']['ServiceJob']['Insert'];
+export type UpdateServiceJob = Database['public']['Tables']['ServiceJob']['Update'];
 
 export type Subcategory = Database['public']['Tables']['Subcategory']['Row'];
 export type InsertSubcategory = Database['public']['Tables']['Subcategory']['Insert'];

@@ -111,14 +111,16 @@
 					selectedUsers.map((userId) => ({
 						notification: notificationResponse?.id,
 						user: userId
-					}))
+					})),
+					notificationResponse
 				);
 			} else {
 				await notificationStore.insertNotificationUser(
 					users.map((user) => ({
 						notification: notificationResponse?.id,
 						user: user.id
-					}))
+					})),
+					notificationResponse
 				);
 			}
 
