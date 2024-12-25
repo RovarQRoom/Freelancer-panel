@@ -32,6 +32,7 @@
 	import type { LanguageEntity } from '$lib/Model/Entity/Language';
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
+	import RichTextEditor from '$lib/Component/RichTextEditor.svelte';
 
 	const { startUpload } = createUploadThing('imageUploader');
 
@@ -255,12 +256,13 @@
 						<!-- Description -->
 						<div class="mb-6 space-y-2">
 							<Label class="text-lg font-medium">{m.description()}</Label>
-							<!-- svelte-ignore element_invalid_self_closing_tag -->
-							<textarea
-								class="w-full rounded-lg border p-2.5 transition-all duration-300 dark:bg-grey-secondary dark:text-white"
-								rows="4"
-								bind:value={descriptionLanguage[language.toLowerCase() as keyof UpdateLanguage]}
-								required={language === Languages.EN}
+							<RichTextEditor
+								content={descriptionLanguage[language.toLowerCase() as keyof UpdateLanguage] ?? ''}
+								placeholder={m.description()}
+								onChange={(html) => {
+									const lang = language.toLowerCase() as keyof UpdateLanguage;
+									(descriptionLanguage[lang] as any) = html;
+								}}
 							/>
 						</div>
 

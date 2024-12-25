@@ -108,9 +108,10 @@
 	<div class="p-4">
 		<h3 class="mb-4 text-xl font-bold">{m.addExtraService()}</h3>
 		<form class="space-y-4">
-			<Tabs style="underline">
+			<Tabs style="underline" class="mb-4 grid grid-cols-3 justify-center items-center w-full">
 				{#each Object.keys(Languages) as language}
-					<TabItem open={language === Languages.EN} title={language}>
+					<TabItem open={language === Languages.EN} title={language} activeClasses="w-full p-4 text-blue-light bg-blue-light/20 rounded-t-lg "
+					inactiveClasses="w-full p-4 text-primary-600 bg-gray-100 rounded-t-lg dark:bg-gray-800 dark:text-white">
 						<div class="space-y-4">
 							<div class="space-y-2">
 								<Label>{m.title()}</Label>
@@ -170,7 +171,7 @@
 				{#if checkPremissionOnRoute($authStore!, [Action.CREATE_EXTRA_SERVICE], $authStore?.role?.name)}
 					<Button
 						type="submit"
-						class="bg-primary-light-500 text-white"
+						class="w-24 bg-blue-light text-white"
 						on:click={handleAdd}
 						disabled={loadingAdd}
 					>

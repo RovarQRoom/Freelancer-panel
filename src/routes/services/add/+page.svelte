@@ -31,6 +31,7 @@
 	import type { ServiceEntity } from '$lib/Model/Entity/Service';
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
+	import RichTextEditor from '$lib/Component/RichTextEditor.svelte';
 
 	const { startUpload } = createUploadThing('imageUploader', {
 		onClientUploadComplete: () => {
@@ -122,7 +123,7 @@
 		try {
 			// Create language entries for title and description
 			titleResponse = await languageStore.insert(titleLanguage);
-			descriptionResponse = await languageStore.insert(descriptionLanguage);
+			descriptionResponse = await languageStore.insert(descriptionLanguage as InsertLanguage);
 
 			// Handle media uploads and create media language entries
 			let mediaUrls: InsertLanguage = { en: '' };
@@ -222,12 +223,13 @@
 					<!-- Description -->
 					<div class="mb-6 space-y-2">
 						<Label class="text-lg font-medium">{m.description()}</Label>
-						<!-- svelte-ignore element_invalid_self_closing_tag -->
-						<textarea
-							class="w-full rounded-lg border-0 p-2.5 transition-all duration-300 hover:border-primary-light-500 bg-grey-light dark:bg-grey-secondary"
-							rows="4"
-							bind:value={descriptionLanguage[language.toLowerCase() as keyof InsertLanguage]}
-							required={language === Languages.EN}
+						<RichTextEditor
+							content={descriptionLanguage[language.toLowerCase() as keyof InsertLanguage] ?? ''}
+							placeholder={m.description()}
+							onChange={(html) => {
+								const lang = language.toLowerCase() as keyof InsertLanguage;
+								(descriptionLanguage[lang] as any) = html;
+							}}
 						/>
 					</div>
 
@@ -295,7 +297,7 @@
 						value: language,
 						name: m[language]()
 					}))}
-					bind:value={createService.supports as (string | number)[]}
+					bind:value={createService.supports as string[]}
 					placeholder={m.select_supported_languages()}
 				/>
 			</div>
@@ -308,7 +310,7 @@
 						value: tag,
 						name: m[tag]()
 					}))}
-					bind:value={createService.tags as (string | number)[]}
+					bind:value={createService.tags as string[]}
 					placeholder={m.select_tags()}
 					class="transition-all duration-300 hover:border-primary-light-500 bg-grey-light dark:bg-grey-secondary border-0"
 				/>
@@ -390,7 +392,7 @@
 					class="transition-all duration-300 hover:border-primary-light-500 bg-grey-light dark:bg-grey-secondary border-0"
 					bind:value={createService.supervised_by}
 					items={users.map((user) => ({
-						value: user.id,
+						value: user.id.toString(),
 						name: user.name ?? ''
 					}))}
 					placeholder={m.select_supervisor()}
