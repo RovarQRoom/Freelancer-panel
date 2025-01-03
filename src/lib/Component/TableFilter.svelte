@@ -88,30 +88,11 @@
 							{/each}
 						</Select>
 
-					{:else if field.type === 'date' && field.dateRange}
+					{:else if field.type === 'date' && field.dateRange && filter.from instanceof Date && filter.to instanceof Date}
 						<Datepicker 
 							range 
 							bind:rangeFrom={filter.from} 
-							bind:rangeTo={filter.to}
-							autohide={false}
-							portal={true}
-							class="rounded-xl border-gray-200 bg-white/50 shadow-sm backdrop-blur-sm 
-							transition-all duration-300 hover:border-blue-400 focus:border-blue-500 
-							focus:ring-2 focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
-							theme={{
-								popup: "bg-white dark:bg-gray-800 shadow-xl rounded-xl border border-gray-200 dark:border-gray-600",
-								input: "rounded-xl border-gray-200 bg-white/50 shadow-sm backdrop-blur-sm dark:bg-gray-800/50 dark:border-gray-600",
-								days: "grid grid-cols-7 gap-1",
-								day: "hover:bg-blue-100 dark:hover:bg-blue-800 rounded-lg text-sm p-2.5 text-center cursor-pointer",
-								today: "bg-blue-50 dark:bg-blue-900",
-								selectedDay: "bg-blue-500 text-white hover:bg-blue-600",
-								disabledDay: "text-gray-400 dark:text-gray-500 cursor-not-allowed",
-								monthSelector: "flex justify-between items-center p-2",
-								monthSelectorButton: "hover:bg-blue-100 dark:hover:bg-blue-800 rounded-lg p-2",
-								yearSelector: "flex justify-between items-center p-2",
-								yearSelectorButton: "hover:bg-blue-100 dark:hover:bg-blue-800 rounded-lg p-2",
-								weekdays: "flex justify-between p-2 text-gray-500 dark:text-gray-400"
-							}}
+							bind:rangeTo={filter.to}					
 						/>
 					{:else}
 						<Input
