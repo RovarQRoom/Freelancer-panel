@@ -1407,7 +1407,7 @@ export const MOBILE_APP_DEVELOPMENT = () => `تطوير تطبيقات المو�
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const SEO = () => `تحسين محرك��ت البحث`
+export const SEO = () => `تحسين محركات البحث`
 
 
 /**
@@ -1887,7 +1887,7 @@ export const AUGMENTED_REALITY_DEVELOPMENT = () => `تطوير الواقع ال
  * @returns {string}
  */
 /* @__NO_SIDE_EFFECTS__ */
-export const VIRTUAL_REALITY_DEVELOPMENT = () => `تط��ير الواقع الافتراضي`
+export const VIRTUAL_REALITY_DEVELOPMENT = () => `تطوير الواقع الافتراضي`
 
 
 /**
@@ -2378,16 +2378,57 @@ export const editExtraService = () => `تعديل الخدمة الإضافية`
 export const service_jobs = () => `وظائف الخدمات`
 
 
-export { search } from "./en.js"
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const search = () => `بحث...`
 
-export { filters } from "./en.js"
 
-export { all } from "./en.js"
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const filters = () => `تصفية`
 
-export { reset } from "./en.js"
 
-export { apply } from "./en.js"
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const all = () => `الكل`
 
-export { active } from "./en.js"
 
-export { inactive } from "./en.js"
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const reset = () => `إعادة تعيين`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const apply = () => `تطبيق`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const active = () => `نشط`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const inactive = () => `غير نشط`

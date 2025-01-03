@@ -174,7 +174,7 @@
 	"CONTENT_WRITING": "كتابة المحتوى",
 	"DATA_ENTRY": "إدخال البيانات",
 	"MOBILE_APP_DEVELOPMENT": "تطوير تطبيقات الموبايل",
-	"SEO": "تحسين محرك��ت البحث",
+	"SEO": "تحسين محركات البحث",
 	"VIDEO_EDITING": "تحرير الفيديو",
 	"TRANSLATION": "الترجمة",
 	"CONSULTING": "الاستشارات",
@@ -234,7 +234,7 @@
 	"WEB_ANALYTICS": "تحليلات الويب",
 	"MOBILE_GAME_DEVELOPMENT": "تطوير ألعاب الموبايل",
 	"AUGMENTED_REALITY_DEVELOPMENT": "تطوير الواقع المعزز",
-	"VIRTUAL_REALITY_DEVELOPMENT": "تط��ير الواقع الافتراضي",
+	"VIRTUAL_REALITY_DEVELOPMENT": "تطوير الواقع الافتراضي",
 	"DIGITAL_ILLUSTRATION": "الرسم الرقمي",
 	"CHARACTER_DESIGN": "تصميم الشخصيات",
 	"SOCIAL_MEDIA_ADVERTISING": "الإعلان على وسائل التواصل الاجتماعي",
@@ -295,5 +295,12 @@
 	"total_price": "السعر الإجمالي",
 	"created_at": "تاريخ الإنشاء",
 	"editExtraService": "تعديل الخدمة الإضافية",
-	"service_jobs": "وظائف الخدمات"
+	"service_jobs": "وظائف الخدمات",
+	"search": "بحث...",
+	"filters": "تصفية",
+	"all": "الكل",
+	"reset": "إعادة تعيين",
+	"apply": "تطبيق",
+	"active": "نشط",
+	"inactive": "غير نشط"
 }

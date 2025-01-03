@@ -85,6 +85,10 @@ const createCategoryStore = () => {
 			try {
 				await categoryRepository.deleteCategoryAsync(id);
 				toastStore.success(m['delete_success']());
+				update((categories) => {
+					categories.data = categories.data.filter((category) => category.id !== id);
+					return categories;
+				});
 			} catch (error) {
 				if (error instanceof Error) toastStore.error(error.message);
 			}

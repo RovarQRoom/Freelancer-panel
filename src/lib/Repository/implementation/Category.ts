@@ -37,7 +37,7 @@ export class CategoryRepository implements ICategory {
 			.order('id', { ascending: false })
 			.range(
 				((options?.page ?? 1) - 1) * (options?.limit ?? 10),
-				((options?.page ?? 1) * (options?.limit ?? 10)) - 1
+				(options?.page ?? 1) * (options?.limit ?? 10) - 1
 			)
 			.returns<CategoryEntity[]>();
 		if (response.error) {
@@ -79,10 +79,7 @@ export class CategoryRepository implements ICategory {
 		const response = await supabase
 			.from('Category')
 			.update({ deleted_at: new Date().toISOString() })
-			.eq('id', id)
-			.select(`*,title(${languageTag()})`)
-			.returns<CategoryEntity>()
-			.single();
+			.eq('id', id);
 		if (response.error) {
 			toastStore.error(response.error.message);
 			throw new Error(response.error.message);

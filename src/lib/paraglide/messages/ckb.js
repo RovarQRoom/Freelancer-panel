@@ -2378,16 +2378,57 @@ export const editExtraService = () => `دەستکاری خزمەتگوزاری �
 export const service_jobs = () => `وێبیناری خزمەتگوزاری`
 
 
-export { search } from "./en.js"
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const search = () => `گەڕان...`
 
-export { filters } from "./en.js"
 
-export { all } from "./en.js"
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const filters = () => `فلتەرەکان`
 
-export { reset } from "./en.js"
 
-export { apply } from "./en.js"
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const all = () => `هەموو`
 
-export { active } from "./en.js"
 
-export { inactive } from "./en.js"
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const reset = () => `ڕێکخستنەوە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const apply = () => `جێبەجێکردن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const active = () => `چالاک`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const inactive = () => `ناچالاک`

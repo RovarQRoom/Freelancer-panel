@@ -46,31 +46,31 @@
 		page: 1
 	});
 
-	const filterFields = [
-		{ name: 'id', type: 'number' },
-		{ name: 'title', type: 'text' },
+	const filterFields: Array<{
+			label: string;
+			name: string;
+			type: 'text' | 'number' | 'select' | 'date' | 'boolean';
+			dateRange?: boolean;
+			options?: Array<{ value: string; label: string }>;
+		}> = $state([
+		{ label: 'Id', name: 'id', type: 'number' },
+		{ label: `Title (${m[languageTag() == 'en' ? 'EN' : languageTag() == 'ar' ? 'AR' : 'CKB']()})`, name: `title.${languageTag()}`, type: 'text' },
 		{ 
-			name: 'status', 
-			type: 'select',
-			options: [
-				{ value: 'active', label: m.active() },
-				{ value: 'inactive', label: m.inactive() }
-			]
+			label: 'Created At', 
+			name: 'created_at',
+			dateRange: true,
+			type: 'date'
 		},
-		{ name: 'created_at', type: 'date' }
-	];
+	]);
 
-	function handleFilter(filters: any) {
-		filter = {
-			...filter,
-			...filters,
-			page: 1
-		};
-		categoryStore.fetchAll(filter);
+	async function fetchCategories() {
+		await categoryStore.fetchAll(filter);
 	}
 
-	onMount(async () => {
-		await categoryStore.fetchAll(filter);
+	$effect(() => {
+		if (filter) {
+			fetchCategories();
+		}
 	});
 
 	async function handleDeleteCategory() {
@@ -142,7 +142,7 @@
 
 	<div class="overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800">
 		<div class="p-4">
-			<TableFilter fields={filterFields} onFilter={handleFilter} />
+			<TableFilter fields={filterFields} store={categoryStore} bind:filter={filter}/>
 		</div>
 
 		<Table hoverable={true} class="w-full">
@@ -264,7 +264,7 @@
 			<Button
 				color="alternative"
 				class="px-6 py-2 transition-all duration-200 hover:scale-105"
-				on:click={() => (showDeleteModal = false)}
+				onclick={() => (showDeleteModal = false)}
 			>
 				{m.no()}
 			</Button>
