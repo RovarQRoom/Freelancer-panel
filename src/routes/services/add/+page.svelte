@@ -224,7 +224,7 @@
 					<div class="mb-6 space-y-2">
 						<Label class="text-lg font-medium">{m.description()}</Label>
 						<RichTextEditor
-							content={descriptionLanguage[language.toLowerCase() as keyof InsertLanguage] ?? ''}
+							content={(descriptionLanguage[language.toLowerCase() as keyof InsertLanguage] ?? '') as string}
 							placeholder={m.description()}
 							onChange={(html) => {
 								const lang = language.toLowerCase() as keyof InsertLanguage;

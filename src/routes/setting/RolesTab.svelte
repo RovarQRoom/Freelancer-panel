@@ -127,13 +127,13 @@
 </script>
 
 <div class="p-6">
-	<div class="mb-8 flex items-center justify-between">
-		<h1 class="text-3xl font-bold bg-gradient-to-r from-primary-light-500 to-purple-500 bg-clip-text text-transparent">
+	<div class="mb-8 flex items-center justify-between ">
+		<h1 class="text-3xl font-bold bg-gradient-to-r from-primary-light-500 to-purple-500 bg-clip-text text-transparent ">
 			{m.roles()}
 		</h1>
 		<Button
 			class="flex items-center gap-2 transform bg-gradient-to-r from-primary-light-500 to-purple-500 text-white 
-			transition-all duration-300 hover:scale-105 hover:shadow-lg"
+			transition-all duration-300 hover:scale-105 hover:shadow-lg "
 			on:click={() => (showAddModal = true)}
 		>
 			<CirclePlusSolid class="h-5 w-5" />
@@ -141,8 +141,8 @@
 		</Button>
 	</div>
 
-	<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-		<Table hoverable={true} class="w-full">
+	<div class=" bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden ">
+		<Table hoverable={true} class="w-full overflow-x-auto ">
 			<TableHead class="bg-gray-50 dark:bg-gray-700 text-center">
 				<TableHeadCell class="font-semibold">{m.id()}</TableHeadCell>
 				<TableHeadCell class="font-semibold">{m.name()}</TableHeadCell>
