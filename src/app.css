@@ -2,6 +2,15 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+
+@font-face {
+	font-family: 'kurdish';
+	src: url('/fonts/kurdishText.ttf') format('truetype');
+}
+
+*, body {
+	font-family: 'kurdish', sans-serif;
+}
 /* Page transition styles */
 .page-transition-enter {
 	opacity: 0;

@@ -317,31 +317,34 @@ export type Database = {
 			};
 			Message: {
 				Row: {
-					content: string;
+					content: string | null;
 					conversation: number | null;
 					created_at: string;
 					deleted_at: string | null;
 					file: string | null;
+					file_type: string | null;
 					id: number;
 					is_read: boolean | null;
 					sender: number | null;
 				};
 				Insert: {
-					content: string;
+					content?: string | null;
 					conversation?: number | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					file?: string | null;
+					file_type?: string | null;
 					id?: number;
 					is_read?: boolean | null;
 					sender?: number | null;
 				};
 				Update: {
-					content?: string;
+					content?: string | null;
 					conversation?: number | null;
 					created_at?: string;
 					deleted_at?: string | null;
 					file?: string | null;
+					file_type?: string | null;
 					id?: number;
 					is_read?: boolean | null;
 					sender?: number | null;
