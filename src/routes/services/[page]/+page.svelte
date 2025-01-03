@@ -28,11 +28,13 @@
 	import EditExtraServiceModal from '../EditExtraServiceModal.svelte';
 	import { Tabs, TabItem } from 'flowbite-svelte';
 	import TableFilter from '$lib/Component/TableFilter.svelte';
+	import { userStore } from '$lib/Store/User';
+	import { subcategoryStore } from '$lib/Store/Subcategory';
 
 	let filter: GenericListOptions = $state({
 		page: 1,
 		limit: 10,
-		select: `*, title(${languageTag()}), description(${languageTag()}), media(${languageTag()}), supervised_by(name), created_by(name)`
+		select: `*, title(${languageTag()}), description(${languageTag()}), media(${languageTag()}), supervised_by(id,name), created_by(id,name), subcategory(id,title(${languageTag()}))`
 	});
 
 	let showExtraServicesModal = $state(false);
@@ -42,31 +44,33 @@
 	let selectedExtraServiceId = $state<number | null>(null);
 	let activeTab = $state(0);
 
-	const filterFields = [
-		{ name: 'title', type: 'text' },
-		{ name: 'price', type: 'number' },
-		{ 
-			name: 'status', 
-			type: 'select',
-			options: [
-				{ value: 'active', label: m.active() },
-				{ value: 'inactive', label: m.inactive() }
-			]
-		},
-		{ name: 'created_at', type: 'date' }
-	];
+	let filterFields: Array<{
+			label: string;
+			name: string;
+			type: 'text' | 'number' | 'select' | 'date' | 'boolean';
+			dateRange?: boolean;
+			options?: Array<{ value: string | number; label: string }>;
+			store?: any;
+			fieldsToShow?: { name: string, relation?: string }[];
+			select?: string;
+		}> = $state([
+		{ label:  `Title (${m[languageTag() == 'en' ? 'EN' : languageTag() == 'ar' ? 'AR' : 'CKB']()})`, name: `title.${languageTag()}`, type: 'text' },
+		{ label: 'Price', name: 'price', type: 'number' },
+		{ label: 'Average Rating', name: 'average_rating', type: 'number' },
+		{ label: 'Created At', name: 'created_at', type: 'date' },
+		{ label: 'Supervisor', name: 'supervised_by', type: 'select', store: userStore, fieldsToShow: [{ name: 'name' }], select: `id, name` },
+		{ label: 'Created By', name: 'created_by', type: 'select', store: userStore, fieldsToShow: [{ name: 'name' }], select: `id, name` },
+		{ label: 'Subcategory', name: 'subcategory', type: 'select', store: subcategoryStore, fieldsToShow: [{ name: `title`, relation: `${languageTag()}` }], select: `id, title(${languageTag()})` }
+	]);
 
-	function handleFilter(filters: any) {
-		filter = {
-			...filter,
-			...filters,
-			page: 1
-		};
-		serviceStore.fetchAll(filter);
+	async function fetchServices() {
+		await serviceStore.fetchAll(filter);
 	}
 
-	onMount(async () => {
-		await serviceStore.fetchAll(filter);
+	$effect(() => {
+		if(filter){
+			fetchServices();
+		}
 	});
 
 	async function handleDelete(service: ServiceEntity) {
@@ -98,7 +102,7 @@
 		<Tabs style="pills" class="!border-b-0">
 			<TabItem open activeClasses="bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md transform scale-105 transition-all duration-300" 
 					inactiveClasses="text-gray-500 hover:text-gray-700  dark:hover:text-white dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300"
-					on:click={() => activeTab = 0}>
+					onclick={() => activeTab = 0}>
 				<div slot="title" class="flex items-center gap-2 px-5 py-2.5">
 					<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 						<path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/>
@@ -118,7 +122,7 @@
 					</div>
 
 					<div class="overflow-x-auto rounded-lg border border-gray-100 shadow-md dark:border-gray-700">
-						<TableFilter fields={filterFields} onFilter={handleFilter} />
+						<TableFilter bind:fields={filterFields} store={serviceStore} bind:filter={filter}/>
 						<Table hoverable={true} class="rounded-lg">
 							<TableHead class="bg-gray-50 dark:bg-gray-700">
 								<TableHeadCell class="!p-4">{m.id()}</TableHeadCell>
@@ -338,25 +342,3 @@
 	bind:extraServiceId={selectedExtraServiceId} 
 />
 
-<style>
-	/* Custom styles for modern UI */
-	:global(.tab-active) {
-		@apply bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md;
-	}
-	
-	:global(.tab-item) {
-		@apply rounded-lg transition-all duration-300 ease-in-out;
-	}
-	
-	:global(.tab-item:hover) {
-		@apply transform scale-105;
-	}
-	
-	:global(.tabs-group) {
-		@apply p-1 bg-gray-50 dark:bg-gray-800 rounded-xl;
-	}
-	
-	:global(.table-container) {
-		@apply bg-white dark:bg-gray-800;
-	}
-</style>

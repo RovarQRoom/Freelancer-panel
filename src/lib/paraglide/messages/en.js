@@ -2432,3 +2432,19 @@ export const active = () => `Active`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const inactive = () => `Inactive`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const from = () => `From`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const to = () => `To`

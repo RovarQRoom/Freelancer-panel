@@ -3,12 +3,11 @@
 	import { SearchOutline, FilterSolid } from 'flowbite-svelte-icons';
 	import * as m from '$lib/paraglide/messages';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
-	import type { Store } from '$lib/Model/Extention/Store';
+	import SelectWithPagination from './SelectWithPagination.svelte';
 
 	let {
-		store,
 		filter = $bindable(),
-		fields
+		fields = $bindable()
 	}: {
 		store: any;
 		filter: GenericListOptions;
@@ -17,7 +16,10 @@
 			name: string;
 			type: 'text' | 'number' | 'select' | 'date' | 'boolean';
 			dateRange?: boolean;
-			options?: Array<{ value: string; label: string }>;
+			store?: any;
+			options?: Array<{ value: string | number; label: string }>;
+			fieldsToShow?: { name: string, relation?: string }[];
+			select?: string;
 		}>;
 	} = $props();
 
@@ -26,99 +28,115 @@
 	function resetFilters() {
 		filter = { limit: 10 };
 	}
-
-	function applyFilters() {
-		store.fetchAll(filter);
-		// showFiltersModal = false;
-	}
 </script>
 
 
-<div class="mb-4 w-full">
-	<div class="flex flex-col gap-4 sm:flex-row">
+<div class="mb-3 w-full">
+	<div class="flex flex-col gap-2 sm:flex-row">
 		<!-- Search Bar -->
 		<div class="relative flex-1">
 			<Input
-				class="rounded-xl border-gray-200 bg-white/50 pl-10 pr-4 shadow-sm backdrop-blur-sm 
-				transition-all duration-300 hover:border-blue-400 focus:border-blue-500 focus:ring-2 
+				class="rounded-lg border-gray-200 bg-white/50 pl-10 pr-4 py-1.5 shadow-sm backdrop-blur-sm 
+				transition-all duration-300 hover:border-blue-400 focus:border-blue-500 focus:ring-1 
 				focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
 				placeholder={m.search()}
 				bind:value={filter.search}>
-				<SearchOutline slot="left" class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+				<SearchOutline slot="left" class="absolute left-3 top-2 h-4 w-4 text-gray-400" />
 			</Input>
 		</div>
 
 		<!-- Filter Button -->
 		<Button
-			class="flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 
-			px-6 text-white shadow-md transition-all duration-300 hover:scale-102 hover:shadow-lg 
+			class="flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 
+			px-4 py-1.5 text-white shadow-sm transition-all duration-300 hover:scale-102 hover:shadow 
 			hover:shadow-blue-500/25 active:scale-98"
 			onclick={() => (showFiltersModal = true)}>
-			<FilterSolid class="h-4 w-4" />
+			<FilterSolid class="h-3.5 w-3.5" />
 			<span>{m.filters()}</span>
 		</Button>
 	</div>
 </div>
 
 <!-- Filter Modal -->
-<Modal bind:open={showFiltersModal} size="md" class="rounded-xl" autoclose={false}>
-	<div class="p-6">
-		<h3 class="mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-2xl 
+<Modal bind:open={showFiltersModal} size="md" class="rounded-lg" autoclose={false}>
+	<div class="p-4">
+		<h3 class="mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-xl 
 		font-bold text-transparent">
 			{m.filters()}
 		</h3>
 
-		<div class="space-y-6">
+		<div class="space-y-4">
 			{#each fields as field}
-				<div class="flex flex-col gap-2">
+				<div class="flex flex-col gap-1">
 					<Label class="text-sm font-medium text-gray-700 dark:text-gray-300">
 						{field.label}
 					</Label>
 
-					{#if field.type === 'select' && field.options && field.options.length > 0}
-						<Select
-							class="rounded-xl border-gray-200 bg-white/50 shadow-sm backdrop-blur-sm 
+					{#if field.type === 'select'}
+						<!-- <Select
+							class="rounded-lg border-gray-200 bg-white/50 py-1.5 shadow-sm backdrop-blur-sm 
 							transition-all duration-300 hover:border-blue-400 focus:border-blue-500 
-							focus:ring-2 focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
+							focus:ring-1 focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
 							bind:value={filter[field.name]}>
 							<option value="">{m.all()}</option>
 							{#each field.options as option}
 								<option value={option.value}>{option.label}</option>
 							{/each}
-						</Select>
+						</Select> -->
+						<SelectWithPagination
+							store={field.store}
+							bind:selectedValue={filter[field.name]} 
+							fieldsToShow={field.fieldsToShow}
+							select={field.select}
+							/>
 
-					{:else if field.type === 'date' && field.dateRange && filter.from instanceof Date && filter.to instanceof Date}
-						<Datepicker 
-							range 
-							bind:rangeFrom={filter.from} 
-							bind:rangeTo={filter.to}					
-						/>
+					{:else if field.type === 'date'}
+						<div class="flex flex-col gap-2">
+							<div class="grid grid-cols-2 gap-4">
+								<div class="flex flex-col gap-1">
+									<Label class="text-sm font-medium text-gray-600 dark:text-gray-400">
+										{m.from()}
+									</Label>
+									<Input
+										type="date"
+										class="rounded-lg border-gray-200 bg-white/50 py-2 shadow-sm backdrop-blur-sm 
+										transition-all duration-300 hover:border-blue-400 focus:border-blue-500 
+										focus:ring-1 focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
+										bind:value={filter.from} />
+								</div>
+								
+								<div class="flex flex-col gap-1">
+									<Label class="text-sm font-medium text-gray-600 dark:text-gray-400">
+										{m.to()}
+									</Label>
+									<Input
+										type="date"
+										class="rounded-lg border-gray-200 bg-white/50 py-2 shadow-sm backdrop-blur-sm 
+										transition-all duration-300 hover:border-blue-400 focus:border-blue-500 
+										focus:ring-1 focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
+										bind:value={filter.to} />
+								</div>
+							</div>
+						</div>
 					{:else}
 						<Input
 							type={field.type as any}
-							class="rounded-xl border-gray-200 bg-white/50 shadow-sm backdrop-blur-sm 
+							class="rounded-lg border-gray-200 bg-white/50 py-1.5 shadow-sm backdrop-blur-sm 
 							transition-all duration-300 hover:border-blue-400 focus:border-blue-500 
-							focus:ring-2 focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
+							focus:ring-1 focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
 							bind:value={filter[field.name]} />
 					{/if}
 				</div>
 			{/each}
 		</div>
 
-		<div class="mt-8 flex justify-end gap-3">
+		<div class="mt-6 flex justify-end gap-2">
 			<Button
 				color="alternative"
-				class="rounded-xl px-6 transition-all duration-300 hover:scale-102 
+				class="rounded-lg px-4 py-1.5 transition-all duration-300 hover:scale-102 
 				hover:bg-gray-100 active:scale-98 dark:hover:bg-gray-600"
 				onclick={resetFilters}>
 				{m.reset()}
-			</Button>
-			<Button
-				class="rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 px-6 text-white 
-				shadow-md transition-all duration-300 hover:scale-102 hover:shadow-lg 
-				hover:shadow-blue-500/25 active:scale-98"
-				onclick={applyFilters}>
-				{m.apply()}
 			</Button>
 		</div>
 	</div>

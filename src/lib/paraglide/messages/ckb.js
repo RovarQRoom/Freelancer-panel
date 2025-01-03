@@ -2432,3 +2432,19 @@ export const active = () => `چالاک`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const inactive = () => `ناچالاک`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const from = () => `لە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const to = () => `بۆ`

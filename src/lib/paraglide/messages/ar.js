@@ -2432,3 +2432,19 @@ export const active = () => `نشط`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const inactive = () => `غير نشط`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const from = () => `من`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const to = () => `إلى`

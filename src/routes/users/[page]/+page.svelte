@@ -24,11 +24,11 @@
 
 	//TODO: When the user clicks on the row, this will open a modal to edit users Password if needed
 
-	let filter: GenericListOptions = {
+	let filter: GenericListOptions = $state({
 		page: 1,
 		limit: 10,
 		select: '*,role:Role(name)'
-	};
+	});
 
 	const filterFields = [
 		{ name: m.name(), type: 'text' },
@@ -44,18 +44,16 @@
 		}
 	];
 
-	function handleFilter(filters: any) {
-		filter = {
-			...filter,
-			...filters,
-			page: 1
-		};
-		userStore.fetchAll(filter);
+	async function fetchUsers() {
+		await userStore.fetchAll(filter);
 	}
 
-	onMount(async () => {
-		await userStore.fetchAll(filter);
+	$effect(() => {
+		if(filter){
+			fetchUsers();
+		}
 	});
+
 
 	async function handleDelete(user: UserEntity) {
 		await userStore.remove(user.id);
@@ -64,7 +62,7 @@
 
 <div class="p-4">
 	<div class="mb-4">
-		<TableFilter fields={filterFields} onFilter={handleFilter} />
+		<!-- <TableFilter fields={filterFields} onFilter={handleFilter} /> -->
 	</div>
 
 	<div class="mb-4 flex justify-end">
@@ -124,7 +122,7 @@
 								{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_USER], $authStore?.role?.name)}
 									<button
 										class="rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
-										on:click={() => goto(`/users/edit/${user.id}`)}
+										onclick={() => goto(`/users/edit/${user.id}`)}
 									>
 										<PenSolid class="h-4 w-4 text-blue-600 dark:text-blue-400" />
 									</button>
@@ -132,7 +130,7 @@
 								{#if checkPremissionOnRoute($authStore!, [Action.DELETE_USER], $authStore?.role?.name)}
 									<button
 										class="rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
-										on:click={() => handleDelete(user)}
+										onclick={() => handleDelete(user)}
 									>
 										<TrashBinSolid class="h-4 w-4 text-red-600 dark:text-red-400" />
 									</button>

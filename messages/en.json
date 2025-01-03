@@ -169,7 +169,7 @@
 	"CKB": "Kurdish",
 	"AR": "Arabic",
 	"WEB_DEVELOPMENT": "Web Development",
-	"GRAPHIC_DESIGN": "Graphic Design", 
+	"GRAPHIC_DESIGN": "Graphic Design",
 	"DIGITAL_MARKETING": "Digital Marketing",
 	"CONTENT_WRITING": "Content Writing",
 	"DATA_ENTRY": "Data Entry",
@@ -302,5 +302,7 @@
 	"reset": "Reset",
 	"apply": "Apply",
 	"active": "Active",
-	"inactive": "Inactive"
+	"inactive": "Inactive",
+	"from": "From",
+	"to": "To"
 }

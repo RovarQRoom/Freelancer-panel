@@ -15,13 +15,14 @@
 	import { languageTag } from '$lib/paraglide/runtime';
 	import TableFilter from '$lib/Component/TableFilter.svelte';
 
-	let filter: GenericListOptions = {
+	let filter: GenericListOptions = $state({
 		limit: 10,
 		page: 1,
 		select: `id,
         status,
         overhaul_price,
         fee,
+			created_at,
 			user:User!inner(name,email),
 			services:OrderService!inner(
 				service:Service!inner(title(${languageTag()}),price)
@@ -29,7 +30,7 @@
 			extraServices:OrderExtraService!inner(
 				extraService:ExtraService(count)
 			)`
-	};
+	});
 
 	const filterFields = [
 		{ name: 'id', type: 'number' },
@@ -55,8 +56,14 @@
 		orderStore.fetchAll(filter);
 	}
 
-	onMount(async () => {
+	async function fetchOrders() {
 		await orderStore.fetchAll(filter);
+	}
+
+	$effect(() => {
+		if(filter){
+			fetchOrders();
+		}
 	});
 </script>
 
@@ -70,9 +77,9 @@
 	</div>
 
 	<div class="overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800">
-		<div class="p-4">
+		<!-- <div class="p-4">
 			<TableFilter fields={filterFields} onFilter={handleFilter} />
-		</div>
+		</div> -->
 
 		<Table hoverable={true} class="w-full">
 			<TableHead class="bg-gray-50 dark:bg-gray-700">
