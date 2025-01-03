@@ -28,10 +28,14 @@ export class CategoryRepository implements ICategory {
 	): Promise<PostgrestSingleResponse<Array<CategoryEntity>>> {
 		const query = supabase
 			.from('Category')
-			.select(options?.select ?? `*,title(${languageTag()})`, { count: 'exact' });
-		if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
+			.select(options?.select ?? `*,title!inner(${languageTag()})`, { count: 'exact' });
+		if (options?.search) query.ilike(`title.${languageTag()}`, `%${options.search}%`);
 		if (options?.from) query.gte('created_at', options.from);
 		if (options?.to) query.lte('created_at', options.to);
+		if (options?.created_at) query.eq('created_at', options.created_at);
+		if (options?.[`title.${languageTag()}`])
+			query.ilike(`title.${languageTag()}`, `%${options[`title.${languageTag()}`]}%`);
+		if (options?.id) query.eq('id', options.id);
 		const response = await query
 			.is('deleted_at', null)
 			.order('id', { ascending: false })

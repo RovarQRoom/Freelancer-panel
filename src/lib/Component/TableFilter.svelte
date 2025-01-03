@@ -28,8 +28,7 @@
 	}
 
 	function applyFilters() {
-		console.log("filter",filter);
-		// store.fetchAll(filter);
+		store.fetchAll(filter);
 		// showFiltersModal = false;
 	}
 </script>

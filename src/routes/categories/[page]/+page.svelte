@@ -12,7 +12,6 @@
 		Checkbox
 	} from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
-	import { onMount } from 'svelte';
 	import { categoryStore } from '$lib/Store/Category';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
