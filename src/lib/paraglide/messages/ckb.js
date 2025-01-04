@@ -2448,3 +2448,19 @@ export const from = () => `لە`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const to = () => `بۆ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const subcategory = () => `بەشی لاوەکی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const select_subcategory = () => `بەشی لاوەکی هەڵبژێرە`

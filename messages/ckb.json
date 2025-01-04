@@ -304,5 +304,7 @@
 	"active": "چالاک",
 	"inactive": "ناچالاک",
 	"from": "لە",
-	"to": "بۆ"
+	"to": "بۆ",
+	"subcategory": "بەشی لاوەکی",
+	"select_subcategory": "بەشی لاوەکی هەڵبژێرە"
 }

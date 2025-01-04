@@ -65,7 +65,7 @@ export class ServiceRepository implements IService {
 		const response = await supabase
 			.from('Service')
 			.select(
-				`*, title(id,en,ckb,ar), description(id,en,ckb,ar), media(id,en,ckb,ar), supervised_by(id,name), created_by(id,name)`
+				`*, title(id,en,ckb,ar), description(id,en,ckb,ar), media(id,en,ckb,ar), supervised_by(id,name), created_by(id,name), subcategory(id)`
 			)
 			.eq('id', id)
 			.returns<ServiceEntity>()

@@ -2448,3 +2448,19 @@ export const from = () => `من`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const to = () => `إلى`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const subcategory = () => `الفئة الفرعية`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const select_subcategory = () => `اختر الفئة الفرعية`

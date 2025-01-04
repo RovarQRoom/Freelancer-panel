@@ -8,12 +8,10 @@
 		TableHeadCell,
 	} from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
-	import { onMount } from 'svelte';
 	import { orderStore } from '$lib/Store/Order';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import Pagination from '$lib/Component/Pagination.Component.svelte';
 	import { languageTag } from '$lib/paraglide/runtime';
-	import TableFilter from '$lib/Component/TableFilter.svelte';
 
 	let filter: GenericListOptions = $state({
 		limit: 10,

@@ -61,6 +61,14 @@ const createSubcategoryStore = () => {
 				if (error instanceof Error) toastStore.error(error.message);
 			}
 		},
+		fetchForDropdown: async (options?: GenericListOptions) => {
+			try {
+				const response = await subcategoryRepository.readSubcategoriesAsync(options);
+				return response.data;
+			} catch (error) {
+				if (error instanceof Error) toastStore.error(error.message);
+			}
+		},
 		put: async (request: UpdateSubcategory) => {
 			try {
 				const response = await subcategoryRepository.updateSubcategoryAsync(request);

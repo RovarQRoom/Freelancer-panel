@@ -2448,3 +2448,19 @@ export const from = () => `From`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const to = () => `To`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const subcategory = () => `Subcategory`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const select_subcategory = () => `Select subcategory`
