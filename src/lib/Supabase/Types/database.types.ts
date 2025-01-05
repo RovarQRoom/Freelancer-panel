@@ -170,6 +170,7 @@ export type Database = {
 					is_group: boolean | null;
 					name: string | null;
 					participants: number[] | null;
+					temporary: boolean | null;
 				};
 				Insert: {
 					created_at?: string;
@@ -179,6 +180,7 @@ export type Database = {
 					is_group?: boolean | null;
 					name?: string | null;
 					participants?: number[] | null;
+					temporary?: boolean | null;
 				};
 				Update: {
 					created_at?: string;
@@ -188,6 +190,7 @@ export type Database = {
 					is_group?: boolean | null;
 					name?: string | null;
 					participants?: number[] | null;
+					temporary?: boolean | null;
 				};
 				Relationships: [];
 			};
