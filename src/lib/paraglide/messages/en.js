@@ -2464,3 +2464,35 @@ export const subcategory = () => `Subcategory`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const select_subcategory = () => `Select subcategory`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const select_an_option = () => `Select an option`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const previous_page = () => `Previous page`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const next_page = () => `Next page`
+
+
+/**
+ * @param {{ page: NonNullable<unknown> }} params
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const go_to_page = (params) => `Go to page ${params.page}`

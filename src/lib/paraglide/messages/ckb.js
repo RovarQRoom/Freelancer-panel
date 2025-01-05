@@ -2464,3 +2464,35 @@ export const subcategory = () => `بەشی لاوەکی`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const select_subcategory = () => `بەشی لاوەکی هەڵبژێرە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const select_an_option = () => `هەڵبژێرەی یەکە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const previous_page = () => `پێشتر`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const next_page = () => `پاشتر`
+
+
+/**
+ * @param {{ page: NonNullable<unknown> }} params
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const go_to_page = (params) => `بۆ پەڕە ${params.page}`

@@ -306,5 +306,9 @@
 	"from": "لە",
 	"to": "بۆ",
 	"subcategory": "بەشی لاوەکی",
-	"select_subcategory": "بەشی لاوەکی هەڵبژێرە"
+	"select_subcategory": "بەشی لاوەکی هەڵبژێرە",
+	"select_an_option": "هەڵبژێرەی یەکە",
+	"previous_page": "پێشتر",
+	"next_page": "پاشتر",
+	"go_to_page": "بۆ پەڕە {page}"
 }

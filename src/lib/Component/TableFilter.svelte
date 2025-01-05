@@ -1,32 +1,30 @@
 <script lang="ts">
-	import { Button, Input, Select, Modal, Label, Datepicker } from 'flowbite-svelte';
+	import { Button, Input, Modal, Label } from 'flowbite-svelte';
 	import { SearchOutline, FilterSolid } from 'flowbite-svelte-icons';
 	import * as m from '$lib/paraglide/messages';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import SelectWithPagination from './SelectWithPagination.svelte';
+	import type { Fields } from '$lib/Model/Common/FieldsOptions';
 
 	let {
-		filter = $bindable(),
-		fields = $bindable()
+		filter,
+		fields,
+		store
 	}: {
-		store: any;
 		filter: GenericListOptions;
-		fields: Array<{
-			label: string;
-			name: string;
-			type: 'text' | 'number' | 'select' | 'date' | 'boolean';
-			dateRange?: boolean;
-			store?: any;
-			options?: Array<{ value: string | number; label: string }>;
-			fieldsToShow?: { name: string, relation?: string }[];
-			select?: string;
-		}>;
+		fields: Array<Fields>;
+		store: any;
 	} = $props();
 
 	let showFiltersModal = $state(false);
 
-	function resetFilters() {
+	async function resetFilters() {
 		filter = { limit: 10 };
+		await store.fetchAll(filter);
+	}
+
+	async function applyFilters() {
+		await store.fetchAll(filter);
 	}
 </script>
 
@@ -131,6 +129,13 @@
 		</div>
 
 		<div class="mt-6 flex justify-end gap-2">
+			<Button
+				color="alternative"
+				class="rounded-lg px-4 py-1.5 transition-all duration-300 hover:scale-102 
+				hover:bg-gray-100 active:scale-98 dark:hover:bg-gray-600"
+				onclick={applyFilters}>
+				{m.apply()}
+			</Button>
 			<Button
 				color="alternative"
 				class="rounded-lg px-4 py-1.5 transition-all duration-300 hover:scale-102 

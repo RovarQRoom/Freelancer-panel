@@ -2464,3 +2464,35 @@ export const subcategory = () => `الفئة الفرعية`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const select_subcategory = () => `اختر الفئة الفرعية`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const select_an_option = () => `اختر خيار`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const previous_page = () => `الصفحة السابقة`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const next_page = () => `الصفحة التالية`
+
+
+/**
+ * @param {{ page: NonNullable<unknown> }} params
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const go_to_page = (params) => `الصفحة ${params.page}`

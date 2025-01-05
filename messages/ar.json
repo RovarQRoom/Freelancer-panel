@@ -306,5 +306,9 @@
 	"from": "من",
 	"to": "إلى",
 	"subcategory": "الفئة الفرعية",
-	"select_subcategory": "اختر الفئة الفرعية"
+	"select_subcategory": "اختر الفئة الفرعية",
+	"select_an_option": "اختر خيار",
+	"previous_page": "الصفحة السابقة",
+	"next_page": "الصفحة التالية",
+	"go_to_page": "الصفحة {page}"
 }

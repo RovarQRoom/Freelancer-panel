@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
+	import * as m from '$lib/paraglide/messages';
 
 	let {
 		store,
@@ -47,12 +48,12 @@
 </script>
 
 {#if $store && $store.pages && $store.pages > 1}
-	<nav class="pagination bg-[#F9FAFB] dark:bg-[#191919]" aria-label="Pagination">
+	<nav class="pagination" aria-label="Pagination">
 		<button
 			class="pagination-button"
 			onclick={() => previous()}
 			disabled={filter.page === 1}
-			aria-label="Previous page"
+			aria-label={m.previous_page()}
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +76,7 @@
 					class="page-number"
 					class:active={page === filter.page}
 					onclick={() => setPage(page)}
-					aria-label="Go to page {page}"
+					aria-label={m.go_to_page({page})}
 					aria-current={page === filter.page ? 'page' : undefined}
 				>
 					{page}
@@ -87,7 +88,7 @@
 			class="pagination-button"
 			onclick={() => next()}
 			disabled={filter.page === $store.pages!}
-			aria-label="Next page"
+			aria-label={m.next_page()}
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -109,15 +110,16 @@
 <style>
 	.pagination {
 		width: 100%;
-		height: 50px;
+		min-height: 60px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		gap: 1rem;
-		font-family:
-			system-ui,
-			-apple-system,
-			sans-serif;
+		gap: 1.5rem;
+		font-family: system-ui, -apple-system, sans-serif;
+		padding: 1rem;
+		background: var(--pagination-bg, #ffffff);
+		border-radius: 1rem;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 	}
 
 	.pagination-numbers {
@@ -131,53 +133,75 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		min-width: 2.5rem;
-		height: 2.5rem;
+		min-width: 2.75rem;
+		height: 2.75rem;
 		padding: 0.5rem;
 		border: none;
-		border-radius: 0.5rem;
-		color: #374151;
+		border-radius: 0.75rem;
+		background: var(--button-bg, #f3f4f6);
+		color: var(--text-color, #374151);
 		cursor: pointer;
-		transition: all 0.2s ease;
-		font-size: 0.875rem;
-		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+		font-size: 0.95rem;
+		font-weight: 500;
+		position: relative;
+		overflow: hidden;
 	}
 
 	.pagination-button {
-		background: #c5c5c5;
+		background: var(--nav-button-bg, #f3f4f6);
 	}
 
 	.pagination-button:hover:not(:disabled),
 	.page-number:hover:not(.active) {
-		background: #f3f4f6;
+		background: var(--hover-bg, #e5e7eb);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 	}
 
 	.pagination-button:disabled {
 		opacity: 0.5;
 		cursor: not-allowed;
+		transform: none;
 	}
 
 	.page-number.active {
-		background: #3b82f6;
+		background: var(--active-bg, #3b82f6);
 		color: white;
-		font-weight: 500;
+		font-weight: 600;
+		box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5);
 	}
 
-	.ellipsis {
-		color: #6b7280;
-		padding: 0 0.25rem;
+	.page-number.active:hover {
+		transform: none;
+	}
+
+	/* Dark mode styles */
+	@media (prefers-color-scheme: dark) {
+		.pagination {
+			--pagination-bg: #1f2937;
+			--button-bg: #374151;
+			--nav-button-bg: #374151;
+			--text-color: #e5e7eb;
+			--hover-bg: #4b5563;
+			--active-bg: #3b82f6;
+			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+		}
 	}
 
 	@media (max-width: 640px) {
 		.pagination {
-			gap: 0.5rem;
+			gap: 0.75rem;
+			padding: 0.75rem;
 		}
 
 		.pagination-button,
 		.page-number {
-			min-width: 2rem;
-			height: 2rem;
+			min-width: 2.25rem;
+			height: 2.25rem;
 			padding: 0.25rem;
+			font-size: 0.875rem;
+			border-radius: 0.5rem;
 		}
 	}
 </style>

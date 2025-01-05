@@ -306,5 +306,9 @@
 	"from": "From",
 	"to": "To",
 	"subcategory": "Subcategory",
-	"select_subcategory": "Select subcategory"
+	"select_subcategory": "Select subcategory",
+	"select_an_option": "Select an option",
+	"previous_page": "Previous page",
+	"next_page": "Next page",
+	"go_to_page": "Go to page {page}"
 }

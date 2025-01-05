@@ -14,7 +14,6 @@
 	} from 'flowbite-svelte';
 	import { PenSolid, TrashBinSolid } from 'flowbite-svelte-icons';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 	import { serviceStore } from '$lib/Store/Service';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
@@ -68,9 +67,7 @@
 	}
 
 	$effect(() => {
-		if(filter){
 			fetchServices();
-		}
 	});
 
 	async function handleDelete(service: ServiceEntity) {
@@ -122,7 +119,7 @@
 					</div>
 
 					<div class="overflow-x-auto rounded-lg border border-gray-100 shadow-md dark:border-gray-700">
-						<TableFilter bind:fields={filterFields} store={serviceStore} bind:filter={filter}/>
+						<TableFilter fields={filterFields} filter={filter} store={serviceStore}/>
 						<Table hoverable={true} class="rounded-lg">
 							<TableHead class="bg-gray-50 dark:bg-gray-700">
 								<TableHeadCell class="!p-4">{m.id()}</TableHeadCell>
