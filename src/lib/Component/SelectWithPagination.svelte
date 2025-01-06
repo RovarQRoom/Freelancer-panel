@@ -64,7 +64,7 @@
 <div class="flex flex-col gap-4">
 	<div class="flex justify-end">
 		{#if $store && $store.data && $store.data.length > 0}
-			<Button class="font-medium">
+			<Button class="w-full text-black dark:text-white bg-grey-light  dark:bg-grey-secondary font-medium">
 				<span class="truncate max-w-[200px]">{dropdownText}</span>
 				<ChevronDownOutline class="w-3 h-3 ms-2 transition-transform duration-200" />
 			</Button>
