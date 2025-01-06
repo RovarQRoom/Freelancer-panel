@@ -30,6 +30,9 @@ export class OrderRepository implements IOrder {
         if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
         if (options?.from) query.gte('created_at', options.from);
         if (options?.to) query.lte('created_at', options.to);
+        if (options?.status) query.eq('status', options.status);
+        if (options?.user) query.eq('user', options.user);
+        
 
         const response = await query
             .is('deleted_at', null)

@@ -28,6 +28,7 @@
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
 	import TableFilter from '$lib/Component/TableFilter.svelte';
+	import type { Fields } from '$lib/Model/Common/FieldsOptions';
 
 	let hideSidebar = $state(true);
 	let hideEditSidebar = $state(true);
@@ -45,13 +46,7 @@
 		page: 1
 	});
 
-	const filterFields: Array<{
-			label: string;
-			name: string;
-			type: 'text' | 'number' | 'select' | 'date' | 'boolean';
-			dateRange?: boolean;
-			options?: Array<{ value: string; label: string }>;
-		}> = $state([
+	let filterFields: Array<Fields> = $state([
 		{ label: 'Id', name: 'id', type: 'number' },
 		{ label: `Title (${m[languageTag() == 'en' ? 'EN' : languageTag() == 'ar' ? 'AR' : 'CKB']()})`, name: `title.${languageTag()}`, type: 'text' },
 		{ 
@@ -97,7 +92,7 @@
 				equal: categoryId?.toString()
 			});
 			selectedSubcategories = $subcategoryStore.data
-				.filter((subcategory) => subcategory.category === categoryId)
+				.filter((subcategory) => subcategory.category?.id === categoryId)
 				.map((subcategory) => subcategory.id);
 			selectedCategory = categoryId;
 			showSubcategoryModal = true;
@@ -141,7 +136,7 @@
 
 	<div class="overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800">
 		<div class="p-4">
-			<TableFilter fields={filterFields} store={categoryStore} bind:filter={filter}/>
+			<TableFilter fields={filterFields} store={categoryStore} filter={filter}/>
 		</div>
 
 		<Table hoverable={true} class="w-full">

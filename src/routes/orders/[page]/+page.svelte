@@ -12,6 +12,9 @@
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import Pagination from '$lib/Component/Pagination.Component.svelte';
 	import { languageTag } from '$lib/paraglide/runtime';
+	import { Status } from '$lib/Supabase/Types/database.types';
+	import TableFilter from '$lib/Component/TableFilter.svelte';
+	import { userStore } from '$lib/Store/User';
 
 	let filter: GenericListOptions = $state({
 		limit: 10,
@@ -30,29 +33,23 @@
 			)`
 	});
 
-	const filterFields = [
-		{ name: 'id', type: 'number' },
-		{ 
-			name: 'status', 
-			type: 'select',
-			options: [
-				{ value: 'PENDING', label: 'Pending' },
-				{ value: 'COMPLETE', label: 'Complete' },
-				{ value: 'FAILED', label: 'Failed' },
-				{ value: 'PROCESSING', label: 'Processing' }
-			]
-		},
-		{ name: 'created_at', type: 'date' }
-	];
-
-	function handleFilter(filters: any) {
-		filter = {
-			...filter,
-			...filters,
-			page: 1
-		};
-		orderStore.fetchAll(filter);
-	}
+	let filterFields: Array<{
+			label: string;
+			name: string;
+			type: 'text' | 'number' | 'select' | 'date' | 'boolean';
+			dateRange?: boolean;
+			options?: Array<{ value: string | number; label: string }>;
+			store?: any;
+			fieldsToShow?: { name: string, relation?: string }[];
+			select?: string;
+			database?: boolean;
+		}> = $state([
+		{ label:  `Overhaul Price`, name: `overhaul_price`, type: 'number' },
+		{ label: 'Fee', name: 'fee', type: 'number' },
+		{ label: 'Created At', name: 'created_at', type: 'date' },
+		{ label: 'Status', name: 'status', type: 'select', options:Object.values(Status).map(status => ({ value: status, label: status })), database: false },
+		{ label: 'User', name: 'user', type: 'select', store: userStore, fieldsToShow: [{ name: 'name' }], select: `id, name`, database: true },
+	]);
 
 	async function fetchOrders() {
 		await orderStore.fetchAll(filter);
@@ -75,9 +72,9 @@
 	</div>
 
 	<div class="overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800">
-		<!-- <div class="p-4">
-			<TableFilter fields={filterFields} onFilter={handleFilter} />
-		</div> -->
+		<div class="p-4">
+			<TableFilter fields={filterFields} filter={filter} store={orderStore}/>
+		</div>
 
 		<Table hoverable={true} class="w-full">
 			<TableHead class="bg-gray-50 dark:bg-gray-700">

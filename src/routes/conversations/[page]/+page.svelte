@@ -39,7 +39,7 @@
 		await messageStore.fetchAll({
 			limit: 100,
 			page: 1,
-			select: `content,is_read,created_at,sender:User!inner(id,name,image)`,
+			select: `content,is_read,file,file_type,created_at,sender:User!inner(id,name,image)`,
 			equal: conversation.id.toString(),
 			order: true
 		});

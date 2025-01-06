@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Input, Modal, Label } from 'flowbite-svelte';
+	import { Button, Input, Modal, Label, Select } from 'flowbite-svelte';
 	import { SearchOutline, FilterSolid } from 'flowbite-svelte-icons';
 	import * as m from '$lib/paraglide/messages';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
@@ -69,25 +69,24 @@
 					<Label class="text-sm font-medium text-gray-700 dark:text-gray-300">
 						{field.label}
 					</Label>
-
-					{#if field.type === 'select'}
-						<!-- <Select
-							class="rounded-lg border-gray-200 bg-white/50 py-1.5 shadow-sm backdrop-blur-sm 
-							transition-all duration-300 hover:border-blue-400 focus:border-blue-500 
-							focus:ring-1 focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
-							bind:value={filter[field.name]}>
-							<option value="">{m.all()}</option>
-							{#each field.options as option}
-								<option value={option.value}>{option.label}</option>
-							{/each}
-						</Select> -->
+					{#if field.type === 'select' && !field.database && field.options}
+						<Select
+						class="rounded-lg border-gray-200 bg-white/50 py-1.5 shadow-sm backdrop-blur-sm 
+						transition-all duration-300 hover:border-blue-400 focus:border-blue-500 
+					focus:ring-1 focus:ring-blue-500/40 dark:border-gray-600 dark:bg-gray-800/50"
+					bind:value={filter[field.name]}>
+					<option value="">{m.all()}</option>
+					{#each field.options as option}
+					<option value={option.value}>{option.label}</option>
+					{/each}
+						</Select>
+					{:else if field.type === 'select'}
 						<SelectWithPagination
 							store={field.store}
 							bind:selectedValue={filter[field.name]} 
 							fieldsToShow={field.fieldsToShow}
 							select={field.select}
 							/>
-
 					{:else if field.type === 'date'}
 						<div class="flex flex-col gap-2">
 							<div class="grid grid-cols-2 gap-4">

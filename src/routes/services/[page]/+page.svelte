@@ -29,6 +29,7 @@
 	import TableFilter from '$lib/Component/TableFilter.svelte';
 	import { userStore } from '$lib/Store/User';
 	import { subcategoryStore } from '$lib/Store/Subcategory';
+	import type { Fields } from '$lib/Model/Common/FieldsOptions';
 
 	let filter: GenericListOptions = $state({
 		page: 1,
@@ -43,23 +44,14 @@
 	let selectedExtraServiceId = $state<number | null>(null);
 	let activeTab = $state(0);
 
-	let filterFields: Array<{
-			label: string;
-			name: string;
-			type: 'text' | 'number' | 'select' | 'date' | 'boolean';
-			dateRange?: boolean;
-			options?: Array<{ value: string | number; label: string }>;
-			store?: any;
-			fieldsToShow?: { name: string, relation?: string }[];
-			select?: string;
-		}> = $state([
+	let filterFields: Array<Fields> = $state([
 		{ label:  `Title (${m[languageTag() == 'en' ? 'EN' : languageTag() == 'ar' ? 'AR' : 'CKB']()})`, name: `title.${languageTag()}`, type: 'text' },
 		{ label: 'Price', name: 'price', type: 'number' },
 		{ label: 'Average Rating', name: 'average_rating', type: 'number' },
 		{ label: 'Created At', name: 'created_at', type: 'date' },
-		{ label: 'Supervisor', name: 'supervised_by', type: 'select', store: userStore, fieldsToShow: [{ name: 'name' }], select: `id, name` },
-		{ label: 'Created By', name: 'created_by', type: 'select', store: userStore, fieldsToShow: [{ name: 'name' }], select: `id, name` },
-		{ label: 'Subcategory', name: 'subcategory', type: 'select', store: subcategoryStore, fieldsToShow: [{ name: `title`, relation: `${languageTag()}` }], select: `id, title(${languageTag()})` }
+		{ label: 'Supervisor', name: 'supervised_by', type: 'select', store: userStore, fieldsToShow: [{ name: 'name' }], select: `id, name`, database: true },
+		{ label: 'Created By', name: 'created_by', type: 'select', store: userStore, fieldsToShow: [{ name: 'name' }], select: `id, name`, database: true },
+		{ label: 'Subcategory', name: 'subcategory', type: 'select', store: subcategoryStore, fieldsToShow: [{ name: `title`, relation: `${languageTag()}` }], select: `id, title(${languageTag()})`, database: true }
 	]);
 
 	async function fetchServices() {

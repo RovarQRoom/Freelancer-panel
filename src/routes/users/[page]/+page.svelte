@@ -13,7 +13,6 @@
 	} from 'flowbite-svelte';
 	import { PenSolid, TrashBinSolid } from 'flowbite-svelte-icons';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 	import { userStore } from '$lib/Store/User';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import { authStore } from '$lib/Store/Auth';
@@ -21,8 +20,8 @@
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
 	import TableFilter from '$lib/Component/TableFilter.svelte';
-
-	//TODO: When the user clicks on the row, this will open a modal to edit users Password if needed
+	import { roleStore } from '$lib/Store/Role';
+	import type { Fields } from '$lib/Model/Common/FieldsOptions';
 
 	let filter: GenericListOptions = $state({
 		page: 1,
@@ -30,28 +29,20 @@
 		select: '*,role:Role(name)'
 	});
 
-	const filterFields = [
-		{ name: m.name(), type: 'text' },
-		{ name: m.email(), type: 'text' },
-		{ name: m.phone(), type: 'text' },
-		{ 
-			name: m.role(),
-			type: 'select',
-			options: [
-				{ value: 'admin', label: 'Admin' },
-				{ value: 'user', label: 'User' }
-			]
-		}
-	];
+	let filterFields: Array<Fields> = $state([
+		{ label:  `Name`, name: `name`, type: 'text' },
+		{ label: 'Email', name: 'email', type: 'text' },
+		{ label: 'Phone', name: 'phone', type: 'text' },
+		{ label: 'Created At', name: 'created_at', type: 'date' },
+		{ label: 'Role', name: 'role', type: 'select', store: roleStore, fieldsToShow: [{ name: 'name' }], select: `id, name`, database: true },
+	]);
 
 	async function fetchUsers() {
 		await userStore.fetchAll(filter);
 	}
 
 	$effect(() => {
-		if(filter){
 			fetchUsers();
-		}
 	});
 
 
@@ -62,7 +53,7 @@
 
 <div class="p-4">
 	<div class="mb-4">
-		<!-- <TableFilter fields={filterFields} onFilter={handleFilter} /> -->
+		<TableFilter fields={filterFields} filter={filter} store={userStore}/>
 	</div>
 
 	<div class="mb-4 flex justify-end">

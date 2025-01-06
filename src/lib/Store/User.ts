@@ -46,6 +46,8 @@ const createUserStore = () => {
 
 		fetchAll: async (options?: GenericListOptions) => {
 			try {
+				console.log('User FetchAll', options);
+
 				const response = await userRepository.readUsersAsync(options);
 				if (response.error) {
 					throw new Error(response.error.message);

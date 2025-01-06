@@ -9,9 +9,10 @@ export class OrderEntity extends Datetime {
 	id: number = 0;
 	status: Status = Status.PENDING;
 	overhaul_price: number = 0;
+	paid_price?: number;
 	fee: number = 0;
 	user: UserEntity = new UserEntity();
 	cart?: CartEntity;
-	services?: { service: ServiceEntity, count?: number }[];
-	extraServices?: { extraService: ExtraServiceEntity, count?: number }[];
+	services?: { service: ServiceEntity; count?: number }[];
+	extraServices?: { extraService: ExtraServiceEntity; count?: number }[];
 }

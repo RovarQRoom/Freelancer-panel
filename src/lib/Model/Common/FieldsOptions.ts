@@ -7,6 +7,7 @@ export class Fields {
 	options?: Array<Options>;
 	fieldsToShow?: Array<FieldsToShow>;
 	select?: string;
+	database?: boolean;
 }
 
 export class Options {
