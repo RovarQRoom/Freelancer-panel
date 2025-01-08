@@ -1,17 +1,24 @@
 <script lang="ts">
 	import { messageStore } from '$lib/Store/Message';
-	import { Modal, Avatar } from 'flowbite-svelte';
+	import { Modal, Avatar, Img } from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
 	import type { ConversationEntity } from '$lib/Model/Entity/Conversation';
+	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
+	import { supabase } from '$lib/Supabase/supabase';
+	import type { RealtimePostgresInsertPayload } from '@supabase/supabase-js';
+	import type { Message } from '$lib/Supabase/Types/database.types';
+	import { onMount } from 'svelte';
 
 	let {
 		show = $bindable(false),
 		currentUserId,
-		conversation
+		conversation,
+		filter
 	}: {
 		show: boolean;
 		currentUserId: number;
 		conversation: ConversationEntity | null;
+		filter: GenericListOptions;
 	} = $props();
 
 	const isGroup = $derived(conversation?.is_group ?? false);
@@ -25,14 +32,129 @@
 	}
 
 	let messageContainer: HTMLDivElement;
+	let isLoading = $state(false);
+	let page = $state(1);
+	const MESSAGES_PER_PAGE = 10;
+	let previousScrollHeight = $state(0);
+	let initialLoad = $state(true);
 
-	// Enhanced scroll behavior
-	$effect(() => {
-		if (messageContainer && $messageStore.data) {
-			// Ensure we're at the bottom even with new messages
-			requestAnimationFrame(() => {
-				messageContainer.scrollTop = messageContainer.scrollHeight;
+	function realtimeMessage() {
+		supabase
+			.channel(`conversation-panel:${conversation?.id}`) // unique channel name per conversation
+			.on(
+				'postgres_changes',
+				{
+					event: 'INSERT',
+					schema: 'public',
+					table: 'Message'
+				},
+				(payload: RealtimePostgresInsertPayload<Message>) => {
+						messageStore.update((store) => {
+							const senderData = store.data.find(
+								(data) => data.sender?.id === payload.new.sender
+							)?.sender;
+
+							store.data = [
+								{
+									...payload.new,
+									sender: senderData,
+									content: payload.new.content || '',
+									conversation: store.data.find(
+										(data) => data.conversation?.id === payload.new.conversation
+									)?.conversation,
+									file: payload.new.file || undefined,
+									is_read: false,
+									file_type: payload.new.file_type || undefined,
+									deleted_at: payload.new.deleted_at || undefined
+								},
+								...store.data
+							];
+							return store;
+						});
+						setTimeout(() => {
+							messageContainer.scrollTop = messageContainer.scrollHeight;
+						}, 100);
+					}
+			)
+			.subscribe();
+	}
+
+	onMount(() => {
+		realtimeMessage();
+	});
+
+	async function loadMoreMessages() {
+		if (isLoading || ($messageStore.remaining ?? 0) <= 0) return;
+		
+		isLoading = true;
+		previousScrollHeight = messageContainer?.scrollHeight ?? 0;
+		
+		try {
+			const result = await messageStore.fetchAll({
+				...filter,
+				page: page + 1,
+				limit: MESSAGES_PER_PAGE,
 			});
+			
+			if (result && result.length > 0) {
+				page++;
+			}
+		} finally {
+			isLoading = false;
+		}
+	}
+
+	function handleScroll(event: Event) {
+		const target = event.target as HTMLDivElement;
+		if (target.scrollTop <= 100) {
+			loadMoreMessages();
+		}
+	}
+
+	// Initialize messages when modal opens
+	$effect(() => {
+		if (show && conversation?.id) {
+			// Reset pagination and initialLoad flag when modal opens
+			page = 1;
+			initialLoad = true;
+			
+			messageStore.fetchAll({
+				...filter,
+				page: 1,
+				limit: MESSAGES_PER_PAGE,
+			}).catch(() => {
+				isLoading = false;
+			});
+		} else {
+			// Clear messages when modal closes
+			messageStore.set({
+				data: [],
+				total: 0,
+				pages: 0,
+				currentPage: 1,
+				remaining: 0
+			});
+		}
+	});
+
+	// Handle initial scroll to bottom
+	$effect(() => {
+		if (show && messageContainer && $messageStore.data.length > 0 && initialLoad) {
+			// Small delay to ensure content is rendered
+			setTimeout(() => {
+				messageContainer.scrollTop = messageContainer.scrollHeight;
+				// Reset initialLoad after the first scroll
+				initialLoad = false;
+			}, 100);
+		}
+	});
+
+	// Handle scroll position after loading more messages
+	$effect(() => {
+		if (messageContainer && previousScrollHeight > 0 && $messageStore.data.length > 0) {
+			const newScrollPosition = messageContainer.scrollHeight - previousScrollHeight;
+			messageContainer.scrollTop = newScrollPosition;
+			previousScrollHeight = 0; // Reset after use
 		}
 	});
 
@@ -40,23 +162,30 @@
 
 <Modal bind:open={show} size="md" class="message-modal">
 	<div class="flex h-[600px] flex-col bg-gray-50 dark:bg-gray-800 rounded-lg">
-		<!-- Enhanced Header -->
+		<!-- Header -->
 		<div class="border-b p-4 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-t-lg backdrop-blur-lg backdrop-filter">
 			<h3 class="text-xl font-semibold text-gray-800 dark:text-white">
 				{conversation?.name ?? m.conversation()}
 			</h3>
 		</div>
 
-		<!-- Fixed message container -->
+		<!-- Message container -->
 		<div 
 			bind:this={messageContainer}
-			class="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600"
+			onscroll={handleScroll}
+			class="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 hover:scrollbar-thumb-gray-400 dark:hover:scrollbar-thumb-gray-500"
 		>
-			<!-- Wrapper to maintain spacing -->
-			<div class="flex flex-col space-y-4 min-h-full">
-				<!-- Auto margin top to push messages to bottom when there's few messages -->
+			<!-- Loading indicator -->
+			{#if isLoading}
+				<div class="flex justify-center py-2">
+					<div class="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900 dark:border-white"></div>
+				</div>
+			{/if}
+
+			<!-- Messages wrapper -->
+			<div class="flex flex-col-reverse space-y-reverse space-y-4 min-h-full">
 				<div class="mt-auto space-y-4">
-					{#each $messageStore.data as message}
+					{#each $messageStore.data.reverse() as message}
 						{@const isCurrentUser = message.sender?.id === currentUserId}
 
 						<div class="flex {isCurrentUser ? 'justify-end' : 'justify-start'} gap-2 animate-fade-in">
@@ -80,7 +209,7 @@
 
 									{#if message.file}
 										{#if isImageFile(message.file_type)}
-											<img 
+											<Img 
 												src={message.file} 
 												alt="Message attachment" 
 												class="mt-2 rounded-lg w-auto h-auto transition-transform hover:scale-105"
@@ -131,6 +260,7 @@
 	</div>
 </Modal>
 
+
 <style>
 	/* Custom scrollbar styles */
 	.scrollbar-thin::-webkit-scrollbar {
@@ -142,12 +272,7 @@
 	}
 
 	.scrollbar-thin::-webkit-scrollbar-thumb {
-		background: #CBD5E0;
 		border-radius: 3px;
-	}
-
-	.dark .scrollbar-thin::-webkit-scrollbar-thumb {
-		background: #4B5563;
 	}
 
 	/* Animation for new messages */
@@ -178,3 +303,13 @@
 		-webkit-overflow-scrolling: touch;
 	}
 </style>
+
+<svelte:head>
+	{#if document?.documentElement.classList.contains('dark')}
+		<style>
+			:root {
+				--scrollbar-thumb-color: #4B5563;
+			}
+		</style>
+	{/if}
+</svelte:head>
