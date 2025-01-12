@@ -8,6 +8,8 @@ export interface GenericListOptions extends FilteringOptions {
 	select?: string;
 	orderBy?: string;
 	order?: boolean;
+	isAdmin?: boolean;
+	user?: string;
 	[key: string]: any;
 }
 

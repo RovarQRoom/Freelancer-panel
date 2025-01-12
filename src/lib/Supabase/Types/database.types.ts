@@ -448,6 +448,7 @@ export type Database = {
 					fee: number | null;
 					id: number;
 					overhaul_price: number;
+					paid_price: number | null;
 					status: Database['public']['Enums']['Status'] | null;
 					user: number;
 				};
@@ -457,6 +458,7 @@ export type Database = {
 					fee?: number | null;
 					id?: number;
 					overhaul_price: number;
+					paid_price?: number | null;
 					status?: Database['public']['Enums']['Status'] | null;
 					user: number;
 				};
@@ -466,6 +468,7 @@ export type Database = {
 					fee?: number | null;
 					id?: number;
 					overhaul_price?: number;
+					paid_price?: number | null;
 					status?: Database['public']['Enums']['Status'] | null;
 					user?: number;
 				};
@@ -932,9 +935,11 @@ export type Database = {
 					gender: Database['public']['Enums']['Genders'] | null;
 					id: number;
 					image: string | null;
+					isAdmin: boolean;
 					name: string | null;
 					phone: string | null;
 					role: number | null;
+					userType: Database['public']['Enums']['UserTypes'] | null;
 				};
 				Insert: {
 					auth?: string | null;
@@ -946,9 +951,11 @@ export type Database = {
 					gender?: Database['public']['Enums']['Genders'] | null;
 					id?: number;
 					image?: string | null;
+					isAdmin?: boolean;
 					name?: string | null;
 					phone?: string | null;
 					role?: number | null;
+					userType?: Database['public']['Enums']['UserTypes'] | null;
 				};
 				Update: {
 					auth?: string | null;
@@ -960,9 +967,11 @@ export type Database = {
 					gender?: Database['public']['Enums']['Genders'] | null;
 					id?: number;
 					image?: string | null;
+					isAdmin?: boolean;
 					name?: string | null;
 					phone?: string | null;
 					role?: number | null;
+					userType?: Database['public']['Enums']['UserTypes'] | null;
 				};
 				Relationships: [
 					{
@@ -1036,7 +1045,7 @@ export type Database = {
 			Genders: 'MALE' | 'FEMALE';
 			JobStatus: 'PENDING' | 'INTASK' | 'COMPLETE' | 'FAILED' | 'CANCELED';
 			'Languages ': 'EN' | 'AR' | 'CKB';
-			Status: 'CANCELLED' | 'FAILED' | 'PENDING' | 'COMPLETE';
+			Status: 'CANCELLED' | 'FAILED' | 'PENDING' | 'HALF_COMPLETE' | 'COMPLETE';
 			Tags:
 				| 'WEB_DEVELOPMENT'
 				| 'GRAPHIC_DESIGN'
@@ -1281,6 +1290,7 @@ export enum Status {
 	CANCELLED = 'CANCELLED',
 	FAILED = 'FAILED',
 	PENDING = 'PENDING',
+	HALF_COMPLETE = 'HALF_COMPLETE',
 	COMPLETE = 'COMPLETE'
 }
 

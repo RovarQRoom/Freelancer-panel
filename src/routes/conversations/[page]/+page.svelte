@@ -13,7 +13,6 @@
 	import { conversationStore } from '$lib/Store/Conversation';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import Pagination from '$lib/Component/Pagination.Component.svelte';
-	import { messageStore } from '$lib/Store/Message';
 	import MessageModal from '../MessageModal.svelte';
 	import { authStore } from '$lib/Store/Auth';
 	import type { ConversationEntity } from '$lib/Model/Entity/Conversation';
