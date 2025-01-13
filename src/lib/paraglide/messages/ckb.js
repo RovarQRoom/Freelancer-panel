@@ -2496,3 +2496,208 @@ export const next_page = () => `پاشتر`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const go_to_page = (params) => `بۆ پەڕە ${params.page}`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const here_s_your_analytic_details = () => `وردەکاری شیکاریەکانت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const filter_by = () => `پاڵاوتن بەپێی`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const exports = () => `هەناردەکردن`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const active_users_in_your_platform = () => `بەکارهێنەرە چالاکەکان لە پلاتفۆرمەکەت`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const total_services = () => `کۆی خزمەتگوزاریەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const available_services = () => `خزمەتگوزاریە بەردەستەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const daily_income = () => `داهاتی ڕۆژانە`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const income_today = () => `داهاتی ئەمڕۆ`
+
+
+export { Total_Users } from "./en.js"
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const total_income = () => `کۆی داهات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const all_time_income = () => `داهاتی هەموو کات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const revenue = () => `داهات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const last_12_months = () => `١٢ مانگی ڕابردوو`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const traffic_channel = () => `کەناڵی هاتوچۆ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const all_time = () => `هەموو کات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const recent_activity = () => `چالاکی دواییەکان`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const last_24h = () => `٢٤ کاتژمێری ڕابردوو`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const order_id = () => `ژمارەی داواکاری`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const time = () => `کات`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const amount = () => `بڕ`
+
+
+export { Dashboard } from "./en.js"
+
+export { Here_s_your_analytic_details } from "./en.js"
+
+export { Filter_by } from "./en.js"
+
+export { Exports } from "./en.js"
+
+export { Active_users_in_your_platform } from "./en.js"
+
+export { Total_Services } from "./en.js"
+
+export { Available_services } from "./en.js"
+
+export { Daily_Income } from "./en.js"
+
+export { Income_today } from "./en.js"
+
+export { Total_Income } from "./en.js"
+
+export { All_time_income } from "./en.js"
+
+export { Revenue } from "./en.js"
+
+export { Last_12_months } from "./en.js"
+
+export { Month } from "./en.js"
+
+export { Traffic_Channel } from "./en.js"
+
+export { All_time } from "./en.js"
+
+export { Recent_Activity } from "./en.js"
+
+export { Last_24h } from "./en.js"
+
+export { Customer } from "./en.js"
+
+export { Status } from "./en.js"
+
+export { Total_Price } from "./en.js"
+
+export { Created_At } from "./en.js"
+
+export { Order_ID } from "./en.js"
+
+export { Time } from "./en.js"
+
+export { Amount } from "./en.js"

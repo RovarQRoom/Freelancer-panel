@@ -9,7 +9,6 @@
 		TableHeadCell,
 		Button,
 		Modal,
-		MultiSelect,
 		Label,
 		Img
 	} from 'flowbite-svelte';
@@ -26,9 +25,10 @@
 	import type { UserEntity } from '$lib/Model/Entity/User';
 	import type { NotificationEntity } from '$lib/Model/Entity/Notification';
 	import { storageStore } from '$lib/Store/Storage';
+	import Pagination from '$lib/Component/PaginationForComponents.svelte';
 
 	let filter: GenericListOptions = $state({
-		limit: 10,
+		limit: 5,
 		page: 1,
 		select: '*,users:NotificationUser(user:User(id,name,image))'
 	});
@@ -217,6 +217,7 @@
 				{/each}
 			</TableBody>
 		</Table>
+		<Pagination store={notificationStore} filter={filter} />
 	</div>
 
 	<Modal
@@ -250,6 +251,7 @@
 						<Label class="mb-2 block text-sm font-medium" for="message">
 							{m.message()}
 						</Label>
+						<!-- svelte-ignore element_invalid_self_closing_tag -->
 						<textarea
 							id="message"
 							rows="3"

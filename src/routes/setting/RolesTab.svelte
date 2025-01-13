@@ -20,6 +20,7 @@
 	import type { InsertRole, UpdateRole } from '$lib/Supabase/Types/database.types';
 	import { roleStore } from '$lib/Store/Role';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
+	import Pagination from '$lib/Component/PaginationForComponents.svelte';
 
 	// States
 	let showAddModal = $state(false);
@@ -31,7 +32,7 @@
     let updateRole = $state<UpdateRole>({id: 0, name: ''});
     let filter = $state<GenericListOptions>({
         page: 1,
-        limit: 10,
+        limit: 5,
         select:"id,name,policies:RolePolicy(count)",
 		orderBy: 'id',
 		order: true
@@ -183,6 +184,7 @@
 			</TableBody>
 		</Table>
 	</div>
+	<Pagination store={roleStore} filter={filter} />
 </div>
 
 <!-- Add Role Modal -->

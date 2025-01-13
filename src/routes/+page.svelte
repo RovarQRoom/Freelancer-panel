@@ -2,12 +2,12 @@
 	import { onMount } from 'svelte';
 	import { Chart } from 'chart.js/auto';
 	import { orderStore } from '$lib/Store/Order';
-	import { authStore } from '$lib/Store/Auth';
 	import { userStore } from '$lib/Store/User';
 	import { serviceStore } from '$lib/Store/Service';
 	import type { OrderEntity } from '$lib/Model/Entity/Order';
 	import type { UserEntity } from '$lib/Model/Entity/User';
 	import { supabase } from '$lib/Supabase/supabase';
+	import * as m from '$lib/paraglide/messages';
 
 	let revenueChart: HTMLCanvasElement;
 	let trafficChart: HTMLCanvasElement;
@@ -224,8 +224,8 @@
 	<!-- Header -->
 	<div class="flex justify-between items-center mb-8">
 		<div>
-			<h1 class="text-2xl font-bold">Dashboard</h1>
-			<p class="text-gray-400">Here's your analytic details</p>
+			<h1 class="text-2xl font-bold">{m.dashboard()}</h1>
+			<p class="text-gray-400">{m.here_s_your_analytic_details()}</p>
 		</div>
 		<div class="flex gap-4">
 			<button
@@ -238,11 +238,11 @@
 						d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0
 						00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
 				</svg>
-				Filter by
+				{m.filter_by()}
 			</button>
 			<button
 				class="bg-grey-light dark:bg-grey-secondary px-4 py-2 rounded-lg flex items-center gap-2">
-				Exports
+				{m.exports()}
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path
 						stroke-linecap="round"
@@ -273,13 +273,13 @@
 								7a4 4 0 11-8 0 4 4 0 018 0z" />
 						</svg>
 					</div>
-					<span class="text-gray-400">Total Users</span>
+					<span class="text-gray-400">{m.total_users()}</span>
 				</div>
 				<button class="text-gray-400">•••</button>
 			</div>
 			<div>
 				<p class="text-2xl font-bold">{users.length}</p>
-				<p class="text-green-400 text-sm mt-1">Active users in your platform</p>
+				<p class="text-green-400 text-sm mt-1">{m.active_users_in_your_platform()}</p>
 			</div>
 		</div>
 
@@ -301,13 +301,13 @@
 								2v10a2 2 0 002 2z" />
 						</svg>
 					</div>
-					<span class="text-gray-400">Total Services</span>
+					<span class="text-gray-400">{m.total_services()}</span>
 				</div>
 				<button class="text-gray-400">•••</button>
 			</div>
 			<div>
 				<p class="text-2xl font-bold">{totalServices}</p>
-				<p class="text-green-400 text-sm mt-1">Available services</p>
+				<p class="text-green-400 text-sm mt-1">{m.available_services()}</p>
 			</div>
 		</div>
 
@@ -329,13 +329,13 @@
 								0118 0z" />
 						</svg>
 					</div>
-					<span class="text-gray-400">Daily Income</span>
+					<span class="text-gray-400">{m.daily_income()}</span>
 				</div>
 				<button class="text-gray-400">•••</button>
 			</div>
 			<div>
 				<p class="text-2xl font-bold">{formatCurrency(dailyIncome)}</p>
-				<p class="text-green-400 text-sm mt-1">Income today</p>
+				<p class="text-green-400 text-sm mt-1">{m.income_today()}</p>
 			</div>
 		</div>
 
@@ -357,13 +357,13 @@
 								0118 0z" />
 						</svg>
 					</div>
-					<span class="text-gray-400">Total Income</span>
+					<span class="text-gray-400">{m.total_income()}</span>
 				</div>
 				<button class="text-gray-400">•••</button>
 			</div>
 			<div>
 				<p class="text-2xl font-bold">{formatCurrency(totalIncome)}</p>
-				<p class="text-green-400 text-sm mt-1">All time income</p>
+				<p class="text-green-400 text-sm mt-1">{m.all_time_income()}</p>
 			</div>
 		</div>
 	</div>
@@ -373,23 +373,25 @@
 		<div class="lg:col-span-2 bg-grey-light dark:bg-grey-secondary p-6 rounded-xl">
 			<div class="flex justify-between items-center mb-6">
 				<div>
-					<h3 class="text-xl font-bold">Revenue</h3>
-					<p class="text-green-400 text-sm">Last 6 months</p>
+					<h3 class="text-xl font-bold">{m.revenue()}</h3>
+					<p class="text-green-400 text-sm">{m.last_12_months()}</p>
 				</div>
 				<select class="dark:bg-grey-dark bg-white border-0 px-3 py-1 rounded-lg text-sm">
 					<option>Month</option>
 				</select>
 			</div>
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<canvas bind:this={revenueChart} />
 		</div>
 
 		<div class="bg-grey-light dark:bg-grey-secondary p-6 rounded-xl">
 			<div class="flex justify-between items-center mb-6">
-				<h3 class="text-xl font-bold">Traffic Channel</h3>
+				<h3 class="text-xl font-bold">{m.traffic_channel()}</h3>
 				<select class="dark:bg-grey-dark bg-white border-0 px-3 py-1 rounded-lg text-sm">
-					<option>All time</option>
+					<option>{m.all_time()}</option>
 				</select>
 			</div>
+			<!-- svelte-ignore element_invalid_self_closing_tag -->
 			<canvas bind:this={trafficChart} />
 		</div>
 	</div>
@@ -397,20 +399,20 @@
 	<!-- Recent Activity -->
 	<div class="mt-8 bg-grey-light dark:bg-grey-secondary rounded-xl p-6">
 		<div class="flex justify-between items-center mb-6">
-			<h3 class="text-xl font-bold">Recent Activity</h3>
+			<h3 class="text-xl font-bold">{m.recent_activity()}</h3>
 			<select class="px-3 py-1 rounded-lg text-sm dark:bg-grey-dark border-0">
-				<option>Last 24h</option>
+				<option>{m.last_24h()}</option>
 			</select>
 		</div>
 		<div class="overflow-x-auto">
 			<table class="w-full">
 				<thead>
 					<tr class="text-gray-400 text-sm">
-						<th class="text-left pb-4">Customer</th>
-						<th class="text-left pb-4">Status</th>
-						<th class="text-left pb-4">Order ID</th>
-						<th class="text-left pb-4">Time</th>
-						<th class="text-left pb-4">Amount</th>
+						<th class="text-left pb-4">{m.customer()}</th>
+						<th class="text-left pb-4">{m.status()}</th>
+						<th class="text-left pb-4">{m.order_id()}</th>
+						<th class="text-left pb-4">{m.time()}</th>
+						<th class="text-left pb-4">{m.amount()}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -418,6 +420,7 @@
 						<tr class="border-t border-gray-700">
 							<td class="py-4">
 								<div class="flex items-center gap-3">
+									<!-- svelte-ignore element_invalid_self_closing_tag -->
 									<div class="w-10 h-10 bg-gray-700 rounded-full" />
 									<div>
 										<p class="font-medium">{activity.name}</p>

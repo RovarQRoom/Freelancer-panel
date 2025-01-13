@@ -37,6 +37,7 @@ export class ServiceRepository implements IService {
 		if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
 		if (options?.from) query.gte('created_at', options.from);
 		if (options?.to) query.lte('created_at', options.to);
+		if (options?.user) query.eq('supervised_by', options.user);
 		if (options?.created_at) query.eq('created_at', options.created_at);
 		if (options?.[`title.${languageTag()}`])
 			query.ilike(`title.${languageTag()}`, `%${options[`title.${languageTag()}`]}%`);

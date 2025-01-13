@@ -55,6 +55,7 @@
 	]);
 
 	async function fetchServices() {
+		filter.user = $authStore?.isAdmin ? undefined : $authStore?.id?.toString();
 		await serviceStore.fetchAll(filter);
 	}
 
@@ -72,7 +73,7 @@
 				select: `id, title(${languageTag()}), description(${languageTag()}), price, icon, service`,
 				fieldOption: 'service',
 				isEmpty: true,
-				equal: serviceId?.toString()
+				equal: serviceId?.toString(),
 			});
 			selectedServiceId = serviceId;
 			showExtraServicesModal = true;
