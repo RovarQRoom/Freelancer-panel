@@ -7,6 +7,7 @@ export function checkPremission(
 	policies?: { policy: PolicyEntity }[],
 	role?: string
 ): boolean {
+	if (auth.isAdmin) return true;
 	if (role === Role.Superadmin || role === Role.Admin) return true;
 	if (!policies) return false;
 	return policies.some(
@@ -15,6 +16,7 @@ export function checkPremission(
 }
 
 export function checkPremissionOnRoute(auth: UserEntity, policies?: number[], role?: string) {
+	if (auth.isAdmin) return true;
 	if (role === Role.Superadmin || role === Role.Admin) return true;
 	if (!policies) return true;
 	if (!auth.role?.policies) return false;
@@ -29,7 +31,7 @@ export function filterNavItemsByPermission(
 	navItems: Array<{ href: string; label: string; policies?: number[] }>
 ): Array<{ href: string; label: string; policies?: number[] }> {
 	if (!auth) return [];
-
+	if (auth.isAdmin) return navItems;
 	return navItems.filter((item) => {
 		if (!item.policies) return true;
 		return checkPremissionOnRoute(auth, item.policies, auth.role?.name);

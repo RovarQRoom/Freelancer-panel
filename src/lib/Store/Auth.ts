@@ -22,7 +22,7 @@ const createAuthStore = () => {
 					toastStore.error(m.email_already_exists());
 					throw new Error(m.email_already_exists());
 				}
-				const checkPhone = await usersRepository.readUserByPhoneAsync(request.phone);
+				const checkPhone = await usersRepository.readUserByPhoneAsync(request.phone || '');
 				if (checkPhone.data) {
 					toastStore.error(m.phone_number_already_exists());
 					throw new Error(m.phone_number_already_exists());
@@ -57,12 +57,15 @@ const createAuthStore = () => {
 		},
 		putPassword: async (request: UpdateUserPassword) => {
 			try {
-				const response = await authRepository.checkPasswordAsync(request.id, request.currentPassword);
+				const response = await authRepository.checkPasswordAsync(
+					request.id,
+					request.currentPassword
+				);
 				if (!response.data) {
 					toastStore.error(m.incorrect_current_password());
 					throw new Error(m.incorrect_current_password());
 				}
-				if(request.newPassword !== request.confirmPassword) {
+				if (request.newPassword !== request.confirmPassword) {
 					toastStore.error(m.password_not_match());
 					throw new Error(m.password_not_match());
 				}
@@ -76,8 +79,6 @@ const createAuthStore = () => {
 		},
 		login: async (email: string, password: string) => {
 			try {
-				console.log(email, password);
-				
 				const response = await authRepository.loginAsync(email, password);
 				if (response.error) {
 					toastStore.error(m.failed_to_login());

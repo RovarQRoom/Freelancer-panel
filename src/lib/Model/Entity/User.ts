@@ -1,3 +1,4 @@
+import type { UserTypes } from '$lib/Supabase/Types/database.types';
 import { Datetime } from '../Extention/Datetime';
 import type { ConversationEntity } from './Conversation';
 import type { NotificationEntity } from './Notification';
@@ -12,6 +13,8 @@ export class UserEntity extends Datetime {
 	phone: string = '';
 	image?: string = '';
 	auth?: string = '';
+	isAdmin?: boolean = false;
+	userType?: UserTypes;
 	role?: RoleEntity = new RoleEntity();
 	services?: { service: ServiceEntity }[] = [];
 	ratings?: { rating: RatingEntity }[] = [];
