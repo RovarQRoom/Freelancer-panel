@@ -355,5 +355,7 @@
 	"Created_At": "Created At",
 	"Order_ID": "Order ID",
 	"Time": "Time",
-	"Amount": "Amount"
+	"Amount": "Amount",
+	"client": "Client",
+	"service_provider": "Service Provider"
 }

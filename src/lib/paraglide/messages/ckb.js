@@ -2701,3 +2701,18 @@ export { Order_ID } from "./en.js"
 export { Time } from "./en.js"
 
 export { Amount } from "./en.js"
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const client = () => `کڕیار`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const service_provider = () => `دابینکەری خزمەتگوزاری`

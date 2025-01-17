@@ -30,11 +30,18 @@
 	import { userStore } from '$lib/Store/User';
 	import { subcategoryStore } from '$lib/Store/Subcategory';
 	import type { Fields } from '$lib/Model/Common/FieldsOptions';
+	import { serviceJobStore } from '$lib/Store/ServiceJobs';
 
 	let filter: GenericListOptions = $state({
 		page: 1,
 		limit: 10,
-		select: `*, title(${languageTag()}), description(${languageTag()}), media(${languageTag()}), supervised_by(id,name), created_by(id,name), subcategory(id,title(${languageTag()}))`
+		select: `*, title(${languageTag()}), description(${languageTag()}), media(${languageTag()}), supervised_by(id,name), created_by(id,name), subcategory(id,title(${languageTag()}))`,
+	});
+
+	let serviceJobsFilter: GenericListOptions = $state({
+		page: 1,
+		limit: 10,
+		select: `id, client(id,name,image), serviceProvider(id,name,image), service(id,price,title(${languageTag()})), order(id,overhaul_price,fee), status, created_at`
 	});
 
 	let showExtraServicesModal = $state(false);
@@ -57,6 +64,11 @@
 	async function fetchServices() {
 		filter.user = $authStore?.isAdmin ? undefined : $authStore?.id?.toString();
 		await serviceStore.fetchAll(filter);
+	}
+
+	async function fetchServiceJobs() {
+		serviceJobsFilter.user = $authStore?.isAdmin ? undefined : $authStore?.id?.toString();
+		await serviceJobStore.fetchAll(serviceJobsFilter);
 	}
 
 	$effect(() => {
@@ -197,7 +209,10 @@
 
 			<TabItem activeClasses="bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md transform scale-105 transition-all duration-300"
 					 inactiveClasses="text-gray-500 hover:text-gray-700  dark:hover:text-white dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-300"
-					 on:click={() => activeTab = 1}>
+					 onclick={() => {
+						activeTab = 1;
+						fetchServiceJobs();
+						}}>
 				<div slot="title" class="flex items-center gap-2 px-5 py-2.5">
 					<svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
 						<path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
@@ -223,7 +238,43 @@
 								<TableHeadCell>{m.actions()}</TableHeadCell>
 							</TableHead>
 							<TableBody>
-								<!-- Add your service jobs data here -->
+								{#each $serviceJobStore.data as job}
+									<TableBodyRow>
+										<TableBodyCell class="!p-4">{job.id}</TableBodyCell>
+										<TableBodyCell>
+											{job.service?.title?.[languageTag()] ?? '-'}
+										</TableBodyCell>
+										<TableBodyCell>
+											<div class="flex flex-col gap-1">
+												<span class="font-medium">{m.client()}: {job.client?.name ?? '-'}</span>
+												<span class="font-medium">{m.service_provider()}: {job.serviceProvider?.name ?? '-'}</span>
+											</div>
+										</TableBodyCell>
+										<TableBodyCell>
+											<span class="inline-flex rounded-full px-3 py-1 text-sm font-medium
+												{job.status === 'PENDING' ? 'bg-yellow-100 text-yellow-800' : 
+												job.status === 'INTASK' ? 'bg-blue-100 text-blue-800' :
+												job.status === 'COMPLETE' ? 'bg-green-100 text-green-800' :
+												job.status === 'FAILED' ? 'bg-red-100 text-red-800' :
+												job.status === 'CANCELED' ? 'bg-gray-100 text-gray-800' :
+												'bg-gray-100 text-gray-800'}">
+												{job.status}
+											</span>
+										</TableBodyCell>
+										<TableBodyCell>
+											{new Date(job.created_at).toLocaleDateString(languageTag())}
+										</TableBodyCell>
+										<TableBodyCell>
+											<div class="flex gap-2">
+												{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_SERVICE], $authStore?.role?.name)}
+													<Button size="sm" class="p-2" color="light">
+														<PenSolid class="h-4 w-4" />
+													</Button>
+												{/if}
+											</div>
+										</TableBodyCell>
+									</TableBodyRow>
+								{/each}
 							</TableBody>
 						</Table>
 						<!-- Add pagination for service jobs if needed -->

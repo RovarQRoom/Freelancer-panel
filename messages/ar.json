@@ -355,5 +355,7 @@
 	"Created_At": "تاريخ الإنشاء",
 	"Order_ID": "رقم الطلب",
 	"Time": "الوقت",
-	"Amount": "المبلغ"
+	"Amount": "المبلغ",
+	"client": "العميل",
+	"service_provider": "مزود الخدمة"
 }

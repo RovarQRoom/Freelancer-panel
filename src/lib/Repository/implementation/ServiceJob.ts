@@ -36,6 +36,7 @@ export class ServiceJobRepository implements IServiceJob {
 		if (options?.service) query.eq('service', options.service);
 		if (options?.order) query.eq('order', options.order);
 		if (options?.status) query.eq('status', options.status);
+		if (options?.user) query.eq('serviceProvider', options.user);
 
 		const response = await query
 			.is('deleted_at', null)

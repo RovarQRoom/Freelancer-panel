@@ -2856,3 +2856,19 @@ export const Time = () => `Time`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const Amount = () => `Amount`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const client = () => `Client`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const service_provider = () => `Service Provider`

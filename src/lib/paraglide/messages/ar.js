@@ -2856,3 +2856,19 @@ export const Time = () => `الوقت`
  */
 /* @__NO_SIDE_EFFECTS__ */
 export const Amount = () => `المبلغ`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const client = () => `العميل`
+
+
+/**
+ * 
+ * @returns {string}
+ */
+/* @__NO_SIDE_EFFECTS__ */
+export const service_provider = () => `مزود الخدمة`

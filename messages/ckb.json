@@ -332,5 +332,7 @@
 	"status": "دۆخ",
 	"order_id": "ژمارەی داواکاری",
 	"time": "کات",
-	"amount": "بڕ"
+	"amount": "بڕ",
+	"client": "کڕیار",
+	"service_provider": "دابینکەری خزمەتگوزاری"
 }
