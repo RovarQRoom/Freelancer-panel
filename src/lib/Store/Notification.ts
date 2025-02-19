@@ -53,8 +53,6 @@ const createNotificationStore = () => {
 					if (notification) {
 						notification.users = [notificationUser];
 					}
-
-					console.log(notification);
 					channel.send({
 						type: 'broadcast',
 						event: 'notification',
