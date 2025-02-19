@@ -1,23 +1,21 @@
-import type { ExtraServiceEntity } from '$lib/Model/Entity/ExtraService';
 import type { GenericListOptions } from '$lib/Model/Common/ListOption';
-import type { InsertExtraService, UpdateExtraService } from '$lib/Supabase/Types/database.types';
+import type { ServiceJobEntity } from '$lib/Model/Entity/ServiceJob';
+import type { InsertServiceJob, UpdateServiceJob } from '$lib/Supabase/Types/database.types';
 import type { PostgrestSingleResponse } from '@supabase/supabase-js';
-import type { IExtraService } from '../Interface/IExtraService';
+import type { IServiceJob } from '../Interface/IServiceJob';
 import { supabase } from '$lib/Supabase/supabase';
 import { toastStore } from '$lib/Store/Toast';
-import { languageTag } from '$lib/paraglide/runtime';
 
-export class ExtraServiceRepository implements IExtraService {
-	async createExtraServiceAsync(
-		request: InsertExtraService
-	): Promise<PostgrestSingleResponse<ExtraServiceEntity>> {
+export class ServiceJobRepository implements IServiceJob {
+	async createServiceJobAsync(
+		request: InsertServiceJob
+	): Promise<PostgrestSingleResponse<ServiceJobEntity>> {
 		const response = await supabase
-			.from('ExtraService')
+			.from('ServiceJob')
 			.insert(request)
-			.select(`*, title(${languageTag()}), description(${languageTag()})`)
-			.returns<ExtraServiceEntity>()
+			.select('*')
+			.returns<ServiceJobEntity>()
 			.single();
-
 		if (response.error) {
 			toastStore.error(response.error.message);
 			throw new Error(response.error.message);
@@ -25,19 +23,20 @@ export class ExtraServiceRepository implements IExtraService {
 		return response;
 	}
 
-	async readExtraServicesAsync(
+	async readServiceJobsAsync(
 		options?: GenericListOptions
-	): Promise<PostgrestSingleResponse<ExtraServiceEntity[]>> {
-		const query = supabase
-			.from('ExtraService')
-			.select(options?.select ?? `*, title(${languageTag()}), description(${languageTag()})`, {
-				count: 'exact'
-			});
+	): Promise<PostgrestSingleResponse<ServiceJobEntity[]>> {
+		const query = supabase.from('ServiceJob').select(options?.select ?? '*', { count: 'exact' });
 
 		if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
 		if (options?.from) query.gte('created_at', options.from);
 		if (options?.to) query.lte('created_at', options.to);
-		if (options?.equal) query.eq(options.fieldOption ?? 'name', options.equal);
+		if (options?.client) query.eq('client', options.client);
+		if (options?.serviceProvider) query.eq('serviceProvider', options.serviceProvider);
+		if (options?.service) query.eq('service', options.service);
+		if (options?.order) query.eq('order', options.order);
+		if (options?.status) query.eq('status', options.status);
+		if (options?.user) query.eq('serviceProvider', options.user);
 
 		const response = await query
 			.is('deleted_at', null)
@@ -46,7 +45,7 @@ export class ExtraServiceRepository implements IExtraService {
 				((options?.page ?? 1) - 1) * (options?.limit ?? 10),
 				(options?.page ?? 1) * (options?.limit ?? 10) - 1
 			)
-			.returns<ExtraServiceEntity[]>();
+			.returns<ServiceJobEntity[]>();
 
 		if (response.error) {
 			toastStore.error(response.error.message);
@@ -55,14 +54,13 @@ export class ExtraServiceRepository implements IExtraService {
 		return response;
 	}
 
-	async readExtraServiceAsync(id: number): Promise<PostgrestSingleResponse<ExtraServiceEntity>> {
+	async readServiceJobAsync(id: number): Promise<PostgrestSingleResponse<ServiceJobEntity>> {
 		const response = await supabase
-			.from('ExtraService')
-			.select(`*, title(id,en,ckb,ar), description(id,en,ckb,ar)`)
+			.from('ServiceJob')
+			.select('*')
 			.eq('id', id)
-			.returns<ExtraServiceEntity>()
+			.returns<ServiceJobEntity>()
 			.single();
-
 		if (response.error) {
 			toastStore.error(response.error.message);
 			throw new Error(response.error.message);
@@ -70,17 +68,16 @@ export class ExtraServiceRepository implements IExtraService {
 		return response;
 	}
 
-	async updateExtraServiceAsync(
-		request: UpdateExtraService
-	): Promise<PostgrestSingleResponse<ExtraServiceEntity>> {
+	async updateServiceJobAsync(
+		request: UpdateServiceJob
+	): Promise<PostgrestSingleResponse<ServiceJobEntity>> {
 		const response = await supabase
-			.from('ExtraService')
+			.from('ServiceJob')
 			.update(request)
 			.eq('id', request.id!)
-			.select(`*, title(${languageTag()}), description(${languageTag()})`)
-			.returns<ExtraServiceEntity>()
+			.select('*')
+			.returns<ServiceJobEntity>()
 			.single();
-
 		if (response.error) {
 			toastStore.error(response.error.message);
 			throw new Error(response.error.message);
@@ -88,12 +85,11 @@ export class ExtraServiceRepository implements IExtraService {
 		return response;
 	}
 
-	async deleteExtraServiceAsync(id: number): Promise<void> {
+	async deleteServiceJobAsync(id: number): Promise<void> {
 		const response = await supabase
-			.from('ExtraService')
+			.from('ServiceJob')
 			.update({ deleted_at: new Date().toISOString() })
 			.eq('id', id);
-
 		if (response.error) {
 			toastStore.error(response.error.message);
 			throw new Error(response.error.message);

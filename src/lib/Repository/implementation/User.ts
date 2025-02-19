@@ -42,6 +42,11 @@ export class UserRepository implements IUsersRepository {
 		if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
 		if (options?.from) query.gte('created_at', options.from);
 		if (options?.to) query.lte('created_at', options.to);
+		if (options?.name) query.ilike('name', `%${options.name}%`);
+		if (options?.email) query.ilike('email', `%${options.email}%`);
+		if (options?.phone) query.ilike('phone', `%${options.phone}%`);
+		if (options?.role) query.eq('role', options.role);
+
 		return query
 			.is('deleted_at', null)
 			.order('id', { ascending: false })

@@ -28,16 +28,20 @@ export class CategoryRepository implements ICategory {
 	): Promise<PostgrestSingleResponse<Array<CategoryEntity>>> {
 		const query = supabase
 			.from('Category')
-			.select(options?.select ?? `*,title(${languageTag()})`, { count: 'exact' });
-		if (options?.search) query.textSearch(options.fieldOption ?? 'name', options.search);
+			.select(options?.select ?? `*,title!inner(${languageTag()})`, { count: 'exact' });
+		if (options?.search) query.ilike(`title.${languageTag()}`, `%${options.search}%`);
 		if (options?.from) query.gte('created_at', options.from);
 		if (options?.to) query.lte('created_at', options.to);
+		if (options?.created_at) query.eq('created_at', options.created_at);
+		if (options?.[`title.${languageTag()}`])
+			query.ilike(`title.${languageTag()}`, `%${options[`title.${languageTag()}`]}%`);
+		if (options?.id) query.eq('id', options.id);
 		const response = await query
 			.is('deleted_at', null)
 			.order('id', { ascending: false })
 			.range(
 				((options?.page ?? 1) - 1) * (options?.limit ?? 10),
-				((options?.page ?? 1) * (options?.limit ?? 10)) - 1
+				(options?.page ?? 1) * (options?.limit ?? 10) - 1
 			)
 			.returns<CategoryEntity[]>();
 		if (response.error) {
@@ -79,10 +83,7 @@ export class CategoryRepository implements ICategory {
 		const response = await supabase
 			.from('Category')
 			.update({ deleted_at: new Date().toISOString() })
-			.eq('id', id)
-			.select(`*,title(${languageTag()})`)
-			.returns<CategoryEntity>()
-			.single();
+			.eq('id', id);
 		if (response.error) {
 			toastStore.error(response.error.message);
 			throw new Error(response.error.message);

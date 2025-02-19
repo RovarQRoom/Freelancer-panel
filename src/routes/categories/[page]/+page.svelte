@@ -12,7 +12,6 @@
 		Checkbox
 	} from 'flowbite-svelte';
 	import * as m from '$lib/paraglide/messages';
-	import { onMount } from 'svelte';
 	import { categoryStore } from '$lib/Store/Category';
 	import { languageTag } from '$lib/paraglide/runtime';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
@@ -29,6 +28,7 @@
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
 	import TableFilter from '$lib/Component/TableFilter.svelte';
+	import type { Fields } from '$lib/Model/Common/FieldsOptions';
 
 	let hideSidebar = $state(true);
 	let hideEditSidebar = $state(true);
@@ -46,31 +46,25 @@
 		page: 1
 	});
 
-	const filterFields = [
-		{ name: 'id', type: 'number' },
-		{ name: 'title', type: 'text' },
+	let filterFields: Array<Fields> = $state([
+		{ label: 'Id', name: 'id', type: 'number' },
+		{ label: `Title (${m[languageTag() == 'en' ? 'EN' : languageTag() == 'ar' ? 'AR' : 'CKB']()})`, name: `title.${languageTag()}`, type: 'text' },
 		{ 
-			name: 'status', 
-			type: 'select',
-			options: [
-				{ value: 'active', label: m.active() },
-				{ value: 'inactive', label: m.inactive() }
-			]
+			label: 'Created At', 
+			name: 'created_at',
+			dateRange: true,
+			type: 'date'
 		},
-		{ name: 'created_at', type: 'date' }
-	];
+	]);
 
-	function handleFilter(filters: any) {
-		filter = {
-			...filter,
-			...filters,
-			page: 1
-		};
-		categoryStore.fetchAll(filter);
+	async function fetchCategories() {
+		await categoryStore.fetchAll(filter);
 	}
 
-	onMount(async () => {
-		await categoryStore.fetchAll(filter);
+	$effect(() => {
+		if (filter) {
+			fetchCategories();
+		}
 	});
 
 	async function handleDeleteCategory() {
@@ -98,7 +92,7 @@
 				equal: categoryId?.toString()
 			});
 			selectedSubcategories = $subcategoryStore.data
-				.filter((subcategory) => subcategory.category === categoryId)
+				.filter((subcategory) => subcategory.category?.id === categoryId)
 				.map((subcategory) => subcategory.id);
 			selectedCategory = categoryId;
 			showSubcategoryModal = true;
@@ -142,7 +136,7 @@
 
 	<div class="overflow-hidden rounded-xl bg-white shadow-lg dark:bg-gray-800">
 		<div class="p-4">
-			<TableFilter fields={filterFields} onFilter={handleFilter} />
+			<TableFilter fields={filterFields} store={categoryStore} filter={filter}/>
 		</div>
 
 		<Table hoverable={true} class="w-full">
@@ -264,7 +258,7 @@
 			<Button
 				color="alternative"
 				class="px-6 py-2 transition-all duration-200 hover:scale-105"
-				on:click={() => (showDeleteModal = false)}
+				onclick={() => (showDeleteModal = false)}
 			>
 				{m.no()}
 			</Button>

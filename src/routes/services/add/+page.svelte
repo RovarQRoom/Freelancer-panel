@@ -32,6 +32,9 @@
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
 	import RichTextEditor from '$lib/Component/RichTextEditor.svelte';
+	import type { SubcategoryEntity } from '$lib/Model/Entity/Subcategory';
+	import { subcategoryStore } from '$lib/Store/Subcategory';
+	import { languageTag } from '$lib/paraglide/runtime';
 
 	const { startUpload } = createUploadThing('imageUploader', {
 		onClientUploadComplete: () => {
@@ -42,11 +45,17 @@
 		}
 	});
 	let users = $state<UserEntity[]>([]);
+	let subcategories = $state<SubcategoryEntity[]>([]);
 	onMount(async () => {
 		users =
 			(await userStore.fetchForDropdown({
 				limit: 100,
 				select: 'id,name'
+			})) ?? [];
+		subcategories =
+			(await subcategoryStore.fetchForDropdown({
+				limit: 100,
+				select: `id,title(${languageTag()}),category(title(${languageTag()}))`
 			})) ?? [];
 	});
 
@@ -224,7 +233,7 @@
 					<div class="mb-6 space-y-2">
 						<Label class="text-lg font-medium">{m.description()}</Label>
 						<RichTextEditor
-							content={descriptionLanguage[language.toLowerCase() as keyof InsertLanguage] ?? ''}
+							content={(descriptionLanguage[language.toLowerCase() as keyof InsertLanguage] ?? '') as string}
 							placeholder={m.description()}
 							onChange={(html) => {
 								const lang = language.toLowerCase() as keyof InsertLanguage;
@@ -396,6 +405,19 @@
 						name: user.name ?? ''
 					}))}
 					placeholder={m.select_supervisor()}
+				/>
+			</div>
+
+			<!-- Subcategory Selection -->
+			<div class="space-y-2">
+				<Label class="text-lg font-medium">{m.subcategory()}</Label>
+				<Select
+					bind:value={createService.subcategory}
+					items={subcategories.map((subcategory) => ({
+						value: subcategory.id.toString(),
+						name: `${subcategory.category?.title[languageTag()] ?? ''} - ${subcategory.title[languageTag()] ?? ''}`
+					}))}
+					placeholder={m.select_subcategory()}
 				/>
 			</div>
 

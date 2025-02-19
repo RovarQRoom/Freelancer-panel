@@ -13,7 +13,6 @@
 	} from 'flowbite-svelte';
 	import { PenSolid, TrashBinSolid } from 'flowbite-svelte-icons';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 	import { userStore } from '$lib/Store/User';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import { authStore } from '$lib/Store/Auth';
@@ -21,41 +20,31 @@
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
 	import TableFilter from '$lib/Component/TableFilter.svelte';
+	import { roleStore } from '$lib/Store/Role';
+	import type { Fields } from '$lib/Model/Common/FieldsOptions';
 
-	//TODO: When the user clicks on the row, this will open a modal to edit users Password if needed
-
-	let filter: GenericListOptions = {
+	let filter: GenericListOptions = $state({
 		page: 1,
 		limit: 10,
 		select: '*,role:Role(name)'
-	};
+	});
 
-	const filterFields = [
-		{ name: m.name(), type: 'text' },
-		{ name: m.email(), type: 'text' },
-		{ name: m.phone(), type: 'text' },
-		{ 
-			name: m.role(),
-			type: 'select',
-			options: [
-				{ value: 'admin', label: 'Admin' },
-				{ value: 'user', label: 'User' }
-			]
-		}
-	];
+	let filterFields: Array<Fields> = $state([
+		{ label:  `Name`, name: `name`, type: 'text' },
+		{ label: 'Email', name: 'email', type: 'text' },
+		{ label: 'Phone', name: 'phone', type: 'text' },
+		{ label: 'Created At', name: 'created_at', type: 'date' },
+		{ label: 'Role', name: 'role', type: 'select', store: roleStore, fieldsToShow: [{ name: 'name' }], select: `id, name`, database: true },
+	]);
 
-	function handleFilter(filters: any) {
-		filter = {
-			...filter,
-			...filters,
-			page: 1
-		};
-		userStore.fetchAll(filter);
+	async function fetchUsers() {
+		await userStore.fetchAll(filter);
 	}
 
-	onMount(async () => {
-		await userStore.fetchAll(filter);
+	$effect(() => {
+			fetchUsers();
 	});
+
 
 	async function handleDelete(user: UserEntity) {
 		await userStore.remove(user.id);
@@ -64,7 +53,7 @@
 
 <div class="p-4">
 	<div class="mb-4">
-		<TableFilter fields={filterFields} onFilter={handleFilter} />
+		<TableFilter fields={filterFields} filter={filter} store={userStore}/>
 	</div>
 
 	<div class="mb-4 flex justify-end">
@@ -124,7 +113,7 @@
 								{#if checkPremissionOnRoute($authStore!, [Action.UPDATE_USER], $authStore?.role?.name)}
 									<button
 										class="rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
-										on:click={() => goto(`/users/edit/${user.id}`)}
+										onclick={() => goto(`/users/edit/${user.id}`)}
 									>
 										<PenSolid class="h-4 w-4 text-blue-600 dark:text-blue-400" />
 									</button>
@@ -132,7 +121,7 @@
 								{#if checkPremissionOnRoute($authStore!, [Action.DELETE_USER], $authStore?.role?.name)}
 									<button
 										class="rounded-full p-2 transition-all duration-300 ease-in-out hover:bg-gray-100 dark:hover:bg-gray-700"
-										on:click={() => handleDelete(user)}
+										onclick={() => handleDelete(user)}
 									>
 										<TrashBinSolid class="h-4 w-4 text-red-600 dark:text-red-400" />
 									</button>

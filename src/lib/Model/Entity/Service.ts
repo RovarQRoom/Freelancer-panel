@@ -1,6 +1,7 @@
 import { Datetime } from '../Extention/Datetime';
 import { LanguageEntity } from './Language';
 import type { RatingEntity } from './Rating';
+import { SubcategoryEntity } from './Subcategory';
 import { UserEntity } from './User';
 
 export class ServiceEntity extends Datetime {
@@ -9,6 +10,8 @@ export class ServiceEntity extends Datetime {
 	price?: number = 0;
 	tags?: string[] = [];
 	supports?: string[] = [];
+	average_rating?: number = 0;
+	subcategory?: SubcategoryEntity = new SubcategoryEntity();
 	media?: LanguageEntity = new LanguageEntity();
 	title: LanguageEntity = new LanguageEntity();
 	description?: LanguageEntity = new LanguageEntity();

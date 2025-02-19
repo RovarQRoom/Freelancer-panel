@@ -33,10 +33,14 @@
 	import { checkPremissionOnRoute } from '$lib/Utils/CheckPremission';
 	import { Action } from '$lib/Model/Action/Action';
 	import RichTextEditor from '$lib/Component/RichTextEditor.svelte';
+	import type { SubcategoryEntity } from '$lib/Model/Entity/Subcategory';
+	import { subcategoryStore } from '$lib/Store/Subcategory';
+	import { languageTag } from '$lib/paraglide/runtime';
 
 	const { startUpload } = createUploadThing('imageUploader');
 
 	let users = $state<UserEntity[]>([]);
+	let subcategories = $state<SubcategoryEntity[]>([]);
 	let isLoading = $state(false);
 
 	let editService = $state<UpdateService>({
@@ -49,7 +53,8 @@
 		tags: [],
 		demo: '',
 		supervised_by: null,
-		created_by: $authStore?.id ?? null
+		created_by: $authStore?.id ?? null,
+		subcategory: null
 	});
 
 	let titleLanguage = $state<UpdateLanguage>({
@@ -100,6 +105,8 @@
 			const service = await serviceStore.fetch(id);
 			if (!service) return;
 
+			console.log('service', service);
+
 			editService = {
 				id: service.id,
 				title: service.title.id,
@@ -110,7 +117,8 @@
 				tags: service.tags,
 				demo: service.demo,
 				supervised_by: service.supervised_by?.id ?? null,
-				created_by: service.created_by?.id ?? null
+				created_by: service.created_by?.id ?? null,
+				subcategory: service.subcategory?.id ?? null
 			};
 
 			titleLanguage = {
@@ -208,6 +216,11 @@
 			(await userStore.fetchForDropdown({
 				limit: 100,
 				select: 'id,name'
+			})) ?? [];
+		subcategories =
+			(await subcategoryStore.fetchForDropdown({
+				limit: 100,
+				select: `id,title(${languageTag()}),category(id,title(${languageTag()}))`
 			})) ?? [];
 	});
 </script>
@@ -442,6 +455,19 @@
 							name: user.name ?? ''
 						}))}
 						placeholder={m.select_supervisor()}
+					/>
+				</div>
+
+				<!-- Subcategory Selection -->
+				<div class="space-y-2">
+					<Label class="text-lg font-medium">{m.subcategory()}</Label>
+					<Select
+						bind:value={editService.subcategory}
+						items={subcategories.map((subcategory) => ({
+							value: subcategory.id,
+							name: `${subcategory.category?.title[languageTag()] ?? ''} - ${subcategory.title[languageTag()] ?? ''}`
+						}))}
+						placeholder={m.select_subcategory()}
 					/>
 				</div>
 

@@ -13,7 +13,6 @@
 	import { conversationStore } from '$lib/Store/Conversation';
 	import type { GenericListOptions } from '$lib/Model/Common/ListOption';
 	import Pagination from '$lib/Component/Pagination.Component.svelte';
-	import { messageStore } from '$lib/Store/Message';
 	import MessageModal from '../MessageModal.svelte';
 	import { authStore } from '$lib/Store/Auth';
 	import type { ConversationEntity } from '$lib/Model/Entity/Conversation';
@@ -27,6 +26,15 @@
 			)`
 	};
 
+	let messagesFilter: GenericListOptions = {
+		limit: 10,
+		page: 1,
+		select: `content,is_read,file,file_type,created_at,sender:User!inner(id,name,image)`,
+		order: false
+	};
+
+	
+
 	let showMessageModal = false;
 	let selectedConversation: ConversationEntity | null = null;
 
@@ -36,13 +44,8 @@
 
 	async function getMessagesForConversation(conversation: ConversationEntity) {
 		selectedConversation = conversation;
-		await messageStore.fetchAll({
-			limit: 100,
-			page: 1,
-			select: `content,is_read,created_at,sender:User!inner(id,name,image)`,
-			equal: conversation.id.toString(),
-			order: true
-		});
+		messagesFilter.equal = conversation.id.toString();
+		// await messageStore.fetchAll(messagesFilter);
 		showMessageModal = true;
 	}
 </script>
@@ -113,5 +116,6 @@
 		bind:show={showMessageModal}
 		currentUserId={$authStore?.id ?? 0}
 		conversation={selectedConversation}
+		filter={messagesFilter}
 	/>
 </div>
